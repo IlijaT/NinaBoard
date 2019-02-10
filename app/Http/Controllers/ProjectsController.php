@@ -9,9 +9,16 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+        $projects = auth()->user()->projects;
         
         return view('projects.index', compact('projects'));
+    }
+
+    public function create() 
+    
+    {
+        return view('projects.create');
+    
     }
 
     public function store()
@@ -29,10 +36,12 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
 
-    public function show(Project $project) 
-    
+    public function show(Project $project)
     {
-        
+        if (auth()->user()->isNot($project->owner)) {
+            abort(403);
+        }
+
         return view('projects.show', compact('project'));
     }
 }

@@ -6,17 +6,29 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ProjectsTest extends TestCase
+class ManageProjectsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    
+    /** @test */
+    public function guest_cannot_manage_a_project()
+    {
+        $project = factory(\App\Project::class)->create();
+
+        $this->post('/projects')->assertRedirect('/login');
+        $this->get('/projects/create')->assertRedirect('/login');
+        $this->get($project->path())->assertRedirect('/login');
+        $this->post('/projects', $project->toArray())->assertRedirect('/login');
+    }
+
     /** @test */
     public function a_user_can_create_a_project()
     {
-        
         $this->withoutExceptionHandling();
+
         $this->actingAs(factory(\App\User::class)->create());
+
+        $this->get('/projects/create')->assertStatus(200);
 
         $attributes = [
             'title' => $this->faker->sentence,
@@ -31,19 +43,32 @@ class ProjectsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_view_project() 
-    
+    public function a_user_can_view_their_project()
     {
-
         $this->withoutExceptionHandling();
         
-        $project = factory(\App\Project::class)->create();
+        $this->be($user = factory('App\User')->create());
+        
+        $project = factory(\App\Project::class)->create(['owner_id' => $user->id]);
 
         $this->get($project->path())
                 ->assertSee($project->title)
                 ->assertSee($project->description);
-    
     }
+
+        /** @test */
+        public function an_authenticted_user_cannot_view_others_project() 
+        
+        {
+        
+            $this->be($user = factory('App\User')->create());
+            
+            $project = factory(\App\Project::class)->create();
+
+            $this->get($project->path())->assertStatus(403);
+
+        
+        }
 
     /** @test */
     public function a_project_requires_a_title()
@@ -54,7 +79,7 @@ class ProjectsTest extends TestCase
             'title' => '',
         ]);
 
-        $this->post('/projects',  $project)->assertSessionHasErrors('title');
+        $this->post('/projects', $project)->assertSessionHasErrors('title');
     }
 
     /** @test */
@@ -66,16 +91,10 @@ class ProjectsTest extends TestCase
             'description' => '',
         ]);
 
-        $this->post('/projects',  $project)->assertSessionHasErrors('description');
+        $this->post('/projects', $project)->assertSessionHasErrors('description');
     }
 
-    /** @test */
-    public function only_authenticated_users_can_create_a_project()
-    {
 
-        
-        $project = factory(\App\Project::class)->raw( );
 
-        $this->post('/projects',  $project)->assertRedirect('/login');
-    }
+   
 }
