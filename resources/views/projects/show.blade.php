@@ -18,15 +18,22 @@
     <div class="lg:flex -mx-3">
         
         <div class="lg:w-3/4 px-3 mb-6">
-
+            
             <div class="mb-10">
+                <h2 class="text-lg text-grey font-normal mb-3">Tasks</h2>
                 @foreach($project->tasks as $task)
-                    <div class="text-grey font-normal mb-3">{{ $task->body }}</div>
+                    <div class="bg-white p-3 mb-3 card w-full">{{ $task->body }}</div>
                 @endforeach
+                <div class="bg-white p-3 mb-3 card w-full">
+                    <form action="{{ $project->path().'/tasks'}}" method="POST">
+                        @csrf
+                        <input name="body" class="w-full" type="text" placeholder="Add a new task...">
+                    </form>
+                </div>
             </div>
             
             <div>
-                <h2 class="text-grey font-normal mb-3">General Notes</h2>
+                <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
                 <!-- General notes -->
                 <textarea class="bg-white p-5 card w-full" style="min-height: 200px">Lorem ipsum...</textarea>
             </div>
