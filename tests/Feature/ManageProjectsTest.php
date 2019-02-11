@@ -26,7 +26,7 @@ class ManageProjectsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->actingAs(factory(\App\User::class)->create());
+        $this->signIn();
 
         $this->get('/projects/create')->assertStatus(200);
 
@@ -47,33 +47,34 @@ class ManageProjectsTest extends TestCase
     {
         $this->withoutExceptionHandling();
         
-        $this->be($user = factory('App\User')->create());
+        $this->signIn();
         
-        $project = factory(\App\Project::class)->create(['owner_id' => $user->id]);
+        
+        $project = factory(\App\Project::class)->create(['owner_id' => auth()->id()]);
 
         $this->get($project->path())
                 ->assertSee($project->title)
                 ->assertSee($project->description);
     }
 
-        /** @test */
-        public function an_authenticted_user_cannot_view_others_project() 
+    /** @test */
+    public function an_authenticted_user_cannot_view_others_project() 
+    
+    {
+    
+        $this->signIn();
         
-        {
-        
-            $this->be($user = factory('App\User')->create());
-            
-            $project = factory(\App\Project::class)->create();
+        $project = factory(\App\Project::class)->create();
 
-            $this->get($project->path())->assertStatus(403);
+        $this->get($project->path())->assertStatus(403);
 
-        
-        }
+    
+    }
 
     /** @test */
     public function a_project_requires_a_title()
     {
-        $this->actingAs(factory(\App\User::class)->create());
+        $this->signIn();
 
         $project = factory(\App\Project::class)->raw([
             'title' => '',
@@ -85,7 +86,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_description()
     {
-        $this->actingAs(factory(\App\User::class)->create());
+        $this->signIn();
 
         $project = factory(\App\Project::class)->raw([
             'description' => '',

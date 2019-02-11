@@ -20,13 +20,9 @@
         <div class="lg:w-3/4 px-3 mb-6">
 
             <div class="mb-10">
-                <h2 class="text-grey font-normal mb-3">Tasks</h2>
-                <!-- tasks -->
-                <div class="bg-white p-3 card mb-3">OVDE IDU TASKOVi...</div>
-                <div class="bg-white p-3 card mb-3">OVDE IDU TASKOVi...</div>
-                <div class="bg-white p-3 card mb-3">OVDE IDU TASKOVi...</div>
-                <div class="bg-white p-3 card mb-3">OVDE IDU TASKOVi...</div>
-                <div class="bg-white p-3 card">OVDE IDU TASKOVi...</div>
+                @foreach($project->tasks as $task)
+                    <div class="text-grey font-normal mb-3">{{ $task->body }}</div>
+                @endforeach
             </div>
             
             <div>

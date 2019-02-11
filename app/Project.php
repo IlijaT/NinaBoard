@@ -22,4 +22,18 @@ class Project extends Model
     
     }
 
+    public function addTask($task) 
+    
+    {
+        return $this->tasks()->create(['body' => $task]);
+    
+    }
+
+    public function tasks() 
+    
+    {
+        return $this->hasMany(Task::class);
+    
+    }
+
 }
