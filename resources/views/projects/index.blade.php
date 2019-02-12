@@ -3,7 +3,7 @@
     <header  class="flex items-center mb-3 py-4">
         <div class="flex justify-between items-end w-full">
             <h2 class="text-grey text-sm font-normal">My Projects</h2>
-            <a class="button text-white" href="/projects/create">New Project</a>
+            <a class="text-lg button text-white" style="text-decoration: none;" href="/projects/create">New Project</a>
         </div>
     </header>
 

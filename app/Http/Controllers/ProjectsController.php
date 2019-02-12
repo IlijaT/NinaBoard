@@ -14,18 +14,17 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    public function create() 
-    
+    public function create()
     {
         return view('projects.create');
-    
     }
 
     public function store()
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'notes' => 'min:3'
         ]);
         
         $attributes['owner_id'] = auth()->id();
@@ -43,5 +42,14 @@ class ProjectsController extends Controller
         }
 
         return view('projects.show', compact('project'));
+    }
+
+    public function update(Project $project) 
+    
+    {
+        
+        $project->update(['notes' => request('notes')]);
+
+        return redirect($project->path());
     }
 }

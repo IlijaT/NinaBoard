@@ -28,10 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function projects() 
-    
+    public function projects()
     {
-        return $this->hasMany(Project::class, 'owner_id');
-    
+        return $this->hasMany(Project::class, 'owner_id')->latest('updated_at');
     }
 }

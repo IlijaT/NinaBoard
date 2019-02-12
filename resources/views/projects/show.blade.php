@@ -49,13 +49,29 @@
                 <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
                 
                 <!-- General notes -->
-                <textarea class="bg-white p-5 card w-full" style="min-height: 200px">Lorem ipsum...</textarea>
+
+                <form action="{{ $project->path() }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <textarea 
+                        name="notes"
+                        class="bg-white p-4 card w-full mb-4" 
+                        style="min-height: 200px"
+                        placeholder="Anything special that you want to make a note of?"
+                    >{{ $project->notes }}</textarea>
+                    <button type="submit" class="text-lg button text-white">Save</button>
+                </form>
             </div>
 
         </div>
         
         <div class="lg:w-1/4 px-3">
-            @include('projects.card')
+            <div class="bg-white p-5 card" >
+                <h3 class="font-normal mb-3 text-xl py-2 -ml-12 border-l-4 border-blue-light pl-4">
+                    <a style="text-decoration: none" class="text-black" href="{{ $project->path() }}">{{ $project->title }} </a>
+                </h3>
+                <div class="text-grey">{{ str_limit($project->description, 100) }}</div>
+            </div>
         </div>
 
     </div>
