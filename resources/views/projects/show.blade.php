@@ -11,7 +11,7 @@
                 My Projects
                 </a>  / {{ $project->title }}
             </p>
-            <a class="text-lg button text-white" style="text-decoration: none;" href="/projects/create">New Project</a>
+            <a class="text-lg button text-white" style="text-decoration: none;" href="{{ $project->path() }}/edit">Update Project</a>
         </div>
     </header>
 
