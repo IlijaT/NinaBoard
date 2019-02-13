@@ -22,6 +22,7 @@ class Project extends Model
     public function addTask($task)
     {
         return $this->tasks()->create(['body' => $task]);
+       
     }
 
     public function tasks()
@@ -32,5 +33,16 @@ class Project extends Model
     public function activities()
     {
         return $this->hasMany(Activity::class);
+    }
+
+
+    public function recordActivity( $type) 
+    
+    {
+        return Activity::create([
+            'project_id' => $this->id,
+            'description' => $type
+        ]);
+    
     }
 }

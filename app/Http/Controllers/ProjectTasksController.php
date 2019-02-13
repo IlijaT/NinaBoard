@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class ProjectTasksController extends Controller
 {
+    
+    
     public function store(Project $project)
     {
         request()->validate(
@@ -18,16 +20,19 @@ class ProjectTasksController extends Controller
         return redirect($project->path());
     }
 
+
+
     public function update(Project $project, Task $task)
     {
         request()->validate(
             ['body' => 'required']
         );
         
-        $task->update([
-            'body' => request('body'),
-            'completed' => request()->has('completed')
-        ]);
+        $task->update(['body' => request('body')]);
+
+        if(request()->has('completed')){
+            $task->complete();  
+        }
 
         return redirect($project->path());
     }
