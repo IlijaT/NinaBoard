@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class ProjectTasksController extends Controller
 {
-    
-    
     public function store(Project $project)
     {
         request()->validate(
@@ -24,14 +22,16 @@ class ProjectTasksController extends Controller
 
     public function update(Project $project, Task $task)
     {
-        request()->validate(
+        $attributes = request()->validate(
             ['body' => 'required']
         );
         
-        $task->update(['body' => request('body')]);
+        $task->update($attributes);
 
-        if(request()->has('completed')){
-            $task->complete();  
+        if (request('completed')) {
+            $task->complete();
+        } else {
+            $task->incomplete();
         }
 
         return redirect($project->path());
