@@ -72,7 +72,8 @@
                 </h3>
                 <div class="text-grey">{{ str_limit($project->description, 100) }}</div>
             </div>
+            @include('projects.activity.card')
         </div>
-
+        
     </div>
 @endsection 
