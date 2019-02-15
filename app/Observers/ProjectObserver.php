@@ -7,59 +7,23 @@ use App\Activity;
 
 class ProjectObserver
 {
-    /**
-     * Handle the project "created" event.
-     *
-     * @param  \App\Project  $project
-     * @return void
-     */
+     
     public function created(Project $project)
     {
         $project->recordActivity('created');
     }
 
-    /**
-     * Handle the project "updated" event.
-     *
-     * @param  \App\Project  $project
-     * @return void
-     */
+    
+    public function updating(Project $project)
+    {
+         $project->old = $project->getOriginal();
+    }
+
     public function updated(Project $project)
     {
-        $project->recordActivity('updated');
+        $project->recordActivity('updated_project');
 
     
     }
-
-    /**
-     * Handle the project "deleted" event.
-     *
-     * @param  \App\Project  $project
-     * @return void
-     */
-    public function deleted(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Handle the project "restored" event.
-     *
-     * @param  \App\Project  $project
-     * @return void
-     */
-    public function restored(Project $project)
-    {
-        //
-    }
-
-    // protected function recordActivity($project, $type) 
     
-    // {
-    //     return Activity::create([
-    //         'project_id' => $project->id,
-    //         'description' => $type
-    //     ]);
-    
-    // }
 }
