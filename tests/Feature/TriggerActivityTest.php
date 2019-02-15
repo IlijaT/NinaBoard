@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Task;
 use Tests\TestCase;
+use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Facades\Tests\Setup\ProjectFactory;
 
 class TriggerActivityTest extends TestCase
 {
@@ -39,12 +40,19 @@ class TriggerActivityTest extends TestCase
     /** @test */
     public function creating_a_task()
     {
+
         $project = ProjectFactory::create();
 
         $project->addTask('Some task');
 
         $this->assertCount(2, $project->activities);
-        $this->assertEquals('created_task', $project->activities->last()->description);
+        
+
+        tap($project->activities->last(), function ($activity) {
+            $this->assertEquals('created_task', $activity->description);
+            $this->assertInstanceOf(Task::class, $activity->subject);
+            $this->assertEquals('Some task', $activity->subject->body);
+        });
     }
 
 
@@ -60,8 +68,12 @@ class TriggerActivityTest extends TestCase
             'completed' => true
             ]);
 
-        $this->assertCount(3, $project->activities);
-        $this->assertEquals('completed_task', $project->activities->last()->description);
+        $this->assertCount(3, $project->fresh()->activities);
+
+        tap($project->activities->last(), function ($activity) {
+            $this->assertInstanceOf(Task::class, $activity->subject);
+            $this->assertEquals('completed_task', $activity->description);
+        });
     }
 
 
@@ -85,9 +97,11 @@ class TriggerActivityTest extends TestCase
             'body' => 'changed body',
             'completed' => false
         ]);
+        
+        $project = $project->fresh();
 
-        $this->assertCount(4, $project->fresh()->activities);
-        $this->assertEquals('incompleted_task', $project->fresh()->activities->last()->description);
+        $this->assertCount(4, $project->activities);
+        $this->assertEquals('incompleted_task', $project->activities->last()->description);
     }
 
 
