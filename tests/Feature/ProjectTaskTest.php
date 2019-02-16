@@ -16,7 +16,12 @@ class ProjectTaskTest extends TestCase
     /** @test */
     public function guests_cannot_add_tasks_to_projects()
     {
-        $project = factory('App\Project')->create();
+        $this->signIn();
+
+        $project = factory(\App\Project::class)->create();
+
+        auth()->logout();
+
         $this->post($project->path() . '/tasks')->assertRedirect('login');
     }
     
@@ -25,7 +30,7 @@ class ProjectTaskTest extends TestCase
     {
         $this->signIn();
 
-        $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
+        $project = factory(Project::class)->create();
 
         $this->post($project->path(). '/tasks', ['body' => 'Test task']);
 
@@ -36,10 +41,10 @@ class ProjectTaskTest extends TestCase
     /** @test */
     public function a_task_can_be_updated()
     {
-        $project = ProjectFactory::withTasks(1)->create();
-
-
+        
         $this->signIn();
+        
+        $project = ProjectFactory::withTasks(1)->create();
 
 
         $this->patch($project->tasks->first()->path(), [
@@ -52,12 +57,12 @@ class ProjectTaskTest extends TestCase
     }
 
     /** @test */
-    public function a_task_can_be_completed()
+    public function a_task_of_a_project_can_be_completed()
     {
-        $project = ProjectFactory::withTasks(1)->create();
-
-
+        
         $this->signIn();
+        
+        $project = ProjectFactory::withTasks(1)->create();
 
 
         $this->patch($project->tasks->first()->path(), [
@@ -74,13 +79,9 @@ class ProjectTaskTest extends TestCase
     /** @test */
     public function a_task_can_be_marked_as_incompleted()
     {
-        $this->withoutExceptionHandling();
+        $this->signIn();
         
         $project = ProjectFactory::withTasks(1)->create();
-
-
-        $this->signIn();
-
 
         $this->patch($project->tasks->first()->path(), [
             'body' => 'changed body',

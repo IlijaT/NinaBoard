@@ -14,6 +14,8 @@ class TaskTest extends TestCase
     /** @test */
     public function it_belongs_to_a_project()
     {
+        $this->signIn();
+
         $task = factory('App\Task')->create();
 
         $this->assertInstanceOf(Project::class, $task->project);
@@ -22,6 +24,8 @@ class TaskTest extends TestCase
     /** @test */
     public function a_task_has_a_path()
     {
+        $this->signIn();
+        
         $task = factory('App\Task')->create();
 
         $this->assertEquals('/projects/'.$task->project->id . '/tasks/'. $task->id, $task->path());
@@ -30,7 +34,7 @@ class TaskTest extends TestCase
     /** @test */
     public function a_task_can_be_completed()
     {
-        $this->withExceptionHandling();
+        $this->signIn();
 
         $task = factory('App\Task')->create();
         
@@ -44,7 +48,7 @@ class TaskTest extends TestCase
     /** @test */
     public function a_task_can_be_marked_as_incomplete()
     {
-        $this->withExceptionHandling();
+        $this->signIn();
 
         $task = factory('App\Task')->create(['completed' => true]);
 

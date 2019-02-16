@@ -15,6 +15,8 @@ class ProjectTest extends TestCase
         public function it_has_a_path() 
         
         {
+            $this->signIn();
+
             $project = factory('App\Project')->create();
 
             $this->assertEquals('/projects/'.$project->id, $project->path());
@@ -25,6 +27,8 @@ class ProjectTest extends TestCase
         public function it_belongs_to_an_owner() 
         
         {
+            $this->signIn();
+            
             $project = factory('App\Project')->create();
             
             $this->assertInstanceOf('App\User', $project->owner);
@@ -35,6 +39,8 @@ class ProjectTest extends TestCase
         public function it_can_add_a_task() 
         
         {
+            $this->signIn();
+            
             $project = factory('App\Project')->create();
 
             $task = $project->addTask('Test task');

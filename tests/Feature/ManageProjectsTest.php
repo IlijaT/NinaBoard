@@ -14,7 +14,11 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function guest_cannot_manage_a_project()
     {
+        $this->signIn();
+
         $project = factory(\App\Project::class)->create();
+
+        auth()->logout();
 
         $this->post('/projects')->assertRedirect('/login');
         $this->get('/projects/create')->assertRedirect('/login');
@@ -110,13 +114,13 @@ class ManageProjectsTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticted_user_cannot_view_others_project()
+    public function an_authenticted_user_can_view_others_project()
     {
         $this->signIn();
         
         $project = factory(\App\Project::class)->create();
 
-        $this->get($project->path())->assertStatus(403);
+        $this->get($project->path())->assertStatus(200);
     }
 
     /** @test */

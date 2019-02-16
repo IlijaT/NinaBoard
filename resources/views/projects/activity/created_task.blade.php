@@ -1,1 +1,1 @@
-You Created <span class="italic">"{{ $activity->subject->body }}"</span>
+{{ $activity->user->name }} Created <span class="italic">"{{ $activity->subject->body }}"</span>

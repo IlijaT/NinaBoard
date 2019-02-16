@@ -1,1 +1,1 @@
-You Completed <span class="italic">"{{ $activity->subject->body }}"</span>
+{{ $activity->user->name }} Completed <span class="italic">"{{ $activity->subject->body }}"</span>

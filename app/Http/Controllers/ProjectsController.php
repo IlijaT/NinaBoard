@@ -9,7 +9,7 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $projects = auth()->user()->projects;
+        $projects = Project::latest('updated_at')->get();
         
         return view('projects.index', compact('projects'));
     }
@@ -43,9 +43,6 @@ class ProjectsController extends Controller
     
     public function show(Project $project)
     {
-        if (auth()->user()->isNot($project->owner)) {
-            abort(403);
-        }
 
         return view('projects.show', compact('project'));
     }

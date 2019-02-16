@@ -14,8 +14,10 @@ class TriggerActivityTest extends TestCase
 
 
     /** @test */
-    public function creating_a_project()
+    public function creating_a_project_triggers_activity()
     {
+        $this->signIn();
+
         $project = ProjectFactory::create();
 
 
@@ -28,8 +30,10 @@ class TriggerActivityTest extends TestCase
     
 
     /** @test */
-    public function updating_a_project()
+    public function updating_a_project_triggers_activity()
     {
+        $this->signIn();
+        
         $project = ProjectFactory::create();
 
         $originalTitle = $project->title;
@@ -52,8 +56,10 @@ class TriggerActivityTest extends TestCase
 
 
     /** @test */
-    public function creating_a_task()
+    public function creating_a_task_triggers_activity()
     {
+        $this->signIn();
+
         $project = ProjectFactory::create();
 
         $project->addTask('Some task');
@@ -68,13 +74,39 @@ class TriggerActivityTest extends TestCase
         });
     }
 
-
+    
     /** @test */
-    public function completing_a_task()
+    public function incompleting_a_task_triggers_activity()
     {
+        $this->signIn();
+        
+        $project = ProjectFactory::withTasks(1)->create();
+        
+        $this->patch($project->tasks->first()->path(), [
+            'body' => 'changed body',
+            'completed' => true
+            ]);
+            
+            $this->assertCount(3, $project->fresh()->activities);
+            
+            $this->patch($project->tasks->first()->path(), [
+                'body' => 'changed body',
+                'completed' => false
+                ]);
+                
+                $project = $project->fresh();
+                
+                $this->assertCount(4, $project->activities);
+                $this->assertEquals('incompleted_task', $project->activities->last()->description);
+            }
+            
+    /** @test */
+    public function completing_a_task_triggers_activity()
+    {
+        $this->signIn();
+        
         $project = ProjectFactory::withTasks(1)->create();
 
-        $this->signIn();
 
         $this->patch($project->tasks[0]->path(), [
             'body' => 'changed',
@@ -83,45 +115,16 @@ class TriggerActivityTest extends TestCase
 
         $this->assertCount(3, $project->fresh()->activities);
 
-        tap($project->activities->last(), function ($activity) {
+        tap($project->fresh()->activities->last(), function ($activity) {
             $this->assertInstanceOf(Task::class, $activity->subject);
             $this->assertEquals('completed_task', $activity->description);
         });
     }
 
-
     /** @test */
-    public function incompleting_a_task()
+    public function deleting_a_task_triggers_activity()
     {
-        $project = ProjectFactory::withTasks(1)->create();
-
-
         $this->signIn();
-
-
-        $this->patch($project->tasks->first()->path(), [
-            'body' => 'changed body',
-            'completed' => true
-        ]);
-
-        $this->assertCount(3, $project->fresh()->activities);
-
-        $this->patch($project->tasks->first()->path(), [
-            'body' => 'changed body',
-            'completed' => false
-        ]);
-        
-        $project = $project->fresh();
-
-        $this->assertCount(4, $project->activities);
-        $this->assertEquals('incompleted_task', $project->activities->last()->description);
-    }
-
-
-    /** @test */
-    public function deleting_a_task()
-    {
-        $this->withoutExceptionHandling();
         
         $project = ProjectFactory::withTasks(1)->create();
 

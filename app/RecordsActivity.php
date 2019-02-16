@@ -46,9 +46,11 @@ trait RecordsActivity
         return $this->morphMany(Activity::class, 'subject')->latest();
     }
 
+
     public function recordActivity($description)
     {
         return $this->activities()->create([
+            'user_id'     => auth()->id(),
             'description' => $description,
             'changes'     => $this->activityChanges(),
             'project_id'  => class_basename($this) === "Project" ? $this->id : $this->project->id
