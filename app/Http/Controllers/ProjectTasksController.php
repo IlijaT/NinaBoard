@@ -15,7 +15,7 @@ class ProjectTasksController extends Controller
         );
         $project->addTask(request('body'));
 
-        return redirect($project->path());
+        return redirect($project->path())->with('flash', 'A new task has been created!');
     }
 
 
@@ -34,6 +34,6 @@ class ProjectTasksController extends Controller
             $task->incomplete();
         }
 
-        return redirect($project->path());
+        return redirect($project->path())->with('flash', 'The task has been updated!');
     }
 }

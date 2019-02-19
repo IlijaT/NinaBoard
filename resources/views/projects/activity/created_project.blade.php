@@ -1,1 +1,1 @@
-{{ $activity->user->name }} Created the project
+{{ $activity->user->name }} Created new announcement 

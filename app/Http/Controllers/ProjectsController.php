@@ -36,14 +36,13 @@ class ProjectsController extends Controller
         $project = auth()->user()->projects()->create($attributes);
 
         
-        return redirect($project->path());
+        return redirect($project->path())->with('flash', 'Your announcment has been created!');
     }
 
     
     
     public function show(Project $project)
     {
-
         return view('projects.show', compact('project'));
     }
 
@@ -66,6 +65,7 @@ class ProjectsController extends Controller
         
         $project->update($attributes);
 
-        return redirect($project->path());
+        return redirect($project->path())->with('flash', 'The announcment has been updated!');
+        ;
     }
 }
