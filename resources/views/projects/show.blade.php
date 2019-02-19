@@ -8,7 +8,7 @@
                 class="text-lg text-grey text-sm font-normal"
                 style="text-decoration: none;"
                 >
-                My Projects
+                All Announcements
                 </a>  / {{ $project->title }}
             </p>
             <a class="text-lg button text-white" style="text-decoration: none;" href="{{ $project->path() }}/edit">Update Project</a>
