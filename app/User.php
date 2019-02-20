@@ -33,4 +33,31 @@ class User extends Authenticatable
         return $this->hasMany(Project::class, 'owner_id')->latest('updated_at');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    // $role is a string not Role object
+    public function assignRole($role)
+    {
+        return $this->roles()->save(
+           Role::whereName($role)->firstOrFail()
+       );
+    }
+
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        foreach ($role as $r) {
+            if ($this->hasRole($r->name)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
