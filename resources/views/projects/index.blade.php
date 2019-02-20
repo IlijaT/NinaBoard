@@ -2,8 +2,8 @@
 @section('content')
     <header  class="flex items-center mb-3 py-4">
         <div class="flex justify-between items-end w-full">
-            <h2 class="text-grey text-sm font-normal">My Projects</h2>
-            <a class="text-lg button text-white" style="text-decoration: none;" href="/projects/create">New Project</a>
+            <h2 class="text-grey text-sm font-normal">Announcements</h2>
+            <a class="text-lg button text-white" style="text-decoration: none;" href="/projects/create">New Announcement</a>
         </div>
     </header>
 
@@ -13,7 +13,7 @@
                 @include('projects.card')
             </div>
         @empty
-            <div>no projects yet</div>
+            <div>No Announcements Yet</div>
         @endforelse
     </main>
  

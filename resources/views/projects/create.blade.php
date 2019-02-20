@@ -2,7 +2,7 @@
 @section('content')
     <div class="lg:w-1/2 lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
         <h1 class="text-2xl font-normal mb-10 text-center">
-            Create a Project
+            Create an Announcement
         </h1>
 
         <form action="/projects" method="POST">
@@ -37,7 +37,7 @@
 
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="text-lg button text-white is-link mr-2">Create Project</button>
+                    <button class="text-lg button text-white is-link mr-2">Create</button>
                     <a href="/projects">Cancel</a>
                 </div>
             </div>
