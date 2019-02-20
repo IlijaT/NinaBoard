@@ -4,41 +4,35 @@ namespace App;
 
 trait RecordsActivity
 {
-
     public $oldAttributes = [];
 
-    public static function bootRecordsActivity() 
-    
+    public static function bootRecordsActivity()
     {
-       static::updating(function($model){
-            $model->oldAttributes = $model->getOriginal();
-       });
-
-       foreach (self::recordableEvents() as $event) {
-           static::$event(function($model) use ($event){
-
-                
+        foreach (self::recordableEvents() as $event) {
+            static::$event(function ($model) use ($event) {
                 $model->recordActivity($model->activityDescription($event));
-           });
-       }
-    
+            });
+            
+            if ($event === 'updated') {
+                static::updating(function ($model) {
+                    $model->oldAttributes = $model->getOriginal();
+                });
+            }
+        }
     }
 
-    public static function recordableEvents(){
-        
+    public static function recordableEvents()
+    {
         if (isset(static::$recordableEvents)) {
             return static::$recordableEvents;
-        } 
+        }
     
-       return ['created', 'updated', 'deleted'];
-       
+        return ['created', 'updated'];
     }
 
-    protected function activityDescription($description) 
-    
+    protected function activityDescription($description)
     {
-        return "{$description}_". strtolower(class_basename($this)); 
-    
+        return "{$description}_". strtolower(class_basename($this));
     }
     
     public function activities()

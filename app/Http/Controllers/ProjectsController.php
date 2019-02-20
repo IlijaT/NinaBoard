@@ -68,4 +68,12 @@ class ProjectsController extends Controller
         return redirect($project->path())->with('flash', 'The announcment has been updated!');
         ;
     }
+
+    public function destroy(Project $project)
+    {
+        $this->authorize('delete-project', $project);
+        $project->delete();
+
+        return redirect('/projects')->with('flash', 'The announcment has been deleted!');
+    }
 }
