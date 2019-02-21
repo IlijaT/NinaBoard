@@ -11,7 +11,6 @@
                 All Announcements
                 </a>  / {{ $project->title }}
             </p>
-            <a class="text-lg button text-white" style="text-decoration: none;" href="{{ $project->path() }}/edit">Update Project</a>
         </div>
     </header>
 
@@ -42,6 +41,13 @@
                         <input name="body" class="w-full" type="text" placeholder="Add a new task...">
                     </form>
                 </div>
+                
+                @if ($errors->has('body'))
+                    <span 
+                        style="width: 100%; margin-top: .25rem; font-size: 80%; color: #e3342f;"
+                        role="alert"
+                    ><strong>{{ $errors->first('body') }}</strong>
+                @endif
 
             </div>
             
@@ -68,7 +74,7 @@
         <div class="lg:w-1/4 px-3">
             <div class="bg-white p-5 card" >
                 <h3 class="font-normal mb-3 text-xl py-2 -ml-12 border-l-4 border-blue-light pl-4">
-                    <a style="text-decoration: none" class="text-black" href="{{ $project->path() }}">{{ $project->title }} </a>
+                    <a style="text-decoration: none" class="text-black" href="{{ $project->path() }}/edit">{{ $project->title }} </a>
                 </h3>
                 <div class="text-grey">{{ str_limit($project->description, 100) }}</div>
             </div>

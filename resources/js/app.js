@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -33,5 +32,3 @@ Vue.component('flash-component', require('./components/FlashComponent.vue').defa
 const app = new Vue({
     el: '#app'
 });
-
-

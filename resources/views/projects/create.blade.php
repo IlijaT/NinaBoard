@@ -20,6 +20,12 @@
                         required
                         >
                 </div>
+                @if ($errors->has('title'))
+                    <span 
+                        style="width: 100%; margin-top: .25rem; font-size: 80%; color: #e3342f;"
+                        role="alert"
+                    ><strong>{{ $errors->first('title') }}</strong>
+                @endif
             </div>
 
             <div class="field mb-6">

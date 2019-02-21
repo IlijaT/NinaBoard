@@ -11,7 +11,7 @@ class ProjectTasksController extends Controller
     public function store(Project $project)
     {
         request()->validate(
-            ['body' => 'required']
+            ['body' => 'required|max:190']
         );
         $project->addTask(request('body'));
 
@@ -23,7 +23,7 @@ class ProjectTasksController extends Controller
     public function update(Project $project, Task $task)
     {
         $attributes = request()->validate(
-            ['body' => 'required']
+            ['body' => 'required|max:190']
         );
         
         $task->update($attributes);

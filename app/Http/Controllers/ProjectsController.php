@@ -26,7 +26,7 @@ class ProjectsController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'title' => 'required',
+            'title' => 'required|max:190',
             'description' => 'required',
             'notes' => 'nullable'
         ]);
@@ -58,7 +58,7 @@ class ProjectsController extends Controller
     public function update(Project $project)
     {
         $attributes = request()->validate([
-            'title' => 'sometimes|required',
+            'title' => 'sometimes|required|max:190',
             'description' => 'sometimes|required',
             'notes' => 'nullable'
         ]);

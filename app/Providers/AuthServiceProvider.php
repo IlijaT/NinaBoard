@@ -31,10 +31,22 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->hasRole($permission->roles);
             });
         }
+
+
     }
 
     protected function getPermissions()
     {
-        return Permission::with('roles')->get();
+        //return Permission::with('roles')->get();
+
+        try {
+
+            return Permission::with('roles')->get();
+            
+        } catch (\Exception $e) {
+            
+            return [];
+            
+        }
     }
 }
