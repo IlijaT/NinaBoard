@@ -1,6 +1,6 @@
 <template>
     <div class="alert-flash">
-        <div class="alert  bg-green-dark text-white" role="alert" v-show="show">
+        <div :class="'bg-' + level + '-dark'" class="alert text-white" role="alert" v-show="show">
         {{ body }}
         </div>
     </div>
@@ -8,32 +8,42 @@
 
 <script>
     export default {
-        props: ['message'],
+        props: ['message', 'color'],
+
         data() {
             return {
                 body: this.message,
+                level: 'green',
                 show: false
             }
         },
+
         created(){
+
             if(this.message) {
-                this.flash(this.message);
+                this.flash(this.message, this.color);
             }
-            window.events.$on('flash', message => {
-                this.flash(message);
-            })
+
+            window.events.$on('flash', data => this.flash(data))
+
         },
+
         methods: {
-            flash(message) {
+
+            flash(message, color) {
                 this.body = message;
+                this.level = color;
                 this.show = true;
                 this.hide();
             },
-             hide(){
-                 setTimeout(() => this.show = false, 3000);
-             },
+
+            hide(){
+                setTimeout(() => this.show = false, 3000);
+            },
+
         }
     }
+
 </script>
 
 <style>

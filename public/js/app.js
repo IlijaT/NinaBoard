@@ -1772,10 +1772,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['message'],
+  props: ['message', 'color'],
   data: function data() {
     return {
       body: this.message,
+      level: 'green',
       show: false
     };
   },
@@ -1783,16 +1784,17 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     if (this.message) {
-      this.flash(this.message);
+      this.flash(this.message, this.color);
     }
 
-    window.events.$on('flash', function (message) {
-      _this.flash(message);
+    window.events.$on('flash', function (data) {
+      return _this.flash(data);
     });
   },
   methods: {
-    flash: function flash(message) {
+    flash: function flash(message, color) {
       this.body = message;
+      this.level = color;
       this.show = true;
       this.hide();
     },
@@ -37321,7 +37323,8 @@ var render = function() {
             expression: "show"
           }
         ],
-        staticClass: "alert  bg-green-dark text-white",
+        staticClass: "alert text-white",
+        class: "bg-" + _vm.level + "-dark",
         attrs: { role: "alert" }
       },
       [_vm._v("\n    " + _vm._s(_vm.body) + "\n    ")]
@@ -49446,7 +49449,11 @@ if (token) {
 window.events = new Vue();
 
 window.flash = function (message) {
-  window.events.$emit('flash', message);
+  var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+  window.events.$emit('flash', {
+    message: message,
+    level: level
+  });
 };
 
 /***/ }),
