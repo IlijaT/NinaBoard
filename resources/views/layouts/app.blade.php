@@ -28,7 +28,7 @@
             @yield('content')
         </main>
 
-        <flash-component message='{{ session('flash') }}'></flash-component>
+        <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}'></flash-component>
     </div>
 
 </body>

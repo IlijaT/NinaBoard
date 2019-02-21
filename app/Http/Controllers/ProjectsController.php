@@ -36,7 +36,10 @@ class ProjectsController extends Controller
         $project = auth()->user()->projects()->create($attributes);
 
         
-        return redirect($project->path())->with('flash', 'Your announcment has been created!');
+        return redirect($project->path())->with('flash', [
+            'message' => 'Your announcment has been created!',
+            'color' => 'green'
+            ]);
     }
 
     
@@ -65,7 +68,10 @@ class ProjectsController extends Controller
         
         $project->update($attributes);
 
-        return redirect($project->path())->with('flash', 'The announcment has been updated!');
+        return redirect($project->path())->with('flash', [
+            'message' => 'The announcment has been updated!',
+            'color' => 'green'
+            ]);
         ;
     }
 
@@ -74,6 +80,9 @@ class ProjectsController extends Controller
         $this->authorize('delete-project', $project);
         $project->delete();
 
-        return redirect('/projects')->with('flash', 'The announcment has been deleted!');
+        return redirect('/projects')->with('flash', [
+            'message' => 'The announcment has been deleted!',
+            'color' => 'red'
+            ]);
     }
 }
