@@ -9,7 +9,7 @@
                 style="text-decoration: none;"
                 >
                 All Announcements
-                </a>  / {{ $project->title }}
+                </a>  / {{ str_limit($project->title, 80) }}
             </p>
         </div>
     </header>
