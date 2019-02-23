@@ -56,7 +56,7 @@
                 
                 <!-- General notes -->
 
-                <form action="{{ $project->path() }}" method="POST">
+                <form class="text-right"  action="{{ $project->path() }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <textarea 
@@ -65,7 +65,7 @@
                         style="min-height: 200px"
                         placeholder="Anything special that you want to make a note of?"
                     >{{ $project->notes }}</textarea>
-                    <button type="submit" class="text-lg button text-white">Save</button>
+                    <button type="submit" class="text-lg button text-white is-link hover:bg-blue-dark">Save</button>
                 </form>
             </div>
 

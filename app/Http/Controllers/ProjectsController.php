@@ -37,7 +37,7 @@ class ProjectsController extends Controller
 
         
         return redirect($project->path())->with('flash', [
-            'message' => 'Your announcment has been created!',
+            'message' => 'Your announcement has been created!',
             'color' => 'green'
             ]);
     }
@@ -69,7 +69,7 @@ class ProjectsController extends Controller
         $project->update($attributes);
 
         return redirect($project->path())->with('flash', [
-            'message' => 'The announcment has been updated!',
+            'message' => 'The announcement has been updated!',
             'color' => 'green'
             ]);
         ;
