@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
 
 class UsersTest extends TestCase
 {
@@ -61,6 +62,37 @@ class UsersTest extends TestCase
         $this->signIn($user);
 
         $this->get("/users/{$user->id}")->assertSee($user->first()->name);
+        
+    }
+
+    /** @test */
+    public function manager_can_register_new_user()
+    {
+        $this->withoutExceptionHandling();
+        
+        $manager = factory(\App\User::class)->create();
+
+        $permission = factory(\App\Permission::class)->create(['name' => 'delete-project']);
+        $role = factory(\App\Role::class)->create(['name' => 'manager']);
+
+        $role->givePermissionTo($permission);
+
+        $manager->assignRole('manager');
+
+        $this->be($manager);
+
+        $attributes = [
+            'name' => 'John Doe',
+            'email' => 'john@gmail.com',
+            'email_verified_at' => now(),
+            'password'          => 'secret', // secret
+            'password_confirmation' => 'secret',
+            'remember_token'    => str_random(10),
+        ];
+
+        $this->post('/users', $attributes)->assertRedirect('/users');
+
+        $this->assertDatabaseHas('users', ['name' => 'John Doe']);
         
     }
 }
