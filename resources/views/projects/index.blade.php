@@ -3,7 +3,7 @@
     <header  class="flex items-center mb-3 py-4">
         <div class="flex justify-between items-end w-full">
             <h2 class="text-grey text-sm font-normal">Announcements</h2>
-            <a class="text-lg button text-white" style="text-decoration: none;" href="/projects/create">New Announcement</a>
+            <a class="text-lg button text-white is-link hover:bg-blue-dark" style="text-decoration: none;" href="/projects/create">New</a>
         </div>
     </header>
 
