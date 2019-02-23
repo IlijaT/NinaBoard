@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Project;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -57,23 +58,44 @@ class ManageProjectsTest extends TestCase
     }
 
     /** @test */
+    public function an_unauthorized_user_cannot_delete_a_project()
+    {
+        $this->signIn();
+
+        $project = factory(\App\Project::class)->create();
+        
+        $this->delete($project->path())->assertStatus(403);
+
+        Auth::logout();
+
+        $this->delete($project->path())->assertRedirect('/login');
+
+    }
+
+    /** @test */
     public function a_manager_can_delete_a_project()
     {
-        $this->withoutExceptionHandling();
-        
-        $this->signIn();
-        
-        
-        $project = factory(\App\Project::class)->create(['owner_id' => auth()->id()]);
+       $this->withoutExceptionHandling();
 
-        
-        $this->delete($project->path())->assertRedirect('/projects');
+        $user = factory(\App\User::class)->create();
+
+        $permission = factory(\App\Permission::class)->create(['name' => 'delete-project']);
+        $role = factory(\App\Role::class)->create(['name' => 'manager']);
+
+        $role->givePermissionTo($permission);
+
+        $user->assignRole('manager');
+
+        $this->be($user);
+
+        $project = factory(\App\Project::class)->create();
+
+        $this->delete($project->path());
 
         $this->assertDatabaseMissing('projects', $project->only('id'));
     }
 
-    
-
+ 
     /** @test */
     public function a_user_can_update_a_project()
     {

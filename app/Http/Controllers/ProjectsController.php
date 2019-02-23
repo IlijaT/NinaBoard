@@ -77,12 +77,16 @@ class ProjectsController extends Controller
 
     public function destroy(Project $project)
     {
-        $this->authorize('delete-project', $project);
+        
+        if( ! auth()->user()->hasRole('manager')) {
+            abort(403);
+        }
+        
         $project->delete();
 
         return redirect('/projects')->with('flash', [
-            'message' => 'The announcment has been deleted!',
-            'color' => 'red'
+            'message' => 'The announcement has been deleted!',
+            'color' => 'orange'
             ]);
     }
 }
