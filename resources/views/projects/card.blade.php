@@ -15,7 +15,7 @@
             <form method="POST" action="{{ $project->path() }}" class="text-right">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="text-xs">Delete</button>
+                <button type="submit" class="no-underline text-orange hover:text-orange-dark rounded-lg py-2 px-3 border border-black text-xs">Delete</button>
             </form>
         </footer>
         @endcan

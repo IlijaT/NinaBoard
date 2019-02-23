@@ -54,10 +54,13 @@
                 </div>
             </div>
 
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="text-lg button text-white is-link mr-2">Update</button>
-                    <a href="{{ $project->path() }}">Cancel</a>
+            <div class="flex">
+                <div class="ml-auto control">
+                    <a 
+                    style="text-decoration: none" 
+                    class="mr-2 no-underline text-blue text-lg hover:text-blue-darkest rounded-lg py-2 px-3 border border-black"
+                    href="{{ $project->path() }}">Cancel</a>
+                    <button class="text-lg button text-white is-link hover:bg-blue-dark">Update</button>
                 </div>
             </div>
         </form>
