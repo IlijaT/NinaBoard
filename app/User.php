@@ -62,8 +62,8 @@ class User extends Authenticatable
         return false;
     }
 
-    public function avatar()
+    public function getAvatarPathAttribute($avatar)
     {
-        return $this->avatar_path ?: 'avatars/default_avatar.jpg';
+        return $avatar ? "/storage/{$avatar}" : '/images/avatars/default_avatar.jpg';
     }
 }

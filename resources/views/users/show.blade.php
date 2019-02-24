@@ -11,15 +11,7 @@
     <main>
         <div>
             
-            <img class="rounded-full" 
-                src="{{ asset('/storage/'.$user->avatar()) }}" 
-                height="80" width="80">
-            
-            <form action="/users/{{ $user->id }}/avatar" method="post" enctype="multipart/form-data">
-                @csrf
-                <input type="file" name="avatar">
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
+            <avatar-form :user="{{ $user }}"></avatar-form>
             
             <h2 class="text-grey text-xl font-normal">Email: {{$user->email}}</h2>
 
