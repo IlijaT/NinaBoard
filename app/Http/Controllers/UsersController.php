@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-
-    public function __construct( )
+    public function __construct()
     {
         $this->middleware(['manager'])->except(['show', 'edit']);
     }
@@ -51,13 +50,13 @@ class UsersController extends Controller
             'remember_token'    => str_random(10),
         ]);
 
-        return redirect('/users')->with('flash', [
+        return redirect('/users')->with(
+            'flash',
+            [
             'message' => 'A new user has been registered!',
             'color' => 'green'
             ]
         );
-
-
     }
 
     /**
@@ -73,7 +72,6 @@ class UsersController extends Controller
         }
 
         abort(403);
-
     }
 
     /**
