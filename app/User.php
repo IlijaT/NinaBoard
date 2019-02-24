@@ -43,7 +43,7 @@ class User extends Authenticatable
     public function assignRole($role)
     {
         return $this->roles()->save(
-           Role::whereName($role)->firstOrFail()
+            Role::whereName($role)->firstOrFail()
        );
     }
 
@@ -60,5 +60,10 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function avatar()
+    {
+        return $this->avatar_path ?: 'avatars/default_avatar.jpg';
     }
 }

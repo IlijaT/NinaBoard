@@ -8,13 +8,15 @@
     </header>
 
     <main>
-        @forelse($users as $user)
-            <div class="list-group">
-                <a href="/users/{{$user->id}}" class="list-group-item list-group-item-action">{{ $user->name}}</a>
-            </div>
-        @empty
-            <div>No Users Yet</div>
-        @endforelse
+        <div class="lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
+            @forelse($users as $user)
+                <div class="list-group">
+                    <a href="/users/{{$user->id}}" class="list-group-item list-group-item-action">{{ $user->name}}</a>
+                </div>
+            @empty
+                <div>No Users Yet</div>
+            @endforelse
+        </div>
     </main>
  
 @endsection
