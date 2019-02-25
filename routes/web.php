@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('projects', 'ProjectsController');
+    Route::resource('projects', 'ProjectsController', ['names' => ['index' => 'home']]);
     Route::resource('users', 'UsersController');
 
     Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/users/{user}/avatar', 'UserAvatarController@store');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    //Route::get('/home', 'HomeController@index')->name('home');
 });
 
 Auth::routes(['register' => false]);

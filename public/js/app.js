@@ -1789,15 +1789,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onLoad: function onLoad(avatar) {
-      this.avatar = avatar.src; // persist to the server
-
-      this.persist(avatar.file);
+      // persist to the server
+      this.persist(avatar);
     },
     persist: function persist(avatar) {
+      var _this = this;
+
       var data = new FormData();
-      data.append('avatar', avatar);
+      data.append('avatar', avatar.file);
       axios.post("/users/".concat(this.user.id, "/avatar"), data).then(function () {
-        return flash('Avatar uploaded');
+        _this.avatar = avatar.src;
+        flash('Avatar successfully uploaded!', 'green');
+      }).catch(function () {
+        flash('Image must be less than 2MB!', 'red');
       });
     }
   }
@@ -1839,7 +1843,7 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     window.events.$on('flash', function (data) {
-      return _this.flash(data);
+      _this.flash(data.message, data.color);
     });
   },
   methods: {
@@ -49612,11 +49616,10 @@ if (token) {
 
 window.events = new Vue();
 
-window.flash = function (message) {
-  var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+window.flash = function (message, color) {
   window.events.$emit('flash', {
     message: message,
-    level: level
+    color: color
   });
 };
 

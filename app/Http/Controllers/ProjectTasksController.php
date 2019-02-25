@@ -38,7 +38,7 @@ class ProjectTasksController extends Controller
         }
 
         return redirect($project->path())->with('flash', [
-            'message' => 'The task has been updated!', 
+            'message' => 'The task has been updated!',
             'color' => 'green'
             ]);
     }

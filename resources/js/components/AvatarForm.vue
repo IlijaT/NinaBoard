@@ -25,19 +25,25 @@ export default {
     methods: {
         onLoad(avatar) {
             
-            this.avatar = avatar.src;
+           
 
             // persist to the server
     
-            this.persist(avatar.file);
+            this.persist(avatar);
         },
 
         persist(avatar) {
             let data = new FormData();
-            data.append('avatar', avatar);
+            data.append('avatar', avatar.file);
 
             axios.post(`/users/${this.user.id}/avatar`, data)
-                .then(() => flash('Avatar uploaded'));
+                .then(() => {
+                    this.avatar = avatar.src;
+                    flash('Avatar successfully uploaded!', 'green');
+                })
+                .catch( () => {
+                    flash('Image must be less than 2MB!', 'red');
+                });
         }
 
          

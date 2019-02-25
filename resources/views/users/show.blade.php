@@ -4,12 +4,15 @@
     <header class="flex items-center mb-3 py-4">
         <div class="flex justify-between items-end w-full">
             <p class="text-lg text-grey text-sm font-normal">
-               <a href="/users" 
+                @can('delete-project')
+                <a href="/users" 
                 class="text-lg text-grey text-sm font-normal"
                 style="text-decoration: none;"
                 >
-                All Users
-                </a>  / {{ $user->name }}
+                All users
+                </a> 
+                @endcan
+               / {{ $user->name }}
             </p>
             <a 
             style="text-decoration: none" 
@@ -30,5 +33,4 @@
             </div>
     </div>
     
- 
 @endsection
