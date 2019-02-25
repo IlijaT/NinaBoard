@@ -37406,8 +37406,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("img", {
-      staticClass: "rounded-full",
-      attrs: { src: _vm.avatar, height: "80", width: "80" }
+      staticClass: "rounded-full h-32 w-32 flex items-center justify-center",
+      attrs: { src: _vm.avatar }
     }),
     _vm._v(" "),
     _c(
@@ -37492,7 +37492,7 @@ var render = function() {
       "label",
       {
         staticClass:
-          "text-small button text-white is-link hover:bg-blue-dark mt-2"
+          "mt-3 no-underline text-blue text-lg hover:text-blue-darkest rounded-lg py-1 px-2  border border-red"
       },
       [
         _vm._v("\n        Upload photo  \n        "),
@@ -49865,8 +49865,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Laravel projekti\birdboard\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Laravel projekti\birdboard\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Laravel_VueJS\BirdBoard\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Laravel_VueJS\BirdBoard\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

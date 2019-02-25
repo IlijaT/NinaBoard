@@ -1,8 +1,8 @@
 <template>
     <div>
-        <img class="rounded-full" 
+        <img class="rounded-full h-32 w-32 flex items-center justify-center" 
             :src="avatar" 
-            height="80" width="80">
+            >
 
         <form method="post" enctype="multipart/form-data">
             <image-upload name="avatar" @loaded="onLoad"></image-upload>

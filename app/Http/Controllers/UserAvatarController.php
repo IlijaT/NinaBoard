@@ -10,7 +10,7 @@ class UserAvatarController extends Controller
     public function store(User $user)
     {
         request()->validate([
-            'avatar' => 'required|image'
+            'avatar' => 'required|image|max:10240'
         ]);
 
         $user->update(

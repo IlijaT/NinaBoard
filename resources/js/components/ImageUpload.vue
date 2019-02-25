@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label class="text-small button text-white is-link hover:bg-blue-dark mt-2">
+        <label class="mt-3 no-underline text-blue text-lg hover:text-blue-darkest rounded-lg py-1 px-2  border border-red">
             Upload photo  
             <input hidden type="file"  accept="image/*" @change="onChange">
         </label>                
