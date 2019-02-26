@@ -65,7 +65,7 @@
                         style="min-height: 200px"
                         placeholder="Anything special that you want to make a note of?"
                     >{{ $project->notes }}</textarea>
-                    <button type="submit" class="text-lg button text-white is-link hover:bg-blue-dark">Save</button>
+                    <button type="submit" class="py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue">Save</button>
                 </form>
             </div>
 

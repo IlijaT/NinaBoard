@@ -52,6 +52,10 @@
   @apply  rounded-lg shadow-md ;  
 }
 
+.card-left {
+  background: linear-gradient(to bottom, #47cdff,#318fb2)
+}
+
  /**
   * This injects all of Tailwind's utility classes, generated based on your
   * config file.

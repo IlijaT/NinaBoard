@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-6">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
@@ -63,8 +63,8 @@
 
                         <div class="form-group row mb-0">
                             <div class="flex col-md-6 offset-md-4">
-                                <a style="text-decoration: none" class="ml-auto mr-2 no-underline text-blue text-lg hover:text-blue-darkest rounded-lg py-2 px-3 border border-black" href="/users">Cancel</a>
-                                <button type="submit" class="text-lg button text-white is-link hover:bg-blue-dark">
+                                <a style="text-decoration: none" class="ml-auto mr-2 no-underline text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey" href="/users">Cancel</a>
+                                <button type="submit" class="py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue">
                                     {{ __('Register') }}
                                 </button>
                             </div>

@@ -1,12 +1,19 @@
 <template>
     <div>
-        <img class="rounded-full h-32 w-32 flex items-center justify-center" 
-            :src="avatar" 
-            >
+        <div class="flex flex-col h-full card-left rounded-lg h-64 w-64 text-center justify-center">
+            <div class="mt-5">
+                <img class="rounded-full h-32 w-32  border-2 border-purple-lighter" 
+                :src="avatar" 
+                >
+            </div>
 
-        <form method="post" enctype="multipart/form-data">
-            <image-upload name="avatar" @loaded="onLoad"></image-upload>
-        </form>  
+            <div class="flex-1">
+                <form method="post" enctype="multipart/form-data">
+                    <image-upload name="avatar" @loaded="onLoad"></image-upload>
+                </form>
+            </div>
+
+        </div>
     </div>
 </template>
 

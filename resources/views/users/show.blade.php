@@ -16,19 +16,49 @@
             </p>
             <a 
             style="text-decoration: none" 
-            class="ml-auto no-underline text-xl button text-white is-link hover:bg-blue-dark"
+            class="ml-auto py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue"
             href="/users/{{ $user->id }}/edit">Edit Details</a>
         </div>
     </header>
 
-    <div class="flex mb-3 py-4 bg-white p-3 mb-3 rounded-lg shadow-md  w-full">
-            <avatar-form :user="{{ $user }}" class="m-5"></avatar-form>
-            <div class="flex flex-col ml-4 content-between">
-                <div class="my-auto">
+    <div class="flex bg-white rounded-lg shadow-md h-64 w-full">
+         
+            {{-- left --}}
+                 
+            <avatar-form :user="{{ $user }}"></avatar-form>
+               
+
+            {{-- right --}}
+            <div class="flex flex-col ml-4 w-full">
+                <div class="flex mt-1">
+                    <div class="rounded-full h-10 w-10 bg-grey-lighter m-2">
+
+                    </div>
+                    <div class="rounded-full h-10 w-10 bg-grey-lighter m-2">
+
+                    </div>
+                    <div class="rounded-full h-10 w-10 bg-grey-lighter m-2">
+
+                    </div>
+                    <div class="rounded-full h-10 w-10 bg-grey-lighter m-2">
+
+                    </div>
+                    <div class="rounded-full h-10 w-10 bg-grey-lighter m-2">
+
+                    </div>
+
+                </div>
+                <div class="mb-auto">
                     <h1>{{$user->name}}</h1>
                     <hr>
                     <h2 class="text-grey text-xl font-normal">Email: {{$user->email}}</h2>
                     <h2 class="text-grey text-xl font-normal">Role: {{$user->hasRole('manager') ? 'Manager' : 'Operator'}}</h2>
+                    
+
+                </div>
+                <div class="flex justify-center m-2">
+                    <h2 class="text-grey text-sm font-normal m-2">Completed tasks: 55</h2>
+                    <h2 class="text-grey text-sm font-normal m-2">Created assignements: 555</h2>
                 </div>
             </div>
     </div>

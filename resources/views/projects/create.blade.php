@@ -42,9 +42,9 @@
             </div>
 
             <div class="flex">
-                <div class="ml-auto control">
-                    <a style="text-decoration: none" class="mr-2 no-underline text-blue text-lg hover:text-blue-darkest rounded-lg py-2 px-3 border border-black" href="/projects">Cancel</a>
-                    <button class="text-lg button text-white is-link hover:bg-blue-dark">Create</button>
+                <div class="ml-auto control flex">
+                    <a style="text-decoration: none" class="mr-2 no-underline text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey" href="/projects">Cancel</a>
+                    <button class="py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue">Create</button>
                 </div>
             </div>
         </form>

@@ -1776,6 +1776,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1883,8 +1890,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      showText: false
+    };
+  },
   methods: {
+    mouseOver: function mouseOver() {
+      this.showText = true;
+    },
+    mouseLeave: function mouseLeave() {
+      this.showText = false;
+    },
     onChange: function onChange(e) {
       var _this = this;
 
@@ -37409,21 +37437,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("img", {
-      staticClass: "rounded-full h-32 w-32 flex items-center justify-center",
-      attrs: { src: _vm.avatar }
-    }),
-    _vm._v(" "),
     _c(
-      "form",
-      { attrs: { method: "post", enctype: "multipart/form-data" } },
+      "div",
+      {
+        staticClass:
+          "flex flex-col h-full card-left rounded-lg h-64 w-64 text-center justify-center"
+      },
       [
-        _c("image-upload", {
-          attrs: { name: "avatar" },
-          on: { loaded: _vm.onLoad }
-        })
-      ],
-      1
+        _c("div", { staticClass: "mt-5" }, [
+          _c("img", {
+            staticClass:
+              "rounded-full h-32 w-32  border-2 border-purple-lighter",
+            attrs: { src: _vm.avatar }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex-1" }, [
+          _c(
+            "form",
+            { attrs: { method: "post", enctype: "multipart/form-data" } },
+            [
+              _c("image-upload", {
+                attrs: { name: "avatar" },
+                on: { loaded: _vm.onLoad }
+              })
+            ],
+            1
+          )
+        ])
+      ]
     )
   ])
 }
@@ -37492,23 +37534,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "label",
-      {
-        staticClass:
-          "mt-3 no-underline text-blue text-lg hover:text-blue-darkest rounded-lg py-1 px-2  border border-red"
-      },
-      [
-        _vm._v("\n        Upload photo  \n        "),
-        _c("input", {
-          attrs: { hidden: "", type: "file", accept: "image/*" },
-          on: { change: _vm.onChange }
-        })
-      ]
-    )
+    _c("label", [
+      _c("div", { staticClass: "flex btn flex mt-2" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "p",
+            {
+              staticClass: "text-white text-normal p-1 mb-0",
+              on: { mouseover: _vm.mouseOver, mouseleave: _vm.mouseLeave }
+            },
+            [_vm._v("Add your photo")]
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.showText,
+                  expression: "showText"
+                }
+              ],
+              staticClass: "text-purple-darkest text-xs font-bold -mt-2"
+            },
+            [_vm._v("Add up to 2MB")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { hidden: "", type: "file", accept: "image/*" },
+        on: { change: _vm.onChange }
+      })
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "p",
+        {
+          staticClass:
+            "rounded-full h-8 w-8 text-grey-darker mr-2 bg-white text-xl font-bold  hover:bg-blue-dark hover:text-purple-darkest"
+        },
+        [_vm._v("+")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
