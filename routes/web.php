@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/users/{user}/avatar', 'UserAvatarController@store');
 
+    Route::get('/calendar', 'CalendarController@index');
+
     //Route::get('/home', 'HomeController@index')->name('home');
 });
 

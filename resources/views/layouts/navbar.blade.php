@@ -39,6 +39,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 
                             <a class="dropdown-item" href="/projects">Announcements</a>
+                            <a class="dropdown-item" href="/calendar">Calendar</a>
                             @can('delete-project')
                                 <a class="dropdown-item" href="/users">Users</a>
                             @endcan
