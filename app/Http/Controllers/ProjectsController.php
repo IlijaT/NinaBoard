@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use App\Activity;
 
 class ProjectsController extends Controller
 {
     public function index()
     {
         $projects = Project::latest('updated_at')->get();
+
+        $activities = Activity::latest('updated_at')->limit(20)->get();
         
-        return view('projects.index', compact('projects'));
+        return view('projects.index', compact(['projects', 'activities']));
     }
 
     
@@ -77,8 +80,7 @@ class ProjectsController extends Controller
 
     public function destroy(Project $project)
     {
-        
-        if( ! auth()->user()->hasRole('manager')) {
+        if (! auth()->user()->hasRole('manager')) {
             abort(403);
         }
         

@@ -24,7 +24,7 @@
     <div id="app">
         @include('layouts.navbar')
 
-        <main class="container py-4">
+        <main class="container">
             @yield('content')
         </main>
 
