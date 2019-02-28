@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
 use App\Project;
-use Illuminate\Http\Request;
 use App\Activity;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProjectsController extends Controller
 {
@@ -13,8 +16,10 @@ class ProjectsController extends Controller
         $projects = Project::latest('updated_at')->get();
 
         $activities = Activity::latest('updated_at')->limit(20)->get();
+
+        $tasks = Task::whereDate('start', Carbon::today())->get();
         
-        return view('projects.index', compact(['projects', 'activities']));
+        return view('projects.index', compact(['projects', 'activities', 'tasks']));
     }
 
     
@@ -28,6 +33,8 @@ class ProjectsController extends Controller
     
     public function store()
     {
+        Log::info(request());
+        
         $attributes = request()->validate([
             'title' => 'required|max:190',
             'description' => 'required',

@@ -24,11 +24,14 @@
     <div id="app">
         @include('layouts.navbar')
 
-        <main class="container">
+        <main class="container py-2">
             @yield('content')
         </main>
 
-        <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}'></flash-component>
+        <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}
+        '></flash-component>
+
+        @include('modals.all')
     </div>
 
 </body>

@@ -7,17 +7,20 @@
 import FullCalendar from 'vue-full-calendar';
 import 'fullcalendar/dist/fullcalendar.css';
 
+import VModal from 'vue-js-modal';
+
 window.Vue = require('vue');
 require('./bootstrap');
+
 Vue.use(FullCalendar);
+Vue.use(VModal);
 
 
 
 Vue.component('flash-component', require('./components/FlashComponent.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').default);
-
-
+Vue.component('add-announcement', require('./components/AddAnnouncement.vue').default);
 
 
 /**
