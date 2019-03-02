@@ -10,7 +10,8 @@
 
                 <div class="flex m-2 items-center">
                     <h2 class="text-grey text-sm font-normal">Announcements</h2>
-                    <a class=" bg-blue ml-auto text-normal btn rounded-full text-white hover:no-underline hover:bg-blue-dark" @click="$modal.show('addAnnouncement')">Add New</a>
+                    {{-- <a class=" bg-blue ml-auto text-normal btn rounded-full text-white hover:no-underline hover:bg-blue-dark" @click="$modal.show('AddAnnouncement')">Add New</a> --}}
+                    <add-announcement class="ml-auto"></add-announcement>
                 </div>
 
                 <div class="lg:flex lg:flex-wrap mt-4 -mx-3">

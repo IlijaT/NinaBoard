@@ -1,9 +1,13 @@
+@tailwind preflight;
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'components/loader';
+
 
 /**
  * This injects Tailwind's base styles, which is a combination of
@@ -15,8 +19,8 @@
  * If using `postcss-import`, use this import instead:
  *
  * @import "tailwindcss/preflight";
- */
- @tailwind preflight;
+ 
+*/
 
  /**
   * This injects any component classes registered by plugins.

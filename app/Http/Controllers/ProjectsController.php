@@ -33,8 +33,6 @@ class ProjectsController extends Controller
     
     public function store()
     {
-        Log::info(request());
-        
         $attributes = request()->validate([
             'title' => 'required|max:190',
             'description' => 'required',
@@ -44,12 +42,8 @@ class ProjectsController extends Controller
         $attributes['owner_id'] = auth()->id();
        
         $project = auth()->user()->projects()->create($attributes);
-
-        
-        return redirect($project->path())->with('flash', [
-            'message' => 'Your announcement has been created!',
-            'color' => 'green'
-            ]);
+    
+        return compact('project');
     }
 
     

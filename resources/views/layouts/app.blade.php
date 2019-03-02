@@ -31,7 +31,7 @@
         <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}
         '></flash-component>
 
-        @include('modals.all')
+        {{-- @include('modals.all') --}}
     </div>
 
 </body>

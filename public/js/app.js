@@ -1754,15 +1754,87 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnnouncement.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddAnnouncement.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1774,15 +1846,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    showModal: function showModal() {
+      this.$modal.show('addAnnouncementModal');
+    },
     addAnnouncement: function addAnnouncement() {
       var _this = this;
 
-      //console.log(this.project);
       axios.post('/projects', {
         'title': this.project.title,
         'description': this.project.description
-      }).then(function () {
-        return location.reload();
+      }).then(function (data) {
+        window.location = "/projects/" + data.data.project.id;
       }).catch(function (error) {
         return _this.feedback = error.response.data;
       });
@@ -72924,6 +72998,191 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "button",
+        {
+          staticClass:
+            " bg-blue ml-auto text-normal btn rounded-full text-white hover:bg-blue-dark",
+          on: { click: _vm.showModal }
+        },
+        [_vm._v("Add New")]
+      ),
+      _vm._v(" "),
+      _c("modal", { attrs: { name: "addAnnouncementModal", height: 500 } }, [
+        _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
+          _c(
+            "h1",
+            { staticClass: "flex-1 text-2xl font-normal mb-10 text-center" },
+            [_vm._v("\r\n              Create an Announcement\r\n          ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "flex-2 mt-auto",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addAnnouncement($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "field mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "label text-sm mb-2 block",
+                    attrs: { for: "title" }
+                  },
+                  [_vm._v("Title")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.project.title,
+                        expression: "project.title"
+                      }
+                    ],
+                    staticClass:
+                      "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                    attrs: {
+                      type: "text",
+                      name: "title",
+                      placeholder: "Announcement title here...",
+                      required: ""
+                    },
+                    domProps: { value: _vm.project.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.project, "title", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "field mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "label text-sm mb-2 block",
+                    attrs: { for: "description" }
+                  },
+                  [_vm._v("Description")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "control" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.project.description,
+                        expression: "project.description"
+                      }
+                    ],
+                    staticClass:
+                      "textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                    attrs: {
+                      name: "description",
+                      rows: "10",
+                      placeholder: "Announcement description here...",
+                      required: ""
+                    },
+                    domProps: { value: _vm.project.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.project,
+                          "description",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.feedback
+                ? _c("div", [
+                    _c("span", {
+                      staticClass: "text-xs text-red",
+                      domProps: { textContent: _vm._s(_vm.feedback) }
+                    })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex" }, [
+                _c("div", { staticClass: "ml-auto control flex" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                      on: {
+                        click: function($event) {
+                          return _vm.$modal.hide("addAnnouncementModal")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Create")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AvatarForm.vue?vue&type=template&id=296473e8&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AvatarForm.vue?vue&type=template&id=296473e8& ***!
@@ -73243,6 +73502,124 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-session/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/vue-session/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var STORAGE = null;
+var VueSession = {
+    key: 'vue-session-key',
+    flash_key: 'vue-session-flash-key',
+    setAll: function(all){
+        STORAGE.setItem(VueSession.key,JSON.stringify(all));
+    }
+}
+
+VueSession.install = function(Vue, options) {
+    if(options && 'persist' in options && options.persist) STORAGE = window.localStorage;
+    else STORAGE = window.sessionStorage;
+    Vue.prototype.$session = {
+        flash: {
+            parent: function(){
+                return Vue.prototype.$session;
+            },
+            get: function(key){
+                var all = this.parent().getAll();
+                var all_flash = all[VueSession.flash_key] || {};
+
+                var flash_value = all_flash[key];
+
+                this.remove(key);
+
+                return flash_value;
+            },
+            set: function(key, value){
+                var all = this.parent().getAll();
+                var all_flash = all[VueSession.flash_key] || {};
+
+                all_flash[key] = value;
+                all[VueSession.flash_key] = all_flash;
+
+                VueSession.setAll(all);
+            },
+            remove: function(key){
+                var all = this.parent().getAll();
+                var all_flash = all[VueSession.flash_key] || {};
+
+                delete all_flash[key];
+
+                all[VueSession.flash_key] = all_flash;
+                VueSession.setAll(all);
+            }
+        },
+        getAll: function(){
+            var all = JSON.parse(STORAGE.getItem(VueSession.key));
+            return all || {};
+        },
+        set: function(key,value){
+            if(key == 'session-id') return false;
+            var all = this.getAll();
+
+            if(!('session-id' in all)){
+                this.start();
+                all = this.getAll();
+            }
+
+            all[key] = value;
+
+            VueSession.setAll(all);
+        },
+        get: function(key){
+            var all = this.getAll();
+            return all[key];
+        },
+        start: function(){
+            var all = this.getAll();
+            all['session-id'] = 'sess:'+Date.now();
+
+            VueSession.setAll(all);
+        },
+        renew: function(sessionId){
+            var all = this.getAll();
+            all['session-id'] = 'sess:' + sessionId;
+            VueSession.setAll(all);
+        },
+        exists: function(){
+            var all = this.getAll();
+            return 'session-id' in all;
+        },
+        has: function(key){
+            var all = this.getAll();
+            return key in all;
+        },
+        remove: function(key){
+            var all = this.getAll();
+            delete all[key];
+
+            VueSession.setAll(all);
+        },
+        clear: function(){
+            var all = this.getAll();
+
+            VueSession.setAll({'session-id': all['session-id']});
+        },
+        destroy: function(){
+            VueSession.setAll({});
+        },
+        id: function(){
+            return this.get('session-id');
+        }
+    }
+};
+
+module.exports = VueSession;
 
 
 /***/ }),
@@ -85166,11 +85543,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fullcalendar_dist_fullcalendar_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
 /* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-session */ "./node_modules/vue-session/index.js");
+/* harmony import */ var vue_session__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_session__WEBPACK_IMPORTED_MODULE_3__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 
@@ -85180,10 +85560,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 Vue.use(vue_full_calendar__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_2___default.a);
+Vue.use(vue_session__WEBPACK_IMPORTED_MODULE_3___default.a);
 Vue.component('flash-component', __webpack_require__(/*! ./components/FlashComponent.vue */ "./resources/js/components/FlashComponent.vue").default);
 Vue.component('avatar-form', __webpack_require__(/*! ./components/AvatarForm.vue */ "./resources/js/components/AvatarForm.vue").default);
 Vue.component('tasks-calendar', __webpack_require__(/*! ./components/TasksCalendar.vue */ "./resources/js/components/TasksCalendar.vue").default);
-Vue.component('add-announcement', __webpack_require__(/*! ./components/AddAnnouncement.vue */ "./resources/js/components/AddAnnouncement.vue").default);
+Vue.component('add-announcement', __webpack_require__(/*! ./components/AddAnnButton.vue */ "./resources/js/components/AddAnnButton.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -85264,28 +85645,30 @@ window.flash = function (message, color) {
 
 /***/ }),
 
-/***/ "./resources/js/components/AddAnnouncement.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/AddAnnouncement.vue ***!
-  \*****************************************************/
-/*! exports provided: default */
+/***/ "./resources/js/components/AddAnnButton.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/AddAnnButton.vue ***!
+  \**************************************************/
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddAnnouncement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddAnnouncement.vue?vue&type=script&lang=js& */ "./resources/js/components/AddAnnouncement.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
+/* harmony import */ var _AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddAnnButton.vue?vue&type=template&id=c90f3086& */ "./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086&");
+/* harmony import */ var _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddAnnButton.vue?vue&type=script&lang=js& */ "./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  _AddAnnouncement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -85295,22 +85678,40 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/AddAnnouncement.vue"
+component.options.__file = "resources/js/components/AddAnnButton.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/AddAnnouncement.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/AddAnnouncement.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
-/*! exports provided: default */
+/***/ "./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddAnnouncement.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnnouncement.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddAnnButton.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AddAnnButton.vue?vue&type=template&id=c90f3086& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

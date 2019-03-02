@@ -1,5 +1,11 @@
-{{-- <add-announcement inline-template>
-    <modal name="addAnnouncement" :height="500">
+<template>
+<div>
+    
+    <button class=" bg-blue ml-auto text-normal btn rounded-full text-white hover:bg-blue-dark" @click="showModal">Add New</button>
+
+
+<!-- modal -->
+<modal name="addAnnouncementModal" :height="500">
         <div class="flex flex-column h-full bg-white p-6">
     
           <h1 class="flex-1 text-2xl font-normal mb-10 text-center">
@@ -21,12 +27,12 @@
                           >
                   </div>
     
-                   @if ($errors->has('title'))
+                    <!-- @if ($errors->has('title'))
                       <span 
                           style="width: 100%; margin-top: .25rem; font-size: 80%; color: #e3342f;"
                           role="alert"
                       ><strong>{{ $errors->first('title') }}</strong>
-                  @endif  
+                  @endif   -->
               </div>
     
               <div class="field mb-6">
@@ -49,7 +55,7 @@
 
               <div class="flex">
                   <div class="ml-auto control flex">
-                      <button @click="$modal.hide('addAnnouncement')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
+                      <button @click="$modal.hide('addAnnouncementModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
                       <button type="submit" class="py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue">Create</button>
                   </div>
               </div>
@@ -57,7 +63,39 @@
 
           </form>
       </div>
-
-
     </modal>
-</add-announcement> --}}
+   
+</div>
+
+</template>
+
+
+<script>
+
+export default {
+
+    data(){
+      return {
+        project: { title: '', description: ''},
+        feedback: ''
+      }
+    },
+
+    methods: {
+      showModal() {
+        this.$modal.show('addAnnouncementModal');
+      },
+            addAnnouncement() {
+
+        axios.post('/projects', {'title': this.project.title, 'description': this.project.description})
+        .then((data) => {
+          window.location = "/projects/" + data.data.project.id;
+          } )
+        .catch(error => this.feedback = error.response.data);
+      }
+    }
+    
+}
+ 
+
+</script>
