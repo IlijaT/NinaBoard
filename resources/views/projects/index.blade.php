@@ -42,11 +42,13 @@
 
                     @forelse($tasks as $task)
                     <div class="mx-3">
-                        <h2 class="text-black text-sm font-normal">
-                            {{ $task->project->title }} {{ $task->title}} ({{ $task->start }} - {{ $task->end }})  </h2>
+                        <h2 class="text-black text-sm ">
+                            {{ $task->project->title }} {{ $task->title}} ({{ $task->start }} - {{ $task->end }}) </h2>
                     </div>
                     @empty
-                        <div class="mx-3">Easy day!</div>
+                        <div class="mx-3">
+                            <h2 class="text-black text-sm ">Easy day!</h2>
+                        </div>
                     @endforelse
                 
                 </div>

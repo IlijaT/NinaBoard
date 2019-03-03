@@ -1856,6 +1856,7 @@ __webpack_require__.r(__webpack_exports__);
         'title': this.project.title,
         'description': this.project.description
       }).then(function (data) {
+        flash('Announcement successfully added!', 'green');
         window.location = "/projects/" + data.data.project.id;
       }).catch(function (error) {
         return _this.feedback = error.response.data;
@@ -73026,152 +73027,156 @@ var render = function() {
         [_vm._v("Add New")]
       ),
       _vm._v(" "),
-      _c("modal", { attrs: { name: "addAnnouncementModal", height: 500 } }, [
-        _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
-          _c(
-            "h1",
-            { staticClass: "flex-1 text-2xl font-normal mb-10 text-center" },
-            [_vm._v("\r\n              Create an Announcement\r\n          ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              staticClass: "flex-2 mt-auto",
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.addAnnouncement($event)
+      _c(
+        "modal",
+        { attrs: { adaptive: "", name: "addAnnouncementModal", height: 500 } },
+        [
+          _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
+            _c(
+              "h1",
+              { staticClass: "flex-1 text-2xl font-normal mb-10 text-center" },
+              [_vm._v("\r\n              Create an Announcement\r\n          ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "flex-2 mt-auto",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addAnnouncement($event)
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { staticClass: "field mb-6" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "label text-sm mb-2 block",
-                    attrs: { for: "title" }
-                  },
-                  [_vm._v("Title")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "control" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.project.title,
-                        expression: "project.title"
-                      }
-                    ],
-                    staticClass:
-                      "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-                    attrs: {
-                      type: "text",
-                      name: "title",
-                      placeholder: "Announcement title here...",
-                      required: ""
-                    },
-                    domProps: { value: _vm.project.title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.project, "title", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "field mb-6" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "label text-sm mb-2 block",
-                    attrs: { for: "description" }
-                  },
-                  [_vm._v("Description")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "control" }, [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.project.description,
-                        expression: "project.description"
-                      }
-                    ],
-                    staticClass:
-                      "textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-                    attrs: {
-                      name: "description",
-                      rows: "10",
-                      placeholder: "Announcement description here...",
-                      required: ""
-                    },
-                    domProps: { value: _vm.project.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.project,
-                          "description",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.feedback
-                ? _c("div", [
-                    _c("span", {
-                      staticClass: "text-xs text-red",
-                      domProps: { textContent: _vm._s(_vm.feedback) }
-                    })
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex" }, [
-                _c("div", { staticClass: "ml-auto control flex" }, [
+              },
+              [
+                _c("div", { staticClass: "field mb-6" }, [
                   _c(
-                    "button",
+                    "label",
                     {
-                      staticClass:
-                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
-                      on: {
-                        click: function($event) {
-                          return _vm.$modal.hide("addAnnouncementModal")
-                        }
-                      }
+                      staticClass: "label text-sm mb-2 block",
+                      attrs: { for: "title" }
                     },
-                    [_vm._v("Cancel")]
+                    [_vm._v("Title")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
+                  _c("div", { staticClass: "control" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.project.title,
+                          expression: "project.title"
+                        }
+                      ],
                       staticClass:
-                        "py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue",
-                      attrs: { type: "submit" }
+                        "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                      attrs: {
+                        type: "text",
+                        name: "title",
+                        placeholder: "Announcement title here...",
+                        required: ""
+                      },
+                      domProps: { value: _vm.project.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.project, "title", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "field mb-6" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "label text-sm mb-2 block",
+                      attrs: { for: "description" }
                     },
-                    [_vm._v("Create")]
-                  )
+                    [_vm._v("Description")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "control" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.project.description,
+                          expression: "project.description"
+                        }
+                      ],
+                      staticClass:
+                        "textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                      attrs: {
+                        name: "description",
+                        rows: "10",
+                        placeholder: "Announcement description here...",
+                        required: ""
+                      },
+                      domProps: { value: _vm.project.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.project,
+                            "description",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.feedback
+                  ? _c("div", [
+                      _c("span", {
+                        staticClass: "text-xs text-red",
+                        domProps: { textContent: _vm._s(_vm.feedback) }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex" }, [
+                  _c("div", { staticClass: "ml-auto control flex" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                        on: {
+                          click: function($event) {
+                            return _vm.$modal.hide("addAnnouncementModal")
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Create")]
+                    )
+                  ])
                 ])
-              ])
-            ]
-          )
-        ])
-      ])
+              ]
+            )
+          ])
+        ]
+      )
     ],
     1
   )
@@ -85649,15 +85654,14 @@ window.flash = function (message, color) {
 /*!**************************************************!*\
   !*** ./resources/js/components/AddAnnButton.vue ***!
   \**************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddAnnButton_vue_vue_type_template_id_c90f3086___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddAnnButton.vue?vue&type=template&id=c90f3086& */ "./resources/js/components/AddAnnButton.vue?vue&type=template&id=c90f3086&");
 /* harmony import */ var _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddAnnButton.vue?vue&type=script&lang=js& */ "./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _AddAnnButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -85687,7 +85691,7 @@ component.options.__file = "resources/js/components/AddAnnButton.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/AddAnnButton.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

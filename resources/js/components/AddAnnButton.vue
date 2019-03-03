@@ -5,7 +5,7 @@
 
 
 <!-- modal -->
-<modal name="addAnnouncementModal" :height="500">
+<modal adaptive name="addAnnouncementModal" :height="500">
         <div class="flex flex-column h-full bg-white p-6">
     
           <h1 class="flex-1 text-2xl font-normal mb-10 text-center">
@@ -89,7 +89,8 @@ export default {
 
         axios.post('/projects', {'title': this.project.title, 'description': this.project.description})
         .then((data) => {
-          window.location = "/projects/" + data.data.project.id;
+            flash('Announcement successfully added!', 'green');
+            window.location = "/projects/" + data.data.project.id;
           } )
         .catch(error => this.feedback = error.response.data);
       }
