@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-white py-2">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-white flex flex-column">
   <div class="container">
       <h1>
           <a class="navbar-brand" href="{{ url('/projects') }}">
@@ -11,11 +11,6 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left Side Of Navbar -->
-          <ul class="navbar-nav mr-auto">
-
-          </ul>
-
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
               <!-- Authentication Links -->
@@ -23,11 +18,6 @@
                   <li class="nav-item">
                       <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                   </li>
-                  @if (Route::has('register'))
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                      </li>
-                  @endif
               @else
                   <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -60,4 +50,16 @@
           </ul>
       </div>
   </div>
+
+    <div class="flex justify-center pb-1">
+        @auth()
+        <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/projects">ANNOUNCEMENTS</a>
+        <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/calendar">CALENDAR</a>
+        @can('delete-project')
+            <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/users">USERS</a>
+        @endcan
+        @endauth 
+    </div>
+
 </nav>
+
