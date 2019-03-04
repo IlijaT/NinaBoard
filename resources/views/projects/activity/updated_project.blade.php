@@ -1,5 +1,5 @@
 @if (count($activity->changes['after']) == 1)
-    {{ $activity->user->name }} updated the {{ key($activity->changes['after']) }} of the announcement
+    {{ $activity->user->name }}  updated the <span class="italic text-xs"> {{ key($activity->changes['after']) }}</span>  of the announcement
 @else
     {{ $activity->user->name }} updated the announcement
 @endif

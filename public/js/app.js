@@ -73859,7 +73859,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "addAnnouncementModal", height: 500 } },
+        { attrs: { adaptive: "", name: "addAnnouncementModal", height: 550 } },
         [
           _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
             _c(
@@ -73928,7 +73928,7 @@ var render = function() {
                       staticClass: "label text-sm mb-2 block",
                       attrs: { for: "description" }
                     },
-                    [_vm._v("Description")]
+                    [_vm._v("Original email")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "control" }, [
@@ -73946,7 +73946,7 @@ var render = function() {
                       attrs: {
                         name: "description",
                         rows: "10",
-                        placeholder: "Announcement description here...",
+                        placeholder: "Paste client's email here...",
                         required: ""
                       },
                       domProps: { value: _vm.project.description },

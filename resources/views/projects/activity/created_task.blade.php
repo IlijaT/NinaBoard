@@ -1,1 +1,1 @@
-{{ $activity->user->name }} Created task <span class="italic">"{{ $activity->subject->title }}"</span>
+{{ $activity->user->name }} created task <span class="italic text-xs">"{{ $activity->subject->title }}"</span>

@@ -1,1 +1,1 @@
-{{ $activity->user->name }} incompleted <span class="italic">"{{ $activity->subject->title }}"</span>
+{{ $activity->user->name }} incompleted <span class="italic text-xs">"{{ $activity->subject->title }}"</span>

@@ -17,6 +17,11 @@ class Task extends Model
 
     protected $casts = ['completed' => 'boolean'];
 
+    public function getDates()
+    {
+        return ['start', 'end', 'created_at', 'updated_at'];
+    }
+
     protected static $recordableEvents = ['created', 'deleted'];
 
     public function project()
@@ -45,8 +50,4 @@ class Task extends Model
 
         $this->recordActivity('incompleted_task');
     }
-
-
-
-
 }

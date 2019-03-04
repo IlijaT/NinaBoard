@@ -5,7 +5,7 @@
 
 
 <!-- modal -->
-<modal adaptive name="addAnnouncementModal" :height="500">
+<modal adaptive name="addAnnouncementModal" :height="550">
         <div class="flex flex-column h-full bg-white p-6">
     
           <h1 class="flex-1 text-2xl font-normal mb-10 text-center">
@@ -36,14 +36,14 @@
               </div>
     
               <div class="field mb-6">
-                  <label class="label text-sm mb-2 block" for="description">Description</label>
+                  <label class="label text-sm mb-2 block" for="description">Original email</label>
     
                   <div class="control">
                       <textarea
                           name="description"
                           rows="10"
                           class="textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full"
-                          placeholder="Announcement description here..."
+                          placeholder="Paste client's email here..."
                           v-model="project.description"
                           required></textarea>
                   </div>

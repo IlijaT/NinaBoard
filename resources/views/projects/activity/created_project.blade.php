@@ -1,1 +1,1 @@
-{{ $activity->user->name }} Created new announcement 
+{{ $activity->user->name }}  <span class="text-xs"> created new announcement </span>
