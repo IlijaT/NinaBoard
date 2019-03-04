@@ -1968,8 +1968,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -1994,12 +1992,12 @@ __webpack_require__.r(__webpack_exports__);
         to: new Date()
       },
       startTimeValue: {
-        HH: "00",
+        HH: "12",
         mm: "00",
         ss: "00"
       },
       endTimeValue: {
-        HH: "00",
+        HH: "12",
         mm: "00",
         ss: "00"
       },
@@ -2011,19 +2009,19 @@ __webpack_require__.r(__webpack_exports__);
       this.$modal.show('addTaskModal');
     },
     addTask: function addTask() {
-      console.log("start date");
-      console.log(this.formatedStartDate);
-      console.log("end date");
-      console.log(this.formatedEndDate);
-      console.log("start time");
-      console.log(this.startTimeValue);
-      console.log("end time");
-      console.log(this.endTimeValue); // axios.pos;t('/projects' + this.project.id + '/tasks', {'title': this.task.title, 'start': this.task.start, 'end': this.task.end})
-      // .then((data) => {
-      //     flash('Task successfully added!', 'green');
-      //     location.reload();
-      //   } )
-      // .catch(error => this.feedback = error.response.data);
+      var _this = this;
+
+      var formatedStartDateAndTime = this.formatedStartDate + ' ' + this.startTimeValue.HH + ':' + this.startTimeValue.mm + ':' + this.startTimeValue.ss;
+      var formatedEndDateAndTime = this.formatedEndDate + ' ' + this.endTimeValue.HH + ':' + this.endTimeValue.mm + ':' + this.endTimeValue.ss;
+      axios.post('/projects/' + this.project.id + '/tasks', {
+        'title': this.task.title,
+        'start': formatedStartDateAndTime,
+        'end': formatedEndDateAndTime
+      }).then(function (data) {
+        location.reload();
+      }).catch(function (error) {
+        return _this.feedback = error.response.data;
+      });
     },
     selectedStartDate: function selectedStartDate(date) {
       this.formatedStartDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format('YYYY-MM-DD');
@@ -74043,7 +74041,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "rounded-full px-2 h-8 w-8 text-grey mr-2 bg-white text-xl border-2 border-grey",
+              "rounded-full px-2 h-8 w-8 text-grey is-link mr-2 bg-white text-xl border-2 border-grey",
             on: { click: _vm.showModal }
           },
           [_vm._v("+")]
@@ -74062,20 +74060,18 @@ var render = function() {
       _c(
         "modal",
         {
-          attrs: { adaptive: "", name: "addTaskModal", width: 650, height: 500 }
+          attrs: { adaptive: "", name: "addTaskModal", width: 650, height: 550 }
         },
         [
-          _c("div", { staticClass: "flex flex-column bg-white p-6" }, [
-            _c(
-              "h1",
-              { staticClass: "flex-1 text-2xl font-normal mb-2 text-center" },
-              [_vm._v("\n          New Task\n      ")]
-            ),
+          _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
+            _c("h1", { staticClass: "text-xl font-normal mb-4 text-center" }, [
+              _vm._v("\n          New Task\n      ")
+            ]),
             _vm._v(" "),
             _c(
               "form",
               {
-                staticClass: "flex-2",
+                staticClass: "flex flex-column h-full",
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
@@ -74084,160 +74080,147 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "field mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "label text-sm mb-2 block",
+                    attrs: { for: "title" }
+                  },
+                  [_vm._v("Task")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "control mb-2" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.task.title,
+                        expression: "task.title"
+                      }
+                    ],
+                    staticClass:
+                      "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                    attrs: {
+                      type: "text",
+                      name: "title",
+                      placeholder: "Task title...",
+                      required: ""
+                    },
+                    domProps: { value: _vm.task.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.task, "title", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "control mb-2" }, [
                   _c(
                     "label",
                     {
                       staticClass: "label text-sm mb-2 block",
                       attrs: { for: "title" }
                     },
-                    [_vm._v("Task")]
+                    [_vm._v("Dates")]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "control mb-1" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.task.title,
-                          expression: "task.title"
-                        }
-                      ],
-                      staticClass:
-                        "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-                      attrs: {
-                        type: "text",
-                        name: "title",
-                        placeholder: "Task title...",
-                        required: ""
-                      },
-                      domProps: { value: _vm.task.title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c("div", { staticClass: "flex" }, [
+                    _c(
+                      "div",
+                      { staticClass: "flex-1 mr-1" },
+                      [
+                        _c("datepicker", {
+                          attrs: {
+                            mondayFirst: true,
+                            "bootstrap-styling": true,
+                            placeholder: "Start Date"
+                          },
+                          on: { selected: _vm.selectedStartDate },
+                          model: {
+                            value: _vm.startDate,
+                            callback: function($$v) {
+                              _vm.startDate = $$v
+                            },
+                            expression: "startDate"
                           }
-                          _vm.$set(_vm.task, "title", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "control mb-1" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label text-sm mb-2 block",
-                        attrs: { for: "title" }
-                      },
-                      [_vm._v("Dates")]
+                        })
+                      ],
+                      1
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "flex" }, [
-                      _c(
-                        "div",
-                        { staticClass: "flex-1 mr-1" },
-                        [
-                          _c("datepicker", {
-                            attrs: {
-                              mondayFirst: true,
-                              "bootstrap-styling": true,
-                              placeholder: "Start Date"
-                            },
-                            on: { selected: _vm.selectedStartDate },
-                            model: {
-                              value: _vm.startDate,
-                              callback: function($$v) {
-                                _vm.startDate = $$v
-                              },
-                              expression: "startDate"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "flex-1 ml-1" },
-                        [
-                          _c("datepicker", {
-                            attrs: {
-                              mondayFirst: true,
-                              "bootstrap-styling": true,
-                              placeholder: "End Date",
-                              disabled: !_vm.startDate,
-                              disabledDates: _vm.disabledDays
-                            },
-                            on: { selected: _vm.selectedEndDate },
-                            model: {
-                              value: _vm.endDate,
-                              callback: function($$v) {
-                                _vm.endDate = $$v
-                              },
-                              expression: "endDate"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: " mb-1" }, [
                     _c(
-                      "label",
-                      {
-                        staticClass: "label text-sm mb-2 block",
-                        attrs: { for: "title" }
-                      },
-                      [_vm._v("Interval")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "div",
-                        { staticClass: "mr-1" },
-                        [
-                          _c("vue-timepicker", {
-                            attrs: { "minute-interval": 5 },
-                            model: {
-                              value: _vm.startTimeValue,
-                              callback: function($$v) {
-                                _vm.startTimeValue = $$v
-                              },
-                              expression: "startTimeValue"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("vue-timepicker", {
-                            attrs: { "minute-interval": 5 },
-                            model: {
-                              value: _vm.endTimeValue,
-                              callback: function($$v) {
-                                _vm.endTimeValue = $$v
-                              },
-                              expression: "endTimeValue"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
+                      "div",
+                      { staticClass: "flex-1 ml-1" },
+                      [
+                        _c("datepicker", {
+                          attrs: {
+                            mondayFirst: true,
+                            "bootstrap-styling": true,
+                            placeholder: "End Date",
+                            disabled: !_vm.startDate,
+                            disabledDates: _vm.disabledDays
+                          },
+                          on: { selected: _vm.selectedEndDate },
+                          model: {
+                            value: _vm.endDate,
+                            callback: function($$v) {
+                              _vm.endDate = $$v
+                            },
+                            expression: "endDate"
+                          }
+                        })
+                      ],
+                      1
+                    )
                   ])
                 ]),
                 _vm._v(" "),
-                _vm.feedback
-                  ? _c("div", [
-                      _c("span", {
-                        staticClass: "text-xs text-red",
-                        domProps: { textContent: _vm._s(_vm.feedback) }
+                _c("div", { staticClass: "mb-1" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "label text-sm mb-2 block",
+                      attrs: { for: "title" }
+                    },
+                    [_vm._v("Interval")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "mr-1" },
+                    [
+                      _c("vue-timepicker", {
+                        attrs: { "minute-interval": 5 },
+                        model: {
+                          value: _vm.startTimeValue,
+                          callback: function($$v) {
+                            _vm.startTimeValue = $$v
+                          },
+                          expression: "startTimeValue"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("vue-timepicker", {
+                        attrs: { "minute-interval": 5 },
+                        model: {
+                          value: _vm.endTimeValue,
+                          callback: function($$v) {
+                            _vm.endTimeValue = $$v
+                          },
+                          expression: "endTimeValue"
+                        }
                       })
-                    ])
-                  : _vm._e(),
+                    ],
+                    1
+                  )
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "flex" }, [
+                _c("div", { staticClass: "flex mt-auto" }, [
                   _c("div", { staticClass: "ml-auto control flex" }, [
                     _c(
                       "button",
@@ -74257,7 +74240,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                          "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
                         attrs: { type: "submit" }
                       },
                       [_vm._v("Save")]

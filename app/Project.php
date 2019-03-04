@@ -24,7 +24,7 @@ class Project extends Model
 
     public function addTask($task)
     {
-        return $this->tasks()->create(['body' => $task]);
+        return $this->tasks()->create($task);
     }
 
     public function tasks()
@@ -36,5 +36,4 @@ class Project extends Model
     {
         return $this->hasMany(Activity::class)->latest();
     }
-
 }

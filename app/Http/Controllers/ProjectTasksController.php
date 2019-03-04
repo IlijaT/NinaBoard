@@ -11,9 +11,12 @@ class ProjectTasksController extends Controller
     public function store(Project $project)
     {
         request()->validate(
-            ['body' => 'required|max:190']
+            ['title' => 'required|max:190'],
+            ['start' => 'required|date'],
+            ['end' => 'required|date']
         );
-        $project->addTask(request('body'));
+
+        $project->addTask(request(['title', 'start', 'end']));
 
         return redirect($project->path())->with('flash', [
             'message' => 'A new task has been created!',
@@ -26,7 +29,7 @@ class ProjectTasksController extends Controller
     public function update(Project $project, Task $task)
     {
         $attributes = request()->validate(
-            ['body' => 'required|max:190']
+            ['title' => 'required|max:190']
         );
         
         $task->update($attributes);
