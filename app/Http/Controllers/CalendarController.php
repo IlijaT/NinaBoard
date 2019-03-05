@@ -10,7 +10,7 @@ class CalendarController extends Controller
 {
     public function index()
     {
-        $tasks = Task::get(['title', 'start', 'end'])->where('start', '>', Carbon::now()->subWeeks(4));
+        $tasks = Task::with('project')->get()->where('start', '>', Carbon::now()->subWeeks(4));
         
         return view('calendar', compact('tasks'));
     }

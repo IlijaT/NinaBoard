@@ -2225,9 +2225,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['tasks'],
+  created: function created() {
+    var _this = this;
+
+    this.tasks.forEach(function (task) {
+      _this.events.push({
+        'title': task.project.title + ' : ' + task.title,
+        'start': task.start,
+        'end': task.end,
+        'color': task.completed == 1 ? 'purple' : 'green',
+        'textColor': 'white'
+      });
+    });
+  },
   data: function data() {
     return {
-      events: this.tasks
+      events: [],
+      config: {
+        allDaySlot: false,
+        editable: false,
+        firstDay: 1,
+        //height: 'auto',
+        slotDuration: '00:15:00',
+        scrollTime: '12:00:00',
+        slotLabelFormat: 'HH:mm'
+      }
     };
   }
 });
@@ -74402,7 +74424,11 @@ var render = function() {
           _c(
             "div",
             { staticClass: "card-body" },
-            [_c("full-calendar", { attrs: { events: _vm.events } })],
+            [
+              _c("full-calendar", {
+                attrs: { events: _vm.events, config: _vm.config }
+              })
+            ],
             1
           )
         ])
