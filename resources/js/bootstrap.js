@@ -54,6 +54,10 @@ if (token) {
 //     encrypted: true
 // });
 
+import Form from './forms/Form.js';
+
+window.Form = Form;
+
 window.events = new Vue();
 
 window.flash = function(message, color) {

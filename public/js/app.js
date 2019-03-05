@@ -1763,6 +1763,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _forms_AddAnnouncementForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../forms/AddAnnouncementForm.vue */ "./resources/js/forms/AddAnnouncementForm.vue");
 //
 //
 //
@@ -1830,37 +1831,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      project: {
-        title: '',
-        description: ''
-      },
-      feedback: ''
-    };
+  components: {
+    AddAnnouncementForm: _forms_AddAnnouncementForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     showModal: function showModal() {
       this.$modal.show('addAnnouncementModal');
-    },
-    addAnnouncement: function addAnnouncement() {
-      var _this = this;
-
-      axios.post('/projects', {
-        'title': this.project.title,
-        'description': this.project.description
-      }).then(function (data) {
-        flash('Announcement successfully added!', 'green');
-        window.location = "/projects/" + data.data.project.id;
-      }).catch(function (error) {
-        return _this.feedback = error.response.data;
-      });
     }
   }
 });
@@ -2251,6 +2229,94 @@ __webpack_require__.r(__webpack_exports__);
     return {
       events: this.tasks
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/AddAnnouncementForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/forms/AddAnnouncementForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: new Form({
+        title: '',
+        description: ''
+      }),
+      loading: false
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.loading = true;
+      this.form.submit('post', '/projects').then(function (data) {
+        window.location = "/projects/" + data.project.id;
+        flash('Announcement successfully added!', 'green');
+      }).catch(function (errors) {
+        _this.loading = false;
+      });
+    }
   }
 });
 
@@ -73861,150 +73927,22 @@ var render = function() {
         "modal",
         { attrs: { adaptive: "", name: "addAnnouncementModal", height: 550 } },
         [
-          _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
-            _c(
-              "h1",
-              { staticClass: "flex-1 text-2xl font-normal mb-10 text-center" },
-              [_vm._v("\r\n              Create an Announcement\r\n          ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "flex-2 mt-auto",
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.addAnnouncement($event)
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "field mb-6" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "label text-sm mb-2 block",
-                      attrs: { for: "title" }
-                    },
-                    [_vm._v("Title")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "control" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.project.title,
-                          expression: "project.title"
-                        }
-                      ],
-                      staticClass:
-                        "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-                      attrs: {
-                        type: "text",
-                        name: "title",
-                        placeholder: "Announcement title here...",
-                        required: ""
-                      },
-                      domProps: { value: _vm.project.title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.project, "title", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "field mb-6" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "label text-sm mb-2 block",
-                      attrs: { for: "description" }
-                    },
-                    [_vm._v("Original email")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "control" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.project.description,
-                          expression: "project.description"
-                        }
-                      ],
-                      staticClass:
-                        "textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-                      attrs: {
-                        name: "description",
-                        rows: "10",
-                        placeholder: "Paste client's email here...",
-                        required: ""
-                      },
-                      domProps: { value: _vm.project.description },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.project,
-                            "description",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm.feedback
-                  ? _c("div", [
-                      _c("span", {
-                        staticClass: "text-xs text-red",
-                        domProps: { textContent: _vm._s(_vm.feedback) }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex" }, [
-                  _c("div", { staticClass: "ml-auto control flex" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
-                        on: {
-                          click: function($event) {
-                            return _vm.$modal.hide("addAnnouncementModal")
-                          }
-                        }
-                      },
-                      [_vm._v("Cancel")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Create")]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ])
+          _c(
+            "div",
+            { staticClass: "flex flex-column h-full bg-white p-6" },
+            [
+              _c(
+                "h1",
+                {
+                  staticClass: "flex-1 text-2xl font-normal mb-10 text-center"
+                },
+                [_vm._v("\r\n            Create an Announcement\r\n        ")]
+              ),
+              _vm._v(" "),
+              _c("add-announcement-form")
+            ],
+            1
+          )
         ]
       )
     ],
@@ -74471,6 +74409,170 @@ var render = function() {
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/AddAnnouncementForm.vue?vue&type=template&id=22090cde&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/forms/AddAnnouncementForm.vue?vue&type=template&id=22090cde& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "flex-2 mt-auto",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.onSubmit($event)
+        },
+        keydown: function($event) {
+          return _vm.form.errors.clear()
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "field mb-6" }, [
+        _c(
+          "label",
+          { staticClass: "label text-sm mb-2 block", attrs: { for: "title" } },
+          [_vm._v("Title")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.title,
+                expression: "form.title"
+              }
+            ],
+            staticClass:
+              "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+            attrs: {
+              type: "text",
+              name: "title",
+              placeholder: "Announcement title here...",
+              required: ""
+            },
+            domProps: { value: _vm.form.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "title", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.form.errors.has("title")
+            ? _c("span", {
+                staticClass: "text-red text-xs",
+                domProps: { textContent: _vm._s(_vm.form.errors.get("title")) }
+              })
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field mb-6" }, [
+        _c(
+          "label",
+          {
+            staticClass: "label text-sm mb-2 block",
+            attrs: { for: "description" }
+          },
+          [_vm._v("Original email")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.description,
+                expression: "form.description"
+              }
+            ],
+            staticClass:
+              "textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+            attrs: {
+              name: "description",
+              rows: "10",
+              placeholder: "Paste client's email here...",
+              required: ""
+            },
+            domProps: { value: _vm.form.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "description", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.form.errors.has("description")
+            ? _c("span", {
+                staticClass: "text-red text-xs",
+                domProps: {
+                  textContent: _vm._s(_vm.form.errors.get("description"))
+                }
+              })
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex" }, [
+        _c("div", { staticClass: "ml-auto control flex" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.$modal.hide("addAnnouncementModal")
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+              class: _vm.loading ? "loader" : "",
+              attrs: { type: "submit", disabled: _vm.form.errors.any() }
+            },
+            [_vm._v("Create")]
+          )
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -88257,9 +88359,12 @@ var app = new Vue({
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _forms_Form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./forms/Form.js */ "./resources/js/forms/Form.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -88310,6 +88415,8 @@ if (token) {
 // });
 
 
+
+window.Form = _forms_Form_js__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.events = new Vue();
 
 window.flash = function (message, color) {
@@ -88750,6 +88857,231 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TasksCalendar_vue_vue_type_template_id_56639ade___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/forms/AddAnnouncementForm.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/forms/AddAnnouncementForm.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddAnnouncementForm_vue_vue_type_template_id_22090cde___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddAnnouncementForm.vue?vue&type=template&id=22090cde& */ "./resources/js/forms/AddAnnouncementForm.vue?vue&type=template&id=22090cde&");
+/* harmony import */ var _AddAnnouncementForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddAnnouncementForm.vue?vue&type=script&lang=js& */ "./resources/js/forms/AddAnnouncementForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddAnnouncementForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddAnnouncementForm_vue_vue_type_template_id_22090cde___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddAnnouncementForm_vue_vue_type_template_id_22090cde___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/forms/AddAnnouncementForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/forms/AddAnnouncementForm.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/forms/AddAnnouncementForm.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncementForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AddAnnouncementForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/AddAnnouncementForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncementForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/forms/AddAnnouncementForm.vue?vue&type=template&id=22090cde&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/forms/AddAnnouncementForm.vue?vue&type=template&id=22090cde& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncementForm_vue_vue_type_template_id_22090cde___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AddAnnouncementForm.vue?vue&type=template&id=22090cde& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/AddAnnouncementForm.vue?vue&type=template&id=22090cde&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncementForm_vue_vue_type_template_id_22090cde___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnnouncementForm_vue_vue_type_template_id_22090cde___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/forms/Errors.js":
+/*!**************************************!*\
+  !*** ./resources/js/forms/Errors.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Errors =
+/*#__PURE__*/
+function () {
+  function Errors(errors) {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+  }, {
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+  }, {
+    key: "any",
+    value: function any(field) {
+      return Object.keys(this.errors).length > 0;
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (field) {
+        delete this.errors[field];
+        return;
+      }
+
+      this.errors = {};
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Errors);
+
+/***/ }),
+
+/***/ "./resources/js/forms/Form.js":
+/*!************************************!*\
+  !*** ./resources/js/forms/Form.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Errors_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors.js */ "./resources/js/forms/Errors.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Form =
+/*#__PURE__*/
+function () {
+  function Form(data) {
+    _classCallCheck(this, Form);
+
+    this.originalData = data;
+
+    for (var field in data) {
+      this[field] = data[field];
+    }
+
+    ;
+    this.errors = new _Errors_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  }
+
+  _createClass(Form, [{
+    key: "reset",
+    value: function reset() {
+      for (var field in this.originalData) {
+        this[field] = '';
+      }
+
+      ;
+      this.errors.clear();
+    }
+  }, {
+    key: "data",
+    value: function data() {
+      var data = {};
+
+      for (var property in this.originalData) {
+        data[property] = this[property];
+      }
+
+      return data;
+    }
+  }, {
+    key: "submit",
+    value: function submit(requestType, url) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        axios[requestType](url, _this.data()).then(function (response) {
+          _this.onSuccess(response.data);
+
+          resolve(response.data);
+        }).catch(function (error) {
+          _this.onFail(error.response.data.errors);
+
+          reject(error.response.data.errors);
+        });
+      });
+    }
+  }, {
+    key: "onSuccess",
+    value: function onSuccess(data) {
+      this.reset();
+    }
+  }, {
+    key: "onFail",
+    value: function onFail(error) {
+      this.errors.record(error);
+    }
+  }]);
+
+  return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Form);
 
 /***/ }),
 
