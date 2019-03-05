@@ -34,3 +34,4 @@ Vue.component('add-task', require('./components/AddTask.vue').default);
 const app = new Vue({
     el: '#app'
 });
+

@@ -6,13 +6,14 @@
 
 <!-- modal -->
 <modal adaptive name="addAnnouncementModal" :height="550">
-        <div class="flex flex-column h-full bg-white p-6">
+    <div class="flex flex-column h-full bg-white p-6">
     
-          <h1 class="flex-1 text-2xl font-normal mb-10 text-center">
-              Create an Announcement
-          </h1>
-    
-          <form class="flex-2 mt-auto" @submit.prevent="addAnnouncement">
+        <h1 class="flex-1 text-2xl font-normal mb-10 text-center">
+            Create an Announcement
+        </h1>
+
+        <add-announcement-form></add-announcement-form>
+          <!-- <form class="flex-2 mt-auto" @submit.prevent="addAnnouncement">
               <div class="field mb-6">
                   <label class="label text-sm mb-2 block" for="title">Title</label>
     
@@ -27,12 +28,6 @@
                           >
                   </div>
     
-                    <!-- @if ($errors->has('title'))
-                      <span 
-                          style="width: 100%; margin-top: .25rem; font-size: 80%; color: #e3342f;"
-                          role="alert"
-                      ><strong>{{ $errors->first('title') }}</strong>
-                  @endif   -->
               </div>
     
               <div class="field mb-6">
@@ -61,7 +56,7 @@
               </div>
 
 
-          </form>
+          </form> -->
       </div>
     </modal>
    
@@ -72,28 +67,15 @@
 
 <script>
 
+import AddAnnouncementForm from '../forms/AddAnnouncementForm.vue';
+
 export default {
-
-    data(){
-      return {
-        project: { title: '', description: ''},
-        feedback: ''
-      }
-    },
-
+    components: { AddAnnouncementForm },
     methods: {
       showModal() {
         this.$modal.show('addAnnouncementModal');
       },
-            addAnnouncement() {
-
-        axios.post('/projects', {'title': this.project.title, 'description': this.project.description})
-        .then((data) => {
-            flash('Announcement successfully added!', 'green');
-            window.location = "/projects/" + data.data.project.id;
-          } )
-        .catch(error => this.feedback = error.response.data);
-      }
+     
     }
     
 }
