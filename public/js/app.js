@@ -1788,49 +1788,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2210,6 +2167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modals_CalendarEventModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modals/CalendarEventModal.vue */ "./resources/js/modals/CalendarEventModal.vue");
 //
 //
 //
@@ -2228,7 +2186,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    CalendarEventModal: _modals_CalendarEventModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: ['tasks'],
   created: function created() {
     var _this = this;
@@ -2244,6 +2211,8 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   data: function data() {
+    var _this2 = this;
+
     return {
       events: [],
       config: {
@@ -2253,7 +2222,12 @@ __webpack_require__.r(__webpack_exports__);
         //height: 'auto',
         slotDuration: '00:15:00',
         scrollTime: '12:00:00',
-        slotLabelFormat: 'HH:mm'
+        slotLabelFormat: 'HH:mm',
+        eventClick: function eventClick(calEvent) {
+          _this2.$modal.show('calendarModal', {
+            'task': calEvent
+          });
+        }
       }
     };
   }
@@ -2343,6 +2317,59 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (errors) {
         _this.loading = false;
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modals/CalendarEventModal.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modals/CalendarEventModal.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      title: '',
+      color: '',
+      start: '',
+      end: '',
+      completed: false
+    };
+  },
+  methods: {
+    beforeOpen: function beforeOpen(event) {
+      this.title = event.params.task.title;
+      this.color = event.params.task.color;
+      this.start = event.params.task.start.format("Do MMM  YYYY");
+      this.end = event.params.task.end.format("Do MMM  YYYY");
+      console.log(event.params.task);
+      console.log(event.params.task.title);
+      console.log(event.params.task.start.format("Do MMM  YYYY"));
+      console.log(event.params.task.end.format("Do MMM  YYYY"));
+      console.log(event.params.task.color);
     }
   }
 });
@@ -73963,7 +73990,11 @@ var render = function() {
                 {
                   staticClass: "flex-1 text-2xl font-normal mb-10 text-center"
                 },
-                [_vm._v("\r\n            Create an Announcement\r\n        ")]
+                [
+                  _vm._v(
+                    "\r\n                Create an Announcement\r\n            "
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("add-announcement-form")
@@ -74010,7 +74041,8 @@ var render = function() {
           },
           [
             _c("i", {
-              staticClass: "fas fa-plus-circle text-3xl text-blue mr-2"
+              staticClass:
+                "fas fa-plus-circle text-3xl text-grey-dark mr-2 hover:text-blue"
             }),
             _vm._v("\n      New Task\n    ")
           ]
@@ -74400,26 +74432,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card shadow-md" }, [
-          _c("div", { staticClass: "card-header text-xl" }, [
-            _vm._v("Tasks Calendar")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-body" },
-            [
-              _c("full-calendar", {
-                attrs: { events: _vm.events, config: _vm.config }
-              })
-            ],
-            1
-          )
-        ])
-      ])
-    ])
+    _c(
+      "div",
+      { staticClass: "row justify-content-center" },
+      [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card shadow-md" }, [
+            _c("div", { staticClass: "card-header text-xl" }, [
+              _vm._v("Tasks Calendar")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c("full-calendar", {
+                  attrs: { events: _vm.events, config: _vm.config }
+                })
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("calendar-event-modal")
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -74584,6 +74623,62 @@ var render = function() {
         ])
       ])
     ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modals/CalendarEventModal.vue?vue&type=template&id=67b3cdec&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modals/CalendarEventModal.vue?vue&type=template&id=67b3cdec& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "modal",
+        {
+          attrs: { adaptive: "", name: "calendarModal", height: 300 },
+          on: { "before-open": _vm.beforeOpen }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "flex flex-column h-full  p-6",
+              class: { color: _vm.color }
+            },
+            [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.title) +
+                  " - \n           " +
+                  _vm._s(_vm.start) +
+                  "\n            " +
+                  _vm._s(_vm.end) +
+                  "\n      "
+              )
+            ]
+          )
+        ]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -89094,6 +89189,75 @@ function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (Form);
+
+/***/ }),
+
+/***/ "./resources/js/modals/CalendarEventModal.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/modals/CalendarEventModal.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CalendarEventModal_vue_vue_type_template_id_67b3cdec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarEventModal.vue?vue&type=template&id=67b3cdec& */ "./resources/js/modals/CalendarEventModal.vue?vue&type=template&id=67b3cdec&");
+/* harmony import */ var _CalendarEventModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarEventModal.vue?vue&type=script&lang=js& */ "./resources/js/modals/CalendarEventModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CalendarEventModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CalendarEventModal_vue_vue_type_template_id_67b3cdec___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CalendarEventModal_vue_vue_type_template_id_67b3cdec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/modals/CalendarEventModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/modals/CalendarEventModal.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/modals/CalendarEventModal.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarEventModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CalendarEventModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modals/CalendarEventModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarEventModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/modals/CalendarEventModal.vue?vue&type=template&id=67b3cdec&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/modals/CalendarEventModal.vue?vue&type=template&id=67b3cdec& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarEventModal_vue_vue_type_template_id_67b3cdec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CalendarEventModal.vue?vue&type=template&id=67b3cdec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modals/CalendarEventModal.vue?vue&type=template&id=67b3cdec&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarEventModal_vue_vue_type_template_id_67b3cdec___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarEventModal_vue_vue_type_template_id_67b3cdec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

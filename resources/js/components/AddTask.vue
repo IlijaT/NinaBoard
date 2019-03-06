@@ -4,7 +4,7 @@
     <div class="flex mt-4">
       
       <p class="flex text-grey text-xl ml-1 cursor-pointer"  @click="showModal">
-        <i class="fas fa-plus-circle text-3xl text-blue mr-2"></i>
+        <i class="fas fa-plus-circle text-3xl text-grey-dark mr-2 hover:text-blue"></i>
         New Task
       </p>
     </div>
