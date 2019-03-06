@@ -2,18 +2,20 @@
     <div>
         <label >
             <div class="flex btn flex mt-2">
-                 <div>
-                     <p class="rounded-full h-8 w-8 text-grey-darker mr-2 bg-white text-xl font-bold  hover:bg-blue-dark hover:text-purple-darkest">+</p>
-                 </div>
                 <div>
-                    <p @mouseover="mouseOver" @mouseleave="mouseLeave" class="text-white text-normal p-1 mb-0">Add your photo</p>
-                    <p v-show="showText"  class="text-purple-darkest text-xs font-bold -mt-2">Add up to 2MB</p>
+                    <p @mouseover="mouseOver" @mouseleave="mouseLeave" class="text-white text-normal mb-2">
+                        <i class="fas fa-plus-circle text-normal mr-1"></i>
+                        Add your photo
+                    </p>
+                    <p v-show="showText"  class="self-center text-grey-darkest text-xs font-bold -mt-4">     up to 2MB</p>
                 </div>
 
               
             </div>
             <input hidden type="file"  accept="image/*" @change="onChange">
-        </label>                
+        </label>    
+        
+
     </div>
 </template>
 

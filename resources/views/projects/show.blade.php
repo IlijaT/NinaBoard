@@ -8,13 +8,20 @@
         
         <header class="flex items-center px-2">
             <div class="flex justify-between items-end w-full">
-                <p class="text-lg text-grey text-sm font-normal">
+                    
+                <p class="text-grey text-normal font-normal">
+                       
                     <a href="/projects" 
-                    class="hover:no-underline hover:text-blue text-lg text-grey-dark text-sm font-normal"
+                    class="hover:no-underline hover:text-blue text-lg text-grey-dark font-normal"
                     >
+                    <i class="fab fa-earlybirds text-2xl text-blue mr-2"></i>
                     All Announcements
-                    </a>  / {{ str_limit($project->title, 80) }}
+                    </a>  / 
+                    <span  
+                    class="text-normal text-grey text-lg font-normal"> {{ str_limit($project->title, 80) }}
+                    </span>
                 </p>
+                
             </div>
         </header>
 

@@ -2,8 +2,11 @@
   <div>
     
     <div class="flex mt-4">
-      <button class="rounded-full px-2 h-8 w-8 text-grey is-link mr-2 bg-white text-xl border-2 border-grey" @click="showModal">+</button>
-      <p class="text-grey text-lg ml-1 cursor-pointer"  @click="showModal">Add New Task</p>
+      
+      <p class="flex text-grey text-xl ml-1 cursor-pointer"  @click="showModal">
+        <i class="fas fa-plus-circle text-3xl text-blue mr-2"></i>
+        New Task
+      </p>
     </div>
     
     <!-- modal -->

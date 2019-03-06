@@ -1946,6 +1946,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2142,6 +2145,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -73998,22 +74003,17 @@ var render = function() {
     [
       _c("div", { staticClass: "flex mt-4" }, [
         _c(
-          "button",
-          {
-            staticClass:
-              "rounded-full px-2 h-8 w-8 text-grey is-link mr-2 bg-white text-xl border-2 border-grey",
-            on: { click: _vm.showModal }
-          },
-          [_vm._v("+")]
-        ),
-        _vm._v(" "),
-        _c(
           "p",
           {
-            staticClass: "text-grey text-lg ml-1 cursor-pointer",
+            staticClass: "flex text-grey text-xl ml-1 cursor-pointer",
             on: { click: _vm.showModal }
           },
-          [_vm._v("Add New Task")]
+          [
+            _c("i", {
+              staticClass: "fas fa-plus-circle text-3xl text-blue mr-2"
+            }),
+            _vm._v("\n      New Task\n    ")
+          ]
         )
       ]),
       _vm._v(" "),
@@ -74338,16 +74338,17 @@ var render = function() {
   return _c("div", [
     _c("label", [
       _c("div", { staticClass: "flex btn flex mt-2" }, [
-        _vm._m(0),
-        _vm._v(" "),
         _c("div", [
           _c(
             "p",
             {
-              staticClass: "text-white text-normal p-1 mb-0",
+              staticClass: "text-white text-normal mb-2",
               on: { mouseover: _vm.mouseOver, mouseleave: _vm.mouseLeave }
             },
-            [_vm._v("Add your photo")]
+            [
+              _c("i", { staticClass: "fas fa-plus-circle text-normal mr-1" }),
+              _vm._v("\n                    Add your photo\n                ")
+            ]
           ),
           _vm._v(" "),
           _c(
@@ -74361,9 +74362,10 @@ var render = function() {
                   expression: "showText"
                 }
               ],
-              staticClass: "text-purple-darkest text-xs font-bold -mt-2"
+              staticClass:
+                "self-center text-grey-darkest text-xs font-bold -mt-4"
             },
-            [_vm._v("Add up to 2MB")]
+            [_vm._v("     up to 2MB")]
           )
         ])
       ]),
@@ -74375,23 +74377,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "p",
-        {
-          staticClass:
-            "rounded-full h-8 w-8 text-grey-darker mr-2 bg-white text-xl font-bold  hover:bg-blue-dark hover:text-purple-darkest"
-        },
-        [_vm._v("+")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
