@@ -2232,6 +2232,24 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     };
+  },
+  methods: {
+    completed: function completed(task) {
+      var newItem = {
+        'id': task.id,
+        'title': task.project.title + ' : ' + task.title,
+        'start': task.start,
+        'end': task.end,
+        'color': '#1f9d55',
+        'completed': task.completed,
+        'textColor': 'white'
+      };
+      var index = this.events.findIndex(function (item) {
+        return item.id === task.id;
+      });
+      this.events.splice(index, 1, newItem);
+      flash('Success! Task has been completed!', 'green');
+    }
   }
 });
 
@@ -2376,8 +2394,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2411,10 +2427,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/tasks/' + this.task.id, {
         'completed': this.task.finished
       }).then(function (data) {
-        //temporary
         _this.$modal.hide('calendarModal');
 
-        location.reload();
+        _this.$emit('completed', data.data);
       }).catch(function (error) {
         console.log(error);
         $modal.hide('calendarModal');
@@ -74504,7 +74519,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("calendar-event-modal")
+        _c("calendar-event-modal", { on: { completed: _vm.completed } })
       ],
       1
     )

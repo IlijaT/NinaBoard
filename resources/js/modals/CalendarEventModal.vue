@@ -1,7 +1,5 @@
 <template>
   <div>
-
-      
     <modal adaptive name="calendarModal" :height="250" @before-open="beforeOpen">
       <div class="flex flex-column p-2 h-full">
   
@@ -78,9 +76,8 @@ export default {
       onSubmit() {
         axios.post('/tasks/' + this.task.id, {'completed': this.task.finished})
         .then((data) => {
-            //temporary
             this.$modal.hide('calendarModal')
-            location.reload();
+            this.$emit('completed', data.data);
           })
         .catch(error => {
           console.log(error)

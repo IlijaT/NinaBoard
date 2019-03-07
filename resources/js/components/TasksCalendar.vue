@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <calendar-event-modal></calendar-event-modal>
+        <calendar-event-modal @completed="completed"></calendar-event-modal>
     </div>
     
     
@@ -65,7 +65,28 @@
           }
         },
       }
-    }
+    },
+    methods: {
+      completed(task) {
+        let newItem = {
+          'id'        : task.id,
+          'title'     : task.project.title + ' : ' + task.title,
+          'start'     : task.start, 
+          'end'       : task.end, 
+          'color'     : '#1f9d55',
+          'completed' : task.completed,
+          'textColor' : 'white',
+        }
+                     
+
+        var index = this.events.findIndex(item => item.id === task.id)
+
+        this.events.splice(index, 1, newItem);
+
+        flash('Success! Task has been completed!', 'green');
+
+      }
+    },
 
   }
 </script>

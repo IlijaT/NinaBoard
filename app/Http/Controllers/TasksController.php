@@ -21,8 +21,6 @@ class TasksController extends Controller
             ['completed' => 'required']
         );
 
-        $task->update($attributes);
-
         if (request('completed')) {
             $task->complete();
         } else {
