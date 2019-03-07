@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/calendar', 'CalendarController@index');
 
+    Route::post('/tasks/{task}', 'TasksController@update');
+
     //Route::get('/home', 'HomeController@index')->name('home');
 });
 

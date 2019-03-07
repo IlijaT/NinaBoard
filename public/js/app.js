@@ -2202,10 +2202,12 @@ __webpack_require__.r(__webpack_exports__);
 
     this.tasks.forEach(function (task) {
       _this.events.push({
+        'id': task.id,
         'title': task.project.title + ' : ' + task.title,
         'start': task.start,
         'end': task.end,
-        'color': task.completed == 1 ? 'purple' : 'green',
+        'color': task.completed == 1 ? '#1f9d55' : '#de751f',
+        'completed': task.completed,
         'textColor': 'white'
       });
     });
@@ -2349,27 +2351,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      title: '',
-      color: '',
-      start: '',
-      end: '',
-      completed: false
+      task: {
+        id: '',
+        title: '',
+        color: '',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+        completed: false,
+        finished: false
+      }
     };
   },
   methods: {
     beforeOpen: function beforeOpen(event) {
-      this.title = event.params.task.title;
-      this.color = event.params.task.color;
-      this.start = event.params.task.start.format("Do MMM  YYYY");
-      this.end = event.params.task.end.format("Do MMM  YYYY");
-      console.log(event.params.task);
-      console.log(event.params.task.title);
-      console.log(event.params.task.start.format("Do MMM  YYYY"));
-      console.log(event.params.task.end.format("Do MMM  YYYY"));
-      console.log(event.params.task.color);
+      this.task.id = event.params.task.id;
+      this.task.title = event.params.task.title;
+      this.task.color = event.params.task.color;
+      this.task.startDate = event.params.task.start.format("Do MMM YYYY");
+      this.task.startTime = event.params.task.start.format("HH:mm:ss");
+      this.task.endDate = event.params.task.end.format("Do MMM YYYY");
+      this.task.endTime = event.params.task.end.format("HH:mm:ss");
+      this.task.completed = event.params.task.completed;
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post('/tasks/' + this.task.id, {
+        'completed': this.task.finished
+      }).then(function (data) {
+        //temporary
+        _this.$modal.hide('calendarModal');
+
+        location.reload();
+      }).catch(function (error) {
+        console.log(error);
+        $modal.hide('calendarModal');
+      });
     }
   }
 });
@@ -74653,28 +74702,128 @@ var render = function() {
       _c(
         "modal",
         {
-          attrs: { adaptive: "", name: "calendarModal", height: 300 },
+          attrs: { adaptive: "", name: "calendarModal", height: 250 },
           on: { "before-open": _vm.beforeOpen }
         },
         [
-          _c(
-            "div",
-            {
-              staticClass: "flex flex-column h-full  p-6",
-              class: { color: _vm.color }
-            },
-            [
+          _c("div", { staticClass: "flex flex-column p-2 h-full" }, [
+            _c("h1", { staticClass: "text-xl font-normal mb-4 text-center" }, [
+              _vm._v("\n          " + _vm._s(_vm.task.title) + "  \n      ")
+            ]),
+            _vm._v(" "),
+            _c("h1", { staticClass: "text-sm font-normal mb-4" }, [
               _vm._v(
-                "\n          " +
-                  _vm._s(_vm.title) +
-                  " - \n           " +
-                  _vm._s(_vm.start) +
-                  "\n            " +
-                  _vm._s(_vm.end) +
+                "\n          Start: " +
+                  _vm._s(_vm.task.startDate) +
+                  " - " +
+                  _vm._s(_vm.task.startTime) +
                   "\n      "
               )
-            ]
-          )
+            ]),
+            _vm._v(" "),
+            _c("h1", { staticClass: "text-sm font-normal mb-4" }, [
+              _vm._v(
+                "\n          End: " +
+                  _vm._s(_vm.task.endDate) +
+                  " - " +
+                  _vm._s(_vm.task.endTime) +
+                  "\n      "
+              )
+            ]),
+            _vm._v(" "),
+            _vm.task.completed
+              ? _c("div", { staticClass: "text-center text-4xl " }, [
+                  _vm._v("\n        Completed "),
+                  _c("i", { staticClass: "fas fa-check text-4xl text-blue" })
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.task.completed
+              ? _c("div", { staticClass: "form-check" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.task.finished,
+                        expression: "task.finished"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", id: "defaultCheck1" },
+                    domProps: {
+                      checked: Array.isArray(_vm.task.finished)
+                        ? _vm._i(_vm.task.finished, null) > -1
+                        : _vm.task.finished
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.task.finished,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.task, "finished", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.task,
+                                "finished",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.task, "finished", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "defaultCheck1" }
+                    },
+                    [_vm._v("\n          Mark as completed\n        ")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex mt-auto" }, [
+              _c("div", { staticClass: "ml-auto control flex" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                    on: {
+                      click: function($event) {
+                        return _vm.$modal.hide("calendarModal")
+                      }
+                    }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                !_vm.task.completed
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                        attrs: { disabled: !_vm.task.finished },
+                        on: { click: _vm.onSubmit }
+                      },
+                      [_vm._v("Save")]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ])
         ]
       )
     ],

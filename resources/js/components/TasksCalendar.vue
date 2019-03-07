@@ -32,13 +32,16 @@
 
     created() {
       this.tasks.forEach(task => {
+        
         this.events.push(
             {
-              'title' : task.project.title + ' : ' + task.title,
-              'start' : task.start, 
-              'end' : task.end, 
-              'color': task.completed == 1 ? 'purple' : 'green',
-              'textColor': 'white',
+              'id'        : task.id,
+              'title'     : task.project.title + ' : ' + task.title,
+              'start'     : task.start, 
+              'end'       : task.end, 
+              'color'     : task.completed == 1 ? '#1f9d55' : '#de751f',
+              'completed' : task.completed,
+              'textColor' : 'white',
             }
           );
       }); 

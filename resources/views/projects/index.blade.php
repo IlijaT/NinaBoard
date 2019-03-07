@@ -45,7 +45,7 @@
 
                     @forelse($tasks as $task)
                     <div class="mx-1">
-                        <h3 class="text-black text-xs px-1 {{ $task->completed == '1' ? 'line-through text-purple-dark' : 'text-green-dark'}}">
+                        <h3 class="text-black text-xs px-1 {{ $task->completed == '1' ? 'line-through text-green' : 'text-orange'}}">
                                 
                             <span class="font-bold"> {{ $task->project->title }} </span> - 
                             <span class="text-xs italic"> "{{ $task->title }}" </span>
