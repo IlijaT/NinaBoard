@@ -1,4 +1,4 @@
-<div class="p-2 overflow-auto" >
+<div>
     <ul class="text-xs list-reset">
         @if(isset($activities))
             @foreach($activities as $activity)

@@ -2248,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
         return item.id === task.id;
       });
       this.events.splice(index, 1, newItem);
-      flash('Success! Task has been completed!', 'green');
+      flash('Task has been completed!', 'green');
     }
   }
 });
@@ -2429,9 +2429,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         _this.$modal.hide('calendarModal');
 
+        _this.task.finished = false;
+
         _this.$emit('completed', data.data);
       }).catch(function (error) {
-        console.log(error);
+        flash('Ooops! Something went wrong!', 'red');
         $modal.hide('calendarModal');
       });
     }

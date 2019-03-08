@@ -10,7 +10,7 @@
                 All Users
                 </a>
             </p>
-            <a class="py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue" style="text-decoration: none;" href="/users/create">New User</a>
+            <a class="py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark  hover:no-underline" href="/users/create">New</a>
         </div>
     </header>
 

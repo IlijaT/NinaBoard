@@ -8,12 +8,12 @@
 
             <div class="flex flex-column">
 
-                <div class="flex m-2 items-center">
+                <div class="flex m-2 items-end">
                     <h2 class="text-grey text-lg font-normal">
                         <i class="fas fa-bullhorn mr-2 text-2xl text-blue"></i>
                         Announcements
                     </h2>
-                    {{-- <a class=" bg-blue ml-auto text-normal btn rounded-full text-white hover:no-underline hover:bg-blue-dark" @click="$modal.show('AddAnnouncement')">Add New</a> --}}
+                    
                     <add-announcement class="ml-auto"></add-announcement>
                 </div>
 
@@ -33,19 +33,17 @@
 
 
         {{-- right side --}}
-        <div class="lg:w-1/4 lg:flex flex-column -mt-3">
+        <div class="lg:w-1/4 lg:flex flex-column ">
 
             {{-- Today's Tasks --}}
-            <div class="h-64 mb-1 p-1 ">
-                <div class="flex flex-column mb-1 bg-white flex-1 h-full overflow-auto">
-
-                    <div class="p-3">
-                        <h2 class="text-grey-dark text-lg">Today's Tasks</h2>
-                    </div>
+            <div class="mb-2">
+                <div class="flex flex-column m-1 px-3 pt-3 pb-1 bg-white flex-1 h-full overflow-auto">
+ 
+                    <h2 class="py-2 text-black text-lg font-bold">Today's Tasks</h2>
 
                     @forelse($tasks as $task)
-                    <div class="mx-1">
-                        <h3 class="text-black text-xs px-1 {{ $task->completed == '1' ? 'line-through text-green' : 'text-orange'}}">
+                    <div>
+                        <h3 class="text-black text-xs {{ $task->completed == '1' ? 'line-through text-green' : 'text-orange'}}">
                                 
                             <span class="font-bold"> {{ $task->project->title }} </span> - 
                             <span class="text-xs italic"> "{{ $task->title }}" </span>
@@ -56,8 +54,8 @@
                         </h3>
                     </div>
                     @empty
-                        <div class="1">
-                            <h2 class="text-black text-sm ">Easy day!</h2>
+                        <div class="text-black text-xs px-1">
+                            <h2>Easy day!</h2>
                         </div>
                     @endforelse
                 
@@ -66,16 +64,13 @@
             </div>
 
             {{-- latest updates --}}
-            <div class="p-1 h-64 overflow-auto">
+            <div style="height:350px" class="my-1">
 
-                <div class="flex flex-column bg-white flex-1">
+                <div class="flex flex-column m-1 p-3 bg-white flex-1 h-full overflow-auto">
 
-                    <div class="mt-1">
-                        <h2 class="text-grey-dark text-lg text-xl">Latest Updates</h2>
-                    </div>
+                    <h2 class="py-2 text-black text-lg font-bold">Latest Updates</h2>
                     
                     @include('projects.activity.card')
-                
                 
                 </div>
             </div>

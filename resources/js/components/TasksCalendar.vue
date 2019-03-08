@@ -83,7 +83,7 @@
 
         this.events.splice(index, 1, newItem);
 
-        flash('Success! Task has been completed!', 'green');
+        flash('Task has been completed!', 'green');
 
       }
     },

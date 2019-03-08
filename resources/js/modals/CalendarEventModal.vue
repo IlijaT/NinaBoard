@@ -76,11 +76,12 @@ export default {
       onSubmit() {
         axios.post('/tasks/' + this.task.id, {'completed': this.task.finished})
         .then((data) => {
-            this.$modal.hide('calendarModal')
+            this.$modal.hide('calendarModal');
+            this.task.finished = false;
             this.$emit('completed', data.data);
           })
         .catch(error => {
-          console.log(error)
+          flash('Ooops! Something went wrong!', 'red');
           $modal.hide('calendarModal')
         });
       }

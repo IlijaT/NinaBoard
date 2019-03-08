@@ -6,8 +6,7 @@
             <p class="text-lg text-grey text-sm font-normal">
                 @can('delete-project')
                 <a href="/users" 
-                class="text-lg text-grey text-sm font-normal"
-                style="text-decoration: none;"
+                class="text-lg text-grey text-sm font-normal hover:text-blue hover:no-underline"
                 >
                 All users
                 </a> 
@@ -16,8 +15,8 @@
             </p>
             <a 
             style="text-decoration: none" 
-            class="ml-auto py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark border-2 border-blue"
-            href="/users/{{ $user->id }}/edit">Edit Details</a>
+            class="ml-auto py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark"
+            href="/users/{{ $user->id }}/edit">Edit</a>
         </div>
     </header>
 
