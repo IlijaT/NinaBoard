@@ -1906,6 +1906,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1917,6 +1921,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['project'],
   data: function data() {
     return {
+      loading: false,
       task: {
         title: '',
         start: '',
@@ -1938,8 +1943,7 @@ __webpack_require__.r(__webpack_exports__);
         HH: "12",
         mm: "00",
         ss: "00"
-      },
-      feedback: ''
+      }
     };
   },
   methods: {
@@ -1949,6 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
     addTask: function addTask() {
       var _this = this;
 
+      this.loading = true;
       var formatedStartDateAndTime = this.formatedStartDate + ' ' + this.startTimeValue.HH + ':' + this.startTimeValue.mm + ':' + this.startTimeValue.ss;
       var formatedEndDateAndTime = this.formatedEndDate + ' ' + this.endTimeValue.HH + ':' + this.endTimeValue.mm + ':' + this.endTimeValue.ss;
       axios.post('/projects/' + this.project.id + '/tasks', {
@@ -1958,7 +1963,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         location.reload();
       }).catch(function (error) {
-        return _this.feedback = error.response.data;
+        return _this.loading = false;
       });
     },
     selectedStartDate: function selectedStartDate(date) {
@@ -2394,6 +2399,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2407,7 +2424,8 @@ __webpack_require__.r(__webpack_exports__);
         endTime: '',
         completed: false,
         finished: false
-      }
+      },
+      loading: false
     };
   },
   methods: {
@@ -2424,15 +2442,18 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit() {
       var _this = this;
 
+      this.loading = true;
       axios.post('/tasks/' + this.task.id, {
         'completed': this.task.finished
       }).then(function (data) {
         _this.$modal.hide('calendarModal');
 
         _this.task.finished = false;
+        _this.loading = false;
 
         _this.$emit('completed', data.data);
       }).catch(function (error) {
+        _this.loading = false;
         flash('Ooops! Something went wrong!', 'red');
         $modal.hide('calendarModal');
       });
@@ -74299,6 +74320,7 @@ var render = function() {
                       {
                         staticClass:
                           "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                        class: _vm.loading ? "loader" : "",
                         attrs: { type: "submit" }
                       },
                       [_vm._v("Save")]
@@ -74714,34 +74736,48 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "modal",
+    {
+      attrs: { adaptive: "", name: "calendarModal", height: 270 },
+      on: { "before-open": _vm.beforeOpen }
+    },
     [
       _c(
-        "modal",
+        "div",
         {
-          attrs: { adaptive: "", name: "calendarModal", height: 250 },
-          on: { "before-open": _vm.beforeOpen }
+          staticClass: "flex flex-column p-2  h-full justify-center",
+          class: _vm.task.completed
+            ? "border-l-8 border-green"
+            : "border-l-8 border-orange"
         },
         [
-          _c("div", { staticClass: "flex flex-column p-2 h-full" }, [
-            _c("h1", { staticClass: "text-xl font-normal mb-4 text-center" }, [
-              _vm._v("\n          " + _vm._s(_vm.task.title) + "  \n      ")
-            ]),
-            _vm._v(" "),
-            _c("h1", { staticClass: "text-sm font-normal mb-4" }, [
+          _c("div", { staticClass: "mb-2" }, [
+            _c("h1", { staticClass: "text-2xl font-bold m-3 text-center" }, [
+              _vm._v("\n        " + _vm._s(_vm.task.title) + "  \n      ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c("h1", { staticClass: "text-sm font-normal" }, [
               _vm._v(
-                "\n          Start: " +
+                "\n        " +
                   _vm._s(_vm.task.startDate) +
-                  " - " +
-                  _vm._s(_vm.task.startTime) +
+                  " \n        " +
+                  _vm._s(_vm.task.startDate != _vm.task.endDate ? "-" : "") +
+                  "\n        " +
+                  _vm._s(
+                    _vm.task.startDate != _vm.task.endDate
+                      ? _vm.task.endDate
+                      : ""
+                  ) +
                   "\n      "
               )
             ]),
             _vm._v(" "),
-            _c("h1", { staticClass: "text-sm font-normal mb-4" }, [
+            _c("h1", { staticClass: "text-sm font-normal mr-2" }, [
               _vm._v(
-                "\n          End: " +
-                  _vm._s(_vm.task.endDate) +
+                "\n         " +
+                  _vm._s(_vm.task.startTime) +
                   " - " +
                   _vm._s(_vm.task.endTime) +
                   "\n      "
@@ -74808,43 +74844,43 @@ var render = function() {
                     [_vm._v("\n          Mark as completed\n        ")]
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex mt-auto" }, [
-              _c("div", { staticClass: "ml-auto control flex" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
-                    on: {
-                      click: function($event) {
-                        return _vm.$modal.hide("calendarModal")
-                      }
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex mt-auto" }, [
+            _c("div", { staticClass: "ml-auto control flex" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                  on: {
+                    click: function($event) {
+                      return _vm.$modal.hide("calendarModal")
                     }
-                  },
-                  [_vm._v("Cancel")]
-                ),
-                _vm._v(" "),
-                !_vm.task.completed
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
-                        attrs: { disabled: !_vm.task.finished },
-                        on: { click: _vm.onSubmit }
-                      },
-                      [_vm._v("Save")]
-                    )
-                  : _vm._e()
-              ])
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
+              _vm._v(" "),
+              !_vm.task.completed
+                ? _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                      class: _vm.loading ? "loader" : "",
+                      attrs: { disabled: !_vm.task.finished },
+                      on: { click: _vm.onSubmit }
+                    },
+                    [_vm._v("Save")]
+                  )
+                : _vm._e()
             ])
           ])
         ]
       )
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []

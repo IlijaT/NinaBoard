@@ -75,7 +75,11 @@
             <div class="flex mt-auto">
               <div class="ml-auto control flex">
                 <button @click="$modal.hide('addTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
-                <button type="submit" class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue">Save</button>
+                <button 
+                  type="submit"
+                  :class="loading ? 'loader' : ''"
+                  class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue"
+                  >Save</button>
               </div> 
             </div> 
 
@@ -101,6 +105,7 @@ export default {
     props: ['project'],
     data(){
       return {
+        loading: false,
         task: { title: '', start: '', end: ''},
         startDate: '',
         formatedStartDate: '',
@@ -120,7 +125,6 @@ export default {
           ss: "00"
         },
 
-        feedback: ''
       }
     },
 
@@ -130,6 +134,7 @@ export default {
       },
 
       addTask() {
+        this.loading = true;
         let formatedStartDateAndTime = this.formatedStartDate + ' ' + this.startTimeValue.HH + ':' + this.startTimeValue.mm + ':' + this.startTimeValue.ss;
         let formatedEndDateAndTime = this.formatedEndDate + ' ' + this.endTimeValue.HH + ':' + this.endTimeValue.mm + ':' + this.endTimeValue.ss;
         
@@ -137,7 +142,7 @@ export default {
         .then((data) => {
             location.reload();
           })
-        .catch(error => this.feedback = error.response.data);
+        .catch(error => this.loading = false);
       },
 
       selectedStartDate(date) {

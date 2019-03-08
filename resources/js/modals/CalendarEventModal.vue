@@ -1,18 +1,24 @@
 <template>
-  <div>
-    <modal adaptive name="calendarModal" :height="250" @before-open="beforeOpen">
-      <div class="flex flex-column p-2 h-full">
-  
-        <h1 class="text-xl font-normal mb-4 text-center">
-            {{ task.title }}  
-        </h1>
-        
-        <h1 class="text-sm font-normal mb-4">
-            Start: {{ task.startDate }} - {{ task.startTime }}
+  <modal adaptive name="calendarModal" :height="270" @before-open="beforeOpen">
+    <div 
+      :class="task.completed ? 'border-l-8 border-green' : 'border-l-8 border-orange'" 
+      class="flex flex-column p-2  h-full justify-center"
+      >
+
+      <div class="mb-2">
+        <h1 class="text-2xl font-bold m-3 text-center">
+          {{ task.title }}  
         </h1>
 
-         <h1 class="text-sm font-normal mb-4">
-            End: {{ task.endDate }} - {{ task.endTime }}
+      </div>
+      <div class="text-center">
+        <h1 class="text-sm font-normal">
+          {{ task.startDate }} 
+          {{ task.startDate != task.endDate ? '-' : '' }}
+          {{ task.startDate != task.endDate ? task.endDate : '' }}
+        </h1>
+        <h1 class="text-sm font-normal mr-2">
+           {{ task.startTime }} - {{ task.endTime }}
         </h1>
 
         <div v-if="task.completed" class="text-center text-4xl ">
@@ -26,17 +32,23 @@
           </label>
         </div>
 
-        <div class="flex mt-auto">
-          <div class="ml-auto control flex">
-            <button @click="$modal.hide('calendarModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
-            <button v-if="! task.completed" :disabled="! task.finished" @click="onSubmit" class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue">Save</button>
-          </div> 
-        </div> 
-       
       </div>
-       
-    </modal>
-  </div>
+
+      <div class="flex mt-auto">
+        <div class="ml-auto control flex">
+          <button @click="$modal.hide('calendarModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
+          <button 
+            v-if="! task.completed" 
+            :disabled="! task.finished" 
+            @click="onSubmit" 
+            :class="loading ? 'loader' : ''"
+            class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue">Save</button>
+        </div> 
+      </div> 
+
+    </div>
+  </modal>
+
 
 </template>
 
@@ -56,7 +68,8 @@ export default {
           endTime: '',
           completed: false,
           finished: false,
-        }
+        },
+        loading: false
         
       }
     },
@@ -74,13 +87,16 @@ export default {
       },
 
       onSubmit() {
+        this.loading = true;
         axios.post('/tasks/' + this.task.id, {'completed': this.task.finished})
         .then((data) => {
             this.$modal.hide('calendarModal');
             this.task.finished = false;
+            this.loading = false;
             this.$emit('completed', data.data);
           })
         .catch(error => {
+          this.loading = false;
           flash('Ooops! Something went wrong!', 'red');
           $modal.hide('calendarModal')
         });
