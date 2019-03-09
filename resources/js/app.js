@@ -21,6 +21,8 @@ Vue.component('flash-component', require('./components/FlashComponent.vue').defa
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').default);
 Vue.component('add-announcement', require('./components/AddAnnButton.vue').default);
+Vue.component('add-new-user', require('./components/AddNewUser.vue').default);
+Vue.component('edit-user', require('./components/EditUser.vue').default);
 Vue.component('add-task', require('./components/AddTask.vue').default);
 
 

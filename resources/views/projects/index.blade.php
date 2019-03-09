@@ -13,7 +13,7 @@
                         <i class="fas fa-bullhorn mr-2 text-2xl text-blue"></i>
                         Announcements
                     </h2>
-                    
+                    {{-- button to add new announcement --}}
                     <add-announcement class="ml-auto"></add-announcement>
                 </div>
 
@@ -54,8 +54,11 @@
                         </h3>
                     </div>
                     @empty
-                        <div class="text-black text-xs px-1">
-                            <h2>Easy day!</h2>
+                        <div class="text-black text-normal px-1">
+                            <div class="flex items-start">
+                                <span>Easy day!</span>
+                                <i class="fas fa-smile-wink text-xl text-yellow-dark ml-2"></i>
+                            </div>
                         </div>
                     @endforelse
                 

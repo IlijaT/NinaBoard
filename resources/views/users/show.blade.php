@@ -13,10 +13,11 @@
                 @endcan
                / {{ $user->name }}
             </p>
-            <a 
+            {{-- <a 
             style="text-decoration: none" 
             class="ml-auto py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark"
-            href="/users/{{ $user->id }}/edit">Edit</a>
+            href="/users/{{ $user->id }}/edit">Edit</a> --}}
+            <edit-user :user="{{ $user }}"></edit-user>
         </div>
     </header>
 
