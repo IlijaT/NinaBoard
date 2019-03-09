@@ -10,7 +10,9 @@
                 All Users
                 </a>
             </p>
-            <a class="py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark  hover:no-underline" href="/users/create">New</a>
+            {{-- <a class="py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark  hover:no-underline" href="/users/create">New</a> --}}
+            {{-- button to add new announcement --}}
+            <add-new-user></add-new-user>
         </div>
     </header>
 

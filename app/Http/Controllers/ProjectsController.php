@@ -25,15 +25,6 @@ class ProjectsController extends Controller
         return view('projects.index', compact(['projects', 'activities', 'tasks']));
     }
 
-    
-    
-    public function create()
-    {
-        return view('projects.create');
-    }
-
-    
-    
     public function store()
     {
         $attributes = request()->validate([

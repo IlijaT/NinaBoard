@@ -16,8 +16,13 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('projects', 'ProjectsController', ['names' => ['index' => 'home']]);
-    Route::resource('users', 'UsersController');
+    Route::resource('projects', 'ProjectsController', ['names' => ['index' => 'home']])->except([
+        'create'
+    ]);
+    Route::resource('users', 'UsersController')->except([
+        'create', 'edit'
+    ]);
+    ;
 
     Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
     Route::patch('/projects/{project}/tasks/{task}', 'ProjectTasksController@update');

@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['manager'])->except(['show', 'edit']);
+        $this->middleware(['manager'])->except(['show', 'update']);
     }
     /**
      * Display a listing of the resource.
@@ -24,17 +24,6 @@ class UsersController extends Controller
         return view('users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('users.create');
-    }
-
-    
     public function store()
     {
         request()->validate([
@@ -43,20 +32,14 @@ class UsersController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'password' => Hash::make(request('password')),
             'remember_token'    => str_random(10),
         ]);
 
-        return redirect('/users')->with(
-            'flash',
-            [
-            'message' => 'A new user has been registered!',
-            'color' => 'green'
-            ]
-        );
+        return $user;
     }
 
     /**
@@ -74,20 +57,6 @@ class UsersController extends Controller
         abort(403);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        if (auth()->user()->id === $user->id  || auth()->user()->hasRole('manager')) {
-            return view('users.edit', compact('user'));
-        }
-
-        abort(403);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -96,9 +65,18 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user)
     {
-        //
+        request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        $user->name     =  request('name');
+        $user->password =  Hash::make(request('password'));
+        $user->save();
+
+        return $user;
     }
 
     /**
