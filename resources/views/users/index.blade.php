@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <header  class="flex items-center mb-3 py-4">
+    {{-- <header  class="flex items-center mb-3 py-4">
         <div class="flex justify-between items-end w-full">
             <p class="text-lg text-grey text-sm font-normal">
                 <a href="/users" 
@@ -10,10 +10,23 @@
                 All Users
                 </a>
             </p>
-            {{-- <a class="py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark  hover:no-underline" href="/users/create">New</a> --}}
-            {{-- button to add new announcement --}}
+            
             <add-new-user></add-new-user>
         </div>
+    </header> --}}
+
+    <header class="flex justify-between items-end w-full mt-2 mb-4">
+
+        <div>
+            <a href="/users"
+            class=" hover:no-underline"
+            >
+            <span class="text-normal text-grey font-bold hover:text-blue">All users</span>
+            </a>
+        </div>
+            
+        <add-new-user></add-new-user>
+        
     </header>
 
     <main>

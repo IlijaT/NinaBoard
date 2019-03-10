@@ -24,6 +24,7 @@ Vue.component('add-announcement', require('./components/AddAnnButton.vue').defau
 Vue.component('add-new-user', require('./components/AddNewUser.vue').default);
 Vue.component('edit-user', require('./components/EditUser.vue').default);
 Vue.component('add-task', require('./components/AddTask.vue').default);
+Vue.component('user-stats', require('./components/UserStats.vue').default);
 
 
 

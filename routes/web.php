@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/tasks/{task}', 'TasksController@update');
 
+    Route::get('/users/{user}/activity', 'UsersActivityController@index');
+
+
     //Route::get('/home', 'HomeController@index')->name('home');
 });
 
