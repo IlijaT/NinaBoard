@@ -2124,6 +2124,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2366,6 +2369,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2414,45 +2420,139 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: ['user'],
   data: function data() {
     return {
+      loading: false,
+      startDate: '',
+      endDate: '',
+      disabledEndDates: {
+        to: new Date(2023, 0, 1)
+      },
       selectedFilter: 'completed_task',
       options: [{
-        text: 'Copleted tasks',
+        text: 'Completed Tasks',
         value: 'completed_task'
       }, {
-        text: 'Incompleted tasks',
+        text: 'Incompleted Tasks',
         value: 'incompleted_task'
       }, {
-        text: 'Created tasks',
+        text: 'Created Tasks',
         value: 'created_task'
       }, {
-        text: 'Created projects',
+        text: 'Created Announcements',
         value: 'created_project'
+      }, {
+        text: 'Updated Announcements',
+        value: 'updated_project'
       }],
       tableData: []
     };
   },
   methods: {
+    showFilterModal: function showFilterModal() {
+      this.$modal.show('filterModal');
+    },
+    selectedStartDate: function selectedStartDate(date) {
+      this.disabledEndDates.to = new Date(moment__WEBPACK_IMPORTED_MODULE_1___default()(date).format('YYYY-MM-DD'));
+    },
     filter: function filter() {
       var _this = this;
 
-      this.tableData = [], axios.get('/users/' + this.user.id + '/activity').then(function (data) {
-        //console.log(data.data);
+      this.tableData = [];
+      this.loading = true;
+      axios.get('/users/' + this.user.id + '/activity', {
+        params: {
+          start: this.startDate,
+          end: this.endDate,
+          selected: this.selectedFilter
+        }
+      }).then(function (data) {
         data.data.forEach(function (element) {
           _this.tableData.push({
             'id': data.data.indexOf(element) + 1,
-            'client': element.subject.project.title,
-            'task': element.subject.title,
-            'action': element.description,
+            'client': element.subject_type == 'App\\Project' ? element.subject.title : element.subject.project.title,
+            'task': element.subject_type == 'App\\Project' ? '/' : element.subject.title,
+            'action': element.description.replace("_", " "),
             'date': element.created_at
           });
         });
-        console.log(_this.items);
+        _this.loading = false;
+        _this.startDate = '';
+        _this.endDate = '';
+        _this.disabledEndDates.to = new Date(2023, 0, 1), _this.selectedFilter = 'completed_task', _this.$modal.hide('filterModal');
       }).catch(function (error) {
-        return _this.loading = false;
+        _this.tableData = [];
+        _this.loading = false;
+        _this.startDate = '';
+        _this.endDate = '';
+
+        _this.$modal.hide('filterModal');
       });
     }
   }
@@ -74901,10 +75001,13 @@ var render = function() {
         "button",
         {
           staticClass:
-            " bg-blue text-normal btn rounded-full text-white hover:bg-blue-dark",
+            "bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker",
           on: { click: _vm.showModal }
         },
-        [_vm._v(" Edit Details")]
+        [
+          _vm._v("\r\n         Edit\r\n        "),
+          _c("i", { staticClass: "fas fa-user-edit text-lg text-white ml-2" })
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -75112,60 +75215,183 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "mt-5 w-full" }, [
-    _c("div", { staticClass: "flex py-2 justify-end w-full my-2" }, [
-      _c("div", { staticClass: "flex" }, [
+    _c(
+      "div",
+      { staticClass: "flex py-2 justify-end w-full my-2" },
+      [
         _c(
-          "select",
+          "button",
           {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.selectedFilter,
-                expression: "selectedFilter"
-              }
-            ],
-            staticClass: "custom-select",
-            attrs: { id: "inputGroupSelect02" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.selectedFilter = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
+            staticClass:
+              "bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker",
+            on: { click: _vm.showFilterModal }
           },
-          _vm._l(_vm.options, function(option) {
-            return _c(
-              "option",
-              { key: option.value, domProps: { value: option.value } },
-              [_vm._v("\n          " + _vm._s(option.text) + "\n        ")]
-            )
-          }),
-          0
+          [
+            _vm._v("\n      Filter\n      "),
+            _c("i", { staticClass: "fas fa-search text-lg text-white ml-2" })
+          ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "input-group-append" }, [
-          _c(
-            "label",
-            {
-              staticClass: "input-group-text btn bg-blue hover:bg-blue-dark",
-              attrs: { for: "inputGroupSelect02" },
-              on: { click: _vm.filter }
-            },
-            [_c("i", { staticClass: "fas fa-search text-normal text-white" })]
-          )
-        ])
-      ])
-    ]),
+        _c(
+          "modal",
+          {
+            attrs: {
+              adaptive: "",
+              name: "filterModal",
+              height: "auto",
+              width: "660"
+            }
+          },
+          [
+            _c("div", { staticClass: "flex flex-column h-full m-2" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "my-2 text-center border-b-2 border-grey-light"
+                },
+                [
+                  _c("h3", { staticClass: "text-grey text-2xl font-normal" }, [
+                    _vm._v("Filter data")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex justify-between mx-2 my-3" },
+                [
+                  _c("datepicker", {
+                    attrs: {
+                      inline: true,
+                      mondayFirst: true,
+                      "bootstrap-styling": ""
+                    },
+                    on: { selected: _vm.selectedStartDate },
+                    model: {
+                      value: _vm.startDate,
+                      callback: function($$v) {
+                        _vm.startDate = $$v
+                      },
+                      expression: "startDate"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("datepicker", {
+                    attrs: {
+                      inline: true,
+                      mondayFirst: true,
+                      disabled: true,
+                      "disabled-dates": _vm.disabledEndDates
+                    },
+                    model: {
+                      value: _vm.endDate,
+                      callback: function($$v) {
+                        _vm.endDate = $$v
+                      },
+                      expression: "endDate"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex m-2" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedFilter,
+                        expression: "selectedFilter"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "inputGroupSelect02" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selectedFilter = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.options, function(option) {
+                    return _c(
+                      "option",
+                      { key: option.value, domProps: { value: option.value } },
+                      [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(option.text) +
+                            "\n            "
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "input-group-text btn bg-grey-light",
+                      attrs: { for: "inputGroupSelect02" }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-filter text-normal text-black"
+                      })
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex m-2 mt-4" }, [
+                _c("div", { staticClass: "ml-auto control flex" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                      on: {
+                        click: function($event) {
+                          return _vm.$modal.hide("filterModal")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                      class: _vm.loading ? "loader" : "",
+                      attrs: { disabled: !_vm.startDate || !_vm.endDate },
+                      on: { click: _vm.filter }
+                    },
+                    [_vm._v("Filter")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ],
+      1
+    ),
     _vm._v(" "),
     _c(
       "table",
@@ -75181,7 +75407,7 @@ var render = function() {
           [
             _vm._l(_vm.tableData, function(item) {
               return _vm.tableData
-                ? _c("tr", { key: _vm.tableData.indexOf(item) }, [
+                ? _c("tr", { key: item.id }, [
                     _c("th", { attrs: { scope: "row" } }, [
                       _vm._v(_vm._s(item.id))
                     ]),
@@ -75197,17 +75423,9 @@ var render = function() {
                 : _vm._e()
             }),
             _vm._v(" "),
-            !_vm.tableData
+            _vm.tableData.length < 1 || _vm.tableData == undefined
               ? _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("No data")]),
-                  _vm._v(" "),
-                  _c("td"),
-                  _vm._v(" "),
-                  _c("td"),
-                  _vm._v(" "),
-                  _c("td"),
-                  _vm._v(" "),
-                  _c("td")
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("Empty table")])
                 ])
               : _vm._e()
           ],

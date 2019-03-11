@@ -73,7 +73,7 @@
                             style="min-height: 200px"
                             placeholder="Anything special that you want to make a note of?"
                         >{{ $project->notes }}</textarea>
-                        <button type="submit" class="py-1 px-3 text-lg button rounded-full text-white is-link hover:bg-blue-dark">Add Note</button>
+                        <button type="submit" class="py-1 px-3 text-lg button btn rounded-full text-white is-link hover:bg-blue-dark">Add Note</button>
                     </form>
                 </div>
                 
@@ -86,7 +86,7 @@
                     <h3 class="font-normal mt-4 px-3 py-2 text-lg border-l-4 border-blue-light">
                         <a class="text-black hover:no-underline hover:text-blue" href="{{ $project->path() }}/edit">{{ $project->title }} </a>
                     </h3>
-                    {{-- <div class="text-grey text-xs py-3 px-4 ">{!! nl2br(preg_replace('/^[ \t]*[\r\n]+/m', '', $project->description))  !!}</div> --}}
+                  
                     <div class="text-grey text-xs py-3 px-4 ">{!! nl2br($project->description)  !!}</div>
 
                 </div>
