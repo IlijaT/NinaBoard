@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Activity;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,7 +32,12 @@ class User extends Authenticatable
 
     public function projects()
     {
-        return $this->hasMany(Project::class, 'owner_id')->latest('updated_at');
+        return $this->hasMany(Project::class, 'owner_id');
+    }
+
+    public function activity()
+    {
+        return $this->hasMany(Activity::class)->oldest('created_at');
     }
 
     public function roles()

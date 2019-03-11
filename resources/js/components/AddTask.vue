@@ -138,11 +138,16 @@ export default {
         let formatedStartDateAndTime = this.formatedStartDate + ' ' + this.startTimeValue.HH + ':' + this.startTimeValue.mm + ':' + this.startTimeValue.ss;
         let formatedEndDateAndTime = this.formatedEndDate + ' ' + this.endTimeValue.HH + ':' + this.endTimeValue.mm + ':' + this.endTimeValue.ss;
         
-        axios.post('/projects/' + this.project.id + '/tasks', {'title': this.task.title, 'start': formatedStartDateAndTime, 'end': formatedEndDateAndTime})
-        .then((data) => {
-            location.reload();
+        axios.post('/projects/' + this.project.id + '/tasks', 
+          {
+          'title': this.task.title, 
+          'start': formatedStartDateAndTime, 
+          'end': formatedEndDateAndTime
           })
-        .catch(error => this.loading = false);
+          .then((data) => {
+              location.reload();
+            })
+          .catch(error => this.loading = false);
       },
 
       selectedStartDate(date) {

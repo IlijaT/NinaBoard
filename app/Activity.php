@@ -12,8 +12,7 @@ class Activity extends Model
         'changes' => 'array'
     ];
 
-    public function subject() 
-    
+    public function subject()
     {
         return $this->morphTo();
     }

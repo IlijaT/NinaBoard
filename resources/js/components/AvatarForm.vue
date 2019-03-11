@@ -31,9 +31,6 @@ export default {
 
     methods: {
         onLoad(avatar) {
-            
-           
-
             // persist to the server
     
             this.persist(avatar);
