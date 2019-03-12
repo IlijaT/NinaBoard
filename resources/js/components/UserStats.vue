@@ -78,7 +78,7 @@
        
     </div>
 
-    <table class="bg-white rounded-lg shadow-md table table-striped table-sm table-responsive">
+    <table class="bg-white shadow-md table table-striped table-sm table-responsive">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -100,8 +100,8 @@
           <th scope="row">Empty table</th>
         </tr>
       </tbody>
-    
     </table>
+    <paginator :dataSet="dataSet" @updated="filter"></paginator>
   </div>
 </template>
 
@@ -133,10 +133,10 @@ import moment from 'moment';
           { text: 'Updated Announcements', value: 'updated_project' }
         ],
 
+        dataSet: false,
         tableData: []
       }
     }, 
-
     methods: {
       showFilterModal() {
         this.$modal.show('filterModal');
@@ -145,15 +145,17 @@ import moment from 'moment';
         this.disabledEndDates.to = new Date(moment(date).format('YYYY-MM-DD'));
       },
 
-      filter() {
+      filter(page) {
         this.tableData = [];
         this.loading = true;
-        axios.get('/users/' + this.user.id + '/activity', { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
+        axios.get(this.url(page), { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
           .then((data) => {
 
-            data.data.forEach(element => {
+            this.dataSet = data.data;
+           
+            data.data.data.forEach(element => {
               this.tableData.push({
-                  'id': data.data.indexOf(element) + 1,
+                  'id': (this.dataSet.current_page == 1 ? 0 : ((this.dataSet.current_page - 1) * this.dataSet.per_page)) + (data.data.data.indexOf(element) + 1),
                   'client': element.subject_type == 'App\\Project' ? element.subject.title : element.subject.project.title,
                   'task': element.subject_type == 'App\\Project' ? '/' : element.subject.title, 
                   'action': element.description.replace("_", " "), 
@@ -162,10 +164,6 @@ import moment from 'moment';
             });
 
             this.loading = false;
-            this.startDate = '';
-            this.endDate = '';
-            this.disabledEndDates.to = new Date(2023, 0, 1),
-            this.selectedFilter = 'completed_task',
             this.$modal.hide('filterModal');
           })
           .catch(error => { 
@@ -175,7 +173,12 @@ import moment from 'moment';
             this.endDate = '';
             this.$modal.hide('filterModal');
           });
-      }
+      },
+
+      url(page = 1) {
+        // '/users/' + this.user.id + '/activity'
+        return `${location.pathname}/activity?page=${page}`;
+      },
     },
 
   }
