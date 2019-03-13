@@ -3,18 +3,10 @@
 
     <div class="flex py-2 justify-end w-full my-2">
 
-      <!-- <div class="flex">
-        <select v-model="selectedFilter"  class="custom-select" id="inputGroupSelect02">
-          <option v-for="option in options" :value="option.value" :key="option.value">
-            {{ option.text }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <label @click="filter" class="input-group-text btn bg-blue hover:bg-blue-dark" for="inputGroupSelect02">
-            <i class="fas fa-search text-normal text-white"></i>
-          </label>
-        </div>
-      </div> -->
+      <button :disabled="!dataSet" @click="exportExcel" class="mr-2 bg-grey text-normal btn rounded-full text-white">
+        Export
+      <i class="far fa-file-excel text-lg text-white ml-2"></i>  
+      </button>
       <button class="bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker" @click="showFilterModal">
         Filter
         <i class="fas fa-search text-lg text-white ml-2"></i>
@@ -176,8 +168,12 @@ import moment from 'moment';
       },
 
       url(page = 1) {
-        // '/users/' + this.user.id + '/activity'
         return `${location.pathname}/activity?page=${page}`;
+      },
+      exportExcel() {
+
+        axios.get(`${location.pathname}/activity/export`, { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}});
+        
       },
     },
 
