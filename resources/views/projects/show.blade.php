@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="lg:flex -mx-3 items-start mb-3 -mt-2">
+<div class="lg:flex -mx-3 items-start">
 
     {{-- left side --}}
     <div class="lg:w-3/4  py-4 justify-between items-end w-full">
@@ -97,25 +97,30 @@
 
     {{-- rigt side --}}
     <div class="lg:w-1/4">
-        <div class="bg-grey-lightest py-4 px-2">
-            <h2 class="text-grey-dark text-lg text-xl">Latest Updates</h2>
-            <ul class="text-xs list-reset">
-                @if(isset($activities))
-                    @foreach($activities as $activity)
-                        <li class="{{$loop->last ? '' : 'mb-1'}}">
+        <div style="height:350px" class="flex flex-column mb-2 m-1 px-3 pt-3 pb-1 bg-white flex-1  overflow-auto">
+            <h2 class="py-2 text-black text-lg font-bold">Latest Tasks Updates</h2>
+            
+            @foreach($project->tasks as $task)
+               
+                <ul class="text-xs list-reset">
+                    @foreach($task->activities as $activity)
+                        <li>
                             @include("projects.activity.{$activity->description}")
-                            <span class="text-grey">{{ $activity->created_at->diffForHumans() }}</span>
+                            <span class="text-grey text-xs">{{ $activity->created_at->diffForHumans() }}</span>
                         </li>
                     @endforeach
-                @else
-                @foreach($project->activities as $activity)
-                    <li class="{{$loop->last ? '' : 'mb-1'}}">
-                        @include("projects.activity.{$activity->description}")
-                        <span class="text-grey">{{ $activity->created_at->diffForHumans() }}</span>
-                    </li>
-                @endforeach
-                @endif
-            </ul>
+                </ul>
+              
+            @endforeach
+
+            
+        </div>
+
+        <div  class="flex flex-column m-1 px-3 pt-3 pb-1 bg-white flex-1 h-64 h-full overflow-auto">
+            <h2 class="py-2 text-black text-lg font-bold">Announcement Updates</h2>
+            
+            @include("projects.activity.card")
+    
         </div>
     </div>
 
