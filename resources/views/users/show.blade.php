@@ -56,6 +56,7 @@
         </div>
     </div>
 
+    
     <user-stats :user="{{$user}}"></user-stats>
 
 @endsection

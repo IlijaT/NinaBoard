@@ -2549,14 +2549,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2636,8 +2628,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     url: function url() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      // '/users/' + this.user.id + '/activity'
       return "".concat(location.pathname, "/activity?page=").concat(page);
+    },
+    exportExcel: function exportExcel() {
+      axios.get("".concat(location.pathname, "/activity/export?"), {
+        params: {
+          start: this.startDate,
+          end: this.endDate,
+          selected: this.selectedFilter
+        }
+      }).then(function (response) {
+        return window.location = response.request.responseURL;
+      });
     }
   }
 });
@@ -75440,6 +75442,22 @@ var render = function() {
         "div",
         { staticClass: "flex py-2 justify-end w-full my-2" },
         [
+          _c(
+            "button",
+            {
+              staticClass:
+                "mr-2 bg-grey text-normal btn rounded-full text-white",
+              attrs: { download: "", disabled: !_vm.dataSet },
+              on: { click: _vm.exportExcel }
+            },
+            [
+              _vm._v("\n      Export\n    "),
+              _c("i", {
+                staticClass: "far fa-file-excel text-lg text-white ml-2"
+              })
+            ]
+          ),
+          _vm._v(" "),
           _c(
             "button",
             {

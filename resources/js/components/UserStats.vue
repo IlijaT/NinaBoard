@@ -3,18 +3,10 @@
 
     <div class="flex py-2 justify-end w-full my-2">
 
-      <!-- <div class="flex">
-        <select v-model="selectedFilter"  class="custom-select" id="inputGroupSelect02">
-          <option v-for="option in options" :value="option.value" :key="option.value">
-            {{ option.text }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <label @click="filter" class="input-group-text btn bg-blue hover:bg-blue-dark" for="inputGroupSelect02">
-            <i class="fas fa-search text-normal text-white"></i>
-          </label>
-        </div>
-      </div> -->
+      <button download :disabled="!dataSet" @click="exportExcel" class="mr-2 bg-grey text-normal btn rounded-full text-white">
+        Export
+      <i class="far fa-file-excel text-lg text-white ml-2"></i>
+      </button>
       <button class="bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker" @click="showFilterModal">
         Filter
         <i class="fas fa-search text-lg text-white ml-2"></i>
@@ -36,7 +28,7 @@
             bootstrap-styling
             v-model="startDate">
             </datepicker>
-            
+
             <datepicker
               :inline="true"
               :mondayFirst="true"
@@ -58,24 +50,24 @@
               </label>
             </div>
           </div>
-            
+
           <div class="flex m-2 mt-4">
             <div class="ml-auto control flex">
               <button @click="$modal.hide('filterModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey">Cancel</button>
-              <button 
+              <button
                 @click="filter"
                 :disabled="! startDate || ! endDate"
                 :class="loading ? 'loader' : ''"
                 class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue"
                 >Filter</button>
-            </div> 
-          </div> 
+            </div>
+          </div>
 
         </div>
 
       </modal>
-        
-       
+
+
     </div>
 
     <table class="bg-white shadow-md table table-striped table-sm table-responsive">
@@ -136,7 +128,7 @@ import moment from 'moment';
         dataSet: false,
         tableData: []
       }
-    }, 
+    },
     methods: {
       showFilterModal() {
         this.$modal.show('filterModal');
@@ -152,13 +144,13 @@ import moment from 'moment';
           .then((data) => {
 
             this.dataSet = data.data;
-           
+
             data.data.data.forEach(element => {
               this.tableData.push({
                   'id': (this.dataSet.current_page == 1 ? 0 : ((this.dataSet.current_page - 1) * this.dataSet.per_page)) + (data.data.data.indexOf(element) + 1),
                   'client': element.subject_type == 'App\\Project' ? element.subject.title : element.subject.project.title,
-                  'task': element.subject_type == 'App\\Project' ? '/' : element.subject.title, 
-                  'action': element.description.replace("_", " "), 
+                  'task': element.subject_type == 'App\\Project' ? '/' : element.subject.title,
+                  'action': element.description.replace("_", " "),
                   'date': element.created_at,
                 });
             });
@@ -166,7 +158,7 @@ import moment from 'moment';
             this.loading = false;
             this.$modal.hide('filterModal');
           })
-          .catch(error => { 
+          .catch(error => {
             this.tableData = [];
             this.loading = false;
             this.startDate = '';
@@ -176,8 +168,15 @@ import moment from 'moment';
       },
 
       url(page = 1) {
-        // '/users/' + this.user.id + '/activity'
         return `${location.pathname}/activity?page=${page}`;
+      },
+      exportExcel() {
+
+        axios.get(`${location.pathname}/activity/export?`, { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
+          .then(response => 
+            window.location =  response.request.responseURL)
+          ;
+
       },
     },
 
