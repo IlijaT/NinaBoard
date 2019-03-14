@@ -2,9 +2,11 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class UsersActivityExport implements FromCollection
+class UsersActivityExport implements FromCollection, WithHeadings
 {
     protected $user;
     protected $description;
@@ -32,6 +34,22 @@ class UsersActivityExport implements FromCollection
             ->whereBetween('created_at', [ $this->startDate, $this->endDate])
             ->with($this->eagerLoadingModel)->get();
 
-        return $activity;
+        $dataForTable = $activity->map(function ($activity, $key) {
+            return
+            ['client'    => $activity->subject_type == 'App\\Project' ? $activity->subject->title : $activity->subject->project->title,
+            'task'      => $activity->subject_type == 'App\\Project' ? '/' : $activity->subject->title,
+            'action'    => $activity->description,
+            'date'      => $activity->created_at];
+        });
+
+        return  $dataForTable;
+    }
+
+    public function headings(): array
+    {
+        return [
+           [$this->user->name],
+           ['Client', 'Task', 'Action', 'Date']
+        ];
     }
 }

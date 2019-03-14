@@ -2631,12 +2631,14 @@ __webpack_require__.r(__webpack_exports__);
       return "".concat(location.pathname, "/activity?page=").concat(page);
     },
     exportExcel: function exportExcel() {
-      axios.get("".concat(location.pathname, "/activity/export"), {
+      axios.get("".concat(location.pathname, "/activity/export?"), {
         params: {
           start: this.startDate,
           end: this.endDate,
           selected: this.selectedFilter
         }
+      }).then(function (response) {
+        return window.location = response.request.responseURL;
       });
     }
   }
@@ -75445,7 +75447,7 @@ var render = function() {
             {
               staticClass:
                 "mr-2 bg-grey text-normal btn rounded-full text-white",
-              attrs: { disabled: !_vm.dataSet },
+              attrs: { download: "", disabled: !_vm.dataSet },
               on: { click: _vm.exportExcel }
             },
             [

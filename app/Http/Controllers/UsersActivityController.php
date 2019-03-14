@@ -16,6 +16,8 @@ class UsersActivityController extends Controller
         $startDate =  Carbon::parse(request('start'))->startOfDay();
         $endDate =  Carbon::parse(request('end'))->endOfDay();
 
+       
+
         if (auth()->user()->id === $user->id  || auth()->user()->hasRole('manager')) {
             $activity = $user->activity()
                 ->where('description', '=', request('selected'))
@@ -31,10 +33,9 @@ class UsersActivityController extends Controller
     protected function resolveEagerLoadingModel($activityDescription)
     {
         if ($activityDescription == 'completed_task' || $activityDescription == 'incompleted_task' || $activityDescription == 'created_task') {
-            return 'subject.project';
+            return 'subject.project:id,title';
         }
-
-        return 'subject';
+        return 'subject:id,title';
     }
 
     public function export(User $user)
@@ -46,8 +47,10 @@ class UsersActivityController extends Controller
 
         $paramsForQuerying = ['user' => $user, 'description' => $description, 'startDate' => $startDate, 'endDate' => $endDate, 'eagerLoadingModel' => $eagerLoadingModel];
 
+        $now = Carbon::now()->timestamp;
+
         if (auth()->user()->id === $user->id  || auth()->user()->hasRole('manager')) {
-            return Excel::download(new UsersActivityExport($paramsForQuerying), 'users.xlsx');
+            return Excel::download(new UsersActivityExport($paramsForQuerying), "{$now}_{$user->name}_activity_stats.xlsx");
         }
 
         abort(403);
