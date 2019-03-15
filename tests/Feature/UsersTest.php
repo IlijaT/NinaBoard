@@ -90,7 +90,7 @@ class UsersTest extends TestCase
             'remember_token'    => str_random(10),
         ];
 
-        $this->post('/users', $attributes)->assertRedirect('/users');
+        $this->post('/users', $attributes);
 
         $this->assertDatabaseHas('users', ['name' => 'John Doe']);
         

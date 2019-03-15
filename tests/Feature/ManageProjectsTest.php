@@ -35,8 +35,6 @@ class ManageProjectsTest extends TestCase
 
         $this->signIn();
 
-        $this->get('/projects/create')->assertStatus(200);
-
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->sentence,
@@ -46,8 +44,6 @@ class ManageProjectsTest extends TestCase
         $response = $this->post('/projects', $attributes);
 
         $project = Project::where($attributes)->first();
-
-        $response->assertRedirect($project->path());
 
         $this->assertDatabaseHas('projects', $attributes);
 
@@ -69,13 +65,12 @@ class ManageProjectsTest extends TestCase
         Auth::logout();
 
         $this->delete($project->path())->assertRedirect('/login');
-
     }
 
     /** @test */
     public function a_manager_can_delete_a_project()
     {
-       $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $user = factory(\App\User::class)->create();
 

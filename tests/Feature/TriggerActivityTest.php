@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Task;
+use App\Project;
+use Carbon\Carbon;
 use Tests\TestCase;
 use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -58,19 +60,23 @@ class TriggerActivityTest extends TestCase
     /** @test */
     public function creating_a_task_triggers_activity()
     {
+        $this->withExceptionHandling();
+        
         $this->signIn();
 
-        $project = ProjectFactory::create();
+        $project = factory(Project::class)->create();
+        
+        $start = Carbon::now();
+        $end = $start->addHour();
 
-        $project->addTask('Some task');
+        $project->addTask(['title' => 'Test task', 'start' => $start, 'end' => $end]);
 
         $this->assertCount(2, $project->activities);
         
-
         tap($project->activities->last(), function ($activity) {
             $this->assertEquals('created_task', $activity->description);
             $this->assertInstanceOf(Task::class, $activity->subject);
-            $this->assertEquals('Some task', $activity->subject->body);
+            $this->assertEquals('Test task', $activity->subject->title);
         });
     }
 
@@ -83,14 +89,14 @@ class TriggerActivityTest extends TestCase
         $project = ProjectFactory::withTasks(1)->create();
         
         $this->patch($project->tasks->first()->path(), [
-            'body' => 'changed body',
+            'title' => 'changed title',
             'completed' => true
             ]);
             
             $this->assertCount(3, $project->fresh()->activities);
             
             $this->patch($project->tasks->first()->path(), [
-                'body' => 'changed body',
+                'title' => 'changed title',
                 'completed' => false
                 ]);
                 
@@ -124,6 +130,8 @@ class TriggerActivityTest extends TestCase
     /** @test */
     public function deleting_a_task_triggers_activity()
     {
+        $this->withExceptionHandling();
+        
         $this->signIn();
         
         $project = ProjectFactory::withTasks(1)->create();
