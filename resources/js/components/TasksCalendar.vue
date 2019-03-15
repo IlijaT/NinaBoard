@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12 mt-2">
          
             <div class="card shadow-md">
-                <div class="card-header text-xl">Tasks Calendar</div>
+                <!-- <div class="card-header text-xl">Tasks Calendar</div> -->
                   
                 <div class="card-body">
                     <full-calendar :events="events" :config="config"></full-calendar>
@@ -51,6 +51,7 @@
       return {
         events: [],
         config: {
+          themeSystem: 'bootstrap4',
           allDaySlot: false,
           editable: false,
           firstDay: 1,

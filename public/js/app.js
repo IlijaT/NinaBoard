@@ -2401,6 +2401,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       events: [],
       config: {
+        themeSystem: 'bootstrap4',
         allDaySlot: false,
         editable: false,
         firstDay: 1,
@@ -75387,12 +75388,8 @@ var render = function() {
       "div",
       { staticClass: "row justify-content-center" },
       [
-        _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "col-md-12 mt-2" }, [
           _c("div", { staticClass: "card shadow-md" }, [
-            _c("div", { staticClass: "card-header text-xl" }, [
-              _vm._v("Tasks Calendar")
-            ]),
-            _vm._v(" "),
             _c(
               "div",
               { staticClass: "card-body" },
