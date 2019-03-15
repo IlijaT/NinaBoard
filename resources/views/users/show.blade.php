@@ -24,20 +24,26 @@
         <div class="flex flex-col ml-4 w-full">
             {{-- achievements icons --}}
             <div class="flex m-2 flex-wrap justify-center">
-                <div class="rounded-full h-8 w-8 bg-grey-lighter m-2">
-                    1
+                <div 
+                    class=" {{ $user->activity()->where('description','completed_task')->count() > 1 ? 'bg-blue-dark' : 'bg-grey-lighter' }} 
+                     flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <i 
+                        class="text-white fas fa-rocket text-lg ">
+                    </i>
                 </div>
-                <div class="rounded-full h-8 w-8 bg-grey-lighter m-2">
-                    2
+                <div 
+                    class="{{ $user->activity()->where('description','completed_task')->count() > 10 ? 'bg-green' : 'bg-grey-lighter' }} 
+                     flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <i class="fas fa-star text-lg text-white"></i>
                 </div>
-                <div class="rounded-full h-8 w-8 bg-grey-lighter m-2">
-                    3
+                <div class="{{ $user->activity()->where('description','completed_task')->count() > 100 ? 'bg-yellow' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <i class="fas fa-award text-lg text-white"></i>
                 </div>
-                <div class="rounded-full h-8 w-8 bg-grey-lighter m-2">
-                    4
+                <div class="{{ $user->activity()->where('description','completed_task')->count() > 500 ? 'bg-orange' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <i class="fas fa-medal text-lg text-white"></i>
                 </div>
-                <div class="rounded-full h-8 w-8 bg-grey-lighter m-2">
-                    5
+                <div class="{{ $user->activity()->where('description','completed_task')->count() > 1000 ? 'bg-red' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <i class="fas fa-trophy text-lg text-white"></i>
                 </div>
             </div>
 
@@ -49,9 +55,15 @@
             </div>
 
             {{-- footer with achievements --}}
-            <div class="flex justify-center m-2">
-                <h2 class="text-grey text-sm font-normal m-2">Completed tasks: 55</h2>
-                <h2 class="text-grey text-sm font-normal m-2">Created assignements: 555</h2>
+            <div class="flex justify-center m-2 p-1">
+                <h2 class="text-grey text-sm font-normal mr-5">
+                    <i class="fas fa-clipboard-list mr-1 text-normal text-grey-dark"></i>
+                    Completed tasks: {{ $user->activity()->where('description','completed_task')->count() }} 
+                </h2>
+                <h2 class="text-grey text-sm font-normal">
+                    <i class="fas fa-broadcast-tower mr-1 text-normal text-grey-dark"></i>
+                    Created announcements: {{ $user->activity()->where('description','created_project')->count() }}
+                </h2>
             </div>
         </div>
     </div>

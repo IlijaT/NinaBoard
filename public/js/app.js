@@ -75263,7 +75263,7 @@ var render = function() {
         attrs: { clas: "flex" }
       },
       [
-        _c("h3", { staticClass: "text-normal text-blue-darkest text-sm" }, [
+        _c("h3", { staticClass: "text-normal text-black text-sm" }, [
           _vm._v(
             "\n      Showing " +
               _vm._s(_vm.page * _vm.perPage - _vm.perPage + 1) +
@@ -75299,7 +75299,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "page-link",
+                    staticClass: "page-link text-grey-darkest",
                     attrs: { href: "#", rel: "prev" },
                     on: {
                       click: function($event) {
@@ -75311,7 +75311,7 @@ var render = function() {
                   [
                     _c("i", {
                       staticClass:
-                        "far fa-hand-point-left text-lg text-blue-darkest mr-2"
+                        "far fa-hand-point-left text-lg text-grey-darkest mr-2"
                     }),
                     _vm._v("\n        Previous\n      ")
                   ]
@@ -75336,7 +75336,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "page-link",
+                    staticClass: "page-link text-lg text-grey-darkest",
                     attrs: { href: "#", rel: "next" },
                     on: {
                       click: function($event) {
@@ -75349,7 +75349,7 @@ var render = function() {
                     _vm._v("\n          Next\n          "),
                     _c("i", {
                       staticClass:
-                        "far fa-hand-point-right text-lg text-blue-darkest ml-2"
+                        "far fa-hand-point-right text-lg text-grey-darkest ml-2"
                     })
                   ]
                 )

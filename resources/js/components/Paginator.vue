@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center">
 
       <div clas="flex" v-show="lastPage > 1">
-        <h3 class="text-normal text-blue-darkest text-sm">
+        <h3 class="text-normal text-black text-sm">
           Showing {{ page * perPage - perPage + 1}} to {{ page == lastPage ? total : page * perPage }} of total {{ total }} items
         </h3>
       </div>
@@ -10,15 +10,15 @@
       <div class="ml-auto">
         <ul v-if="shouldPaginate" class="pagination justify-content-end">
           <li v-show="prevUrl" class="page-item">
-          <a class="page-link" href="#" @click.prevent="page--" rel="prev">
-            <i class="far fa-hand-point-left text-lg text-blue-darkest mr-2"></i>
+          <a class="page-link text-grey-darkest" href="#" @click.prevent="page--" rel="prev">
+            <i class="far fa-hand-point-left text-lg text-grey-darkest mr-2"></i>
             Previous
           </a>
           </li>
           <li v-show="nextUrl" class="page-item">
-            <a class="page-link" href="#" @click.prevent="page++" rel="next">
+            <a class="page-link text-lg text-grey-darkest" href="#" @click.prevent="page++" rel="next">
               Next
-              <i class="far fa-hand-point-right text-lg text-blue-darkest ml-2"></i>
+              <i class="far fa-hand-point-right text-lg text-grey-darkest ml-2"></i>
             </a>
           </li>
         </ul>

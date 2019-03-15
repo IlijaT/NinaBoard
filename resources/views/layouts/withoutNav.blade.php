@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-light h-screen">
+<body style="background: linear-gradient(to bottom, #47cdff,#318fb2)" class="h-screen">
     
     <div id="app" class="container py-2 flex h-full items-center justify-center">
        
@@ -27,10 +27,8 @@
 
     </div>
 
+    <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}
+    ' class="z-50"></flash-component>
+
 </body>
 </html>
-
-
-@section('content')
-
-@endsection
