@@ -14,7 +14,6 @@
                     <a href="/projects" 
                     class="hover:no-underline hover:text-blue text-lg text-grey-dark font-normal"
                     >
-                    <i class="fab fa-earlybirds text-2xl text-blue mr-2"></i>
                     All Announcements
                     </a>  / 
                     <span  
@@ -82,12 +81,12 @@
         
             {{-- rigt side of left side --}}
             <div class="lg:w-2/5 mt-3 mx-2">
-                <div class="bg-white mt-3 card" >
+                <div class="bg-white mt-3 pb-4 card" >
                     <h3 class="font-normal mt-4 px-3 py-2 text-lg border-l-4 border-blue-light">
                         <a class="text-black hover:no-underline hover:text-blue" href="{{ $project->path() }}/edit">{{ $project->title }} </a>
                     </h3>
                   
-                    <div class="text-grey text-xs py-3 px-4 ">{!! nl2br($project->description)  !!}</div>
+                    <div class="text-grey text-xs py-2 px-4 ">{!! nl2br($project->description)  !!}</div>
 
                 </div>
             </div>
@@ -97,31 +96,13 @@
 
     {{-- rigt side --}}
     <div class="lg:w-1/4">
-        <div style="height:350px" class="flex flex-column mb-2 m-1 px-3 pt-3 pb-1 bg-white flex-1  overflow-auto">
+        <div  class="flex flex-column mb-2 mx-0 my-1 p-3 bg-white">
             <h2 class="py-2 text-black text-lg font-bold">Latest Tasks Updates</h2>
             
-            @foreach($project->tasks as $task)
-               
-                <ul class="text-xs list-reset">
-                    @foreach($task->activities as $activity)
-                        <li>
-                            @include("projects.activity.{$activity->description}")
-                            <span class="text-grey text-xs">{{ $activity->created_at->diffForHumans() }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-              
-            @endforeach
-
-            
-        </div>
-
-        <div  class="flex flex-column m-1 px-3 pt-3 pb-1 bg-white flex-1 h-64 h-full overflow-auto">
-            <h2 class="py-2 text-black text-lg font-bold">Announcement Updates</h2>
-            
             @include("projects.activity.card")
-    
+
         </div>
+
     </div>
 
 </div>

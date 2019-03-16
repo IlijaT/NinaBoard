@@ -10,7 +10,6 @@
 
                 <div class="flex m-2 items-end">
                     <h2 class="text-grey text-lg font-normal">
-                        <i class="fas fa-bullhorn mr-2 text-2xl text-blue"></i>
                         Announcements
                     </h2>
                     {{-- button to add new announcement --}}
@@ -67,7 +66,7 @@
             </div>
 
             {{-- latest updates --}}
-            <div style="height:350px" class="my-1">
+            <div style="height:400px" class="my-1">
 
                 <div class="flex flex-column m-1 p-3 bg-white flex-1 h-full overflow-auto">
 
