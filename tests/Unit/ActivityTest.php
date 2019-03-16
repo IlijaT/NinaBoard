@@ -11,15 +11,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ActivityTest extends TestCase
 {
+    use RefreshDatabase;
 
-  use RefreshDatabase;
-
-  /** @test */
-  public function it_has_a_user() 
-  
-  {
-    $user = $this->signIn();
-    $project = ProjectFactory::ownedBy($user)->create();
-    $this->assertEquals($user->id, $project->activities->first()->user->id);
-  }
+    /** @test */
+    public function it_has_a_user()
+    {
+        $this->withExceptionHandling();
+    
+        $user = $this->signIn();
+        $project = ProjectFactory::ownedBy($user)->create();
+        $this->assertEquals($user->id, $project->activities->first()->user->id);
+    }
 }
