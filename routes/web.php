@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('projects', 'ProjectsController', ['names' => ['index' => 'home']])->except([
-        'create'
+        'create', 'edit'
     ]);
     Route::resource('users', 'UsersController')->except([
         'create', 'edit'

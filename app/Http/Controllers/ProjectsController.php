@@ -47,15 +47,6 @@ class ProjectsController extends Controller
         return view('projects.show', compact('project'));
     }
 
-    
-    
-    public function edit(Project $project)
-    {
-        return view('projects.edit', compact('project'));
-    }
-
-
-
     public function update(Project $project)
     {
         $attributes = request()->validate([
@@ -66,11 +57,14 @@ class ProjectsController extends Controller
         
         $project->update($attributes);
 
+        if (request()->ajax()) {
+            return $project;
+        }
+        
         return redirect($project->path())->with('flash', [
             'message' => 'The announcement has been updated!',
             'color' => 'green'
-            ]);
-        ;
+        ]);
     }
 
     public function destroy(Project $project)

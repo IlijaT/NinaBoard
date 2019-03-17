@@ -80,16 +80,8 @@
             </div>
         
             {{-- rigt side of left side --}}
-            <div class="lg:w-2/5 mt-3 mx-2">
-                <div class="bg-white mt-3 pb-4 card" >
-                    <h3 class="font-normal mt-4 px-3 py-2 text-lg border-l-4 border-blue-light">
-                        <a class="text-black hover:no-underline hover:text-blue" href="{{ $project->path() }}/edit">{{ $project->title }} </a>
-                    </h3>
-                  
-                    <div class="text-grey text-xs py-2 px-4 ">{!! nl2br($project->description)  !!}</div>
+            <project-card :project="{{$project}}"></project-card>
 
-                </div>
-            </div>
         </div>
 
     </div>

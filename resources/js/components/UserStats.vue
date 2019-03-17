@@ -89,7 +89,7 @@
           <td>{{ item.date }}</td>
         </tr>
         <tr v-if="tableData.length < 1 || tableData == undefined">
-          <th scope="row">Empty table</th>
+          <th colspan="5" scope="row" class="p-2 text-grey-dark">Empty table</th>
         </tr>
       </tbody>
     </table>
