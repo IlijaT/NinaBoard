@@ -27,6 +27,8 @@ Vue.component('project-card', require('./components/ProjectCard.vue').default);
 Vue.component('add-task', require('./components/AddTask.vue').default);
 Vue.component('user-stats', require('./components/UserStats.vue').default);
 Vue.component('paginator', require('./components/Paginator.vue').default);
+Vue.component('general-notes', require('./components/GeneralNotes.vue').default);
+
 
 
 

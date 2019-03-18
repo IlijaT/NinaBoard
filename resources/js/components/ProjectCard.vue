@@ -1,7 +1,7 @@
 <template>
-    <div class="lg:w-2/5 mt-3 mx-2">
+    <div class="lg:w-2/5 mt-5 mx-2">
          
-        <div style="cursor:pointer" @click="showModal" class="bg-white mt-3 pb-4 card" >
+        <div style="cursor:pointer" @click="showModal" class="bg-white mt-5 pb-4 card" >
             <h3  class="font-normal mt-4 px-3 py-2 text-lg border-l-4 border-blue-light">
                 {{ announcement.title }}
             </h3>

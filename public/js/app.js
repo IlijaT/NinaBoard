@@ -1954,10 +1954,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2192,6 +2188,64 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         return _this2.show = false;
       }, 3000);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralNotes.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GeneralNotes.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _forms_GeneralNoteForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../forms/GeneralNoteForm.vue */ "./resources/js/forms/GeneralNoteForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    GeneralNoteForm: _forms_GeneralNoteForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['project'],
+  created: function created() {
+    this.projectInComponent = this.project;
+  },
+  data: function data() {
+    return {
+      projectInComponent: this.project
+    };
+  },
+  methods: {
+    addNotesModal: function addNotesModal() {
+      this.$modal.show('addNotesModal');
+    },
+    updatedNotes: function updatedNotes(data) {
+      this.projectInComponent = data;
+      flash('The notes has been updated!', 'green');
     }
   }
 });
@@ -2972,6 +3026,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project'],
   data: function data() {
@@ -3100,6 +3155,79 @@ __webpack_require__.r(__webpack_exports__);
 
         location.reload();
       }).catch(function (errors) {
+        _this.loading = false;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/GeneralNoteForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/forms/GeneralNoteForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['project'],
+  data: function data() {
+    return {
+      form: new Form({
+        notes: this.project.notes
+      }),
+      loading: false
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.loading = true;
+      this.form.submit('patch', '/projects/' + this.project.id).then(function (data) {
+        _this.loading = false;
+
+        _this.$modal.hide('addNotesModal');
+
+        _this.$emit('updatedNotes', data);
+      }).catch(function (errors) {
+        flash('Ooooops! Something went wrong', 'red');
         _this.loading = false;
       });
     }
@@ -74938,20 +75066,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "flex mt-4" }, [
+      _c("div", { staticClass: "flex" }, [
         _c(
-          "p",
+          "button",
           {
-            staticClass: "flex text-grey text-xl ml-1 cursor-pointer",
+            staticClass:
+              "py-1 px-3 text-lg button btn rounded-full text-white hover:bg-blue-dark",
             on: { click: _vm.showModal }
           },
-          [
-            _c("i", {
-              staticClass:
-                "fas fa-plus-circle text-3xl text-grey-dark mr-2 hover:text-blue"
-            }),
-            _vm._v("\n      New Task\n    ")
-          ]
+          [_vm._v("Add Task")]
         )
       ]),
       _vm._v(" "),
@@ -75321,6 +75444,60 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralNotes.vue?vue&type=template&id=df21d3b8&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GeneralNotes.vue?vue&type=template&id=df21d3b8& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          staticClass: "bg-white mt-5 pb-4 card",
+          staticStyle: { cursor: "pointer" },
+          on: { click: _vm.addNotesModal }
+        },
+        [
+          _c("div", { staticClass: "text-grey text-xs py-2 px-4 " }, [
+            _vm._v(_vm._s(_vm.projectInComponent.notes))
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "modal",
+        { attrs: { adaptive: "", name: "addNotesModal", height: 300 } },
+        [
+          _c("general-note-form", {
+            attrs: { project: _vm.projectInComponent },
+            on: { updatedNotes: _vm.updatedNotes }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ImageUpload.vue?vue&type=template&id=e0921fbe&":
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ImageUpload.vue?vue&type=template&id=e0921fbe& ***!
@@ -75536,12 +75713,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "lg:w-2/5 mt-3 mx-2" },
+    { staticClass: "lg:w-2/5 mt-5 mx-2" },
     [
       _c(
         "div",
         {
-          staticClass: "bg-white mt-3 pb-4 card",
+          staticClass: "bg-white mt-5 pb-4 card",
           staticStyle: { cursor: "pointer" },
           on: { click: _vm.showModal }
         },
@@ -76433,7 +76610,7 @@ var render = function() {
             ],
             staticClass:
               "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-            attrs: { name: "description" },
+            attrs: { name: "description", rows: "8" },
             domProps: { value: _vm.form.description },
             on: {
               input: function($event) {
@@ -76456,7 +76633,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex mt-4" }, [
+      _c("div", { staticClass: "flex" }, [
         _c("div", { staticClass: "ml-auto control flex" }, [
           _c(
             "button",
@@ -76675,6 +76852,109 @@ var render = function() {
               attrs: { type: "submit", disabled: _vm.form.errors.any() }
             },
             [_vm._v("Save")]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/GeneralNoteForm.vue?vue&type=template&id=18394050&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/forms/GeneralNoteForm.vue?vue&type=template&id=18394050& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "m-2 p-2",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.onSubmit($event)
+        },
+        keydown: function($event) {
+          return _vm.form.errors.clear()
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "field mb-2" }, [
+        _c("div", { staticClass: "control" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.notes,
+                expression: "form.notes"
+              }
+            ],
+            staticClass:
+              "textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+            attrs: { name: "notes", rows: "10", required: "" },
+            domProps: { value: _vm.form.notes },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "notes", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.form.errors.has("notes")
+            ? _c("span", {
+                staticClass: "text-red text-xs",
+                domProps: { textContent: _vm._s(_vm.form.errors.get("notes")) }
+              })
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex" }, [
+        _c("div", { staticClass: "ml-auto control flex" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.$modal.hide("addNotesModal")
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+              class: _vm.loading ? "loader" : "",
+              attrs: { type: "submit", disabled: _vm.form.errors.any() }
+            },
+            [_vm._v("Create")]
           )
         ])
       ])
@@ -90625,6 +90905,7 @@ Vue.component('project-card', __webpack_require__(/*! ./components/ProjectCard.v
 Vue.component('add-task', __webpack_require__(/*! ./components/AddTask.vue */ "./resources/js/components/AddTask.vue").default);
 Vue.component('user-stats', __webpack_require__(/*! ./components/UserStats.vue */ "./resources/js/components/UserStats.vue").default);
 Vue.component('paginator', __webpack_require__(/*! ./components/Paginator.vue */ "./resources/js/components/Paginator.vue").default);
+Vue.component('general-notes', __webpack_require__(/*! ./components/GeneralNotes.vue */ "./resources/js/components/GeneralNotes.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -91137,6 +91418,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FlashComponent_vue_vue_type_template_id_a4a130d0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FlashComponent_vue_vue_type_template_id_a4a130d0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/GeneralNotes.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/GeneralNotes.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _GeneralNotes_vue_vue_type_template_id_df21d3b8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GeneralNotes.vue?vue&type=template&id=df21d3b8& */ "./resources/js/components/GeneralNotes.vue?vue&type=template&id=df21d3b8&");
+/* harmony import */ var _GeneralNotes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GeneralNotes.vue?vue&type=script&lang=js& */ "./resources/js/components/GeneralNotes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _GeneralNotes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GeneralNotes_vue_vue_type_template_id_df21d3b8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GeneralNotes_vue_vue_type_template_id_df21d3b8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/GeneralNotes.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/GeneralNotes.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/GeneralNotes.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNotes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./GeneralNotes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralNotes.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNotes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/GeneralNotes.vue?vue&type=template&id=df21d3b8&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/GeneralNotes.vue?vue&type=template&id=df21d3b8& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNotes_vue_vue_type_template_id_df21d3b8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./GeneralNotes.vue?vue&type=template&id=df21d3b8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GeneralNotes.vue?vue&type=template&id=df21d3b8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNotes_vue_vue_type_template_id_df21d3b8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNotes_vue_vue_type_template_id_df21d3b8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -91919,6 +92269,75 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/js/forms/GeneralNoteForm.vue":
+/*!************************************************!*\
+  !*** ./resources/js/forms/GeneralNoteForm.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _GeneralNoteForm_vue_vue_type_template_id_18394050___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GeneralNoteForm.vue?vue&type=template&id=18394050& */ "./resources/js/forms/GeneralNoteForm.vue?vue&type=template&id=18394050&");
+/* harmony import */ var _GeneralNoteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GeneralNoteForm.vue?vue&type=script&lang=js& */ "./resources/js/forms/GeneralNoteForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _GeneralNoteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GeneralNoteForm_vue_vue_type_template_id_18394050___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GeneralNoteForm_vue_vue_type_template_id_18394050___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/forms/GeneralNoteForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/forms/GeneralNoteForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/forms/GeneralNoteForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNoteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./GeneralNoteForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/GeneralNoteForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNoteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/forms/GeneralNoteForm.vue?vue&type=template&id=18394050&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/forms/GeneralNoteForm.vue?vue&type=template&id=18394050& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNoteForm_vue_vue_type_template_id_18394050___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./GeneralNoteForm.vue?vue&type=template&id=18394050& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/forms/GeneralNoteForm.vue?vue&type=template&id=18394050&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNoteForm_vue_vue_type_template_id_18394050___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneralNoteForm_vue_vue_type_template_id_18394050___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/modals/CalendarEventModal.vue":
 /*!****************************************************!*\
   !*** ./resources/js/modals/CalendarEventModal.vue ***!
@@ -92006,8 +92425,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Laravel projekti\birdboard\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Laravel projekti\birdboard\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Laravel_VueJS\BirdBoard\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Laravel_VueJS\BirdBoard\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

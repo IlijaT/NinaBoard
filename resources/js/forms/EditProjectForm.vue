@@ -22,8 +22,9 @@
 
       <div class="control">
           <textarea 
-             class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
+            class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
             name="description"
+            rows="8"
             v-model="form.description">
             </textarea>
           <span v-if="form.errors.has('description')" class="text-red text-xs" v-text="form.errors.get('description')">
@@ -32,7 +33,7 @@
 
     </div>
 
-    <div class="flex mt-4">
+    <div class="flex">
       <div class="ml-auto control flex">
         <button @click.prevent="$modal.hide('editProjectModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey">Cancel</button>
         <button 

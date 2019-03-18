@@ -1,12 +1,8 @@
 <template>
   <div>
     
-    <div class="flex mt-4">
-      
-      <p class="flex text-grey text-xl ml-1 cursor-pointer"  @click="showModal">
-        <i class="fas fa-plus-circle text-3xl text-grey-dark mr-2 hover:text-blue"></i>
-        New Task
-      </p>
+    <div class="flex">
+      <button @click="showModal" class="py-1 px-3 text-lg button btn rounded-full text-white hover:bg-blue-dark">Add Task</button>
     </div>
     
     <!-- modal -->
