@@ -10,7 +10,7 @@
       <div class="ml-auto">
         <ul v-if="shouldPaginate" class="pagination justify-content-end">
           <li v-show="prevUrl" class="page-item">
-          <a class="page-link text-grey-darkest" href="#" @click.prevent="page--" rel="prev">
+          <a class="page-link text-lg text-grey-darkest" href="#" @click.prevent="page--" rel="prev">
             <i class="far fa-hand-point-left text-lg text-grey-darkest mr-2"></i>
             Previous
           </a>

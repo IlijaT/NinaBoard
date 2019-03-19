@@ -41,23 +41,24 @@ class ManagerCreatorCommand extends Command
      */
     public function handle()
     {
-        $role = factory(Role::class)->create();
+        $manager = factory(Role::class)->create();
+        $operator = factory(Role::class)->create(['name' => 'operator', 'label' => 'Company operator']);
         $permission = factory(Permission::class)->create();
 
-        $role->givePermissionTo($permission);
+        $manager->givePermissionTo($permission);
 
         $name = $this->ask('First and last name');
         $email = $this->ask('Email');
         $password = $this->secret('Password (6 characters min.)');
 
-        $manager = User::create([
+        $firstUser = User::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
             'remember_token'    => str_random(10),
         ]);
 
-        $manager->assignRole('manager');
+        $firstUser->assignRole('manager');
 
         $this->info('A manager has been successfully created!');
     }

@@ -7,12 +7,12 @@
             <a href="/users"
             class=" hover:no-underline"
             >
-            <span class="text-normal text-grey font-bold hover:text-blue">All users /</span>
+            <span class="hover:no-underline hover:text-blue text-sm text-grey-dark font-normal">All users /</span>
             </a>
             @endcan
             <span class="text-normal text-grey font-normal ">{{ $user->name }}</span>
         </div>
-        <edit-user :user="{{ $user }}"></edit-user>
+    <edit-user :user=" {{ $user }} " :logged=" {{ auth()->user() }} "></edit-user>
     </header>
 
 
@@ -27,9 +27,7 @@
                 <div 
                     class=" {{ $user->activity()->where('description','completed_task')->count() > 1 ? 'bg-blue-dark' : 'bg-grey-lighter' }} 
                      flex items-center justify-center rounded-full h-8 w-8 m-2">
-                    <i 
-                        class="text-white fas fa-rocket text-lg ">
-                    </i>
+                    <i class="text-white fas fa-rocket text-lg "></i>
                 </div>
                 <div 
                     class="{{ $user->activity()->where('description','completed_task')->count() > 10 ? 'bg-green' : 'bg-grey-lighter' }} 
@@ -56,12 +54,12 @@
 
             {{-- footer with achievements --}}
             <div class="flex justify-center m-2 p-1">
-                <h2 class="text-grey text-sm font-normal mr-5">
-                    <i class="fas fa-clipboard-list mr-1 text-normal text-grey-dark"></i>
+                <h2 class="text-grey text-xs font-normal mr-3">
+                    <i class="fas fa-clipboard-list mr-1 text-xs text-grey-dark"></i>
                     Completed tasks: {{ $user->activity()->where('description','completed_task')->count() }} 
                 </h2>
-                <h2 class="text-grey text-sm font-normal">
-                    <i class="fas fa-broadcast-tower mr-1 text-normal text-grey-dark"></i>
+                <h2 class="text-grey text-xs font-normal">
+                    <i class="fas fa-broadcast-tower mr-1 text-xs text-grey-dark"></i>
                     Created announcements: {{ $user->activity()->where('description','created_project')->count() }}
                 </h2>
             </div>

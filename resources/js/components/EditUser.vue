@@ -1,23 +1,17 @@
 <template>
 <div>
     
-    <button class="bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker" @click="showModal">
+    <button class="bg-blue text-lg btn rounded-lg text-white hover:bg-blue-darker" @click="showModal">
          Edit
         <i class="fas fa-user-edit text-lg text-white ml-2"></i>
     </button>
 
 
     <!-- modal -->
-    <modal adaptive name="editUserModal" :height="420">
-        <div class="flex flex-column h-full bg-white p-4">
-        
-            <h1 class="text-2xl font-normal mb-3 text-center">
-                Change details
-            </h1>
+    <modal adaptive name="editUserModal" height="auto">
 
-            <edit-user-form :user="user"></edit-user-form>
+        <edit-user-form :user="user" :logged="logged"></edit-user-form>
             
-        </div>
     </modal>
    
 </div>
@@ -32,7 +26,7 @@ import EditUserForm from '../forms/EditUserForm.vue';
 export default {
 
   components: { EditUserForm },
-  props: ['user'],
+  props: ['user', 'logged'],
   methods: {
     showModal() {
       this.$modal.show('editUserModal');

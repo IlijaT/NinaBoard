@@ -1,13 +1,14 @@
 <template>
-  <div class="mt-5 w-full">
+  <div class="mt-3 w-full">
 
     <div class="flex py-2 justify-end w-full my-2">
 
-      <button download :disabled="!dataSet" @click="exportExcel" class="mr-2 bg-grey text-normal btn rounded-full text-white">
+      <button download :disabled="!dataSet" @click="exportExcel" class="mr-2 bg-blue text-lg btn rounded-lg text-white
+      ">
         Export
       <i class="far fa-file-excel text-lg text-white ml-2"></i>
       </button>
-      <button class="bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker" @click="showFilterModal">
+      <button class="bg-blue text-lg btn rounded-lg text-white hover:bg-blue-darker" @click="showFilterModal">
         Filter
         <i class="fas fa-search text-lg text-white ml-2"></i>
       </button>
@@ -62,7 +63,6 @@
                 >Filter</button>
             </div>
           </div>
-
         </div>
 
       </modal>

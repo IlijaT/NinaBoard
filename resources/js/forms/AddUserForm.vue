@@ -1,5 +1,5 @@
 <template>
-  <form class="mt-auto" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
+  <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
     <div class="field mb-2">
       <label class="label text-sm mb-1 block" for="title">Name</label>
 
@@ -29,6 +29,20 @@
           <span v-if="form.errors.has('email')" class="text-red text-xs" v-text="form.errors.get('email')">
           </span>
       </div>
+
+    </div>
+
+    <div class="field mb-2">
+      <label class="label text-sm mb-1 block" for="title">Role</label>
+      <div class="control">
+        <select name="role" class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full" v-model="form.role">
+          <option disabled value="">Select user role</option>
+          <option>operator</option>
+          <option>manager</option>
+        </select>
+      </div>
+      <span v-if="form.errors.has('role')" class="text-red text-xs" v-text="form.errors.get('role')">
+      </span>
 
     </div>
 
@@ -83,7 +97,7 @@
   export default {
     data(){
       return {
-        form : new Form({ name: '', email: '', password: '', password_confirmation: ''}),
+        form : new Form({ name: '', email: '', role: '', password: '', password_confirmation: ''}),
         loading: false
       }
     },

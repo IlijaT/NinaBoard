@@ -4,14 +4,14 @@
     <main class="lg:flex">
 
         {{-- all projects - left side --}}
-        <div class="lg:w-3/4 m-2 p-2">
+        <div class="lg:w-3/4 m-2">
 
             <div class="flex flex-column">
 
-                <div class="flex m-2 items-end">
-                    <h2 class="text-grey text-lg font-normal">
+                <div class="flex items-end">
+                    <div class="text-grey text-sm font-normal">
                         Announcements
-                    </h2>
+                    </div>
                     {{-- button to add new announcement --}}
                     <add-announcement class="ml-auto"></add-announcement>
                 </div>
@@ -42,7 +42,7 @@
 
                     @forelse($tasks as $task)
                     <div>
-                        <h3 class="text-black text-xs {{ $task->completed == '1' ? 'line-through text-green' : 'text-orange'}}">
+                        <h3 class="text-black text-xs {{ $task->completed == '1' ? 'line-through text-green' : 'text-orange-dark'}}">
                                 
                             <span class="font-bold"> {{ $task->project->title }} </span> - 
                             <span class="text-xs italic"> "{{ $task->title }}" </span>

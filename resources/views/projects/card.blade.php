@@ -11,15 +11,15 @@
         </div>
         
         @can('delete-project')
-        <footer>
+        <div>
             <form method="POST" action="{{ $project->path() }}" class="text-right">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="btn">
-                    <i class="fas fa-toilet text-grey-dark text-2xl hover:text-orange-dark"></i>
+                    <i class="fas fa-trash-alt"></i>
                 </button>
             </form>
-        </footer>
+        </div>
         @endcan
 
    

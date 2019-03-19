@@ -48,7 +48,7 @@ class User extends Authenticatable
     // $role is a string not Role object
     public function assignRole($role)
     {
-        return $this->roles()->save(
+        return $this->roles()->sync(
             Role::whereName($role)->firstOrFail()
        );
     }

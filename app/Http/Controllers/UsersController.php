@@ -30,6 +30,7 @@ class UsersController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'role' => ['required', 'string']
         ]);
 
         $user = User::create([
@@ -38,6 +39,8 @@ class UsersController extends Controller
             'password' => Hash::make(request('password')),
             'remember_token'    => str_random(10),
         ]);
+
+        $user->assignRole(request('role'));
 
         return $user;
     }
@@ -68,13 +71,19 @@ class UsersController extends Controller
     public function update(User $user)
     {
         request()->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'name' => 'required', 'string', 'max:255',
+            'password' => 'required', 'string', 'min:6', 'confirmed',
         ]);
 
         $user->name     =  request('name');
         $user->password =  Hash::make(request('password'));
         $user->save();
+
+        $user->save();
+
+        if (request('role') != '') {
+            $user->assignRole(request('role'));
+        }
 
         return $user;
     }

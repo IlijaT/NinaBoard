@@ -51,6 +51,7 @@ export default {
 
     updated(data) {
         this.announcement = data;
+        location.reload();
     }
 
   }

@@ -1,21 +1,17 @@
 <template>
   <div>
 
-    <div style="cursor:pointer" @click="addNotesModal" class="bg-white mt-5 pb-4 card" >
+    <div style="cursor:pointer" @click="addNotesModal" class="bg-white card" >
     
-    <div class="text-grey text-xs py-2 px-4 ">{{  projectInComponent.notes }}</div>
-
+      <div class="text-grey text-xs p-4 ">{{  projectInComponent.notes }}</div>
 
     </div>
   
     <!-- modal -->
-    <modal adaptive name="addNotesModal" :height="300">
+    <modal adaptive name="addNotesModal" height="auto">
       <general-note-form @updatedNotes="updatedNotes" :project="projectInComponent"></general-note-form>
     </modal>
   </div>
-
-
-
   
 </template>
 
@@ -34,27 +30,20 @@ export default {
   },
 
   data() {
-
     return {
       projectInComponent: this.project,
-      
     }
   },
 
-
-
   methods: {
-
     addNotesModal() {
       this.$modal.show('addNotesModal');
   
     },
-
     updatedNotes(data) {
       this.projectInComponent = data;
-      flash('The notes has been updated!', 'green');
+      location.reload();
     }
-  
 
   }
   

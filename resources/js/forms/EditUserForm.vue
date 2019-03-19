@@ -1,5 +1,5 @@
 <template>
-  <form class="mt-auto" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
+  <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
     <div class="field mb-2">
       <label class="label text-sm mb-1 block" for="title">Name</label>
 
@@ -13,6 +13,24 @@
             <span v-if="form.errors.has('name')" class="text-red text-xs" v-text="form.errors.get('name')">
             </span>
       </div>
+
+    </div>
+
+    <div v-if="logged.roles[0].name == 'manager'" class="field mb-2">
+      <label class="label text-sm mb-1 block" for="title">Role</label>
+      <div class="control">
+        <select 
+          name="role" 
+          class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full" 
+          v-model="form.role"
+          >
+          <option disabled value="">Select user role</option>
+          <option>operator</option>
+          <option>manager</option>
+        </select>
+      </div>
+      <span v-if="form.errors.has('role')" class="text-red text-xs" v-text="form.errors.get('role')">
+      </span>
 
     </div>
 
@@ -65,10 +83,11 @@
 
 <script>
   export default {
-   props: ['user'],
+    props: ['user', 'logged'],
+
     data(){
       return {
-        form : new Form({ name: this.user.name, password: '', password_confirmation: ''}),
+        form : new Form({ name: this.user.name, role: '', password: '', password_confirmation: ''}),
         loading: false
       }
     },
@@ -80,7 +99,6 @@
 
         this.form.submit('patch', '/users/' + this.user.id )
         .then((data) => {
-          this.$modal.hide('editUserModal')
           location.reload();
         })
         .catch(errors => {

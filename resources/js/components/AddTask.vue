@@ -2,18 +2,12 @@
   <div>
     
     <div class="flex">
-      <button @click="showModal" class="py-1 px-3 text-lg button btn rounded-full text-white hover:bg-blue-dark">Add Task</button>
+      <button @click="showModal" class="py-1 px-3 text-lg button btn rounded-lg text-white hover:bg-blue-dark">Add Task</button>
     </div>
     
     <!-- modal -->
-    <modal adaptive name="addTaskModal" :width="650" :height="550">
-      <div class="flex flex-column h-full bg-white p-6">
-  
-        <h1 class="text-xl font-normal mb-4 text-center">
-            New Task
-        </h1>
-  
-        <form class="flex flex-column h-full" @submit.prevent="addTask">
+    <modal adaptive name="addTaskModal"  height="auto">
+        <form class="p-10 flex flex-column h-full" @submit.prevent="addTask">
 
             <label class="label text-sm mb-2 block" for="title">Task</label>
             <div class="control mb-2">
@@ -80,7 +74,6 @@
             </div> 
 
         </form>
-      </div>
     </modal>
     
   </div>

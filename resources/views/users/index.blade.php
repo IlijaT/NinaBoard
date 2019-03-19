@@ -1,19 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {{-- <header  class="flex items-center mb-3 py-4">
-        <div class="flex justify-between items-end w-full">
-            <p class="text-lg text-grey text-sm font-normal">
-                <a href="/users" 
-                class="text-lg text-grey text-sm font-normal"
-                style="text-decoration: none;"
-                >
-                All Users
-                </a>
-            </p>
-            
-            <add-new-user></add-new-user>
-        </div>
-    </header> --}}
 
     <header class="flex justify-between items-end w-full mt-2 mb-4">
 
@@ -21,7 +7,7 @@
             <a href="/users"
             class=" hover:no-underline"
             >
-            <span class="text-normal text-grey font-bold hover:text-blue">All users</span>
+            <span class="hover:no-underline hover:text-blue text-sm text-grey-dark font-normal">All users</span>
             </a>
         </div>
             

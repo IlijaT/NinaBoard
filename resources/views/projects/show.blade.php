@@ -9,7 +9,7 @@
         <div class="lg:flex items-start my-1 mb-3 mr-2">
            
             {{-- left side of  left side --}}
-            <div class="lg:w-3/5 mb-6 mx-2 ">
+            <div class="lg:w-3/5 mx-2 ">
                 <div class="mb-10">
 
                     <div class="flex items-center">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div>
-                    <h2 class="text-sm text-grey font-normal mb-3">General Notes</h2>
+                    <h2 class="text-sm text-grey font-normal my-3">General Notes</h2>
                     
                     <!-- General notes -->
                     <general-notes :project="{{ $project }}"></general-notes>

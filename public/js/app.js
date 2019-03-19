@@ -1828,14 +1828,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1864,13 +1856,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2117,18 +2102,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditUserForm: _forms_EditUserForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['user'],
+  props: ['user', 'logged'],
   methods: {
     showModal: function showModal() {
       this.$modal.show('editUserModal');
@@ -2221,10 +2200,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2245,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updatedNotes: function updatedNotes(data) {
       this.projectInComponent = data;
-      flash('The notes has been updated!', 'green');
+      location.reload();
     }
   }
 });
@@ -2450,6 +2425,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updated: function updated(data) {
       this.announcement = data;
+      location.reload();
     }
   }
 });
@@ -2940,12 +2916,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: new Form({
         name: '',
         email: '',
+        role: '',
         password: '',
         password_confirmation: ''
       }),
@@ -3047,8 +3038,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit('updated', data);
 
         _this.$modal.hide('editProjectModal');
-
-        flash('The announcement has been updated!', 'green');
       }).catch(function (errors) {
         flash('Ooooops! Something went wrong', 'red');
         _this.loading = false;
@@ -3133,12 +3122,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user'],
+  props: ['user', 'logged'],
   data: function data() {
     return {
       form: new Form({
         name: this.user.name,
+        role: '',
         password: '',
         password_confirmation: ''
       }),
@@ -3151,8 +3159,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.form.submit('patch', '/users/' + this.user.id).then(function (data) {
-        _this.$modal.hide('editUserModal');
-
         location.reload();
       }).catch(function (errors) {
         _this.loading = false;
@@ -74946,7 +74952,7 @@ var render = function() {
         "button",
         {
           staticClass:
-            " bg-blue ml-auto text-normal btn rounded-full text-white hover:bg-blue-dark",
+            " bg-blue ml-auto text-lg btn rounded-lg text-white hover:bg-blue-dark",
           on: { click: _vm.showModal }
         },
         [_vm._v("Add New")]
@@ -75011,7 +75017,7 @@ var render = function() {
         "button",
         {
           staticClass:
-            " bg-blue ml-auto text-normal btn rounded-full text-white hover:bg-blue-dark",
+            " bg-blue ml-auto text-lg btn rounded-lg text-white hover:bg-blue-dark",
           on: { click: _vm.showModal }
         },
         [_vm._v(" New User")]
@@ -75019,23 +75025,9 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "addUserModal", height: 490 } },
-        [
-          _c(
-            "div",
-            { staticClass: "flex flex-column h-full bg-white p-4" },
-            [
-              _c(
-                "h1",
-                { staticClass: "text-2xl font-normal mb-3 text-center" },
-                [_vm._v("\r\n                New User\r\n            ")]
-              ),
-              _vm._v(" "),
-              _c("add-user-form")
-            ],
-            1
-          )
-        ]
+        { attrs: { adaptive: "", name: "addUserModal", height: "auto" } },
+        [_c("add-user-form")],
+        1
       )
     ],
     1
@@ -75071,7 +75063,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "py-1 px-3 text-lg button btn rounded-full text-white hover:bg-blue-dark",
+              "py-1 px-3 text-lg button btn rounded-lg text-white hover:bg-blue-dark",
             on: { click: _vm.showModal }
           },
           [_vm._v("Add Task")]
@@ -75080,198 +75072,190 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        {
-          attrs: { adaptive: "", name: "addTaskModal", width: 650, height: 550 }
-        },
+        { attrs: { adaptive: "", name: "addTaskModal", height: "auto" } },
         [
-          _c("div", { staticClass: "flex flex-column h-full bg-white p-6" }, [
-            _c("h1", { staticClass: "text-xl font-normal mb-4 text-center" }, [
-              _vm._v("\n          New Task\n      ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "flex flex-column h-full",
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.addTask($event)
-                  }
+          _c(
+            "form",
+            {
+              staticClass: "p-10 flex flex-column h-full",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addTask($event)
                 }
-              },
-              [
+              }
+            },
+            [
+              _c(
+                "label",
+                {
+                  staticClass: "label text-sm mb-2 block",
+                  attrs: { for: "title" }
+                },
+                [_vm._v("Task")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "control mb-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.task.title,
+                      expression: "task.title"
+                    }
+                  ],
+                  staticClass:
+                    "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                  attrs: {
+                    type: "text",
+                    name: "title",
+                    placeholder: "Task title...",
+                    required: ""
+                  },
+                  domProps: { value: _vm.task.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.task, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control mb-2" }, [
                 _c(
                   "label",
                   {
                     staticClass: "label text-sm mb-2 block",
                     attrs: { for: "title" }
                   },
-                  [_vm._v("Task")]
+                  [_vm._v("Dates")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "control mb-2" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.task.title,
-                        expression: "task.title"
-                      }
-                    ],
-                    staticClass:
-                      "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-                    attrs: {
-                      type: "text",
-                      name: "title",
-                      placeholder: "Task title...",
-                      required: ""
-                    },
-                    domProps: { value: _vm.task.title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c("div", { staticClass: "flex" }, [
+                  _c(
+                    "div",
+                    { staticClass: "flex-1 mr-1" },
+                    [
+                      _c("datepicker", {
+                        attrs: {
+                          mondayFirst: true,
+                          "bootstrap-styling": true,
+                          placeholder: "Start Date"
+                        },
+                        on: { selected: _vm.selectedStartDate },
+                        model: {
+                          value: _vm.startDate,
+                          callback: function($$v) {
+                            _vm.startDate = $$v
+                          },
+                          expression: "startDate"
                         }
-                        _vm.$set(_vm.task, "title", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "control mb-2" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "label text-sm mb-2 block",
-                      attrs: { for: "title" }
-                    },
-                    [_vm._v("Dates")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex" }, [
-                    _c(
-                      "div",
-                      { staticClass: "flex-1 mr-1" },
-                      [
-                        _c("datepicker", {
-                          attrs: {
-                            mondayFirst: true,
-                            "bootstrap-styling": true,
-                            placeholder: "Start Date"
-                          },
-                          on: { selected: _vm.selectedStartDate },
-                          model: {
-                            value: _vm.startDate,
-                            callback: function($$v) {
-                              _vm.startDate = $$v
-                            },
-                            expression: "startDate"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "flex-1 ml-1" },
-                      [
-                        _c("datepicker", {
-                          attrs: {
-                            mondayFirst: true,
-                            "bootstrap-styling": true,
-                            placeholder: "End Date",
-                            disabled: !_vm.startDate,
-                            disabledDates: _vm.disabledDays
-                          },
-                          on: { selected: _vm.selectedEndDate },
-                          model: {
-                            value: _vm.endDate,
-                            callback: function($$v) {
-                              _vm.endDate = $$v
-                            },
-                            expression: "endDate"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-1" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "label text-sm mb-2 block",
-                      attrs: { for: "title" }
-                    },
-                    [_vm._v("Interval")]
+                      })
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "mr-1" },
+                    { staticClass: "flex-1 ml-1" },
                     [
-                      _c("vue-timepicker", {
-                        attrs: { "minute-interval": 5 },
+                      _c("datepicker", {
+                        attrs: {
+                          mondayFirst: true,
+                          "bootstrap-styling": true,
+                          placeholder: "End Date",
+                          disabled: !_vm.startDate,
+                          disabledDates: _vm.disabledDays
+                        },
+                        on: { selected: _vm.selectedEndDate },
                         model: {
-                          value: _vm.startTimeValue,
+                          value: _vm.endDate,
                           callback: function($$v) {
-                            _vm.startTimeValue = $$v
+                            _vm.endDate = $$v
                           },
-                          expression: "startTimeValue"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("vue-timepicker", {
-                        attrs: { "minute-interval": 5 },
-                        model: {
-                          value: _vm.endTimeValue,
-                          callback: function($$v) {
-                            _vm.endTimeValue = $$v
-                          },
-                          expression: "endTimeValue"
+                          expression: "endDate"
                         }
                       })
                     ],
                     1
                   )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex mt-auto" }, [
-                  _c("div", { staticClass: "ml-auto control flex" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
-                        on: {
-                          click: function($event) {
-                            return _vm.$modal.hide("addTaskModal")
-                          }
-                        }
-                      },
-                      [_vm._v("Cancel")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
-                        class: _vm.loading ? "loader" : "",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Save")]
-                    )
-                  ])
                 ])
-              ]
-            )
-          ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-1" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "label text-sm mb-2 block",
+                    attrs: { for: "title" }
+                  },
+                  [_vm._v("Interval")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mr-1" },
+                  [
+                    _c("vue-timepicker", {
+                      attrs: { "minute-interval": 5 },
+                      model: {
+                        value: _vm.startTimeValue,
+                        callback: function($$v) {
+                          _vm.startTimeValue = $$v
+                        },
+                        expression: "startTimeValue"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("vue-timepicker", {
+                      attrs: { "minute-interval": 5 },
+                      model: {
+                        value: _vm.endTimeValue,
+                        callback: function($$v) {
+                          _vm.endTimeValue = $$v
+                        },
+                        expression: "endTimeValue"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex mt-auto" }, [
+                _c("div", { staticClass: "ml-auto control flex" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                      on: {
+                        click: function($event) {
+                          return _vm.$modal.hide("addTaskModal")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                      class: _vm.loading ? "loader" : "",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ])
+              ])
+            ]
+          )
         ]
       )
     ],
@@ -75362,7 +75346,7 @@ var render = function() {
         "button",
         {
           staticClass:
-            "bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker",
+            "bg-blue text-lg btn rounded-lg text-white hover:bg-blue-darker",
           on: { click: _vm.showModal }
         },
         [
@@ -75373,23 +75357,13 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "editUserModal", height: 420 } },
+        { attrs: { adaptive: "", name: "editUserModal", height: "auto" } },
         [
-          _c(
-            "div",
-            { staticClass: "flex flex-column h-full bg-white p-4" },
-            [
-              _c(
-                "h1",
-                { staticClass: "text-2xl font-normal mb-3 text-center" },
-                [_vm._v("\r\n                Change details\r\n            ")]
-              ),
-              _vm._v(" "),
-              _c("edit-user-form", { attrs: { user: _vm.user } })
-            ],
-            1
-          )
-        ]
+          _c("edit-user-form", {
+            attrs: { user: _vm.user, logged: _vm.logged }
+          })
+        ],
+        1
       )
     ],
     1
@@ -75465,12 +75439,12 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "bg-white mt-5 pb-4 card",
+          staticClass: "bg-white card",
           staticStyle: { cursor: "pointer" },
           on: { click: _vm.addNotesModal }
         },
         [
-          _c("div", { staticClass: "text-grey text-xs py-2 px-4 " }, [
+          _c("div", { staticClass: "text-grey text-xs p-4 " }, [
             _vm._v(_vm._s(_vm.projectInComponent.notes))
           ])
         ]
@@ -75478,7 +75452,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "addNotesModal", height: 300 } },
+        { attrs: { adaptive: "", name: "addNotesModal", height: "auto" } },
         [
           _c("general-note-form", {
             attrs: { project: _vm.projectInComponent },
@@ -75628,7 +75602,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "page-link text-grey-darkest",
+                    staticClass: "page-link text-lg text-grey-darkest",
                     attrs: { href: "#", rel: "prev" },
                     on: {
                       click: function($event) {
@@ -75841,7 +75815,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mt-5 w-full" },
+    { staticClass: "mt-3 w-full" },
     [
       _c(
         "div",
@@ -75851,7 +75825,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "mr-2 bg-grey text-normal btn rounded-full text-white",
+                "mr-2 bg-blue text-lg btn rounded-lg text-white\n    ",
               attrs: { download: "", disabled: !_vm.dataSet },
               on: { click: _vm.exportExcel }
             },
@@ -75867,7 +75841,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "bg-grey text-normal btn rounded-full text-white hover:bg-grey-darker",
+                "bg-blue text-lg btn rounded-lg text-white hover:bg-blue-darker",
               on: { click: _vm.showFilterModal }
             },
             [
@@ -76306,7 +76280,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "mt-auto",
+      staticClass: "p-10",
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -76396,6 +76370,66 @@ var render = function() {
               })
             : _vm._e()
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field mb-2" }, [
+        _c(
+          "label",
+          { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
+          [_vm._v("Role")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.role,
+                  expression: "form.role"
+                }
+              ],
+              staticClass:
+                "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+              attrs: { name: "role" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.form,
+                    "role",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { disabled: "", value: "" } }, [
+                _vm._v("Select user role")
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("operator")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("manager")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm.form.errors.has("role")
+          ? _c("span", {
+              staticClass: "text-red text-xs",
+              domProps: { textContent: _vm._s(_vm.form.errors.get("role")) }
+            })
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "field mb-2" }, [
@@ -76690,7 +76724,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "mt-auto",
+      staticClass: "p-10",
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -76741,6 +76775,73 @@ var render = function() {
             : _vm._e()
         ])
       ]),
+      _vm._v(" "),
+      _vm.logged.roles[0].name == "manager"
+        ? _c("div", { staticClass: "field mb-2" }, [
+            _c(
+              "label",
+              {
+                staticClass: "label text-sm mb-1 block",
+                attrs: { for: "title" }
+              },
+              [_vm._v("Role")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "control" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.role,
+                      expression: "form.role"
+                    }
+                  ],
+                  staticClass:
+                    "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                  attrs: { name: "role" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "role",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "", value: "" } }, [
+                    _vm._v("Select user role")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("operator")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("manager")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.form.errors.has("role")
+              ? _c("span", {
+                  staticClass: "text-red text-xs",
+                  domProps: { textContent: _vm._s(_vm.form.errors.get("role")) }
+                })
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "field mb-2" }, [
         _c(
@@ -90906,12 +91007,6 @@ Vue.component('add-task', __webpack_require__(/*! ./components/AddTask.vue */ ".
 Vue.component('user-stats', __webpack_require__(/*! ./components/UserStats.vue */ "./resources/js/components/UserStats.vue").default);
 Vue.component('paginator', __webpack_require__(/*! ./components/Paginator.vue */ "./resources/js/components/Paginator.vue").default);
 Vue.component('general-notes', __webpack_require__(/*! ./components/GeneralNotes.vue */ "./resources/js/components/GeneralNotes.vue").default);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 var app = new Vue({
   el: '#app'
 });
