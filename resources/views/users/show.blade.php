@@ -24,23 +24,29 @@
         <div class="flex flex-col ml-4 w-full">
             {{-- achievements icons --}}
             <div class="flex m-2 flex-wrap justify-center">
+              
                 <div 
-                    class=" {{ $user->activity()->where('description','completed_task')->count() > 1 ? 'bg-blue-dark' : 'bg-grey-lighter' }} 
+                    class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 1 ? 'bg-blue-dark' : 'bg-grey-lighter' }} 
                      flex items-center justify-center rounded-full h-8 w-8 m-2">
+                     <span class="text-xs">1 completed task</span>
                     <i class="text-white fas fa-rocket text-lg "></i>
                 </div>
                 <div 
-                    class="{{ $user->activity()->where('description','completed_task')->count() > 10 ? 'bg-green' : 'bg-grey-lighter' }} 
+                    class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 10 ? 'bg-green' : 'bg-grey-lighter' }} 
                      flex items-center justify-center rounded-full h-8 w-8 m-2">
+                     <span class="text-xs">10 completed tasks</span>
                     <i class="fas fa-star text-lg text-white"></i>
                 </div>
-                <div class="{{ $user->activity()->where('description','completed_task')->count() > 100 ? 'bg-yellow' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                <div class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 100 ? 'bg-yellow' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                        <span class="text-xs">100 completed tasks</span>
                     <i class="fas fa-award text-lg text-white"></i>
                 </div>
-                <div class="{{ $user->activity()->where('description','completed_task')->count() > 500 ? 'bg-orange' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                <div class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 500 ? 'bg-orange' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <span class="text-xs">500 completed tasks</span>
                     <i class="fas fa-medal text-lg text-white"></i>
                 </div>
-                <div class="{{ $user->activity()->where('description','completed_task')->count() > 1000 ? 'bg-red' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                <div class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 1000 ? 'bg-red' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2">
+                    <span class="text-xs">1000 completed tasks</span>
                     <i class="fas fa-trophy text-lg text-white"></i>
                 </div>
             </div>
