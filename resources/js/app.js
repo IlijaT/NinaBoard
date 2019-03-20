@@ -28,7 +28,7 @@ Vue.component('add-task', require('./components/AddTask.vue').default);
 Vue.component('user-stats', require('./components/UserStats.vue').default);
 Vue.component('paginator', require('./components/Paginator.vue').default);
 Vue.component('general-notes', require('./components/GeneralNotes.vue').default);
-
+Vue.component('latest-project-updates', require('./components/LatestProjectUpdates.vue').default);
 
 const app = new Vue({
     el: '#app',

@@ -79,8 +79,8 @@
     <div class="lg:w-1/4">
         <div  class="flex flex-column mb-2 mx-0 my-1 p-3 bg-white">
             <h2 class="py-2 text-black text-lg font-bold">Latest Tasks Updates</h2>
-            
-            @include("projects.activity.card")
+            <latest-project-updates :project="{{ $project->activities()->with(['subject', 'user'])->get() }}"></latest-project-updates>
+            {{-- @include("projects.activity.card") --}}
 
         </div>
 
