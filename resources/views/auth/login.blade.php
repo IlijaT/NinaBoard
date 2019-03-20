@@ -52,7 +52,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn py-1 px-4 text-lg button rounded-full text-white is-link hover:bg-blue-dark">
+                            <button type="submit" class="btn py-1 px-4 bg-green text-normal button rounded-lg text-white is-link hover:bg-green-dark">
                                 {{ __('Login') }}
                             </button>
 

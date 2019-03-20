@@ -35,11 +35,11 @@
 
     <div class="flex">
       <div class="ml-auto control flex">
-        <button @click.prevent="$modal.hide('editProjectModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey">Cancel</button>
+        <button @click.prevent="$modal.hide('editProjectModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
         <button 
           type="submit" 
           :class="loading ? 'loader' : ''"
-          class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark" :disabled="form.errors.any()"
+          class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark" :disabled="form.errors.any()"
           >Save</button>
       </div>
     </div>

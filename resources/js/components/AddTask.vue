@@ -2,11 +2,11 @@
   <div>
     
     <div class="flex">
-      <button @click="showModal" class="py-1 px-3 text-lg button btn rounded-lg text-white hover:bg-blue-dark">Add Task</button>
+      <button @click="showModal" class="py-1 px-3 button btn rounded-lg text-white hover:bg-blue-dark">Add Task</button>
     </div>
     
     <!-- modal -->
-    <modal adaptive name="addTaskModal"  height="auto">
+    <modal adaptive name="addTaskModal"  :height="550" :width="650">
         <form class="p-10 flex flex-column h-full" @submit.prevent="addTask">
 
             <label class="label text-sm mb-2 block" for="title">Task</label>
@@ -64,11 +64,11 @@
 
             <div class="flex mt-auto">
               <div class="ml-auto control flex">
-                <button @click="$modal.hide('addTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
+                <button @click="$modal.hide('addTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
                 <button 
                   type="submit"
                   :class="loading ? 'loader' : ''"
-                  class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue"
+                  class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue"
                   >Save</button>
               </div> 
             </div> 

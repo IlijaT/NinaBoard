@@ -1780,14 +1780,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2930,6 +2922,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3251,6 +3247,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -74952,7 +74949,7 @@ var render = function() {
         "button",
         {
           staticClass:
-            " bg-blue ml-auto text-lg btn rounded-lg text-white hover:bg-blue-dark",
+            " bg-blue ml-auto btn rounded-lg text-white hover:bg-blue-dark",
           on: { click: _vm.showModal }
         },
         [_vm._v("Add New")]
@@ -74960,29 +74957,11 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "addAnnouncementModal", height: 550 } },
-        [
-          _c(
-            "div",
-            { staticClass: "flex flex-column h-full bg-white p-6" },
-            [
-              _c(
-                "h1",
-                {
-                  staticClass: "flex-1 text-2xl font-normal mb-10 text-center"
-                },
-                [
-                  _vm._v(
-                    "\r\n                Create an Announcement\r\n            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("add-announcement-form")
-            ],
-            1
-          )
-        ]
+        {
+          attrs: { adaptive: "", name: "addAnnouncementModal", height: "auto" }
+        },
+        [_c("add-announcement-form")],
+        1
       )
     ],
     1
@@ -75063,7 +75042,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "py-1 px-3 text-lg button btn rounded-lg text-white hover:bg-blue-dark",
+              "py-1 px-3 button btn rounded-lg text-white hover:bg-blue-dark",
             on: { click: _vm.showModal }
           },
           [_vm._v("Add Task")]
@@ -75072,7 +75051,9 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "addTaskModal", height: "auto" } },
+        {
+          attrs: { adaptive: "", name: "addTaskModal", height: 550, width: 650 }
+        },
         [
           _c(
             "form",
@@ -75232,7 +75213,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
                       on: {
                         click: function($event) {
                           return _vm.$modal.hide("addTaskModal")
@@ -75246,7 +75227,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                        "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue",
                       class: _vm.loading ? "loader" : "",
                       attrs: { type: "submit" }
                     },
@@ -76116,7 +76097,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "flex-2 mt-auto",
+      staticClass: "p-10",
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -76128,11 +76109,11 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "field mb-6" }, [
+      _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
-          { staticClass: "label text-sm mb-2 block", attrs: { for: "title" } },
-          [_vm._v("Title")]
+          { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
+          [_vm._v("Client")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "control" }, [
@@ -76150,7 +76131,7 @@ var render = function() {
             attrs: {
               type: "text",
               name: "title",
-              placeholder: "Announcement title here...",
+              placeholder: "Client title here...",
               required: ""
             },
             domProps: { value: _vm.form.title },
@@ -76173,11 +76154,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "field mb-6" }, [
+      _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
           {
-            staticClass: "label text-sm mb-2 block",
+            staticClass: "label text-sm mb-1 block",
             attrs: { for: "description" }
           },
           [_vm._v("Original email")]
@@ -76229,7 +76210,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -76244,7 +76225,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+                "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
               class: _vm.loading ? "loader" : "",
               attrs: { type: "submit", disabled: _vm.form.errors.any() }
             },
@@ -76295,7 +76276,7 @@ var render = function() {
       _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
-          { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
+          { staticClass: "label text-sm mb-1 block", attrs: { for: "name" } },
           [_vm._v("Name")]
         ),
         _vm._v(" "),
@@ -76311,7 +76292,7 @@ var render = function() {
             ],
             staticClass:
               "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-            attrs: { type: "text", name: "name" },
+            attrs: { type: "text", name: "name", required: "" },
             domProps: { value: _vm.form.name },
             on: {
               input: function($event) {
@@ -76351,7 +76332,7 @@ var render = function() {
             ],
             staticClass:
               "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-            attrs: { type: "email", name: "email" },
+            attrs: { type: "email", name: "email", required: "" },
             domProps: { value: _vm.form.email },
             on: {
               input: function($event) {
@@ -76393,7 +76374,7 @@ var render = function() {
               ],
               staticClass:
                 "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-              attrs: { name: "role" },
+              attrs: { name: "role", required: "" },
               on: {
                 change: function($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -76451,7 +76432,7 @@ var render = function() {
             ],
             staticClass:
               "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-            attrs: { type: "password", name: "password" },
+            attrs: { type: "password", name: "password", required: "" },
             domProps: { value: _vm.form.password },
             on: {
               input: function($event) {
@@ -76493,7 +76474,11 @@ var render = function() {
             ],
             staticClass:
               "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
-            attrs: { type: "password", name: "password_confirmation" },
+            attrs: {
+              type: "password",
+              name: "password_confirmation",
+              required: ""
+            },
             domProps: { value: _vm.form.password_confirmation },
             on: {
               input: function($event) {
@@ -76522,7 +76507,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -76537,7 +76522,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+                "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
               class: _vm.loading ? "loader" : "",
               attrs: { type: "submit", disabled: _vm.form.errors.any() }
             },
@@ -76673,7 +76658,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -76688,7 +76673,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+                "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
               class: _vm.loading ? "loader" : "",
               attrs: { type: "submit", disabled: _vm.form.errors.any() }
             },
@@ -76933,7 +76918,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -76948,7 +76933,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+                "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
               class: _vm.loading ? "loader" : "",
               attrs: { type: "submit", disabled: _vm.form.errors.any() }
             },
@@ -77087,14 +77072,14 @@ var render = function() {
   return _c(
     "modal",
     {
-      attrs: { adaptive: "", name: "calendarModal", height: 270 },
+      attrs: { adaptive: "", name: "calendarModal", height: "auto" },
       on: { "before-open": _vm.beforeOpen }
     },
     [
       _c(
         "div",
         {
-          staticClass: "flex flex-column p-2  h-full justify-center",
+          staticClass: "flex flex-column p-10  h-full justify-center",
           class: _vm.task.completed
             ? "border-l-8 border-green"
             : "border-l-8 border-orange"
@@ -77106,7 +77091,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "text-center" }, [
+          _c("div", { staticClass: "text-center mb-2" }, [
             _c("h1", { staticClass: "text-sm font-normal" }, [
               _vm._v(
                 "\n        " +
@@ -77135,8 +77120,11 @@ var render = function() {
             _vm._v(" "),
             _vm.task.completed
               ? _c("div", { staticClass: "text-center text-4xl " }, [
-                  _vm._v("\n        Completed "),
-                  _c("i", { staticClass: "fas fa-check text-4xl text-blue" })
+                  _c("i", { staticClass: "fas fa-check text-5xl text-green" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-black text-lg" }, [
+                    _vm._v("Completed")
+                  ])
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -77196,13 +77184,13 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "flex mt-auto" }, [
+          _c("div", { staticClass: "flex mt-4" }, [
             _c("div", { staticClass: "ml-auto control flex" }, [
               _c(
                 "button",
                 {
                   staticClass:
-                    "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey",
+                    "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
                   on: {
                     click: function($event) {
                       return _vm.$modal.hide("calendarModal")
@@ -77217,7 +77205,7 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                        "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue",
                       class: _vm.loading ? "loader" : "",
                       attrs: { disabled: !_vm.task.finished },
                       on: { click: _vm.onSubmit }

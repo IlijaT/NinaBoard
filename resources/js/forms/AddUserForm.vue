@@ -1,7 +1,7 @@
 <template>
   <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
     <div class="field mb-2">
-      <label class="label text-sm mb-1 block" for="title">Name</label>
+      <label class="label text-sm mb-1 block" for="name">Name</label>
 
       <div class="control">
           <input
@@ -9,6 +9,7 @@
             class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
             name="name"
             v-model="form.name"
+            required
             >
             <span v-if="form.errors.has('name')" class="text-red text-xs" v-text="form.errors.get('name')">
             </span>
@@ -25,6 +26,7 @@
           class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
           name="email"
           v-model="form.email"
+          required
           >
           <span v-if="form.errors.has('email')" class="text-red text-xs" v-text="form.errors.get('email')">
           </span>
@@ -35,7 +37,7 @@
     <div class="field mb-2">
       <label class="label text-sm mb-1 block" for="title">Role</label>
       <div class="control">
-        <select name="role" class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full" v-model="form.role">
+        <select name="role" required class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full" v-model="form.role">
           <option disabled value="">Select user role</option>
           <option>operator</option>
           <option>manager</option>
@@ -55,6 +57,7 @@
           class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
           name="password"
           v-model="form.password"
+          required
           >
           <span v-if="form.errors.has('password')" class="text-red text-xs" v-text="form.errors.get('password')">
           </span>
@@ -71,6 +74,7 @@
           class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
           name="password_confirmation"
           v-model="form.password_confirmation"
+          required
           >
           <span v-if="form.errors.has('password')" class="text-red text-xs" v-text="form.errors.get('password')">
           </span>
@@ -80,11 +84,11 @@
 
     <div class="flex mt-4">
       <div class="ml-auto control flex">
-        <button @click.prevent="$modal.hide('addUserModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey">Cancel</button>
+        <button @click.prevent="$modal.hide('addUserModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
         <button 
           type="submit" 
           :class="loading ? 'loader' : ''"
-          class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark" :disabled="form.errors.any()"
+          class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark" :disabled="form.errors.any()"
           >Create</button>
       </div>
     </div>

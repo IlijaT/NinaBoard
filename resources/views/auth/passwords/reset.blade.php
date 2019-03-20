@@ -51,7 +51,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn py-1 px-4 text-normal button bg-green rounded-lg text-white is-link hover:bg-green-dark">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>

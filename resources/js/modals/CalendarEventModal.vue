@@ -1,8 +1,8 @@
 <template>
-  <modal adaptive name="calendarModal" :height="270" @before-open="beforeOpen">
+  <modal adaptive name="calendarModal" height="auto" @before-open="beforeOpen">
     <div 
       :class="task.completed ? 'border-l-8 border-green' : 'border-l-8 border-orange'" 
-      class="flex flex-column p-2  h-full justify-center"
+      class="flex flex-column p-10  h-full justify-center"
       >
 
       <div class="mb-2">
@@ -11,7 +11,7 @@
         </h1>
 
       </div>
-      <div class="text-center">
+      <div class="text-center mb-2">
         <h1 class="text-sm font-normal">
           {{ task.startDate }} 
           {{ task.startDate != task.endDate ? '-' : '' }}
@@ -22,7 +22,8 @@
         </h1>
 
         <div v-if="task.completed" class="text-center text-4xl ">
-          Completed <i  class="fas fa-check text-4xl text-blue"></i> 
+          <i  class="fas fa-check text-5xl text-green"></i>
+          <div class="text-black text-lg">Completed</div> 
         </div>
 
         <div v-if="! task.completed" class="form-check">
@@ -34,15 +35,15 @@
 
       </div>
 
-      <div class="flex mt-auto">
+      <div class="flex mt-4">
         <div class="ml-auto control flex">
-          <button @click="$modal.hide('calendarModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-2 border-grey">Cancel</button>
+          <button @click="$modal.hide('calendarModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
           <button 
             v-if="! task.completed" 
             :disabled="! task.finished" 
             @click="onSubmit" 
             :class="loading ? 'loader' : ''"
-            class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue">Save</button>
+            class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue">Save</button>
         </div> 
       </div> 
 
