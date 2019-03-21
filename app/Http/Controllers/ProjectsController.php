@@ -58,7 +58,7 @@ class ProjectsController extends Controller
         $project->update($attributes);
 
         if (request()->ajax()) {
-            return $project;
+            return Project::with('activities.user', 'activities.subject')->find($project->id);
         }
         
         return redirect($project->path())->with('flash', [

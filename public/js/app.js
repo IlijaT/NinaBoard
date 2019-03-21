@@ -2212,7 +2212,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     updatedNotes: function updatedNotes(data) {
       this.projectInComponent = data;
-      location.reload();
+      flash('General notes has been updated!', 'green');
+      events.$emit('updatednote', data.activities);
     }
   }
 });
@@ -2306,16 +2307,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['project'],
+  props: ['activities'],
   data: function data() {
     return {
-      activity: []
+      projectActivities: []
     };
   },
   created: function created() {
-    this.activity = this.project;
+    var _this = this;
+
+    this.projectActivities = this.activities;
+    events.$on('updatednote', function (data) {
+      return _this.projectActivities = data;
+    });
   },
   methods: {
     diffforhumans: function diffforhumans(dateCreated) {
@@ -2414,12 +2440,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _forms_EditProjectForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../forms/EditProjectForm.vue */ "./resources/js/forms/EditProjectForm.vue");
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -75575,16 +75595,93 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "ul",
-    { staticClass: "text-xs list-reset" },
-    _vm._l(_vm.activity, function(item) {
-      return _c("li", { key: item.id, staticClass: "mb-1" }, [
-        _c("span", { staticClass: "text-grey text-xs" }, [
-          _vm._v(_vm._s(_vm.diffforhumans(item.created_at)))
-        ])
-      ])
-    }),
-    0
+    "div",
+    { staticClass: "flex flex-column mx-0 mt-1 px-3 pt-3 pb-1 bg-white" },
+    [
+      _c("h2", { staticClass: "py-2 text-black text-lg font-bold" }, [
+        _vm._v("Latest Tasks Updates")
+      ]),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "text-xs list-reset" },
+        _vm._l(_vm.projectActivities, function(activity) {
+          return _c("li", { key: activity.id }, [
+            activity.description == "completed_task"
+              ? _c("div", [
+                  _vm._v(
+                    "\n          " + _vm._s(activity.user.name) + " completed "
+                  ),
+                  _c("span", { staticClass: "text-xs italic" }, [
+                    _vm._v('"' + _vm._s(activity.subject.title) + '"')
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            activity.description == "created_project"
+              ? _c("div", [
+                  _vm._v("\n          " + _vm._s(activity.user.name) + "  "),
+                  _c("span", { staticClass: "text-xs" }, [
+                    _vm._v(" created new announcement ")
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            activity.description == "created_task"
+              ? _c("div", [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(activity.user.name) +
+                      " created task "
+                  ),
+                  _c("span", { staticClass: "italic text-xs" }, [
+                    _vm._v('"' + _vm._s(activity.subject.title) + '"')
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            activity.description == "deleted_task"
+              ? _c("div", [
+                  _vm._v(
+                    "\n          " + _vm._s(activity.user.name) + " deleted "
+                  ),
+                  _c("span", { staticClass: "italic text-xs" }, [
+                    _vm._v('"' + _vm._s(activity.subject.title) + '"')
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            activity.description == "incompleted_task"
+              ? _c("div", [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(activity.user.name) +
+                      " incompleted "
+                  ),
+                  _c("span", { staticClass: "italic text-xs" }, [
+                    _vm._v('"' + _vm._s(activity.subject.title) + '"')
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            activity.description == "updated_project"
+              ? _c("div", [
+                  _vm._v(
+                    "\n           " +
+                      _vm._s(activity.user.name) +
+                      " updated the announcement \n        "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-grey text-xs" }, [
+              _vm._v(_vm._s(_vm.diffforhumans(activity.created_at)))
+            ])
+          ])
+        }),
+        0
+      )
+    ]
   )
 }
 var staticRenderFns = []
@@ -75776,26 +75873,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "modal",
-        { attrs: { adaptive: "", name: "editProjectModal", height: 420 } },
+        { attrs: { adaptive: "", name: "editProjectModal", height: "auto" } },
         [
-          _c(
-            "div",
-            { staticClass: "flex flex-column h-full bg-white p-4" },
-            [
-              _c(
-                "h1",
-                { staticClass: "text-2xl font-normal mb-3 text-center" },
-                [_vm._v("\n                Change details\n            ")]
-              ),
-              _vm._v(" "),
-              _c("edit-project-form", {
-                attrs: { project: _vm.announcement },
-                on: { updated: _vm.updated }
-              })
-            ],
-            1
-          )
-        ]
+          _c("edit-project-form", {
+            attrs: { project: _vm.announcement },
+            on: { updated: _vm.updated }
+          })
+        ],
+        1
       )
     ],
     1
@@ -76635,7 +76720,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "mt-auto",
+      staticClass: "p-10",
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -76687,7 +76772,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "field mb-2" }, [
+      _c("div", { staticClass: "field mb-4" }, [
         _c(
           "label",
           { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
@@ -77046,7 +77131,7 @@ var render = function() {
   return _c(
     "form",
     {
-      staticClass: "m-2 p-2",
+      staticClass: "p-10",
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -77058,7 +77143,7 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "field mb-2" }, [
+      _c("div", { staticClass: "field mb-4" }, [
         _c("div", { staticClass: "control" }, [
           _c("textarea", {
             directives: [
@@ -77098,7 +77183,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -77113,7 +77198,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark",
+                "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
               class: _vm.loading ? "loader" : "",
               attrs: { type: "submit", disabled: _vm.form.errors.any() }
             },

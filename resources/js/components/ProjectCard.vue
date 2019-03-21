@@ -10,14 +10,8 @@
         </div>
       
             <!-- modal -->
-        <modal adaptive name="editProjectModal" :height="420">
-            <div class="flex flex-column h-full bg-white p-4">
-                <h1 class="text-2xl font-normal mb-3 text-center">
-                    Change details
-                </h1>
-                <edit-project-form @updated="updated" :project="announcement"></edit-project-form>
-                
-            </div>
+        <modal adaptive name="editProjectModal" height="auto">
+            <edit-project-form @updated="updated" :project="announcement"></edit-project-form>
         </modal>
         
     </div>

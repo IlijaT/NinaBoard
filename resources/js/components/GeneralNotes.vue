@@ -42,7 +42,8 @@ export default {
     },
     updatedNotes(data) {
       this.projectInComponent = data;
-      location.reload();
+      flash('General notes has been updated!', 'green');
+      events.$emit('updatednote', data.activities);
     }
 
   }

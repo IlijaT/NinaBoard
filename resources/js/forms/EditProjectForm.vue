@@ -1,6 +1,6 @@
 <template>
 
-  <form class="mt-auto" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
+  <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
     <div class="field mb-2">
       <label class="label text-sm mb-1 block" for="title">Client</label>
 
@@ -17,7 +17,7 @@
 
     </div>
 
-    <div class="field mb-2">
+    <div class="field mb-4">
       <label class="label text-sm mb-1 block" for="title">Email text</label>
 
       <div class="control">
