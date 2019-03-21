@@ -18,6 +18,7 @@ Vue.use(VModal);
 Vue.use(VueSession);
 
 Vue.component('flash-component', require('./components/FlashComponent.vue').default);
+Vue.component('tasks-component', require('./components/tasks/TasksComponent.vue').default);
 Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').default);
 Vue.component('add-announcement', require('./components/AddAnnButton.vue').default);
