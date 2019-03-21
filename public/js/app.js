@@ -2342,6 +2342,9 @@ __webpack_require__.r(__webpack_exports__);
     events.$on('updatednote', function (data) {
       return _this.projectActivities = data;
     });
+    events.$on('updatedproject', function (data) {
+      return _this.projectActivities = data.activities;
+    });
   },
   methods: {
     diffforhumans: function diffforhumans(dateCreated) {
@@ -2466,7 +2469,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ['project'],
   created: function created() {
+    var _this = this;
+
     this.announcement = this.project;
+    events.$on('updatedproject', function (data) {
+      return _this.announcement = data;
+    });
   },
   data: function data() {
     return {
@@ -3093,9 +3101,12 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.form.submit('patch', '/projects/' + this.project.id).then(function (data) {
-        _this.$emit('updated', data);
+        _this.loading = false;
+        events.$emit('updatedproject', data);
 
         _this.$modal.hide('editProjectModal');
+
+        flash('The announcement has been updated!', 'green');
       }).catch(function (errors) {
         flash('Ooooops! Something went wrong', 'red');
         _this.loading = false;

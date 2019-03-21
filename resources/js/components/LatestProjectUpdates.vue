@@ -44,12 +44,14 @@
     created() {
       this.projectActivities = this.activities;
       events.$on('updatednote', (data) => this.projectActivities = data);
+      events.$on('updatedproject', (data) => this.projectActivities = data.activities);
+
     },
 
-      methods: {
-      diffforhumans(dateCreated) {
-        return moment(dateCreated).fromNow()
-      },
+    methods: {
+    diffforhumans(dateCreated) {
+      return moment(dateCreated).fromNow()
+    },
     }
 
   }

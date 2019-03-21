@@ -66,8 +66,10 @@
 
         this.form.submit('patch', '/projects/' + this.project.id )
           .then((data) => {
-            this.$emit('updated', data);
-            this.$modal.hide('editProjectModal')
+            this.loading = false;
+            events.$emit('updatedproject', data);
+            this.$modal.hide('editProjectModal');
+            flash('The announcement has been updated!', 'green');
           })
           .catch(errors => {
             flash('Ooooops! Something went wrong', 'red');

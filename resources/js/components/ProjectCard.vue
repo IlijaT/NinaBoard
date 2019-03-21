@@ -29,6 +29,7 @@ export default {
 
   created() {
       this.announcement = this.project;
+      events.$on('updatedproject', (data) => this.announcement = data);
   },
 
   data() {
