@@ -27,6 +27,10 @@ class TasksController extends Controller
             $task->incomplete();
         }
 
+        if (request()->ajax()) {
+            return Task::with('activities.user', 'activities.subject')->find($task->id);
+        }
+
         return $task;
     }
 }

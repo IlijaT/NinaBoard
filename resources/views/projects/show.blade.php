@@ -36,25 +36,6 @@
                         
                     {{-- show tasks --}}
                     <tasks-component :projecttasks="{{ $project->tasks }}"></tasks-component>
-                    {{-- @foreach($project->tasks as $task)
-                        <div class="bg-white p-3 mb-2 card w-full">
-                            <form method="POST" action="{{ $task->path() }}">
-                                @method('PATCH')
-                                @csrf
-                                <div class="flex">
-                                    <input class="w-full {{ $task->completed ? 'text-grey' : ''}}" name="title" type="text" value="{{ $task->title }}">
-                                    <input type="checkbox" name="completed" onChange="this.form.submit()" {{ $task->completed ? 'checked' : ''}}>
-                                </div>
-                            </form>
-                        </div>
-                    @endforeach
-    
-                    @if ($errors->has('body'))
-                        <span 
-                            style="width: 100%; margin-top: .25rem; font-size: 80%; color: #e3342f;"
-                            role="alert"
-                        ><strong>{{ $errors->first('body') }}</strong>
-                    @endif --}}
         
                 </div>
 
@@ -83,7 +64,6 @@
             :activities="{{ $project->activities()->with(['subject', 'user'])->get() }}">
         </latest-project-updates>
 
-        {{-- @include("projects.activity.card") --}}
     </div>
 
 
