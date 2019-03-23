@@ -2181,6 +2181,9 @@ __webpack_require__.r(__webpack_exports__);
     events.$on('completedtask', function (data) {
       return _this.projectActivities.unshift(data);
     });
+    events.$on('addedtask', function (data) {
+      return _this.projectActivities.unshift(data.activities[0]);
+    });
   },
   methods: {
     diffforhumans: function diffforhumans(dateCreated) {
@@ -2784,7 +2787,11 @@ __webpack_require__.r(__webpack_exports__);
         'start': formatedStartDateAndTime,
         'end': formatedEndDateAndTime
       }).then(function (data) {
-        location.reload();
+        _this.$modal.hide('addTaskModal');
+
+        events.$emit('addedtask', data.data);
+        flash('New task has added successfully!', 'green');
+        _this.loading = false;
       }).catch(function (error) {
         return _this.loading = false;
       });
@@ -2914,7 +2921,12 @@ __webpack_require__.r(__webpack_exports__);
     TaskComponent: _TaskComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
+    var _this = this;
+
     this.tasks = this.projecttasks;
+    events.$on('addedtask', function (data) {
+      return _this.tasks.unshift(data);
+    });
   },
   data: function data() {
     return {
@@ -2929,16 +2941,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$modal.show('completeTask');
     },
     onComplete: function onComplete() {
-      var _this = this;
+      var _this2 = this;
 
       this.loading = true;
       axios.post("/tasks/".concat(this.taskForCompleting.id), {
         'completed': true
       }).then(function (data) {
-        _this.$modal.hide('completeTask');
+        _this2.$modal.hide('completeTask');
 
-        _this.taskForCompleting = null;
-        _this.tasks = _this.tasks.map(function (task) {
+        _this2.taskForCompleting = null;
+        _this2.tasks = _this2.tasks.map(function (task) {
           if (task.id == data.data.id) {
             task.completed = true;
           }
@@ -2947,9 +2959,9 @@ __webpack_require__.r(__webpack_exports__);
         });
         flash('You completed the task! Congrats!!!', 'green');
         events.$emit('completedtask', data.data.activities[0]);
-        _this.loading = false;
+        _this2.loading = false;
       }).catch(function (error) {
-        _this.loading = false;
+        _this2.loading = false;
         flash('Ooops! Something went wrong!', 'red');
         $modal.hide('completeTask');
       });
@@ -93189,8 +93201,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Laravel_VueJS\BirdBoard\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Laravel_VueJS\BirdBoard\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Laravel projekti\birdboard\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Laravel projekti\birdboard\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

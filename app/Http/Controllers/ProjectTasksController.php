@@ -16,7 +16,11 @@ class ProjectTasksController extends Controller
             ['end' => 'required|date']
         );
 
-        $project->addTask(request(['title', 'start', 'end']));
+        $task = $project->addTask(request(['title', 'start', 'end']));
+
+        if (request()->ajax()) {
+            return Task::with('activities.user', 'activities.subject')->find($task->id);
+        }
 
         return redirect($project->path())->with('flash', [
             'message' => 'A new task has been created!',

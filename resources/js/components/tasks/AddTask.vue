@@ -134,7 +134,10 @@ export default {
           'end': formatedEndDateAndTime
           })
           .then((data) => {
-              location.reload();
+              this.$modal.hide('addTaskModal');
+              events.$emit('addedtask', data.data);
+              flash('New task has added successfully!', 'green');
+              this.loading = false;
             })
           .catch(error => this.loading = false);
       },

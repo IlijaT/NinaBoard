@@ -46,6 +46,7 @@
       events.$on('updatednote', (data) => this.projectActivities = data);
       events.$on('updatedproject', (data) => this.projectActivities = data.activities);
       events.$on('completedtask', (data) => this.projectActivities.unshift(data));
+      events.$on('addedtask', (data) => this.projectActivities.unshift(data.activities[0]));
     },
 
     methods: {
