@@ -28,7 +28,7 @@ class TasksController extends Controller
         }
 
         if (request()->ajax()) {
-            return Task::with('activities.user', 'activities.subject')->find($task->id);
+            return Task::with('project', 'activities.user', 'activities.subject')->find($task->id);
         }
 
         return $task;

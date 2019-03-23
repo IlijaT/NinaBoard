@@ -2323,10 +2323,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showModal: function showModal() {
       this.$modal.show('editProjectModal');
-    },
-    updated: function updated(data) {
-      this.announcement = data;
-      location.reload();
     }
   }
 });
@@ -2411,6 +2407,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     completed: function completed(task) {
+      // console.log('uhvaceno');
+      // console.log(task);
       var newItem = {
         'id': task.id,
         'title': task.project.title + ' : ' + task.title,
@@ -2792,6 +2790,18 @@ __webpack_require__.r(__webpack_exports__);
         events.$emit('addedtask', data.data);
         flash('New task has added successfully!', 'green');
         _this.loading = false;
+        _this.task.title = '';
+        _this.startDate = null;
+        _this.endDate = null;
+        _this.startTimeValue = {
+          HH: "12",
+          mm: "00",
+          ss: "00"
+        }, _this.endTimeValue = {
+          HH: "12",
+          mm: "00",
+          ss: "00"
+        };
       }).catch(function (error) {
         return _this.loading = false;
       });
@@ -75825,12 +75835,7 @@ var render = function() {
       _c(
         "modal",
         { attrs: { adaptive: "", name: "editProjectModal", height: "auto" } },
-        [
-          _c("edit-project-form", {
-            attrs: { project: _vm.announcement },
-            on: { updated: _vm.updated }
-          })
-        ],
+        [_c("edit-project-form", { attrs: { project: _vm.announcement } })],
         1
       )
     ],
@@ -76389,6 +76394,7 @@ var render = function() {
                         "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
                       on: {
                         click: function($event) {
+                          $event.preventDefault()
                           return _vm.$modal.hide("addTaskModal")
                         }
                       }

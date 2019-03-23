@@ -64,7 +64,7 @@
 
             <div class="flex mt-auto">
               <div class="ml-auto control flex">
-                <button @click="$modal.hide('addTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
+                <button @click.prevent="$modal.hide('addTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
                 <button 
                   type="submit"
                   :class="loading ? 'loader' : ''"
@@ -138,6 +138,19 @@ export default {
               events.$emit('addedtask', data.data);
               flash('New task has added successfully!', 'green');
               this.loading = false;
+              this.task.title = '';
+              this.startDate = null;
+              this.endDate = null;
+              this.startTimeValue = {
+                HH: "12",
+                mm: "00",
+                ss: "00"
+              },  
+              this.endTimeValue = {
+                HH: "12",
+                mm: "00",
+                ss: "00"
+              }
             })
           .catch(error => this.loading = false);
       },

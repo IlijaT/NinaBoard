@@ -11,7 +11,7 @@
       
             <!-- modal -->
         <modal adaptive name="editProjectModal" height="auto">
-            <edit-project-form @updated="updated" :project="announcement"></edit-project-form>
+            <edit-project-form :project="announcement"></edit-project-form>
         </modal>
         
     </div>
@@ -43,11 +43,6 @@ export default {
     showModal() {
       this.$modal.show('editProjectModal');
     },
-
-    updated(data) {
-        this.announcement = data;
-        location.reload();
-    }
 
   }
     

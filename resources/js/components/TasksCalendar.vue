@@ -69,6 +69,8 @@
     },
     methods: {
       completed(task) {
+        // console.log('uhvaceno');
+        // console.log(task);
         let newItem = {
           'id'        : task.id,
           'title'     : task.project.title + ' : ' + task.title,
