@@ -39,7 +39,7 @@ export default {
 
     created() {
       this.tasks = this.projecttasks;
-      events.$on('addedtask', (data) => this.tasks.unshift(data));
+      events.$on('addedtask', (data) => this.tasks.push(data));
     },
 
     data() {

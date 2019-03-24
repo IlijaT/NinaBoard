@@ -1,10 +1,12 @@
 <template>
-  <div class=" bg-white py-3 pr-3 pl-0 mb-2 card w-full">
+  <div class="bg-white py-3 pr-3 pl-0 mb-2 card w-full">
 
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
 
-      <div :class="{'border-blue': taskInComponent.completed, 'border-red-dark': !taskInComponent.completed }" class="border-l-4  pl-3">{{ taskInComponent.title }}
-
+      <div 
+        :class="{'border-blue': taskInComponent.completed, 'border-red-dark': !taskInComponent.completed }" 
+        class="border-l-4  pl-3">
+        {{ taskInComponent.title }}
       </div>
 
       <div  class="flex text-xs text-grey">{{  diffforhumans(taskInComponent.start) }} 

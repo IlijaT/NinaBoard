@@ -14,7 +14,7 @@
             {{ activity.user.name }} created task <span class="italic text-xs">"{{ activity.subject.title }}"</span>
           </div>
           <div v-if="activity.description == 'deleted_task'">
-            {{ activity.user.name }} deleted <span class="italic text-xs">"{{ activity.subject.title }}"</span>
+            {{ activity.user.name }} deleted a task  
           </div>
           <div v-if="activity.description == 'incompleted_task'">
             {{ activity.user.name }} incompleted <span class="italic text-xs">"{{ activity.subject.title }}"</span>

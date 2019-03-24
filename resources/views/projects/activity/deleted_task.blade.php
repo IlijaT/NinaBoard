@@ -1,1 +1,1 @@
-{{ $activity->user->name }} deleted <span class="italic text-xs">"{{ $activity->subject->title }}"</span>
+{{ $activity->user->name }} deleted a task

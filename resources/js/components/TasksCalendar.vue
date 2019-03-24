@@ -4,12 +4,9 @@
         <div class="col-md-12 mt-2">
          
             <div class="card shadow-md">
-                <!-- <div class="card-header text-xl">Tasks Calendar</div> -->
-                  
                 <div class="card-body">
                     <full-calendar :events="events" :config="config"></full-calendar>
                 </div>
-
             </div>
         </div>
 
@@ -68,9 +65,7 @@
       }
     },
     methods: {
-      completed(task) {
-        // console.log('uhvaceno');
-        // console.log(task);
+      completed(task) {      
         let newItem = {
           'id'        : task.id,
           'title'     : task.project.title + ' : ' + task.title,

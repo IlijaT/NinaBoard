@@ -2359,9 +2359,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2407,8 +2404,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     completed: function completed(task) {
-      // console.log('uhvaceno');
-      // console.log(task);
       var newItem = {
         'id': task.id,
         'title': task.project.title + ' : ' + task.title,
@@ -2861,6 +2856,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['task'],
@@ -2935,7 +2932,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.tasks = this.projecttasks;
     events.$on('addedtask', function (data) {
-      return _this.tasks.unshift(data);
+      return _this.tasks.push(data);
     });
   },
   data: function data() {
@@ -75604,11 +75601,10 @@ var render = function() {
             activity.description == "deleted_task"
               ? _c("div", [
                   _vm._v(
-                    "\n          " + _vm._s(activity.user.name) + " deleted "
-                  ),
-                  _c("span", { staticClass: "italic text-xs" }, [
-                    _vm._v('"' + _vm._s(activity.subject.title) + '"')
-                  ])
+                    "\n          " +
+                      _vm._s(activity.user.name) +
+                      " deleted a task  \n        "
+                  )
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -76446,9 +76442,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: " bg-white py-3 pr-3 pl-0 mb-2 card w-full" },
+    { staticClass: "bg-white py-3 pr-3 pl-0 mb-2 card w-full" },
     [
-      _c("div", { staticClass: "flex justify-between" }, [
+      _c("div", { staticClass: "flex justify-between items-center" }, [
         _c(
           "div",
           {
@@ -76458,7 +76454,7 @@ var render = function() {
               "border-red-dark": !_vm.taskInComponent.completed
             }
           },
-          [_vm._v(_vm._s(_vm.taskInComponent.title) + "\n\n    ")]
+          [_vm._v("\n      " + _vm._s(_vm.taskInComponent.title) + "\n    ")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "flex text-xs text-grey" }, [
