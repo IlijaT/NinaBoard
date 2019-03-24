@@ -2732,6 +2732,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2832,6 +2837,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3149,6 +3160,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3224,6 +3236,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -3499,6 +3515,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project'],
   data: function data() {
@@ -3695,6 +3716,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project'],
   data: function data() {
@@ -3735,6 +3758,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -76463,7 +76489,7 @@ var render = function() {
       _c(
         "modal",
         {
-          attrs: { adaptive: "", name: "addTaskModal", height: 550, width: 650 }
+          attrs: { adaptive: "", name: "addTaskModal", height: 590, width: 650 }
         },
         [
           _c(
@@ -76478,6 +76504,23 @@ var render = function() {
               }
             },
             [
+              _c(
+                "header",
+                {
+                  staticClass: "section py-6 mb-2",
+                  staticStyle: {
+                    background: "url('/images/splash.svg') 161px 4px no-repeat"
+                  }
+                },
+                [
+                  _c(
+                    "h1",
+                    { staticClass: "text-black text-center text-2xl mb-4" },
+                    [_vm._v("Add New Task")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
               _c(
                 "label",
                 {
@@ -76546,14 +76589,41 @@ var render = function() {
                           },
                           expression: "startDate"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "mt-2" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "label text-sm mb-2 block",
+                              attrs: { for: "title" }
+                            },
+                            [_vm._v("Start time")]
+                          ),
+                          _vm._v(" "),
+                          _c("vue-timepicker", {
+                            attrs: { "minute-interval": 10 },
+                            model: {
+                              value: _vm.startTimeValue,
+                              callback: function($$v) {
+                                _vm.startTimeValue = $$v
+                              },
+                              expression: "startTimeValue"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "flex-1 ml-1" },
+                    { staticClass: "flex-1 ml-1 mb-2" },
                     [
                       _c("datepicker", {
                         attrs: {
@@ -76571,51 +76641,38 @@ var render = function() {
                           },
                           expression: "endDate"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "mt-2" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "label text-sm mb-2 block",
+                              attrs: { for: "title" }
+                            },
+                            [_vm._v("End time")]
+                          ),
+                          _vm._v(" "),
+                          _c("vue-timepicker", {
+                            attrs: { "minute-interval": 10 },
+                            model: {
+                              value: _vm.endTimeValue,
+                              callback: function($$v) {
+                                _vm.endTimeValue = $$v
+                              },
+                              expression: "endTimeValue"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-1" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "label text-sm mb-2 block",
-                    attrs: { for: "title" }
-                  },
-                  [_vm._v("Interval")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "mr-1" },
-                  [
-                    _c("vue-timepicker", {
-                      attrs: { "minute-interval": 5 },
-                      model: {
-                        value: _vm.startTimeValue,
-                        callback: function($$v) {
-                          _vm.startTimeValue = $$v
-                        },
-                        expression: "startTimeValue"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("vue-timepicker", {
-                      attrs: { "minute-interval": 5 },
-                      model: {
-                        value: _vm.endTimeValue,
-                        callback: function($$v) {
-                          _vm.endTimeValue = $$v
-                        },
-                        expression: "endTimeValue"
-                      }
-                    })
-                  ],
-                  1
-                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "flex mt-auto" }, [
@@ -76686,8 +76743,8 @@ var render = function() {
           attrs: {
             adaptive: "",
             name: "editTaskModal",
-            height: 550,
-            width: 670
+            height: 590,
+            width: 650
           },
           on: { "before-open": _vm.beforeOpen }
         },
@@ -76704,6 +76761,23 @@ var render = function() {
               }
             },
             [
+              _c(
+                "header",
+                {
+                  staticClass: "section py-6 mb-2",
+                  staticStyle: {
+                    background: "url('/images/splash.svg') 190px 4px no-repeat"
+                  }
+                },
+                [
+                  _c(
+                    "h1",
+                    { staticClass: "text-black text-center text-2xl mb-4" },
+                    [_vm._v("Edit Task")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
               _c(
                 "label",
                 {
@@ -76772,7 +76846,31 @@ var render = function() {
                           },
                           expression: "startDate"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "mt-2" },
+                        [
+                          _c(
+                            "label",
+                            { staticClass: "label text-sm mb-2 block" },
+                            [_vm._v("Start time")]
+                          ),
+                          _vm._v(" "),
+                          _c("vue-timepicker", {
+                            attrs: { "minute-interval": 10 },
+                            model: {
+                              value: _vm.startTimeValue,
+                              callback: function($$v) {
+                                _vm.startTimeValue = $$v
+                              },
+                              expression: "startTimeValue"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
                   ),
@@ -76797,51 +76895,35 @@ var render = function() {
                           },
                           expression: "endDate"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "mt-2" },
+                        [
+                          _c(
+                            "label",
+                            { staticClass: "label text-sm mb-2 block" },
+                            [_vm._v("End time")]
+                          ),
+                          _vm._v(" "),
+                          _c("vue-timepicker", {
+                            attrs: { "minute-interval": 10 },
+                            model: {
+                              value: _vm.endTimeValue,
+                              callback: function($$v) {
+                                _vm.endTimeValue = $$v
+                              },
+                              expression: "endTimeValue"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-1" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "label text-sm mb-2 block",
-                    attrs: { for: "title" }
-                  },
-                  [_vm._v("Interval")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "mr-1" },
-                  [
-                    _c("vue-timepicker", {
-                      attrs: { "minute-interval": 10 },
-                      model: {
-                        value: _vm.startTimeValue,
-                        callback: function($$v) {
-                          _vm.startTimeValue = $$v
-                        },
-                        expression: "startTimeValue"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("vue-timepicker", {
-                      attrs: { "minute-interval": 10 },
-                      model: {
-                        value: _vm.endTimeValue,
-                        callback: function($$v) {
-                          _vm.endTimeValue = $$v
-                        },
-                        expression: "endTimeValue"
-                      }
-                    })
-                  ],
-                  1
-                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "flex mt-auto" }, [
@@ -76989,16 +77071,31 @@ var render = function() {
       _vm._v(" "),
       _c("modal", { attrs: { name: "completeTask", height: "auto" } }, [
         _c("div", { staticClass: "p-10" }, [
-          _c("div", { staticClass: "text-grey text-2xl text-center mb-4" }, [
-            _vm._v("\n        Complete the task?\n      ")
-          ]),
+          _c(
+            "header",
+            {
+              staticClass: "section py-6 mt-4 mb-6",
+              staticStyle: {
+                background: "url('/images/splash.svg') 100px 4px no-repeat"
+              }
+            },
+            [
+              _c(
+                "h1",
+                {
+                  staticClass: "text-black font-bold text-center text-2xl mb-4"
+                },
+                [_vm._v("Complete the task?")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "ml-auto flex" }, [
+          _c("div", { staticClass: "flex mt-auto" }, [
             _c(
               "button",
               {
                 staticClass:
-                  "btn ml-auto mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
+                  "flex-1 btn ml-auto mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -77013,11 +77110,11 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
+                  "flex-1 btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark",
                 class: _vm.loading ? "loader" : "",
                 on: { click: _vm.onComplete }
               },
-              [_vm._v("Complete\n          ")]
+              [_vm._v("Complete\n        ")]
             )
           ])
         ])
@@ -77065,10 +77162,12 @@ var render = function() {
       }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
-          { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
+          { staticClass: "label text-sm mb-2 block", attrs: { for: "title" } },
           [_vm._v("Client")]
         ),
         _vm._v(" "),
@@ -77110,11 +77209,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "field mb-2" }, [
+      _c("div", { staticClass: "field mb-4" }, [
         _c(
           "label",
           {
-            staticClass: "label text-sm mb-1 block",
+            staticClass: "label text-sm mb-2 block",
             attrs: { for: "description" }
           },
           [_vm._v("Original email")]
@@ -77192,7 +77291,27 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      {
+        staticClass: "section py-6 mb-2",
+        staticStyle: {
+          background: "url('/images/splash.svg') 75px 4px no-repeat"
+        }
+      },
+      [
+        _c("h1", { staticClass: "text-black text-center text-2xl mb-4" }, [
+          _vm._v("Add New Announcement")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -77526,10 +77645,12 @@ var render = function() {
       }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
-          { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
+          { staticClass: "label text-sm  mb-2 block", attrs: { for: "title" } },
           [_vm._v("Client")]
         ),
         _vm._v(" "),
@@ -77569,7 +77690,7 @@ var render = function() {
       _c("div", { staticClass: "field mb-4" }, [
         _c(
           "label",
-          { staticClass: "label text-sm mb-1 block", attrs: { for: "title" } },
+          { staticClass: "label text-sm  mb-2 block", attrs: { for: "title" } },
           [_vm._v("Email text")]
         ),
         _vm._v(" "),
@@ -77640,7 +77761,27 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      {
+        staticClass: "section py-6 mb-6",
+        staticStyle: {
+          background: "url('/images/splash.svg') 102px 4px no-repeat"
+        }
+      },
+      [
+        _c("h1", { staticClass: "text-black text-center text-2xl mb-4" }, [
+          _vm._v("Edit Announcement")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -77937,6 +78078,8 @@ var render = function() {
       }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "field mb-4" }, [
         _c("div", { staticClass: "control" }, [
           _c("textarea", {
@@ -78003,7 +78146,27 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      {
+        staticClass: "section py-6 mb-6",
+        staticStyle: {
+          background: "url('/images/splash.svg') 112px 4px no-repeat"
+        }
+      },
+      [
+        _c("h1", { staticClass: "text-black text-center text-2xl mb-4" }, [
+          _vm._v("Add Some Notes...")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -78042,9 +78205,22 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "mb-2" }, [
-            _c("h1", { staticClass: "text-2xl font-bold m-3 text-center" }, [
-              _vm._v("\n        " + _vm._s(_vm.task.title) + "  \n      ")
-            ])
+            _c(
+              "header",
+              {
+                staticClass: "section py-6 mb-2",
+                staticStyle: {
+                  background: "url('/images/splash.svg') 75px 4px no-repeat"
+                }
+              },
+              [
+                _c(
+                  "h1",
+                  { staticClass: "text-black text-center text-2xl mb-4" },
+                  [_vm._v(_vm._s(_vm.task.title) + " ")]
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "text-center mb-2" }, [

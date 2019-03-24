@@ -6,9 +6,12 @@
       >
 
       <div class="mb-2">
-        <h1 class="text-2xl font-bold m-3 text-center">
+        <!-- <h1 class="text-2xl font-bold m-3 text-center">
           {{ task.title }}  
-        </h1>
+        </h1> -->
+        <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 75px 4px no-repeat;">
+          <h1 class="text-black text-center text-2xl mb-4">{{ task.title }} </h1>
+        </header>
 
       </div>
       <div class="text-center mb-2">

@@ -1,10 +1,10 @@
 <template>
-                   
+
   <div>
     <div v-for="task in tasks" :key="task.id" >
-      <task-component 
-        @showEditTaskModal="showEditTaskModal" 
-        @showCompleteTaskModal="showCompleteTaskModal" 
+      <task-component
+        @showEditTaskModal="showEditTaskModal"
+        @showCompleteTaskModal="showCompleteTaskModal"
         :task="task">
       </task-component>
     </div>
@@ -12,24 +12,25 @@
     <!-- modal -->
     <modal name="completeTask" height="auto">
       <div class="p-10">
-        <div class="text-grey text-2xl text-center mb-4">
-          Complete the task?
-        </div>
 
-        <div class="ml-auto flex">
-            <button @click.prevent="$modal.hide('completeTask')" class="btn ml-auto mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
-            <button 
-              @click="onComplete" 
-              :class="loading ? 'loader' : ''"
-              class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark"  
-              >Complete
-            </button>
+        <header class="section py-6 mt-4 mb-6" style="background: url('/images/splash.svg') 100px 4px no-repeat;">
+          <h1 class="text-black font-bold text-center text-2xl mb-4">Complete the task?</h1>
+        </header>
+
+        <div class="flex mt-auto">
+          <button @click.prevent="$modal.hide('completeTask')" class="flex-1 btn ml-auto mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
+          <button
+            @click="onComplete"
+            :class="loading ? 'loader' : ''"
+            class="flex-1 btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark"
+            >Complete
+          </button>
         </div>
       </div>
     </modal>
     <edit-task></edit-task>
   </div>
-                   
+
 </template>
 
 
@@ -46,7 +47,7 @@ export default {
     created() {
       this.tasks = this.projecttasks;
       events.$on('addedtask', (data) => this.tasks.push(data));
-      
+
     },
 
     data() {
@@ -73,7 +74,7 @@ export default {
         .then((data) => {
             this.$modal.hide('completeTask');
             this.taskForCompleting = null;
-            this.tasks = this.tasks.map(task => { 
+            this.tasks = this.tasks.map(task => {
               if(task.id == data.data.id) {
                 task.completed = true;
               }
@@ -88,10 +89,10 @@ export default {
           flash('Ooops! Something went wrong!', 'red');
           $modal.hide('completeTask')
         });
-      } 
+      }
     },
-    
+
 }
- 
+
 
 </script>

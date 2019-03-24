@@ -6,9 +6,12 @@
     </div>
     
     <!-- modal -->
-    <modal adaptive name="addTaskModal"  :height="550" :width="650">
+    <modal adaptive name="addTaskModal"  :height="590" :width="650">
         <form class="p-10 flex flex-column h-full" @submit.prevent="addTask">
-
+            <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 161px 4px no-repeat;">
+              <h1 class="text-black text-center text-2xl mb-4">Add New Task</h1>
+            </header>
+            
             <label class="label text-sm mb-2 block" for="title">Task</label>
             <div class="control mb-2">
               <input
@@ -34,9 +37,15 @@
                   @selected="selectedStartDate"
                   v-model="startDate">
                   </datepicker>
+
+                  <div class="mt-2">
+                    <label class="label text-sm mb-2 block" for="title">Start time</label>
+                    <vue-timepicker :minute-interval="10" v-model="startTimeValue"></vue-timepicker>
+                  </div>
+
                 </div>
 
-                <div class="flex-1 ml-1">
+                <div class="flex-1 ml-1 mb-2">
                   <datepicker
                     :mondayFirst="true"
                     :bootstrap-styling="true"
@@ -46,20 +55,16 @@
                     :disabledDates="disabledDays"
                     v-model="endDate">
                   </datepicker>
+
+                  <div class="mt-2">
+                    <label class="label text-sm mb-2 block" for="title">End time</label>
+                    <vue-timepicker :minute-interval="10" v-model="endTimeValue"></vue-timepicker>
+                  </div>
+                  
                 </div>
 
               </div>
 
-            </div>
-
-            <div class="mb-1">
-              <label class="label text-sm mb-2 block" for="title">Interval</label>
-              
-              <div class="mr-1">
-                <vue-timepicker :minute-interval="5" v-model="startTimeValue"></vue-timepicker>
-                <vue-timepicker :minute-interval="5" v-model="endTimeValue"></vue-timepicker>
-              </div>
-               
             </div>
 
             <div class="flex mt-auto">

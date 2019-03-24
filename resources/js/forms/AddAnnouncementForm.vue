@@ -1,7 +1,11 @@
 <template>
   <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
+
+    <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 75px 4px no-repeat;">
+      <h1 class="text-black text-center text-2xl mb-4">Add New Announcement</h1>
+    </header>
     <div class="field mb-2">
-      <label class="label text-sm mb-1 block" for="title">Client</label>
+      <label class="label text-sm mb-2 block" for="title">Client</label>
 
       <div class="control">
         <input
@@ -18,8 +22,8 @@
 
     </div>
 
-    <div class="field mb-2">
-      <label class="label text-sm mb-1 block" for="description">Original email</label>
+    <div class="field mb-4">
+      <label class="label text-sm mb-2 block" for="description">Original email</label>
 
       <div class="control">
           <textarea

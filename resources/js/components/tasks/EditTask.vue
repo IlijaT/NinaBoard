@@ -2,8 +2,12 @@
   <div>
     
     <!-- modal -->
-    <modal @before-open="beforeOpen" adaptive name="editTaskModal"  :height="550" :width="670">
+    <modal @before-open="beforeOpen" adaptive name="editTaskModal" :height="590" :width="650">
         <form class="p-10 flex flex-column h-full" @submit.prevent="editTask">
+
+            <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 190px 4px no-repeat;">
+              <h1 class="text-black text-center text-2xl mb-4">Edit Task</h1>
+            </header>
 
             <label class="label text-sm mb-2 block" for="title">Task</label>
             <div class="control mb-2">
@@ -30,6 +34,12 @@
                   @selected="selectedStartDate"
                   v-model="startDate">
                   </datepicker>
+           
+                  <div class="mt-2">
+                    <label class="label text-sm mb-2 block">Start time</label>
+                    <vue-timepicker :minute-interval="10" v-model="startTimeValue"></vue-timepicker>
+                  </div>
+
                 </div>
 
                 <div class="flex-1 ml-1">
@@ -42,20 +52,16 @@
                     :disabledDates="disabledDays"
                     v-model="endDate">
                   </datepicker>
+
+                  <div class="mt-2">
+                    <label class="label text-sm mb-2 block">End time</label>
+                    <vue-timepicker :minute-interval="10" v-model="endTimeValue"></vue-timepicker>
+                  </div>
+                  
                 </div>
 
               </div>
 
-            </div>
-
-            <div class="mb-1">
-              <label class="label text-sm mb-2 block" for="title">Interval</label>
-              
-              <div class="mr-1">
-                <vue-timepicker :minute-interval="10" v-model="startTimeValue"></vue-timepicker>
-                <vue-timepicker :minute-interval="10" v-model="endTimeValue"></vue-timepicker>
-              </div>
-               
             </div>
 
             <div class="flex mt-auto">

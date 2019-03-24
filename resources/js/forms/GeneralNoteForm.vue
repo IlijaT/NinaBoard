@@ -1,7 +1,9 @@
 <template>
 
   <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
-
+    <header class="section py-6 mb-6" style="background: url('/images/splash.svg') 112px 4px no-repeat;">
+      <h1 class="text-black text-center text-2xl mb-4">Add Some Notes...</h1>
+    </header>
     <div class="field mb-4">
       <div class="control">
           <textarea
