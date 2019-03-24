@@ -2,7 +2,11 @@
                    
   <div>
     <div v-for="task in tasks" :key="task.id" >
-      <task-component @showCompleteTaskModal="showCompleteTaskModal" :task="task"></task-component>
+      <task-component 
+        @showEditTaskModal="showEditTaskModal" 
+        @showCompleteTaskModal="showCompleteTaskModal" 
+        :task="task">
+      </task-component>
     </div>
 
     <!-- modal -->
@@ -23,6 +27,7 @@
         </div>
       </div>
     </modal>
+    <edit-task></edit-task>
   </div>
                    
 </template>
@@ -31,21 +36,24 @@
 <script>
 
 import TaskComponent from './TaskComponent.vue';
+import EditTask from './EditTask.vue';
 
 export default {
     props: ['projecttasks'],
 
-    components: { TaskComponent },
+    components: { TaskComponent, EditTask },
 
     created() {
       this.tasks = this.projecttasks;
       events.$on('addedtask', (data) => this.tasks.push(data));
+      
     },
 
     data() {
       return {
         tasks: [],
         taskForCompleting: null,
+        taskForEditing: null,
         loading: false
       }
     },
@@ -54,6 +62,10 @@ export default {
       showCompleteTaskModal(data) {
         this.taskForCompleting = data;
         this.$modal.show('completeTask')
+      },
+      showEditTaskModal(data){
+        this.taskForEditing = data;
+        this.$modal.show('editTaskModal', {'taskForEditing': data});
       },
       onComplete() {
         this.loading = true;
@@ -68,7 +80,7 @@ export default {
               return task;
             });
             flash('You completed the task! Congrats!!!', 'green');
-            events.$emit('completedtask', data.data.activities[0]);
+            events.$emit('completedtask', data.data);
             this.loading = false;
           })
         .catch(error => {
@@ -76,7 +88,7 @@ export default {
           flash('Ooops! Something went wrong!', 'red');
           $modal.hide('completeTask')
         });
-      }
+      } 
     },
     
 }

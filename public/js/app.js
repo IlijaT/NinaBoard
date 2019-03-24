@@ -2179,9 +2179,12 @@ __webpack_require__.r(__webpack_exports__);
       return _this.projectActivities = data.activities;
     });
     events.$on('completedtask', function (data) {
-      return _this.projectActivities.unshift(data);
+      return _this.projectActivities.unshift(data.activities[0]);
     });
     events.$on('addedtask', function (data) {
+      return _this.projectActivities.unshift(data.activities[0]);
+    });
+    events.$on('editedtask', function (data) {
       return _this.projectActivities.unshift(data.activities[0]);
     });
   },
@@ -2815,6 +2818,192 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tasks/EditTask.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tasks/EditTask.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-timepicker */ "./node_modules/vue2-timepicker/index.js");
+/* harmony import */ var vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_timepicker__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
+    VueTimepicker: vue2_timepicker__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  data: function data() {
+    return {
+      loading: false,
+      taskForEditing: {},
+      startDate: '',
+      formatedStartDate: '',
+      formatedEndDate: '',
+      endDate: '',
+      disabledDays: {
+        to: new Date()
+      },
+      startTimeValue: {
+        HH: '00',
+        mm: "00",
+        ss: "00"
+      },
+      endTimeValue: {
+        HH: "00",
+        mm: "00",
+        ss: "00"
+      }
+    };
+  },
+  methods: {
+    beforeOpen: function beforeOpen(event) {
+      this.taskForEditing = event.params.taskForEditing;
+      this.formatedStartDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(event.params.taskForEditing.start).format('YYYY-MM-DD');
+      this.formatedEndDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(event.params.taskForEditing.end).format('YYYY-MM-DD');
+      this.startTimeValue.HH = moment__WEBPACK_IMPORTED_MODULE_2___default()(event.params.taskForEditing.start).format('hh');
+      this.startTimeValue.mm = moment__WEBPACK_IMPORTED_MODULE_2___default()(event.params.taskForEditing.start).format('mm');
+      this.endTimeValue.HH = moment__WEBPACK_IMPORTED_MODULE_2___default()(event.params.taskForEditing.end).format('hh');
+      this.endTimeValue.mm = moment__WEBPACK_IMPORTED_MODULE_2___default()(event.params.taskForEditing.end).format('mm');
+    },
+    placeholderStart: function placeholderStart() {
+      return moment__WEBPACK_IMPORTED_MODULE_2___default()(this.taskForEditing.start).format('DD MMM YYYY');
+    },
+    placeholderEnd: function placeholderEnd() {
+      return moment__WEBPACK_IMPORTED_MODULE_2___default()(this.taskForEditing.end).format('DD MMM YYYY');
+    },
+    editTask: function editTask() {
+      var _this = this;
+
+      this.loading = true;
+      var formatedStartDateAndTime = this.formatedStartDate + ' ' + this.startTimeValue.HH + ':' + this.startTimeValue.mm + ':' + this.startTimeValue.ss;
+      var formatedEndDateAndTime = this.formatedEndDate + ' ' + this.endTimeValue.HH + ':' + this.endTimeValue.mm + ':' + this.endTimeValue.ss;
+      axios.patch('/projects/' + this.taskForEditing.project_id + '/tasks/' + this.taskForEditing.id, {
+        'title': this.taskForEditing.title,
+        'start': formatedStartDateAndTime,
+        'end': formatedEndDateAndTime
+      }).then(function (data) {
+        _this.$modal.hide('editTaskModal');
+
+        events.$emit('editedtask', data.data);
+        flash('The task has been updated successfully!', 'green');
+        _this.loading = false;
+        _this.task = {};
+        _this.startDate = null;
+        _this.endDate = null;
+        _this.formatedStartDate = '', _this.formatedEndDate = '', _this.startTimeValue = {
+          HH: "00",
+          mm: "00",
+          ss: "00"
+        }, _this.endTimeValue = {
+          HH: "00",
+          mm: "00",
+          ss: "00"
+        };
+      }).catch(function (error) {
+        return _this.loading = false;
+      });
+    },
+    selectedStartDate: function selectedStartDate(date) {
+      this.formatedStartDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format('YYYY-MM-DD');
+      this.disabledDays.to = new Date(this.formatedStartDate);
+      this.selectedEndDate(date);
+      this.endDate = this.formatedStartDate;
+    },
+    selectedEndDate: function selectedEndDate(date) {
+      this.formatedEndDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format('YYYY-MM-DD');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tasks/TaskComponent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tasks/TaskComponent.vue?vue&type=script&lang=js& ***!
@@ -2858,11 +3047,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['task'],
   created: function created() {
+    var _this = this;
+
     this.taskInComponent = this.task;
+    events.$on('editedtask', function (data) {
+      return _this.onEditedTask(data);
+    });
+    events.$on('completedtask', function (data) {
+      return _this.onConpletedTask(data);
+    });
   },
   data: function data() {
     return {
@@ -2871,10 +3070,33 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     diffforhumans: function diffforhumans(dateCreated) {
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(dateCreated).fromNow();
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(dateCreated).format('DD MMM YYYY');
     },
     emitEvent: function emitEvent() {
       this.$emit('showCompleteTaskModal', this.taskInComponent);
+    },
+    showEditTaskModal: function showEditTaskModal() {
+      if (this.taskInComponent.completed) {
+        return;
+      }
+
+      this.$emit('showEditTaskModal', this.taskInComponent);
+    },
+    onEditedTask: function onEditedTask(data) {
+      if (this.taskInComponent.id == data.id) {
+        this.taskInComponent = data;
+        flash('The task has been updated successfully!', 'green');
+      }
+    },
+    onConpletedTask: function onConpletedTask(data) {
+      if (this.taskInComponent.id == data.id) {
+        this.taskInComponent = data;
+      }
+    }
+  },
+  computed: {
+    computedCursor: function computedCursor() {
+      return this.taskInComponent.completed ? '' : 'pointer';
     }
   }
 });
@@ -2891,6 +3113,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TaskComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskComponent.vue */ "./resources/js/components/tasks/TaskComponent.vue");
+/* harmony import */ var _EditTask_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTask.vue */ "./resources/js/components/tasks/EditTask.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2922,10 +3150,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['projecttasks'],
   components: {
-    TaskComponent: _TaskComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    TaskComponent: _TaskComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    EditTask: _EditTask_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
     var _this = this;
@@ -2939,6 +3169,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tasks: [],
       taskForCompleting: null,
+      taskForEditing: null,
       loading: false
     };
   },
@@ -2946,6 +3177,12 @@ __webpack_require__.r(__webpack_exports__);
     showCompleteTaskModal: function showCompleteTaskModal(data) {
       this.taskForCompleting = data;
       this.$modal.show('completeTask');
+    },
+    showEditTaskModal: function showEditTaskModal(data) {
+      this.taskForEditing = data;
+      this.$modal.show('editTaskModal', {
+        'taskForEditing': data
+      });
     },
     onComplete: function onComplete() {
       var _this2 = this;
@@ -2965,7 +3202,7 @@ __webpack_require__.r(__webpack_exports__);
           return task;
         });
         flash('You completed the task! Congrats!!!', 'green');
-        events.$emit('completedtask', data.data.activities[0]);
+        events.$emit('completedtask', data.data);
         _this2.loading = false;
       }).catch(function (error) {
         _this2.loading = false;
@@ -76425,6 +76662,232 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tasks/EditTask.vue?vue&type=template&id=0801833b&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tasks/EditTask.vue?vue&type=template&id=0801833b& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "modal",
+        {
+          attrs: {
+            adaptive: "",
+            name: "editTaskModal",
+            height: 550,
+            width: 670
+          },
+          on: { "before-open": _vm.beforeOpen }
+        },
+        [
+          _c(
+            "form",
+            {
+              staticClass: "p-10 flex flex-column h-full",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.editTask($event)
+                }
+              }
+            },
+            [
+              _c(
+                "label",
+                {
+                  staticClass: "label text-sm mb-2 block",
+                  attrs: { for: "title" }
+                },
+                [_vm._v("Task")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "control mb-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.taskForEditing.title,
+                      expression: "taskForEditing.title"
+                    }
+                  ],
+                  staticClass:
+                    "input bg-transparent border border-grey-light rounded p-2 text-xs w-full",
+                  attrs: {
+                    type: "text",
+                    name: "title",
+                    placeholder: "Task title...",
+                    required: ""
+                  },
+                  domProps: { value: _vm.taskForEditing.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.taskForEditing, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control mb-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "label text-sm mb-2 block",
+                    attrs: { for: "title" }
+                  },
+                  [_vm._v("Dates")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex" }, [
+                  _c(
+                    "div",
+                    { staticClass: "flex-1 mr-1" },
+                    [
+                      _c("datepicker", {
+                        attrs: {
+                          mondayFirst: true,
+                          "bootstrap-styling": true,
+                          placeholder: _vm.placeholderStart()
+                        },
+                        on: { selected: _vm.selectedStartDate },
+                        model: {
+                          value: _vm.startDate,
+                          callback: function($$v) {
+                            _vm.startDate = $$v
+                          },
+                          expression: "startDate"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex-1 ml-1" },
+                    [
+                      _c("datepicker", {
+                        attrs: {
+                          mondayFirst: true,
+                          "bootstrap-styling": true,
+                          placeholder: _vm.placeholderEnd(),
+                          disabled: !_vm.startDate,
+                          disabledDates: _vm.disabledDays
+                        },
+                        on: { selected: _vm.selectedEndDate },
+                        model: {
+                          value: _vm.endDate,
+                          callback: function($$v) {
+                            _vm.endDate = $$v
+                          },
+                          expression: "endDate"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-1" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "label text-sm mb-2 block",
+                    attrs: { for: "title" }
+                  },
+                  [_vm._v("Interval")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mr-1" },
+                  [
+                    _c("vue-timepicker", {
+                      attrs: { "minute-interval": 10 },
+                      model: {
+                        value: _vm.startTimeValue,
+                        callback: function($$v) {
+                          _vm.startTimeValue = $$v
+                        },
+                        expression: "startTimeValue"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("vue-timepicker", {
+                      attrs: { "minute-interval": 10 },
+                      model: {
+                        value: _vm.endTimeValue,
+                        callback: function($$v) {
+                          _vm.endTimeValue = $$v
+                        },
+                        expression: "endTimeValue"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex mt-auto" }, [
+                _c("div", { staticClass: "ml-auto control flex" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.$modal.hide("editTaskModal")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue",
+                      class: _vm.loading ? "loader" : "",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tasks/TaskComponent.vue?vue&type=template&id=72096e9c&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tasks/TaskComponent.vue?vue&type=template&id=72096e9c& ***!
@@ -76452,7 +76915,9 @@ var render = function() {
             class: {
               "border-blue": _vm.taskInComponent.completed,
               "border-red-dark": !_vm.taskInComponent.completed
-            }
+            },
+            style: { cursor: _vm.computedCursor },
+            on: { click: _vm.showEditTaskModal }
           },
           [_vm._v("\n      " + _vm._s(_vm.taskInComponent.title) + "\n    ")]
         ),
@@ -76512,7 +76977,10 @@ var render = function() {
           [
             _c("task-component", {
               attrs: { task: task },
-              on: { showCompleteTaskModal: _vm.showCompleteTaskModal }
+              on: {
+                showEditTaskModal: _vm.showEditTaskModal,
+                showCompleteTaskModal: _vm.showCompleteTaskModal
+              }
             })
           ],
           1
@@ -76553,7 +77021,9 @@ var render = function() {
             )
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c("edit-task")
     ],
     2
   )
@@ -92472,6 +92942,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTask_vue_vue_type_template_id_6fc60d6a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTask_vue_vue_type_template_id_6fc60d6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/tasks/EditTask.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/tasks/EditTask.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditTask_vue_vue_type_template_id_0801833b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditTask.vue?vue&type=template&id=0801833b& */ "./resources/js/components/tasks/EditTask.vue?vue&type=template&id=0801833b&");
+/* harmony import */ var _EditTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTask.vue?vue&type=script&lang=js& */ "./resources/js/components/tasks/EditTask.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditTask_vue_vue_type_template_id_0801833b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditTask_vue_vue_type_template_id_0801833b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/tasks/EditTask.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/tasks/EditTask.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/tasks/EditTask.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./EditTask.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tasks/EditTask.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/tasks/EditTask.vue?vue&type=template&id=0801833b&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/tasks/EditTask.vue?vue&type=template&id=0801833b& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTask_vue_vue_type_template_id_0801833b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./EditTask.vue?vue&type=template&id=0801833b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tasks/EditTask.vue?vue&type=template&id=0801833b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTask_vue_vue_type_template_id_0801833b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditTask_vue_vue_type_template_id_0801833b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

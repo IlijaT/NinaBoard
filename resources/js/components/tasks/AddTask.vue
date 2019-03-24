@@ -113,7 +113,6 @@ export default {
           mm: "00",
           ss: "00"
         },
-
       }
     },
 
@@ -160,7 +159,6 @@ export default {
         this.disabledDays.to = new Date(this.formatedStartDate);
         this.selectedEndDate(date);
         this.endDate = this.formatedStartDate;
-
       },
 
       selectedEndDate(date) {
