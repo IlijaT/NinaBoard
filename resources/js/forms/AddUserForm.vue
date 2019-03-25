@@ -1,5 +1,8 @@
 <template>
   <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
+    <header class="section py-6 mb-6" style="background: url('/images/splash.svg') 108px 4px no-repeat;">
+      <h1 class="text-black text-center text-2xl mb-4">Register New User</h1>
+    </header>
     <div class="field mb-2">
       <label class="label text-sm mb-1 block" for="name">Name</label>
 
@@ -82,7 +85,7 @@
 
     </div>
 
-    <div class="flex mt-4">
+    <div class="flex mt-4 py-4">
       <div class="ml-auto control flex">
         <button @click.prevent="$modal.hide('addUserModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
         <button 

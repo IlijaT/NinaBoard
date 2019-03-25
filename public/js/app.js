@@ -3249,6 +3249,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3546,6 +3549,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3681,6 +3687,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -77159,62 +77168,27 @@ var render = function() {
                 adaptive: "",
                 name: "filterModal",
                 height: "auto",
-                width: "660"
+                width: 740
               }
             },
             [
-              _c("div", { staticClass: "flex flex-column h-full m-2" }, [
+              _c("div", { staticClass: "p-10 flex flex-column h-full m-2" }, [
                 _c(
-                  "div",
+                  "header",
                   {
-                    staticClass: "my-2 text-center border-b-2 border-grey-light"
+                    staticClass: "section py-6 mb-6",
+                    staticStyle: {
+                      background:
+                        "url('/images/splash.svg') 218px 4px no-repeat"
+                    }
                   },
                   [
                     _c(
-                      "h3",
-                      { staticClass: "text-grey text-2xl font-normal" },
-                      [_vm._v("Filter data")]
+                      "h1",
+                      { staticClass: "text-black text-center text-2xl mb-4" },
+                      [_vm._v("Filter Data")]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "flex justify-between mx-2 my-3" },
-                  [
-                    _c("datepicker", {
-                      attrs: {
-                        inline: true,
-                        mondayFirst: true,
-                        "bootstrap-styling": ""
-                      },
-                      on: { selected: _vm.selectedStartDate },
-                      model: {
-                        value: _vm.startDate,
-                        callback: function($$v) {
-                          _vm.startDate = $$v
-                        },
-                        expression: "startDate"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("datepicker", {
-                      attrs: {
-                        inline: true,
-                        mondayFirst: true,
-                        disabled: true,
-                        "disabled-dates": _vm.disabledEndDates
-                      },
-                      model: {
-                        value: _vm.endDate,
-                        callback: function($$v) {
-                          _vm.endDate = $$v
-                        },
-                        expression: "endDate"
-                      }
-                    })
-                  ],
-                  1
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex m-2" }, [
@@ -77282,13 +77256,52 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "flex m-2 mt-4" }, [
+                _c(
+                  "div",
+                  { staticClass: "flex justify-between mx-2 my-3" },
+                  [
+                    _c("datepicker", {
+                      attrs: {
+                        inline: true,
+                        mondayFirst: true,
+                        "bootstrap-styling": ""
+                      },
+                      on: { selected: _vm.selectedStartDate },
+                      model: {
+                        value: _vm.startDate,
+                        callback: function($$v) {
+                          _vm.startDate = $$v
+                        },
+                        expression: "startDate"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("datepicker", {
+                      attrs: {
+                        inline: true,
+                        mondayFirst: true,
+                        disabled: true,
+                        "disabled-dates": _vm.disabledEndDates
+                      },
+                      model: {
+                        value: _vm.endDate,
+                        callback: function($$v) {
+                          _vm.endDate = $$v
+                        },
+                        expression: "endDate"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex m-2 mt-4 py-4" }, [
                   _c("div", { staticClass: "ml-auto control flex" }, [
                     _c(
                       "button",
                       {
                         staticClass:
-                          "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey",
+                          "btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey",
                         on: {
                           click: function($event) {
                             return _vm.$modal.hide("filterModal")
@@ -77302,7 +77315,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
+                          "btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue",
                         class: _vm.loading ? "loader" : "",
                         attrs: { disabled: !_vm.startDate || !_vm.endDate },
                         on: { click: _vm.filter }
@@ -77616,6 +77629,8 @@ var render = function() {
       }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
@@ -77844,7 +77859,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex mt-4" }, [
+      _c("div", { staticClass: "flex mt-4 py-4" }, [
         _c("div", { staticClass: "ml-auto control flex" }, [
           _c(
             "button",
@@ -77876,7 +77891,27 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      {
+        staticClass: "section py-6 mb-6",
+        staticStyle: {
+          background: "url('/images/splash.svg') 108px 4px no-repeat"
+        }
+      },
+      [
+        _c("h1", { staticClass: "text-black text-center text-2xl mb-4" }, [
+          _vm._v("Register New User")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -78086,6 +78121,8 @@ var render = function() {
       }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "field mb-2" }, [
         _c(
           "label",
@@ -78277,7 +78314,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex mt-4" }, [
+      _c("div", { staticClass: "flex mt-4 py-4" }, [
         _c("div", { staticClass: "ml-auto control flex" }, [
           _c(
             "button",
@@ -78309,7 +78346,27 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      {
+        staticClass: "section py-6 mb-6",
+        staticStyle: {
+          background: "url('/images/splash.svg') 102px 4px no-repeat"
+        }
+      },
+      [
+        _c("h1", { staticClass: "text-black text-center text-2xl mb-4" }, [
+          _vm._v("Update User Details")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

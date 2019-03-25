@@ -15,12 +15,27 @@
 
 
       <!-- modal -->
-      <modal adaptive name="filterModal" height="auto" width="660">
-        <div class="flex flex-column h-full m-2">
+      <modal adaptive name="filterModal" height="auto" :width="740">
+        <div class="p-10 flex flex-column h-full m-2">
 
-          <div class="my-2 text-center border-b-2 border-grey-light">
-            <h3 class="text-grey text-2xl font-normal">Filter data</h3>
+          <header class="section py-6 mb-6" style="background: url('/images/splash.svg') 218px 4px no-repeat;">
+            <h1 class="text-black text-center text-2xl mb-4">Filter Data</h1>
+          </header>
+
+          
+          <div class="flex m-2">
+            <select v-model="selectedFilter"  class="custom-select" id="inputGroupSelect02">
+              <option v-for="option in options" :value="option.value" :key="option.value">
+              {{ option.text }}
+              </option>
+            </select>
+            <div class="input-group-append">
+              <label class="input-group-text btn bg-grey-light" for="inputGroupSelect02">
+              <i class="fas fa-filter text-normal text-black"></i>
+              </label>
+            </div>
           </div>
+
           <div class="flex justify-between mx-2 my-3">
             <datepicker
             :inline="true"
@@ -39,27 +54,15 @@
             </datepicker>
           </div>
 
-          <div class="flex m-2">
-            <select v-model="selectedFilter"  class="custom-select" id="inputGroupSelect02">
-              <option v-for="option in options" :value="option.value" :key="option.value">
-              {{ option.text }}
-              </option>
-            </select>
-            <div class="input-group-append">
-              <label class="input-group-text btn bg-grey-light" for="inputGroupSelect02">
-              <i class="fas fa-filter text-normal text-black"></i>
-              </label>
-            </div>
-          </div>
 
-          <div class="flex m-2 mt-4">
+          <div class="flex m-2 mt-4 py-4">
             <div class="ml-auto control flex">
-              <button @click="$modal.hide('filterModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-full py-1 px-4 border-1 border-grey">Cancel</button>
+              <button @click="$modal.hide('filterModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
               <button
                 @click="filter"
                 :disabled="! startDate || ! endDate"
                 :class="loading ? 'loader' : ''"
-                class="btn py-1 px-4 text-lg button rounded-full text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue"
+                class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue"
                 >Filter</button>
             </div>
           </div>
