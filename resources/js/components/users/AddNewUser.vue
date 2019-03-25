@@ -16,7 +16,7 @@
 
 <script>
 
-import AddUserForm from '../forms/AddUserForm.vue';
+import AddUserForm from '../../forms/AddUserForm.vue';
 
 export default {
   components: { AddUserForm },

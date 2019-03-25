@@ -21,12 +21,13 @@
 
 <script>
 
-import EditUserForm from '../forms/EditUserForm.vue';
+import EditUserForm from '../../forms/EditUserForm.vue';
 
 export default {
 
   components: { EditUserForm },
   props: ['user', 'logged'],
+
   methods: {
     showModal() {
       this.$modal.show('editUserModal');

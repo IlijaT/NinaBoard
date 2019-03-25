@@ -18,18 +18,19 @@ Vue.use(VModal);
 Vue.use(VueSession);
 
 Vue.component('flash-component', require('./components/FlashComponent.vue').default);
-Vue.component('tasks-component', require('./components/tasks/TasksComponent.vue').default);
-Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').default);
-Vue.component('add-announcement', require('./components/AddAnnButton.vue').default);
-Vue.component('add-new-user', require('./components/AddNewUser.vue').default);
-Vue.component('edit-user', require('./components/EditUser.vue').default);
-Vue.component('project-card', require('./components/ProjectCard.vue').default);
-Vue.component('add-task', require('./components/tasks/AddTask.vue').default);
-Vue.component('user-stats', require('./components/UserStats.vue').default);
 Vue.component('paginator', require('./components/Paginator.vue').default);
-Vue.component('general-notes', require('./components/GeneralNotes.vue').default);
-Vue.component('latest-project-updates', require('./components/LatestProjectUpdates.vue').default);
+Vue.component('announcements', require('./components/announcements/Announcements.vue').default);
+Vue.component('add-announcement', require('./components/announcements/AddAnnButton.vue').default);
+Vue.component('avatar-form', require('./components/users/AvatarForm.vue').default);
+Vue.component('add-new-user', require('./components/users/AddNewUser.vue').default);
+Vue.component('edit-user', require('./components/users/EditUser.vue').default);
+Vue.component('user-stats', require('./components/users/UserStats.vue').default);
+Vue.component('tasks-component', require('./components/tasks/TasksComponent.vue').default);
+Vue.component('project-card', require('./components/tasks/ProjectCard.vue').default);
+Vue.component('add-task', require('./components/tasks/AddTask.vue').default);
+Vue.component('general-notes', require('./components/tasks/GeneralNotes.vue').default);
+Vue.component('latest-project-updates', require('./components/tasks/LatestProjectUpdates.vue').default);
 
 const app = new Vue({
     el: '#app',

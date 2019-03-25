@@ -16,7 +16,7 @@
 
 <script>
 
-import AddAnnouncementForm from '../forms/AddAnnouncementForm.vue';
+import AddAnnouncementForm from '../../forms/AddAnnouncementForm.vue';
 
 export default {
     components: { AddAnnouncementForm },

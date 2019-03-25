@@ -17,7 +17,7 @@
 
 <script>
 
-import GeneralNoteForm from '../forms/GeneralNoteForm.vue';
+import GeneralNoteForm from '../../forms/GeneralNoteForm.vue';
 
 export default {
 

@@ -51,7 +51,10 @@
             </div>
         
             {{-- rigt side of left side --}}
-            <project-card :project="{{ $project }}"></project-card>
+            <project-card 
+                :project="{{ $project }}"
+                :logged="{{ auth()->user()->with('roles')->find(auth()->id()) }}">
+            </project-card>
 
         </div>
 

@@ -13,7 +13,7 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $projects = Project::latest('updated_at')->get();
+        $projects = Project::latest('updated_at')->with('tasks')->get();
 
         //$activities = Activity::latest('updated_at')->limit(5)->get();
         $activities = Activity::latest('updated_at')->where('updated_at', '>', Carbon::now()->subDays(2))

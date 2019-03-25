@@ -15,16 +15,9 @@
                     {{-- button to add new announcement --}}
                     <add-announcement class="ml-auto"></add-announcement>
                 </div>
-
-                <div class="lg:flex lg:flex-wrap mt-4 -mx-3">
-                    @forelse($projects as $project)
-                        <div class="lg:w-1/3 px-3 pb-6">
-                            @include('projects.card')
-                        </div>
-                    @empty
-                        <div>No Announcements Yet</div>
-                    @endforelse
-                </div>
+                
+                <announcements :projects="{{ $projects }}">
+                </announcements>
 
             </div>
 
