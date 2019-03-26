@@ -18,11 +18,11 @@
         <div class="flex justify-center mt-auto items-end">
             
             <div class="text-grey text-xs font-normal mr-2">
-                <i class="far fa-list-alt text-xs text-grey-dark"></i>
+                <i class="far fa-bell text-xs text-grey"></i>
                 {{ announcement.tasks.length }}
             </div>
             <div class="text-grey text-xs font-normal">
-                <i class="far fa-check-circle text-xs text-grey-dark"></i>
+                <i class="fas fa-feather-alt text-xs text-grey"></i>
                 {{ this.finishedTasksCount }}
             </div>
          

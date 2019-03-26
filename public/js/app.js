@@ -75972,7 +75972,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "flex justify-center mt-auto items-end" }, [
         _c("div", { staticClass: "text-grey text-xs font-normal mr-2" }, [
-          _c("i", { staticClass: "far fa-list-alt text-xs text-grey-dark" }),
+          _c("i", { staticClass: "far fa-bell text-xs text-grey" }),
           _vm._v(
             "\n            " +
               _vm._s(_vm.announcement.tasks.length) +
@@ -75981,9 +75981,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "text-grey text-xs font-normal" }, [
-          _c("i", {
-            staticClass: "far fa-check-circle text-xs text-grey-dark"
-          }),
+          _c("i", { staticClass: "fas fa-feather-alt text-xs text-grey" }),
           _vm._v(
             "\n            " + _vm._s(this.finishedTasksCount) + "\n        "
           )
