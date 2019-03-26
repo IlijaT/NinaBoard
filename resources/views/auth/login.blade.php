@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         <div class="flex flex-column">
-                            <button type="submit" class="btn py-1 px-4 bg-green text-lg button rounded-lg text-white is-link hover:bg-green-dark">
+                            <button type="submit" class="btn py-1 px-4 bg-green text-normal button rounded-lg text-white is-link hover:bg-green-dark">
                                 {{ __('Login') }}
                             </button>
 
