@@ -28,35 +28,7 @@
         <div class="lg:w-1/4 lg:flex flex-column ">
 
             {{-- Today's Tasks --}}
-            <div class="mb-2">
-                <div class="flex flex-column m-1 px-3 pt-3 pb-1 bg-white flex-1 h-full overflow-auto">
- 
-                    <h2 class="py-2 text-black text-lg font-bold">Today's Tasks</h2>
-
-                    @forelse($tasks as $task)
-                    <div>
-                        <h3 class="text-black text-xs {{ $task->completed == '1' ? 'line-through text-green' : 'text-orange-dark'}}">
-                                
-                            <span class="font-bold"> {{ $task->project->title }} </span> - 
-                            <span class="text-xs italic"> "{{ $task->title }}" </span>
-                            <span class="text-grey"> 
-                                ({{ $task->start->hour }}:{{ $task->start->minute }} 
-                                - {{ $task->end->hour }}:{{ $task->end->minute }}) 
-                            </span>
-                        </h3>
-                    </div>
-                    @empty
-                        <div class="text-black text-normal px-1">
-                            <div class="flex items-start">
-                                <span>Easy day!</span>
-                                <i class="fas fa-smile-wink text-xl text-yellow-dark ml-2"></i>
-                            </div>
-                        </div>
-                    @endforelse
-                
-                </div>
-
-            </div>
+            <today-tasks></today-tasks>
 
             {{-- latest updates --}}
             <div style="height:400px" class="my-1">

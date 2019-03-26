@@ -31,6 +31,7 @@ Vue.component('project-card', require('./components/tasks/ProjectCard.vue').defa
 Vue.component('add-task', require('./components/tasks/AddTask.vue').default);
 Vue.component('general-notes', require('./components/tasks/GeneralNotes.vue').default);
 Vue.component('latest-project-updates', require('./components/tasks/LatestProjectUpdates.vue').default);
+Vue.component('today-tasks', require('./components/tasks/TodayTasks.vue').default);
 
 const app = new Vue({
     el: '#app',

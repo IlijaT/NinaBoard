@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
 use App\Project;
 use App\Activity;
 use Carbon\Carbon;
@@ -15,14 +14,10 @@ class ProjectsController extends Controller
     {
         $projects = Project::latest('updated_at')->with('tasks')->get();
 
-        //$activities = Activity::latest('updated_at')->limit(5)->get();
         $activities = Activity::latest('updated_at')->where('updated_at', '>', Carbon::now()->subDays(2))
         ->get();
-
-
-        $tasks = Task::whereDate('start', Carbon::today())->get();
         
-        return view('projects.index', compact(['projects', 'activities', 'tasks']));
+        return view('projects.index', compact(['projects', 'activities']));
     }
 
     public function store()

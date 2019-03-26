@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/calendar', 'CalendarController@index');
 
     Route::post('/tasks/{task}', 'TasksController@update');
+    Route::get('/today-tasks', 'TodayTasksController@index');
+
 
     Route::get('/users/{user}/activity', 'UsersActivityController@index');
     Route::get('/users/{user}/activity/export', 'UsersActivityController@export');
