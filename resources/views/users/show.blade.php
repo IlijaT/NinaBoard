@@ -61,12 +61,12 @@
             {{-- footer with achievements --}}
             <div class="flex justify-center m-2 p-1">
                 <h2 class="text-grey text-xs font-normal mr-3">
-                    <i class="fas fa-clipboard-list mr-1 text-xs text-grey-dark"></i>
-                    Completed tasks: {{ $user->activity()->where('description','completed_task')->count() }} 
+                    <i class="far fa-list-alt text-xs text-grey-dark"></i>
+                    {{ $user->activity()->where('description','completed_task')->count() }} 
                 </h2>
                 <h2 class="text-grey text-xs font-normal">
-                    <i class="fas fa-broadcast-tower mr-1 text-xs text-grey-dark"></i>
-                    Created announcements: {{ $user->activity()->where('description','created_project')->count() }}
+                    <i class="far fa-check-circle text-xs text-grey-dark"></i>
+                    {{ $user->activity()->where('description','created_task')->count() }}
                 </h2>
             </div>
         </div>

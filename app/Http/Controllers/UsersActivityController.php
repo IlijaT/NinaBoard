@@ -19,6 +19,16 @@ class UsersActivityController extends Controller
        
 
         if (auth()->user()->id === $user->id  || auth()->user()->hasRole('manager')) {
+            if (request('selected') == 'all') {
+                $activity = $user->activity()
+                ->where('subject_type', 'App\\Task')
+                ->where('description', '!=', 'incompleted_task')
+                ->whereBetween('created_at', [ $startDate, $endDate])
+                ->with('subject.project:id,title')->paginate(50); //temporary
+
+                return $activity;
+            }
+
             $activity = $user->activity()
                 ->where('description', '=', request('selected'))
                 ->whereBetween('created_at', [ $startDate, $endDate])

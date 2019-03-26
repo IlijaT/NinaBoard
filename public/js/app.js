@@ -3272,17 +3272,11 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Completed Tasks',
         value: 'completed_task'
       }, {
-        text: 'Incompleted Tasks',
-        value: 'incompleted_task'
-      }, {
         text: 'Created Tasks',
         value: 'created_task'
       }, {
-        text: 'Created Announcements',
-        value: 'created_project'
-      }, {
-        text: 'Updated Announcements',
-        value: 'updated_project'
+        text: 'All',
+        value: 'all'
       }],
       dataSet: false,
       tableData: []
@@ -3311,8 +3305,8 @@ __webpack_require__.r(__webpack_exports__);
         data.data.data.forEach(function (element) {
           _this.tableData.push({
             'id': (_this.dataSet.current_page == 1 ? 0 : (_this.dataSet.current_page - 1) * _this.dataSet.per_page) + (data.data.data.indexOf(element) + 1),
-            'client': element.subject_type == 'App\\Project' ? element.subject.title : element.subject.project.title,
-            'task': element.subject_type == 'App\\Project' ? '/' : element.subject.title,
+            'client': element.subject.project.title,
+            'task': element.subject.title,
             'action': element.description.replace("_", " "),
             'date': element.created_at
           });

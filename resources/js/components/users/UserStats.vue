@@ -122,10 +122,8 @@ import moment from 'moment';
 
         options: [
           { text: 'Completed Tasks', value: 'completed_task' },
-          { text: 'Incompleted Tasks', value: 'incompleted_task' },
           { text: 'Created Tasks', value: 'created_task' },
-          { text: 'Created Announcements', value: 'created_project' },
-          { text: 'Updated Announcements', value: 'updated_project' }
+          { text: 'All', value: 'all' },
         ],
 
         dataSet: false,
@@ -151,8 +149,8 @@ import moment from 'moment';
             data.data.data.forEach(element => {
               this.tableData.push({
                   'id': (this.dataSet.current_page == 1 ? 0 : ((this.dataSet.current_page - 1) * this.dataSet.per_page)) + (data.data.data.indexOf(element) + 1),
-                  'client': element.subject_type == 'App\\Project' ? element.subject.title : element.subject.project.title,
-                  'task': element.subject_type == 'App\\Project' ? '/' : element.subject.title,
+                  'client': element.subject.project.title,
+                  'task': element.subject.title,
                   'action': element.description.replace("_", " "),
                   'date': element.created_at,
                 });
