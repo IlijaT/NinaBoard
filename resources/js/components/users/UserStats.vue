@@ -73,8 +73,8 @@
 
     </div>
 
-    <table class="bg-white shadow-md table table-striped table-sm table-responsive">
-      <thead>
+    <table class="table lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
+      <thead class="bg-grey-light text-black">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Client</th>
