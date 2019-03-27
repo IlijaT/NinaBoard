@@ -17,7 +17,7 @@
             {{ activity.user.name }} deleted a task  
           </div>
           <div v-if="activity.description == 'incompleted_task'">
-            {{ activity.user.name }} incompleted <span class="italic text-xs">"{{ activity.subject.title }}"</span>
+            {{ activity.user.name }} changed <span class="italic text-xs">"{{ activity.subject.title }}"</span>
           </div>
           <div v-if="activity.description == 'updated_project'">
              {{ activity.user.name }} updated the announcement 

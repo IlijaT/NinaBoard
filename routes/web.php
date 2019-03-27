@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/tasks/{task}', 'TasksController@update');
     Route::get('/today-tasks', 'TodayTasksController@index');
+    Route::get('/last-activity', 'ActivityController@index');
 
 
     Route::get('/users/{user}/activity', 'UsersActivityController@index');

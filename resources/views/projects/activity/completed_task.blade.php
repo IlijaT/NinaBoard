@@ -1,1 +1,0 @@
-{{ $activity->user->name }} completed <span class="text-xs italic">"{{ $activity->subject->title }}"</span>

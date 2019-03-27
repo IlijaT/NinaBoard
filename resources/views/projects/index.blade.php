@@ -30,8 +30,10 @@
             {{-- Today's Tasks --}}
             <today-tasks></today-tasks>
 
-            {{-- latest updates --}}
-            <div style="height:400px" class="my-1">
+            {{-- latest 48h updates --}}
+            <latest-activity></latest-activity>
+            
+            {{-- <div style="height:400px" class="my-1">
 
                 <div class="flex flex-column m-1 p-3 bg-white flex-1 h-full overflow-auto">
 
@@ -40,7 +42,7 @@
                     @include('projects.activity.card')
                 
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 

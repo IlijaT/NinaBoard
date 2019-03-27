@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Project;
-use App\Activity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -14,10 +13,7 @@ class ProjectsController extends Controller
     {
         $projects = Project::latest('updated_at')->with('tasks')->get();
 
-        $activities = Activity::latest('updated_at')->where('updated_at', '>', Carbon::now()->subDays(2))
-        ->get();
-        
-        return view('projects.index', compact(['projects', 'activities']));
+        return view('projects.index', compact('projects'));
     }
 
     public function store()

@@ -1,1 +1,0 @@
-{{ $activity->user->name }}  <span class="text-xs"> created new announcement </span>

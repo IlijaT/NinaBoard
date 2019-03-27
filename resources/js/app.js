@@ -22,6 +22,7 @@ Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').defaul
 Vue.component('paginator', require('./components/Paginator.vue').default);
 Vue.component('announcements', require('./components/announcements/Announcements.vue').default);
 Vue.component('add-announcement', require('./components/announcements/AddAnnButton.vue').default);
+Vue.component('latest-activity', require('./components/announcements/LatestActivity.vue').default);
 Vue.component('avatar-form', require('./components/users/AvatarForm.vue').default);
 Vue.component('add-new-user', require('./components/users/AddNewUser.vue').default);
 Vue.component('edit-user', require('./components/users/EditUser.vue').default);
