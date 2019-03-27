@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-12 mt-2">
          
@@ -36,7 +36,7 @@
               'title'     : task.project.title + ' : ' + task.title,
               'start'     : task.start, 
               'end'       : task.end, 
-              'color'     : task.completed == 1 ? '#1f9d55' : '#de751f',
+              'color'     : task.completed == 1 ? '#38a4cc' : '#de751f',
               'completed' : task.completed,
               'textColor' : 'white',
             }
@@ -71,7 +71,7 @@
           'title'     : task.project.title + ' : ' + task.title,
           'start'     : task.start, 
           'end'       : task.end, 
-          'color'     : '#1f9d55',
+          'color'     : '#38a4cc',
           'completed' : task.completed,
           'textColor' : 'white',
         }
