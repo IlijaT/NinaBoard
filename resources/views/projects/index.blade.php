@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Announcements')
 @section('content')
 
     <main class="lg:flex">

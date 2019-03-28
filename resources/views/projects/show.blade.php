@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', str_limit($project->title, 20))
 @section('content')
 
 <div class="lg:flex -mx-3 items-start">

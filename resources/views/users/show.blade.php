@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'User profile | '.$user->name )
 @section('content')
 
     <header class="flex justify-between items-end w-full mt-2 mb-4">

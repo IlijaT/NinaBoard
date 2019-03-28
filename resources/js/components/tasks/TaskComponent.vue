@@ -6,7 +6,10 @@
       <div
         :style="{cursor: computedCursor }"
         @click="showEditTaskModal" 
-        :class="{'border-blue': taskInComponent.completed, 'border-orange-dark': !taskInComponent.completed }" 
+        :class="{
+          'border-blue': taskInComponent.completed,
+          'border-orange-dark': !taskInComponent.completed,
+          'text-grey-dark': taskInComponent.completed }" 
         class="border-l-4  pl-3">
         {{ taskInComponent.title }}
       </div>
