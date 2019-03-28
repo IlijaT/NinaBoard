@@ -1,4 +1,4 @@
-@extends('layouts.withoutnav')
+@extends('layouts.withoutNav')
 
  @section('content')
        
