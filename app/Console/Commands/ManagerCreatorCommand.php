@@ -15,7 +15,7 @@ class ManagerCreatorCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'manager-create';
+    protected $signature = 'create-manager';
 
     /**
      * The console command description.
@@ -41,11 +41,22 @@ class ManagerCreatorCommand extends Command
      */
     public function handle()
     {
-        $manager = factory(Role::class)->create();
-        $operator = factory(Role::class)->create(['name' => 'operator', 'label' => 'Company operator']);
-        $permission = factory(Permission::class)->create();
+        $manager = new Role();
+        $manager->name = 'manager';
+        $manager->label = 'Manager of company';
+        $manager->save();
 
-        $manager->givePermissionTo($permission);
+        $operator = new Role();
+        $operator->name = 'operator';
+        $operator->label = 'Company operator';
+        $operator->save();
+
+        $deletePermison =  new Permission();
+        $deletePermison->name = 'delete-project';
+        $deletePermison->label = 'Permission to delete a project';
+        $deletePermison->save();
+
+        $manager->givePermissionTo($deletePermison);
 
         $name = $this->ask('First and last name');
         $email = $this->ask('Email');

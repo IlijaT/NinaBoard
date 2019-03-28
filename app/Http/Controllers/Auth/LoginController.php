@@ -50,7 +50,7 @@ class LoginController extends Controller
     {
         return redirect()->intended($this->redirectPath())->with('flash', [
             'message' => 'Welcome back! You are now logged in.',
-            'color' => 'indigo'
+            'color' => 'blue'
             ]);
         ;
     }
