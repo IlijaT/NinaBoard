@@ -10,7 +10,7 @@ class TodayTasksController extends Controller
 {
     public function index()
     {
-        $tasks = Task::whereDate('start', Carbon::today())->latest('created_at')->with('project')->get();
+        $tasks = Task::whereDate('start', Carbon::today())->oldest('start')->with('project')->get();
 
         return $tasks;
     }

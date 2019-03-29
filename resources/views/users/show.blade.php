@@ -18,7 +18,7 @@
 
 
     {{-- user profile card --}}
-    <div class="flex bg-white rounded-lg shadow-md h-64 w-full">
+    <div class="flex bg-white rounded-lg shadow-md w-full">
         {{-- left side blue--}}
         <avatar-form :user="{{ $user }}"></avatar-form>
         {{-- right white side--}}
@@ -62,12 +62,12 @@
             {{-- footer with achievements --}}
             <div class="flex justify-center m-2 p-1">
                 <h2 class="text-grey text-xs font-normal mr-3">
-                    <i class="far fa-list-alt text-xs text-grey-dark"></i>
-                    {{ $user->activity()->where('description','completed_task')->count() }} 
+                    <i class="fas fa-bullhorn text-xs text-grey"></i>
+                    {{ $user->activity()->where('description','created_task')->count() }}
                 </h2>
                 <h2 class="text-grey text-xs font-normal">
-                    <i class="far fa-check-circle text-xs text-grey-dark"></i>
-                    {{ $user->activity()->where('description','created_task')->count() }}
+                    <i class="fas fa-feather-alt text-xs text-grey"></i>
+                    {{ $user->activity()->where('description','completed_task')->count() }} 
                 </h2>
             </div>
         </div>

@@ -6,13 +6,14 @@
     </header>
     <div class="field mb-4">
       <div class="control">
-          <textarea
+        <wysiwyg name="notes" v-model="form.notes"></wysiwyg>
+          <!-- <textarea
               name="notes"
               rows="10"
               class="textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full"
               v-model="form.notes"
               required
-              ></textarea>
+              ></textarea> -->
           <span v-if="form.errors.has('notes')" class="text-red text-xs" v-text="form.errors.get('notes')">
           </span>
       </div>

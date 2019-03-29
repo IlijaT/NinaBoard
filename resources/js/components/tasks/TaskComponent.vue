@@ -20,7 +20,7 @@
           v-if="!taskInComponent.completed" 
           style="cursor:pointer"
           @click="emitEvent">
-          <i class="far fa-square text-xl ml-2"></i>
+          <i class="far fa-square text-normal ml-2"></i>
         </div>
 
         <div v-else>

@@ -8,7 +8,7 @@
             <div v-if="todayTasks.length > 0" v-for="task in todayTasks" :key="task.id">
                 <h3 class="text-xs">
                     <i v-if="task.completed" class="fas fa-feather-alt text-xs text-blue mr-1"></i>
-                    <i v-else class="far fa-bell text-xs text-orange-dark mr-1"></i>
+                    <i v-else class="fas fa-feather-alt text-xs text-orange-dark mr-1"></i>
                     <span class="font-bold"> {{ task.project.title }} </span> - 
                     <span class="text-xs italic"> "{{ task.title }}" </span> 
                     <span class="text-grey"> 
@@ -18,11 +18,11 @@
                 </h3>
             </div>
              
-            <div v-else class="text-black text-normal px-1">
-                <div class="flex items-center">
-                    Easy day...  
-                    <i class="far fa-laugh-wink text-2xl text-blue ml-2"></i>
-                </div>
+            <div v-if="!loading && todayTasks.length == 0" class="text-black text-normal px-1">
+                <h3 class="text-xs">
+                    <span class="text-xs italic">Easy day...</span>
+                    <i class="far fa-smile-wink text-lg text-blue ml-1"></i>
+                </h3>
             </div>
             
         

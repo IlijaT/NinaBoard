@@ -3,12 +3,12 @@
 
     <div style="cursor:pointer" @click="addNotesModal" class="bg-white card" >
     
-      <div class="text-grey text-xs p-4 ">{{  projectInComponent.notes }}</div>
+      <div class="text-grey text-xs p-4" v-html="projectInComponent.notes"></div>
 
     </div>
   
     <!-- modal -->
-    <modal adaptive name="addNotesModal" height="auto">
+    <modal adaptive name="addNotesModal" :width="650" height="auto">
       <general-note-form @updatedNotes="updatedNotes" :project="projectInComponent"></general-note-form>
     </modal>
   </div>

@@ -16,6 +16,7 @@ require('./bootstrap');
 Vue.use(FullCalendar);
 Vue.use(VModal);
 Vue.use(VueSession);
+Vue.config.ignoredElements = ['trix-editor']
 
 Vue.component('flash-component', require('./components/FlashComponent.vue').default);
 Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').default);
@@ -33,6 +34,8 @@ Vue.component('add-task', require('./components/tasks/AddTask.vue').default);
 Vue.component('general-notes', require('./components/tasks/GeneralNotes.vue').default);
 Vue.component('latest-project-updates', require('./components/tasks/LatestProjectUpdates.vue').default);
 Vue.component('today-tasks', require('./components/tasks/TodayTasks.vue').default);
+Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
+
 
 const app = new Vue({
     el: '#app',

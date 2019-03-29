@@ -1,7 +1,7 @@
 <template>
   <form class="p-10" @submit.prevent="onSubmit" @keydown="form.errors.clear()">
 
-    <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 75px 4px no-repeat;">
+    <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 95px 4px no-repeat;">
       <h1 class="text-black text-center text-2xl mb-4">Add New Announcement</h1>
     </header>
     <div class="field mb-2">
@@ -22,18 +22,20 @@
 
     </div>
 
+    
     <div class="field mb-4">
       <label class="label text-sm mb-2 block" for="description">Original email</label>
-
+      
       <div class="control">
-          <textarea
+        <wysiwyg name="description" v-model="form.description"></wysiwyg>
+          <!-- <textarea
               name="description"
               rows="10"
               class="textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full"
               placeholder="Paste client's email here..."
               v-model="form.description"
               required
-              ></textarea>
+              ></textarea> -->
           <span v-if="form.errors.has('description')" class="text-red text-xs" v-text="form.errors.get('description')">
           </span>
       </div>
@@ -55,7 +57,9 @@
 </template>
 
 <script>
+
   export default {
+
     data(){
       return {
         form : new Form({ title: '', description: ''}),

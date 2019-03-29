@@ -1,24 +1,22 @@
 <template>
-    <div class="flex flex-col bg-white px-4 pt-4 pb-3 card" style="height: 260px">
+    <div @click="changeLocation" class="flex flex-col bg-white px-4 pt-4 pb-3 card" style="height: 260px; cursor:pointer;">
 
         <div 
             :class="announcement.tasks.length == this.finishedTasksCount ? 'border-blue-light' : 'border-orange-dark'"
             class="font-normal mb-2 text-normal pl-4 py-2 -ml-6 border-l-4  pl-2">
-            <a style="text-decoration: none" class="text-black" :href="`/projects/${announcement.id}`">
                 {{  announcement.title.substr(0, 50)  }}
-            </a>
-            <div class="text-grey text-xs">{{ diffforhumans(announcement.created_at) }}</div>
+            <span class="text-grey text-xs">{{ diffforhumans(announcement.created_at) }}</span>
         </div>
 
         
-        <div class="text-grey text-xs mb-2">
-            {{  announcement.description.substr(0, 90) }}...
+        <div style="overflow: hidden;" class="text-grey text-xs mb-2" v-html="announcement.description.substr(0, 200)">
+             
         </div>
        
         <div class="flex justify-center mt-auto items-end">
             
             <div class="text-grey text-xs font-normal mr-2">
-                <i class="far fa-bell text-xs text-grey"></i>
+                <i class="fas fa-bullhorn text-xs text-grey"></i>
                 {{ announcement.tasks.length }}
             </div>
             <div class="text-grey text-xs font-normal">
@@ -51,6 +49,9 @@ export default {
         diffforhumans(date) {
             return moment(date).format('DD MMM YYYY')
         },
+        changeLocation(){
+            window.location.href =`/projects/${this.announcement.id}`;
+        }
     },
     computed: {
         finishedTasksCount() {
