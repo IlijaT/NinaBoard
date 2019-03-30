@@ -1,9 +1,9 @@
 <template>
 <div>
     
-    <button class="bg-blue text-lg btn rounded-lg text-white hover:bg-blue-darker" @click="showModal">
+    <button class="bg-blue text-normal btn rounded-lg text-white hover:bg-blue-darker" @click="showModal">
          Edit
-        <i class="fas fa-user-edit text-lg text-white ml-2"></i>
+        <i class="fas fa-user-edit text-normal text-white ml-2"></i>
     </button>
 
 

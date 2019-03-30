@@ -3,14 +3,14 @@
 
     <div class="flex py-2 justify-end w-full my-2">
 
-      <button download :disabled="!dataSet" @click="exportExcel" class="mr-2 bg-blue text-lg btn rounded-lg text-white
+      <button download :disabled="!dataSet" @click="exportExcel" class="mr-2 bg-blue-darker text-normal btn rounded-lg text-white
       ">
         Export
-      <i class="far fa-file-excel text-lg text-white ml-2"></i>
+      <i class="far fa-file-excel text-normal text-white ml-2"></i>
       </button>
-      <button class="bg-blue text-lg btn rounded-lg text-white hover:bg-blue-darker" @click="showFilterModal">
+      <button class="bg-blue-darker text-normal btn rounded-lg text-white hover:bg-blue-darker" @click="showFilterModal">
         Filter
-        <i class="fas fa-search text-lg text-white ml-2"></i>
+        <i class="fas fa-search text-normal text-white ml-2"></i>
       </button>
 
 

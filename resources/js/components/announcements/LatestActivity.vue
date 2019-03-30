@@ -1,5 +1,5 @@
 <template>
-    <div style="height:400px" class="my-1">
+    <div style="height:500px" class="my-2">
 
         <div class="flex flex-column m-1 p-3 bg-white flex-1 h-full overflow-auto">
 

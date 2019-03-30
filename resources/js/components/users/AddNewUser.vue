@@ -1,7 +1,7 @@
 <template>
 <div>
     
-    <button class=" bg-blue ml-auto text-lg btn rounded-lg text-white hover:bg-blue-dark" @click="showModal"> New User</button>
+    <button class=" bg-blue ml-auto text-normal btn rounded-lg text-white hover:bg-blue-dark" @click="showModal"> New User</button>
 
 
     <!-- modal -->

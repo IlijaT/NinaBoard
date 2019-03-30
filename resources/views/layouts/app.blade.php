@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
+    {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
 
     <!-- Fonts -->

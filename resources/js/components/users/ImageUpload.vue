@@ -3,11 +3,11 @@
         <label >
             <div class="flex btn flex mt-2">
                 <div>
-                    <p @mouseover="mouseOver" @mouseleave="mouseLeave" class="text-white text-normal mb-2">
+                    <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="p-2 text-white text-normal mb-2">
                         <i class="fas fa-plus-circle text-normal mr-1"></i>
                         Add your photo
-                    </p>
-                    <p v-show="showText"  class="self-center text-grey-darkest text-xs font-bold -mt-4">     up to 2MB</p>
+                    </div>
+                    <div v-show="showText"  class="self-center text-grey-darkest text-xs font-bold -mt-4">     up to 2MB</div>
                 </div>
 
               
