@@ -14,7 +14,10 @@
                         Announcements
                     </div>
                     {{-- button to add new announcement --}}
-                    <add-announcement class="ml-auto"></add-announcement>
+                    <div class="ml-auto flex content-center items-center">
+                        <search-bar class="mr-3"></search-bar>
+                        <add-announcement ></add-announcement>
+                    </div>
                 </div>
                 
                 <announcements :projects="{{ $projects }}">
