@@ -27,9 +27,9 @@
     {{-- Trix text editor - wysiwyg --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.1.0/trix.css">
 </head>
-<body class="bg-grey-light font-sans">
+<body class="bg-grey-light font-sans h-screen">
     
-    <div id="app">
+    <div id="app" class="h-full">
         @include('layouts.navbar')
 
         <main class="container py-2">
@@ -39,6 +39,12 @@
         <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}
         ' class="z-50"></flash-component>
     </div>
+    
+    <footer class="mt-auto p-4">
+        <div class="text-grey text-xs text-center">
+            &copy; BirdBoard {{ \Carbon\Carbon::now()->year }}. All rights reserved. Yes, all of them. Developed by Ilija
+        </div>
+    </footer>
 
 </body>
 </html>
