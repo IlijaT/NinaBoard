@@ -14,7 +14,7 @@
       <div class="p-10">
 
         <header class="section py-6 mt-4 mb-6" style="background: url('/images/splash.svg') 100px 4px no-repeat;">
-          <h1 class="text-black font-bold text-center text-2xl mb-4">Complete the task?</h1>
+          <h1 class="text-grey-darker font-bold text-center text-2xl mb-4">Complete the task?</h1>
         </header>
 
         <div class="flex mt-auto">

@@ -10,17 +10,17 @@
           'border-blue': taskInComponent.completed,
           'border-orange-dark': !taskInComponent.completed,
           'text-grey-dark': taskInComponent.completed }" 
-        class="border-l-4  pl-3">
+        class="border-l-4  px-3">
         {{ taskInComponent.title }}
       </div>
 
-      <div  class="flex text-xs text-grey">{{ diffforhumans(taskInComponent.start) }} 
+      <div class="px-1 flex text-xs text-grey items-center">{{ diffforhumans(taskInComponent.start) }} 
 
         <div 
           v-if="!taskInComponent.completed" 
           style="cursor:pointer"
           @click="emitEvent">
-          <i class="far fa-square text-normal ml-2"></i>
+          <i class="far fa-square text-normal ml-2 hover:text-blue"></i>
         </div>
 
         <div v-else>

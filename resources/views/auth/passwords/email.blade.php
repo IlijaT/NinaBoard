@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-4">
+            <div class="p-2 m-2 text-3xl text-white font-bold text-center">
+                BirdBoard 
+            </div>
             <div class="card">
                 <div class="card-header text-lg text-center">{{ __('Reset Password') }}</div>
 
@@ -33,7 +36,7 @@
 
                         <div class="form-group">
                             <div class="flex flex-column">
-                                <button type="submit" class="btn py-1 px-4 text-normal button bg-green rounded-lg text-white is-link hover:bg-green-dark">
+                                <button type="submit" class="btn py-2 px-4 text-normal button bg-green rounded-lg text-white is-link hover:bg-green-dark">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>

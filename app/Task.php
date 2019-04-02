@@ -6,9 +6,12 @@ use App\Project;
 use App\Activity;
 use App\RecordActivity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
+    use SoftDeletes;
+
     use RecordsActivity;
 
     protected $guarded = [];
@@ -26,7 +29,7 @@ class Task extends Model
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class)->withTrashed();
     }
 
 

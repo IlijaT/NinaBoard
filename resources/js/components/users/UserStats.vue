@@ -143,7 +143,7 @@ import moment from 'moment';
         this.loading = true;
         axios.get(this.url(page), { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
           .then((data) => {
-
+            
             this.dataSet = data.data;
 
             data.data.data.forEach(element => {

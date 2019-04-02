@@ -66,6 +66,13 @@ class ProjectsController extends Controller
         
         $project->delete();
 
+        $project->tasks()->delete();
+
+        if (request()->ajax()) {
+            return response()
+            ->json(['data' => [], 'message' => 'The announcement has been deleted!']);
+        }
+
         return redirect('/projects')->with('flash', [
             'message' => 'The announcement has been deleted!',
             'color' => 'orange'

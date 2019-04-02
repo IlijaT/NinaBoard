@@ -5,9 +5,12 @@ namespace App;
 use App\Activity;
 use App\RecordActivity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
+    use SoftDeletes;
+
     use RecordsActivity;
 
     protected $guarded = [];
