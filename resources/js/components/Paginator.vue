@@ -10,15 +10,13 @@
       <div class="ml-auto">
         <ul v-if="shouldPaginate" class="pagination justify-content-end">
           <li v-show="prevUrl" class="page-item">
-          <a class="page-link text-lg text-grey-darkest" href="#" @click.prevent="page--" rel="prev">
-            <i class="far fa-hand-point-left text-lg text-grey-darkest mr-2"></i>
-            Previous
+          <a class="page-link text-normal text-grey-darkest" href="#" @click.prevent="page--" rel="prev">
+            <i class="far fa-hand-point-left text-normal text-grey-darkest"></i>
           </a>
           </li>
           <li v-show="nextUrl" class="page-item">
-            <a class="page-link text-lg text-grey-darkest" href="#" @click.prevent="page++" rel="next">
-              Next
-              <i class="far fa-hand-point-right text-lg text-grey-darkest ml-2"></i>
+            <a class="page-link text-normal text-grey-darkest" href="#" @click.prevent="page++" rel="next">
+              <i class="far fa-hand-point-right text-normal text-grey-darkest"></i>
             </a>
           </li>
         </ul>

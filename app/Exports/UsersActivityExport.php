@@ -29,19 +29,28 @@ class UsersActivityExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        $activity = $this->user->activity()
-            ->where('description', '=', $this->description)
-            ->whereBetween('created_at', [ $this->startDate, $this->endDate])
-            ->with($this->eagerLoadingModel)->get();
+        if ($this->description == 'all') {
+            $activity = $this->user->activity()
+                ->where('description', 'completed_task')
+                ->orWhere('description', 'created_task')
+                ->whereBetween('created_at', [ $this->startDate, $this->endDate])
+                ->with($this->eagerLoadingModel)->get();
+        } else {
+            $activity = $this->user->activity()
+                ->where('description', '=', $this->description)
+                ->whereBetween('created_at', [ $this->startDate, $this->endDate])
+                ->with($this->eagerLoadingModel)->get();
+        }
+
+       
 
         $dataForTable = $activity->map(function ($activity, $key) {
             return
-            ['client'    => $activity->subject_type == 'App\\Project' ? $activity->subject->title : $activity->subject->project->title,
-            'task'      => $activity->subject_type == 'App\\Project' ? '/' : $activity->subject->title,
+            ['client'    => $activity->subject->project->title,
+            'task'      => $activity->subject->title,
             'action'    => $activity->description,
             'date'      => $activity->created_at];
         });
-
         return  $dataForTable;
     }
 

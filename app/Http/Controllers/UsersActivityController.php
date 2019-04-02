@@ -24,7 +24,7 @@ class UsersActivityController extends Controller
                 ->where('subject_type', 'App\\Task')
                 ->where('description', '!=', 'incompleted_task')
                 ->whereBetween('created_at', [ $startDate, $endDate])
-                ->with('subject.project:id,title')->paginate(50); //temporary
+                ->with('subject.project:id,title')->paginate(5); //temporary
 
                 return $activity;
             }
@@ -32,7 +32,7 @@ class UsersActivityController extends Controller
             $activity = $user->activity()
                 ->where('description', '=', request('selected'))
                 ->whereBetween('created_at', [ $startDate, $endDate])
-                ->with($this->resolveEagerLoadingModel(request('selected')))->paginate(50); //temporary
+                ->with($this->resolveEagerLoadingModel(request('selected')))->paginate(5); //temporary
 
             return $activity;
         }
@@ -53,10 +53,10 @@ class UsersActivityController extends Controller
         $description = request('selected');
         $startDate =  Carbon::parse(request('start'))->startOfDay();
         $endDate =  Carbon::parse(request('end'))->endOfDay();
-        $eagerLoadingModel = $this->resolveEagerLoadingModel(request('selected'));
+        $eagerLoadingModel = 'subject.project:id,title';
 
         $paramsForQuerying = ['user' => $user, 'description' => $description, 'startDate' => $startDate, 'endDate' => $endDate, 'eagerLoadingModel' => $eagerLoadingModel];
-
+       
         $now = Carbon::now()->timestamp;
 
         if (auth()->user()->id === $user->id  || auth()->user()->hasRole('manager')) {

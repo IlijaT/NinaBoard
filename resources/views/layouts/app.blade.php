@@ -38,7 +38,6 @@
 
         <flash-component message='{{ session('flash.message') }}' color='{{ session('flash.color') }}
         ' class="z-50"></flash-component>
-       
     </div>
 
 </body>

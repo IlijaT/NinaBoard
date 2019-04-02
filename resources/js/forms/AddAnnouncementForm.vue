@@ -28,16 +28,8 @@
       
       <div class="control">
         <wysiwyg name="description" v-model="form.description"></wysiwyg>
-          <!-- <textarea
-              name="description"
-              rows="10"
-              class="textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full"
-              placeholder="Paste client's email here..."
-              v-model="form.description"
-              required
-              ></textarea> -->
-          <span v-if="form.errors.has('description')" class="text-red text-xs" v-text="form.errors.get('description')">
-          </span>
+        <span v-if="form.errors.has('description')" class="text-red text-xs" v-text="form.errors.get('description')">
+        </span>
       </div>
     </div>
 
