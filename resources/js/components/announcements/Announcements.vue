@@ -2,7 +2,7 @@
     <div class="lg:flex lg:flex-wrap mt-4 -mx-2">
              
         <div  class="lg:w-1/3 px-2 pb-4" v-for="announcement in filteredAnnouncements" :key="announcement.id">
-            <announcement :logged="logged" :project="announcement"></announcement>
+            <announcement :project="announcement"></announcement>
         </div>
            
     </div>
@@ -13,13 +13,18 @@
 import Announcement from './Announcement.vue';
 
 export default {
-    props:['projects', 'logged'],
+    props:['projects'],
 
     components: { Announcement },
 
     created() {
         this.announcements = this.projects;
         events.$on('search', (data) => this.searchTerm = data);
+        window.Echo.channel('projects').listen('ProjectCreated', e => {
+            this.announcements.unshift(e.project);
+            flash( `${e.activity.user.name} has created a new project!`, 'green');
+        });
+
     },
     data() {
         return {

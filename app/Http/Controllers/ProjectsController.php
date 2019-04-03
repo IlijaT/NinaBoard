@@ -6,6 +6,7 @@ use App\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Events\ProjectCreated;
 
 class ProjectsController extends Controller
 {
@@ -27,6 +28,8 @@ class ProjectsController extends Controller
         $attributes['owner_id'] = auth()->id();
        
         $project = auth()->user()->projects()->create($attributes);
+
+        event(new ProjectCreated($project, $project->activities()->with('user')->latest()->first()));
     
         return compact('project');
     }

@@ -58,6 +58,9 @@ export default {
         .catch(error => {
             this.loading = false;
         });
+        window.Echo.channel('projects').listen('ProjectCreated', e => {
+            this.activities.unshift(e.activity);
+        });
     },
 
     data() {
