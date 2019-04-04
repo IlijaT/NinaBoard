@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Events\ProjectCreated;
 use App\Events\ProjectUpdated;
+use App\Events\ProjectSoftDeleted;
 
 class ProjectsController extends Controller
 {
@@ -72,6 +73,8 @@ class ProjectsController extends Controller
         }
         
         $project->delete();
+
+        event(new ProjectSoftDeleted($project));
 
         $project->tasks()->delete();
 

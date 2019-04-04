@@ -26,7 +26,11 @@ export default {
         });
         window.Echo.channel('projects').listen('ProjectUpdated', e => {
             this.onUpdate(e.project);
-            flash( `${e.activity.user.name} has updated the ${e.project.title}!`, 'green');
+            flash( `${e.activity.user.name} has updated the announcement`, 'green');
+        });
+        window.Echo.channel('projects').listen('ProjectSoftDeleted', e => {
+            this.onDelete(e.project);
+            flash( `The announcement '${e.project.title}' has been archived`, 'green');
         });
 
     },
@@ -54,6 +58,10 @@ export default {
                 this.announcements.unshift(newItem);
             })
             
+         },
+        onDelete(project) {
+            var item = this.announcements.find((element) => {return element.id == project.id });
+            this.announcements.splice(this.announcements.indexOf(item), 1);
          }
     },
     

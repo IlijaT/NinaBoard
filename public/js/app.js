@@ -2184,7 +2184,12 @@ __webpack_require__.r(__webpack_exports__);
     window.Echo.channel('projects').listen('ProjectUpdated', function (e) {
       _this.onUpdate(e.project);
 
-      flash("".concat(e.activity.user.name, " has updated the ").concat(e.project.title, "!"), 'green');
+      flash("".concat(e.activity.user.name, " has updated the announcement"), 'green');
+    });
+    window.Echo.channel('projects').listen('ProjectSoftDeleted', function (e) {
+      _this.onDelete(e.project);
+
+      flash("The announcement '".concat(e.project.title, "' has been archived"), 'green');
     });
   },
   data: function data() {
@@ -2212,6 +2217,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         this.announcements.unshift(newItem);
       });
+    },
+    onDelete: function onDelete(project) {
+      var item = this.announcements.find(function (element) {
+        return element.id == project.id;
+      });
+      this.announcements.splice(this.announcements.indexOf(item), 1);
     }
   }
 });
@@ -2986,12 +2997,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$modal.hide('deleteProjectModal');
 
         window.location = "/projects/";
-        flash('Announcement has been archived!', 'green');
+        flash('The announcement has been archived!', 'green');
         _this2.loading = false;
       }).catch(function (error) {
         _this2.loading = false;
         flash('Ooops! Something went wrong!', 'red');
-        $modal.hide('deleteProjectModal');
+
+        _this2.$modal.hide('deleteProjectModal');
       });
     }
   }
