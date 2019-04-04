@@ -2208,7 +2208,10 @@ __webpack_require__.r(__webpack_exports__);
         return element.id == project.id;
       });
       this.announcements.splice(this.announcements.indexOf(item), 1);
-      this.announcements.unshift(project);
+      var newItem = project;
+      this.$nextTick(function () {
+        this.announcements.unshift(newItem);
+      });
     }
   }
 });
@@ -2284,6 +2287,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.loading = false;
     });
     window.Echo.channel('projects').listen('ProjectCreated', function (e) {
+      _this.activities.unshift(e.activity);
+    });
+    window.Echo.channel('projects').listen('ProjectUpdated', function (e) {
       _this.activities.unshift(e.activity);
     });
   },

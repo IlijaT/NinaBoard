@@ -49,7 +49,11 @@ export default {
         onUpdate(project) {
             var item = this.announcements.find((element) => {return element.id == project.id });
             this.announcements.splice(this.announcements.indexOf(item), 1);
-            this.announcements.unshift(project);
+            let newItem = project;
+            this.$nextTick(function () {
+                this.announcements.unshift(newItem);
+            })
+            
          }
     },
     

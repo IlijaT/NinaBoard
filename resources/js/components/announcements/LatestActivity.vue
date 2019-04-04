@@ -61,6 +61,9 @@ export default {
         window.Echo.channel('projects').listen('ProjectCreated', e => {
             this.activities.unshift(e.activity);
         });
+        window.Echo.channel('projects').listen('ProjectUpdated', e => {
+            this.activities.unshift(e.activity);
+        });
     },
 
     data() {
