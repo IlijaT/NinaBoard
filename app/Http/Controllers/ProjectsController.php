@@ -6,6 +6,9 @@ use App\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Events\ProjectCreated;
+use App\Events\ProjectUpdated;
+use App\Events\ProjectSoftDeleted;
 
 class ProjectsController extends Controller
 {
@@ -27,6 +30,8 @@ class ProjectsController extends Controller
         $attributes['owner_id'] = auth()->id();
        
         $project = auth()->user()->projects()->create($attributes);
+
+        event(new ProjectCreated($project, $project->activities()->with('user')->latest()->first()));
     
         return compact('project');
     }
@@ -48,6 +53,9 @@ class ProjectsController extends Controller
         
         $project->update($attributes);
 
+        event(new ProjectUpdated($project, $project->activities()->with('user')->latest()->first()));
+
+
         if (request()->ajax()) {
             return Project::with('activities.user', 'activities.subject')->find($project->id);
         }
@@ -65,6 +73,8 @@ class ProjectsController extends Controller
         }
         
         $project->delete();
+
+        event(new ProjectSoftDeleted($project));
 
         $project->tasks()->delete();
 

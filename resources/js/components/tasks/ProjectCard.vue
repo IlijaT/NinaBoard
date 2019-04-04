@@ -95,13 +95,13 @@ export default {
         .then((data) => {
             this.$modal.hide('deleteProjectModal');
             window.location = "/projects/";
-            flash('Announcement has been archived!', 'green');
+            flash('The announcement has been archived!', 'green');
             this.loading = false;
           })
         .catch(error => {
-          this.loading = false;
-          flash('Ooops! Something went wrong!', 'red');
-          $modal.hide('deleteProjectModal')
+            this.loading = false;
+            flash('Ooops! Something went wrong!', 'red');
+            this.$modal.hide('deleteProjectModal')
         });
     }
 
