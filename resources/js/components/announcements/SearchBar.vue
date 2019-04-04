@@ -4,6 +4,7 @@
             <transition name="slide-fade">
                 <input
                     autofocus
+                    ref="search"
                     class="lg:w-64 p-2 px-3 text-grey text-xs rounded-lg border border-blue focus:outline-none"
                     v-show="state == 'open'"
                     placeholder="Search here..."
@@ -39,7 +40,12 @@ export default {
     methods: {
         toggleState() {
             if(this.state == 'close') {
-               this.state = 'open';
+                this.state = 'open';
+
+                this.$nextTick(function () {
+                    this.$refs.search.focus()
+                })
+              
             } else {
                 this.state = 'close';
                 this.search = '';
@@ -52,8 +58,7 @@ export default {
 </script>
 
 <style scoped>
-    /* Enter and leave animations can use different */
-    /* durations and timing functions.              */
+
     .slide-fade-enter-active {
     transition: all .2s ease;
     }
@@ -61,7 +66,7 @@ export default {
     transition: all .2s ease;
     }
     .slide-fade-enter, .slide-fade-leave-to
-    /* .slide-fade-leave-active below version 2.1.8 */ {
+    {
     transform: translateX(5px);
     opacity: 0;
     }

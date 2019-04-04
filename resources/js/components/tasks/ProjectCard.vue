@@ -6,7 +6,7 @@
                 {{ announcement.title }}
             </h3>
 
-            <div class="text-grey text-xs py-2 px-4" v-html="announcement.description"></div>
+            <div class="text-grey-darker text-xs py-2 px-4" v-html="announcement.description"></div>
             
             <div class="flex py-2 px-4">
                 <div class="ml-auto py-1 px-1"> 

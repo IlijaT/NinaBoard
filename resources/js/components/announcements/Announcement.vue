@@ -9,7 +9,7 @@
         </div>
 
         
-        <div style="overflow: hidden;" class="text-grey text-xs mb-2" v-html="announcement.description.substr(0, 200)">
+        <div style="overflow: hidden;" class="text-grey-darker text-xs mb-2" v-html="announcement.description.substr(0, 200)">
              
         </div>
        
