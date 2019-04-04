@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Events\ProjectCreated;
+use App\Events\ProjectUpdated;
 
 class ProjectsController extends Controller
 {
@@ -50,6 +51,9 @@ class ProjectsController extends Controller
         ]);
         
         $project->update($attributes);
+
+        event(new ProjectUpdated($project, $project->activities()->with('user')->latest()->first()));
+
 
         if (request()->ajax()) {
             return Project::with('activities.user', 'activities.subject')->find($project->id);

@@ -22,7 +22,11 @@ export default {
         events.$on('search', (data) => this.searchTerm = data);
         window.Echo.channel('projects').listen('ProjectCreated', e => {
             this.announcements.unshift(e.project);
-            flash( `${e.activity.user.name} has created a new project!`, 'green');
+            flash( `${e.activity.user.name} has created a new announcement!`, 'green');
+        });
+        window.Echo.channel('projects').listen('ProjectUpdated', e => {
+            this.onUpdate(e.project);
+            flash( `${e.activity.user.name} has updated the ${e.project.title}!`, 'green');
         });
 
     },
@@ -39,6 +43,14 @@ export default {
                     ann.description.toLowerCase().match(this.searchTerm.toLowerCase());
             })
         }
+    },
+
+    methods: {
+        onUpdate(project) {
+            var item = this.announcements.find((element) => {return element.id == project.id });
+            this.announcements.splice(this.announcements.indexOf(item), 1);
+            this.announcements.unshift(project);
+         }
     },
     
 

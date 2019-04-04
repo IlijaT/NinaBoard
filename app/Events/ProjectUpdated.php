@@ -12,12 +12,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Project;
 use App\Activity;
 
-class ProjectCreated implements ShouldBroadcast
+class ProjectUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $project;
     public $activity;
+
     /**
      * Create a new event instance.
      *

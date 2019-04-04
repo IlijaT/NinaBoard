@@ -2179,7 +2179,12 @@ __webpack_require__.r(__webpack_exports__);
     window.Echo.channel('projects').listen('ProjectCreated', function (e) {
       _this.announcements.unshift(e.project);
 
-      flash("".concat(e.activity.user.name, " has created a new project!"), 'green');
+      flash("".concat(e.activity.user.name, " has created a new announcement!"), 'green');
+    });
+    window.Echo.channel('projects').listen('ProjectUpdated', function (e) {
+      _this.onUpdate(e.project);
+
+      flash("".concat(e.activity.user.name, " has updated the ").concat(e.project.title, "!"), 'green');
     });
   },
   data: function data() {
@@ -2195,6 +2200,15 @@ __webpack_require__.r(__webpack_exports__);
       return this.announcements.filter(function (ann) {
         return ann.title.toLowerCase().match(_this2.searchTerm.toLowerCase()) || ann.description.toLowerCase().match(_this2.searchTerm.toLowerCase());
       });
+    }
+  },
+  methods: {
+    onUpdate: function onUpdate(project) {
+      var item = this.announcements.find(function (element) {
+        return element.id == project.id;
+      });
+      this.announcements.splice(this.announcements.indexOf(item), 1);
+      this.announcements.unshift(project);
     }
   }
 });
