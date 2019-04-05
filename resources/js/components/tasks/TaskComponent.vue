@@ -20,7 +20,7 @@
           v-if="!taskInComponent.completed" 
           style="cursor:pointer"
           @click="emitEvent">
-          <i class="far fa-square text-normal ml-2 hover:text-blue"></i>
+          <i class="far fa-square text-grey-darkest ml-2 hover:text-blue-dark"></i>
         </div>
 
         <div v-else>

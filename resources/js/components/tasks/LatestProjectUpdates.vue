@@ -48,12 +48,34 @@
       events.$on('completedtask', (data) => this.projectActivities.unshift(data.activities[0]));
       events.$on('addedtask', (data) => this.projectActivities.unshift(data.activities[0]));
       events.$on('editedtask', (data) => this.projectActivities.unshift(data.activities[0]));
+
+      window.Echo.channel('tasks').listen('TaskCreated', e => {
+        if(this.activities[0].project_id == e.task.project.id) {
+          this.onCreatedEventBroadcasted(e);
+        }
+      });
+
+      window.Echo.channel('tasks').listen('TaskUpdated', e => {
+        if(this.activities[0].project_id == e.task.project.id) {
+          this.onUpdatedEventBroadcasted(e);
+        }
+      });
     },
 
     methods: {
       diffforhumans(dateCreated) {
         return moment(dateCreated).fromNow()
       },
+      onCreatedEventBroadcasted(e){
+        let newActivity = e.activity;
+        newActivity.subject = e.task;
+        this.projectActivities.unshift(newActivity);
+      },
+      onUpdatedEventBroadcasted(e){
+        let newActivity = e.activity;
+        newActivity.subject = e.task;
+        this.projectActivities.unshift(newActivity);
+      }
     }
 
   }

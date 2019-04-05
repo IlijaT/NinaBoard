@@ -11,7 +11,7 @@
             <div class="flex py-2 px-4">
                 <div class="ml-auto py-1 px-1"> 
                     <button  @click="showModal">
-                        <i class="fas fa-edit text-grey-dark text-normal"></i>
+                        <i class="fas fa-edit text-grey-dark text-normal hover:text-grey-darkest"></i>
                     </button>
                 </div>
                 <div 
@@ -19,7 +19,7 @@
                     class="py-1 px-1"
                     >
                     <button @click="showDeleteModal">
-                        <i class="fas fa-folder-open text-grey-dark text-normal"></i>
+                        <i class="fas fa-folder-open text-grey-dark text-normal hover:text-grey-darkest"></i>
                     </button>
                 </div>
 

@@ -1771,6 +1771,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['message', 'color'],
   data: function data() {
@@ -2885,10 +2889,30 @@ __webpack_require__.r(__webpack_exports__);
     events.$on('editedtask', function (data) {
       return _this.projectActivities.unshift(data.activities[0]);
     });
+    window.Echo.channel('tasks').listen('TaskCreated', function (e) {
+      if (_this.activities[0].project_id == e.task.project.id) {
+        _this.onCreatedEventBroadcasted(e);
+      }
+    });
+    window.Echo.channel('tasks').listen('TaskUpdated', function (e) {
+      if (_this.activities[0].project_id == e.task.project.id) {
+        _this.onUpdatedEventBroadcasted(e);
+      }
+    });
   },
   methods: {
     diffforhumans: function diffforhumans(dateCreated) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(dateCreated).fromNow();
+    },
+    onCreatedEventBroadcasted: function onCreatedEventBroadcasted(e) {
+      var newActivity = e.activity;
+      newActivity.subject = e.task;
+      this.projectActivities.unshift(newActivity);
+    },
+    onUpdatedEventBroadcasted: function onUpdatedEventBroadcasted(e) {
+      var newActivity = e.activity;
+      newActivity.subject = e.task;
+      this.projectActivities.unshift(newActivity);
     }
   }
 });
@@ -3181,14 +3205,12 @@ __webpack_require__.r(__webpack_exports__);
     });
     window.Echo.channel('tasks').listen('TaskCreated', function (e) {
       if (_this.project.id == e.task.project.id) {
-        _this.tasks.push(e.task);
-
-        flash("".concat(e.activity.user.name, " has created a new task!"), 'green');
+        _this.onCreatedEventBroadcasted(e);
       }
     });
     window.Echo.channel('tasks').listen('TaskUpdated', function (e) {
       if (_this.project.id == e.task.project.id) {
-        _this.onUpdatedEvent(e);
+        _this.onUpdatedEventBroadcasted(e);
       }
     });
   },
@@ -3237,7 +3259,11 @@ __webpack_require__.r(__webpack_exports__);
         $modal.hide('completeTask');
       });
     },
-    onUpdatedEvent: function onUpdatedEvent(e) {
+    onCreatedEventBroadcasted: function onCreatedEventBroadcasted(e) {
+      this.tasks.push(e.task);
+      flash("".concat(e.activity.user.name, " has created a new task!"), 'green');
+    },
+    onUpdatedEventBroadcasted: function onUpdatedEventBroadcasted(e) {
       var item = this.tasks.find(function (element) {
         return element.id == e.task.id;
       });
@@ -8701,7 +8727,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".alert-flash {\n  position: fixed;\n  right: 25px;\n  bottom: 25px;\n}\n", ""]);
+exports.push([module.i, ".alert-flash {\n  position: fixed;\n  right: 25px;\n  bottom: 25px;\n}\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity .9s;\n}\n.fade-enter,\n.fade-leave-to {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -86263,25 +86289,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert-flash" }, [
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.show,
-            expression: "show"
-          }
-        ],
-        staticClass: "alert text-white",
-        class: "bg-" + _vm.level + "-dark",
-        attrs: { role: "alert" }
-      },
-      [_vm._v("\n    " + _vm._s(_vm.body) + "\n    ")]
-    )
-  ])
+  return _c(
+    "div",
+    { staticClass: "alert-flash" },
+    [
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.show
+          ? _c(
+              "div",
+              {
+                staticClass: "alert text-white",
+                class: "bg-" + _vm.level + "-dark",
+                attrs: { role: "alert" }
+              },
+              [_vm._v(_vm._s(_vm.body))]
+            )
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -87651,7 +87678,10 @@ var render = function() {
         _c("div", { staticClass: "flex py-2 px-4" }, [
           _c("div", { staticClass: "ml-auto py-1 px-1" }, [
             _c("button", { on: { click: _vm.showModal } }, [
-              _c("i", { staticClass: "fas fa-edit text-grey-dark text-normal" })
+              _c("i", {
+                staticClass:
+                  "fas fa-edit text-grey-dark text-normal hover:text-grey-darkest"
+              })
             ])
           ]),
           _vm._v(" "),
@@ -87659,7 +87689,8 @@ var render = function() {
             ? _c("div", { staticClass: "py-1 px-1" }, [
                 _c("button", { on: { click: _vm.showDeleteModal } }, [
                   _c("i", {
-                    staticClass: "fas fa-folder-open text-grey-dark text-normal"
+                    staticClass:
+                      "fas fa-folder-open text-grey-dark text-normal hover:text-grey-darkest"
                   })
                 ])
               ])
@@ -87796,7 +87827,7 @@ var render = function() {
                 [
                   _c("i", {
                     staticClass:
-                      "far fa-square text-normal ml-2 hover:text-blue"
+                      "far fa-square text-grey-darkest ml-2 hover:text-blue-dark"
                   })
                 ]
               )

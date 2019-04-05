@@ -1,8 +1,12 @@
 <template>
     <div class="alert-flash">
-        <div :class="'bg-' + level + '-dark'" class="alert text-white" role="alert" v-show="show">
-        {{ body }}
-        </div>
+        <transition name="fade">
+            <div v-if="show" :class="'bg-' + level + '-dark'" class="alert text-white" role="alert">{{ body }}</div>
+            
+            <!-- <div :class="'bg-' + level + '-dark'" class="alert text-white" role="alert" v-show="show">
+            {{ body }}
+            </div> -->
+        </transition>
     </div>
 </template>
 
@@ -53,6 +57,13 @@
         position: fixed;
         right: 25px;
         bottom: 25px
+    }
+
+    .fade-enter-active, .fade-leave-active {
+    transition: opacity .9s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
     }
     
 </style>
