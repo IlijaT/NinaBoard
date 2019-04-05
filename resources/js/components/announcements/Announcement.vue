@@ -39,6 +39,18 @@ export default {
 
     created() {
         this.announcement = this.project;
+
+        window.Echo.channel('tasks').listen('TaskCreated', e => {
+            if(this.announcement.id == e.task.project_id){
+                this.onBroadcastTaskCreated(e);
+            }
+        });
+
+        window.Echo.channel('tasks').listen('TaskUpdated', e => {
+            if(this.announcement.id == e.task.project_id){
+                this.onBroadcastTaskUpdated(e);
+            }
+        });
     },
     data() {
         return {
@@ -58,9 +70,29 @@ export default {
             }
             return 'border-orange-dark';
         },
-
         changeLocation(){
             window.location.href =`/projects/${this.announcement.id}`;
+        },
+        onBroadcastTaskCreated(e) {
+            if(this.announcement.tasks == 0) {
+                this.announcement.tasks[0] = e.task
+            } else {
+                this.announcement.tasks.push(e.task);
+            }
+        },
+        onBroadcastTaskUpdated(e) {
+            var item = this.announcement.tasks.find((element) => {return element.id == e.task.id });
+
+            item.completed = e.task.completed;
+            item.created_at = e.task.created_at;
+            item.deleted_at = e.task.deleted_at;
+            item.end = e.task.end;
+            item.id = e.task.id;
+            item.project_id = e.task.project_id;
+            item.start = e.task.start;
+            item.title = e.task.title;
+            item.updated_at = e.task.updated_at;
+
         }
     },
     computed: {

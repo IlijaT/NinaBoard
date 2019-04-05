@@ -39,14 +39,53 @@ export default {
     created() {
         this.loading = true;
         axios.get(`/today-tasks`)
-        .then((data) => {
-            this.todayTasks = data.data;
-            this.loading = false;
-          })
-        .catch(error => {
-            console.log(error);
-            this.loading = false;
+            .then((data) => {
+                this.todayTasks = data.data;
+                this.loading = false;
+            })
+            .catch(error => {
+                this.loading = false;
         });
+
+        window.Echo.channel('tasks').listen('TaskCreated', e => {
+            axios.get(`/today-tasks`)
+                .then((data) => {
+                    this.todayTasks = data.data;
+                    this.loading = false;
+                    flash( `${e.activity.user.name} has created a new task!`, 'green');
+                })
+                .catch(error => {
+                    this.loading = false;
+            });
+        });
+
+        window.Echo.channel('tasks').listen('TaskUpdated', e => {
+            axios.get(`/today-tasks`)
+                .then((data) => {
+                    this.todayTasks = data.data;
+                    this.loading = false;
+                    if (e.task.completed == true) {
+                    flash( `${e.activity.user.name} has completed the task!`, 'green');          
+                    } else {
+                    flash( `${e.activity.user.name} has updated the task!`, 'green'); 
+                    }                    
+                })
+                .catch(error => {
+                    this.loading = false;
+            });
+        });
+
+        window.Echo.channel('projects').listen('ProjectSoftDeleted', e => {
+            axios.get(`/today-tasks`)
+                .then((data) => {
+                    this.todayTasks = data.data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+            });
+        });
+
     },
 
     data() {

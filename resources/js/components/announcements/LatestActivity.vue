@@ -51,18 +51,38 @@ export default {
     created() {
         this.loading = true;
         axios.get(`/last-activity`)
-        .then((data) => {
-            this.activities = data.data;
-            this.loading = false;
-          })
-        .catch(error => {
-            this.loading = false;
+            .then((data) => {
+                this.activities = data.data;
+                this.loading = false;
+            })
+            .catch(error => {
+                this.loading = false;
         });
         window.Echo.channel('projects').listen('ProjectCreated', e => {
             this.activities.unshift(e.activity);
         });
         window.Echo.channel('projects').listen('ProjectUpdated', e => {
             this.activities.unshift(e.activity);
+        });
+        window.Echo.channel('tasks').listen('TaskCreated', e => {
+            axios.get(`/last-activity`)
+                .then((data) => {
+                    this.activities = data.data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+                });
+        });
+         window.Echo.channel('tasks').listen('TaskUpdated', e => {
+             axios.get(`/last-activity`)
+                .then((data) => {
+                    this.activities = data.data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+            });
         });
     },
 
