@@ -40,7 +40,7 @@
             },
 
             hide(){
-                setTimeout(() => this.show = false, 3000);
+                setTimeout(() => this.show = false, 4000);
             },
 
         }
@@ -54,4 +54,5 @@
         right: 25px;
         bottom: 25px
     }
+    
 </style>

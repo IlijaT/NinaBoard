@@ -40,13 +40,26 @@ import TaskComponent from './TaskComponent.vue';
 import EditTask from './EditTask.vue';
 
 export default {
-    props: ['projecttasks'],
+    props: ['projecttasks', 'project'],
 
     components: { TaskComponent, EditTask },
 
     created() {
       this.tasks = this.projecttasks;
       events.$on('addedtask', (data) => this.tasks.push(data));
+
+      window.Echo.channel('tasks').listen('TaskCreated', e => {
+        if(this.project.id == e.task.project.id) {
+          this.tasks.push(e.task);
+          flash( `${e.activity.user.name} has created a new task!`, 'green');
+        }
+      });
+
+      window.Echo.channel('tasks').listen('TaskUpdated', e => {
+        if(this.project.id == e.task.project.id) {
+          this.onUpdatedEvent(e);
+        }
+      });
 
     },
 
@@ -89,6 +102,26 @@ export default {
           flash('Ooops! Something went wrong!', 'red');
           $modal.hide('completeTask')
         });
+      },
+
+      onUpdatedEvent(e) {
+            var item = this.tasks.find((element) => {return element.id == e.task.id });
+
+            item.completed = e.task.completed;
+            item.created_at = e.task.created_at;
+            item.deleted_at = e.task.deleted_at;
+            item.end = e.task.end;
+            item.id = e.task.id;
+            item.project_id = e.task.project_id;
+            item.start = e.task.start;
+            item.title = e.task.title;
+            item.updated_at = e.task.updated_at;
+
+            if (e.task.completed == true) {
+              flash( `${e.activity.user.name} has completed the task!`, 'green');          
+            } else {
+              flash( `${e.activity.user.name} has updated the task!`, 'green'); 
+            }
       }
     },
 

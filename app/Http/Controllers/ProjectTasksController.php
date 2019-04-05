@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Task;
 use App\Project;
 use Illuminate\Http\Request;
+use App\Events\TaskCreated;
+use App\Events\TaskUpdated;
 
 class ProjectTasksController extends Controller
 {
@@ -17,6 +19,8 @@ class ProjectTasksController extends Controller
         );
 
         $task = $project->addTask(request(['title', 'start', 'end']));
+        
+        event(new TaskCreated($task, $task->activities()->with('user')->latest()->first()));
 
         if (request()->ajax()) {
             return Task::with('activities.user', 'activities.subject')->find($task->id);
@@ -45,6 +49,8 @@ class ProjectTasksController extends Controller
         } else {
             $task->incomplete();
         }
+
+        event(new TaskUpdated($task, $task->activities()->with('user')->latest()->first()));
 
         if (request()->ajax()) {
             return Task::with('activities.user', 'activities.subject')->find($task->id);

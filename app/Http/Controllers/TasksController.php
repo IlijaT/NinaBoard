@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use App\Events\TaskUpdated;
 
 class TasksController extends Controller
 {
@@ -26,6 +27,8 @@ class TasksController extends Controller
         } else {
             $task->incomplete();
         }
+
+        event(new TaskUpdated($task, $task->activities()->with('user')->latest()->first()));
 
         if (request()->ajax()) {
             return Task::with('project', 'activities.user', 'activities.subject')->find($task->id);

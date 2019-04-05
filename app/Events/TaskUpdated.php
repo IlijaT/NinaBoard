@@ -10,22 +10,23 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Activity;
-use App\Project;
+use App\Task;
 
-class ProjectCreated implements ShouldBroadcast
+class TaskUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $project;
+    public $task;
     public $activity;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Project $project, Activity $activity)
+    public function __construct(Task $task, Activity $activity)
     {
-        $this->project = $project;
+        $this->task = $task;
         $this->activity = $activity;
 
         $this->dontBroadcastToCurrentUser();
@@ -38,6 +39,6 @@ class ProjectCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('projects');
+        return new Channel('tasks');
     }
 }

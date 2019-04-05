@@ -36,7 +36,7 @@
                     <h2 class="text-sm text-grey font-normal my-3">Tasks</h2>
                         
                     {{-- show tasks --}}
-                    <tasks-component :projecttasks="{{ $project->tasks }}"></tasks-component>
+                    <tasks-component :projecttasks="{{ $project->tasks }}" :project="{{ $project }}"></tasks-component>
         
                 </div>
 
