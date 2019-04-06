@@ -46,7 +46,7 @@ export default {
 
     created() {
       this.tasks = this.projecttasks;
-      events.$on('addedtask', (data) => this.tasks.push(data));
+      events.$on('addedtask', (data) => this.onAddedTask(data));
 
       window.Echo.channel('tasks').listen('TaskCreated', e => {
         if(this.project.id == e.task.project.id) {
@@ -80,6 +80,9 @@ export default {
         this.taskForEditing = data;
         this.$modal.show('editTaskModal', {'taskForEditing': data});
       },
+      onAddedTask(newTask) {
+        this.sortTasks(newTask);
+      },
       onComplete() {
         this.loading = true;
         axios.post(`/tasks/${this.taskForCompleting.id}`, {'completed': true})
@@ -103,7 +106,7 @@ export default {
         });
       },
       onCreatedEventBroadcasted(e){
-          this.tasks.push(e.task);
+          this.sortTasks(e.task);
           flash( `${e.activity.user.name} has created a new task!`, 'green');
       },
       onUpdatedEventBroadcasted(e) {
@@ -124,6 +127,33 @@ export default {
         } else {
           flash( `${e.activity.user.name} has updated the task!`, 'green'); 
         }
+      },
+
+      sortTasks(newTask) {
+        
+        if(this.tasks.length == 0) {
+          this.tasks.push(newTask);
+          return;
+        } 
+        if(this.tasks[0].start > newTask.start) {
+          this.tasks.unshift(newTask);
+          return;
+        }
+
+        let index = 0;
+        for (var i = 0; i < this.tasks.length; i++) {
+          if(this.tasks[i+1] == null) {
+            index = i;
+            break;
+          } else {
+            if(this.tasks[i].start < newTask.start &&  this.tasks[i+1].start > newTask.start) {
+              index = i;
+              break;
+            }
+
+          } 
+        }
+        this.tasks.splice(index + 1, 0, newTask);
       }
     },
 

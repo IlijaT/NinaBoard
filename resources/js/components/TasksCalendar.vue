@@ -1,7 +1,7 @@
 <template>
-  <div class="container mt-4">
+  <div class="container mt-2">
     <div class="row justify-content-center">
-        <div class="col-md-12 mt-2">
+        <div class="col-md-12">
          
             <div class="card shadow-md">
                 <div class="card-body">
@@ -25,8 +25,12 @@
   export default {
     components: { CalendarEventModal },
 
-    props: ['tasks'],
-
+    props: {
+      tasks: {
+        type: Array,
+        default: () => []
+      }
+    },
     created() {
       this.tasks.forEach(task => {
         
@@ -48,11 +52,12 @@
       return {
         events: [],
         config: {
+          defaultView: 'month',
           themeSystem: 'bootstrap4',
           allDaySlot: false,
           editable: false,
           firstDay: 1,
-          //height: 'auto',
+          height: 700,
           slotDuration: '00:15:00',
           scrollTime: '12:00:00',
           slotLabelFormat: 'HH:mm',
