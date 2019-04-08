@@ -17,7 +17,7 @@
             
             <div class="text-grey text-xs font-normal mr-2">
                 <i class="fas fa-bullhorn text-xs text-grey"></i>
-                {{ projectTasks ? projectTasks.length : 0 }}
+                {{ this.announcement.tasks ? this.announcement.tasks.length : 0 }}
             </div>
             <div class="text-grey text-xs font-normal">
                 <i class="fas fa-feather-alt text-xs text-grey"></i>
@@ -39,12 +39,15 @@ export default {
 
     created() {
         this.announcement = this.project;
-        if(typeof this.announcement.tasks == "undefined") {
+        if(typeof this.project.tasks == "undefined") {
             this.announcement.tasks = [];
+        } else {
+            this.announcement.tasks = this.project.tasks;
         }
         
         window.Echo.channel('tasks').listen('TaskCreated', e => {
             if(this.announcement.id == e.task.project_id){
+                //window.location.reload()
                 this.onBroadcastTaskCreated(e);
             }
         });
@@ -57,7 +60,9 @@ export default {
     },
     data() {
         return {
-            announcement: {},
+            announcement: {
+                tasks : []
+            },
         }
     },
     methods: {
@@ -81,7 +86,7 @@ export default {
             this.$forceUpdate();
         },
         onBroadcastTaskUpdated(e) {
-            var item = this.projectTasks.find((element) => {return element.id == e.task.id });
+            var item = this.announcement.tasks.find((element) => {return element.id == e.task.id });
 
             item.completed = e.task.completed;
             item.created_at = e.task.created_at;
@@ -92,18 +97,16 @@ export default {
             item.start = e.task.start;
             item.title = e.task.title;
             item.updated_at = e.task.updated_at;
-
+            
+            window.location.reload();
         }
     },
     computed: {
         finishedTasksCount() {
             let completed = this.announcement.tasks.filter((item) => item.completed );
             return completed.length;
-        },
-        projectTasks() {
-            return this.announcement.tasks;
-        }
-    }
+        }, 
+    },
 }
 </script>
 
