@@ -22,9 +22,7 @@ class ManageProjectsTest extends TestCase
         auth()->logout();
 
         $this->post('/projects')->assertRedirect('/login');
-        $this->get('/projects/create')->assertRedirect('/login');
         $this->get($project->path())->assertRedirect('/login');
-        $this->get($project->path().'/edit')->assertRedirect('/login');
         $this->post('/projects', $project->toArray())->assertRedirect('/login');
     }
 
@@ -85,9 +83,11 @@ class ManageProjectsTest extends TestCase
 
         $project = factory(\App\Project::class)->create();
 
+        $this->assertDatabaseHas('projects', ['id' => $project->id, 'deleted_at' => null]);
+        
         $this->delete($project->path());
 
-        $this->assertDatabaseMissing('projects', $project->only('id'));
+        $this->assertNotNull($project->fresh()->deleted_at);
     }
 
  
@@ -101,8 +101,6 @@ class ManageProjectsTest extends TestCase
         
         $project = factory(\App\Project::class)->create(['owner_id' => auth()->id()]);
 
-        
-        $this->get($project->path().'/edit')->assertOk();
 
         $this->patch($project->path(), $atributes = [
             'title' => 'changed',

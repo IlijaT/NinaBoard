@@ -121,8 +121,6 @@ class ProjectTaskTest extends TestCase
     /** @test */
     public function a_task_requires_a_start()
     {
-        
-
         $this->signIn();
 
         $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
@@ -142,7 +140,6 @@ class ProjectTaskTest extends TestCase
     /** @test */
     public function a_task_requires_the_end()
     {
-
         $this->signIn();
 
         $project = factory(Project::class)->create(['owner_id' => auth()->id()]);

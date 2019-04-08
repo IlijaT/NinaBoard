@@ -9,7 +9,6 @@ use App\User;
 
 class UsersTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
@@ -18,7 +17,6 @@ class UsersTest extends TestCase
         $users = factory(\App\User::class, 1)->create();
 
         $this->get('/users')->assertRedirect('/login');
-       
     }
 
     /** @test */
@@ -29,27 +27,31 @@ class UsersTest extends TestCase
         $users = factory(\App\User::class, 3)->create();
 
         $this->get('/users')->assertRedirect('/projects');
-        
     }
 
     /** @test */
     public function manager_can_see_users()
     {
         $user = factory(\App\User::class)->create();
+      
 
         $permission = factory(\App\Permission::class)->create(['name' => 'delete-project']);
         $role = factory(\App\Role::class)->create(['name' => 'manager']);
+        $roleOperator = factory(\App\Role::class)->create(['name' => 'operator']);
 
         $role->givePermissionTo($permission);
 
         $user->assignRole('manager');
 
         $this->be($user);
-
-        $worker = factory(\App\User::class, 1)->create();
-
-        $this->get('/users')->assertSee($worker->first()->name);
         
+
+        $worker = factory(\App\User::class)->create();
+        $roleOperator = factory(\App\Role::class)->create(['name' => 'operator']);
+        $worker->assignRole('operator');
+        
+
+        $this->get('/users')->assertSee($user->first()->name);
     }
 
     /** @test */
@@ -62,7 +64,6 @@ class UsersTest extends TestCase
         $this->signIn($user);
 
         $this->get("/users/{$user->id}")->assertSee($user->first()->name);
-        
     }
 
     /** @test */
@@ -74,6 +75,7 @@ class UsersTest extends TestCase
 
         $permission = factory(\App\Permission::class)->create(['name' => 'delete-project']);
         $role = factory(\App\Role::class)->create(['name' => 'manager']);
+        $role = factory(\App\Role::class)->create(['name' => 'operator']);
 
         $role->givePermissionTo($permission);
 
@@ -84,6 +86,7 @@ class UsersTest extends TestCase
         $attributes = [
             'name' => 'John Doe',
             'email' => 'john@gmail.com',
+            'role' => 'operator',
             'email_verified_at' => now(),
             'password'          => 'secret', // secret
             'password_confirmation' => 'secret',
@@ -93,6 +96,5 @@ class UsersTest extends TestCase
         $this->post('/users', $attributes);
 
         $this->assertDatabaseHas('users', ['name' => 'John Doe']);
-        
     }
 }

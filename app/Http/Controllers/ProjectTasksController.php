@@ -10,6 +10,11 @@ use App\Events\TaskUpdated;
 
 class ProjectTasksController extends Controller
 {
+    public function index(Project $project)
+    {
+        return $project->tasks;
+    }
+    
     public function store(Project $project)
     {
         request()->validate(

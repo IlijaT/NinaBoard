@@ -32,7 +32,6 @@ export default {
             this.onDelete(e.project);
             flash( `The announcement '${e.project.title}' has been archived`, 'green');
         });
-
     },
     data() {
         return {

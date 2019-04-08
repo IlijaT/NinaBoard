@@ -17,11 +17,11 @@
             
             <div class="text-grey text-xs font-normal mr-2">
                 <i class="fas fa-bullhorn text-xs text-grey"></i>
-                {{ announcement.tasks ? announcement.tasks.length : 0 }}
+                {{ projectTasks ? projectTasks.length : 0 }}
             </div>
             <div class="text-grey text-xs font-normal">
                 <i class="fas fa-feather-alt text-xs text-grey"></i>
-                {{ this.finishedTasksCount }}
+                {{ finishedTasksCount }}
             </div>
          
         </div>
@@ -39,7 +39,10 @@ export default {
 
     created() {
         this.announcement = this.project;
-
+        if(typeof this.announcement.tasks == "undefined") {
+            this.announcement.tasks = [];
+        }
+        
         window.Echo.channel('tasks').listen('TaskCreated', e => {
             if(this.announcement.id == e.task.project_id){
                 this.onBroadcastTaskCreated(e);
@@ -54,7 +57,7 @@ export default {
     },
     data() {
         return {
-            announcement: {}
+            announcement: {},
         }
     },
     methods: {
@@ -74,14 +77,11 @@ export default {
             window.location.href =`/projects/${this.announcement.id}`;
         },
         onBroadcastTaskCreated(e) {
-            if(this.announcement.tasks == 0) {
-                this.announcement.tasks[0] = e.task
-            } else {
-                this.announcement.tasks.push(e.task);
-            }
+            this.announcement.tasks.push(e.task);
+            this.$forceUpdate();
         },
         onBroadcastTaskUpdated(e) {
-            var item = this.announcement.tasks.find((element) => {return element.id == e.task.id });
+            var item = this.projectTasks.find((element) => {return element.id == e.task.id });
 
             item.completed = e.task.completed;
             item.created_at = e.task.created_at;
@@ -97,11 +97,11 @@ export default {
     },
     computed: {
         finishedTasksCount() {
-            if(! this.announcement.tasks) {
-                return 0;
-            }
             let completed = this.announcement.tasks.filter((item) => item.completed );
             return completed.length;
+        },
+        projectTasks() {
+            return this.announcement.tasks;
         }
     }
 }
