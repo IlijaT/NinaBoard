@@ -17,6 +17,7 @@ class ProjectUpdated implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $project;
+    public $tasks;
     public $activity;
 
     /**
@@ -24,9 +25,10 @@ class ProjectUpdated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Project $project, Activity $activity)
+    public function __construct(Project $project, $tasks, Activity $activity)
     {
         $this->project = $project;
+        $this->tasks = $tasks;
         $this->activity = $activity;
 
         $this->dontBroadcastToCurrentUser();

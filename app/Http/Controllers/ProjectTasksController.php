@@ -14,8 +14,8 @@ class ProjectTasksController extends Controller
     {
         request()->validate(
             ['title' => 'required|max:190'],
-            ['start' => 'required|date'],
-            ['end' => 'required|date']
+            ['start' => 'required'],
+            ['end' => 'required']
         );
 
         $task = $project->addTask(request(['title', 'start', 'end']));

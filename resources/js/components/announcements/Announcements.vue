@@ -25,7 +25,7 @@ export default {
             flash( `${e.activity.user.name} has created a new announcement!`, 'green');
         });
         window.Echo.channel('projects').listen('ProjectUpdated', e => {
-            this.onUpdate(e.project);
+            this.onUpdate(e);
             flash( `${e.activity.user.name} has updated the announcement`, 'green');
         });
         window.Echo.channel('projects').listen('ProjectSoftDeleted', e => {
@@ -49,10 +49,12 @@ export default {
     },
 
     methods: {
-        onUpdate(project) {
-            var item = this.announcements.find((element) => {return element.id == project.id });
+        onUpdate(e) {
+            var item = this.announcements.find((element) => {return element.id == e.project.id });
             this.announcements.splice(this.announcements.indexOf(item), 1);
-            let newItem = project;
+            let newItem = e.project;
+            newItem.tasks = e.tasks;
+            
             this.$nextTick(function () {
                 this.announcements.unshift(newItem);
             })

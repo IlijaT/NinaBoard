@@ -53,39 +53,18 @@ export default {
 
     created() {
         this.loading = true;
-        axios.get(`/last-activity`)
-            .then((data) => {
-                this.activities = data.data;
-                this.loading = false;
-            })
-            .catch(error => {
-                this.loading = false;
-        });
+        this.getActivities();
         window.Echo.channel('projects').listen('ProjectCreated', e => {
-            this.activities.unshift(e.activity);
+            this.getActivities();
         });
         window.Echo.channel('projects').listen('ProjectUpdated', e => {
-            this.activities.unshift(e.activity);
+            this.getActivities();
         });
         window.Echo.channel('tasks').listen('TaskCreated', e => {
-            axios.get(`/last-activity`)
-                .then((data) => {
-                    this.activities = data.data;
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.loading = false;
-                });
+            this.getActivities();
         });
          window.Echo.channel('tasks').listen('TaskUpdated', e => {
-             axios.get(`/last-activity`)
-                .then((data) => {
-                    this.activities = data.data;
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.loading = false;
-            });
+            this.getActivities();
         });
     },
 
@@ -100,6 +79,16 @@ export default {
         diffforhumans(dateCreated) {
             return moment(dateCreated).fromNow()
       },
+        getActivities() {
+            axios.get(`/last-activity`)
+                .then((data) => {
+                    this.activities = data.data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+            });
+        }
     }
     
 }

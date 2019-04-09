@@ -53,7 +53,7 @@ class ProjectsController extends Controller
         
         $project->update($attributes);
 
-        event(new ProjectUpdated($project, $project->activities()->with('user')->latest()->first()));
+        event(new ProjectUpdated($project, $project->tasks, $project->activities()->with('user')->latest()->first()));
 
 
         if (request()->ajax()) {

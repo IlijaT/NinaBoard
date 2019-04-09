@@ -32,7 +32,7 @@ class UsersActivityController extends Controller
             $activity = $user->activity()
                 ->where('description', '=', request('selected'))
                 ->whereBetween('created_at', [ $startDate, $endDate])
-                ->with($this->resolveEagerLoadingModel(request('selected')))->paginate(5); //temporary
+                ->with($this->resolveEagerLoadingModel(request('selected')))->paginate(50); //temporary
 
             return $activity;
         }

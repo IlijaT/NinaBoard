@@ -32,8 +32,12 @@
                 <div class="flex-1 mr-1">
                   <datepicker
                   :mondayFirst="true"
+                  :calendar-button="true" 
+                  :clear-button="true" 
+                  calendar-button-icon="far fa-calendar-alt text-xl text-blue" 
+                  clear-button-icon="fa fa-times text-xs text-grey"
                   :bootstrap-styling="true" 
-                  placeholder="Start Date"
+                  placeholder="Select start date..."
                   @selected="selectedStartDate"
                   v-model="startDate">
                   </datepicker>
@@ -48,8 +52,12 @@
                 <div class="flex-1 ml-1 mb-2">
                   <datepicker
                     :mondayFirst="true"
-                    :bootstrap-styling="true"
-                    placeholder="End Date"
+                    :calendar-button="true" 
+                    :clear-button="true" 
+                    calendar-button-icon="far fa-calendar-alt text-xl text-blue" 
+                    clear-button-icon="fa fa-times text-xs text-grey"
+                    :bootstrap-styling="true" 
+                    placeholder="Select end date..."
                     :disabled="! startDate"
                     @selected="selectedEndDate"
                     :disabledDates="disabledDays"
@@ -60,7 +68,7 @@
                     <label class="label text-sm mb-2 block" for="title">End time</label>
                     <vue-timepicker :minute-interval="10" v-model="endTimeValue"></vue-timepicker>
                   </div>
-                  
+
                 </div>
 
               </div>
@@ -69,9 +77,10 @@
 
             <div class="flex mt-auto">
               <div class="ml-auto control flex">
-                <button @click.prevent="$modal.hide('addTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
+                <button @click.prevent="onCancel()" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
                 <button 
                   type="submit"
+                  :disabled="! task.title || ! startDate"
                   :class="loading ? 'loader' : ''"
                   class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue"
                   >Save</button>
@@ -115,7 +124,7 @@ export default {
         },
         endTimeValue: {
           HH: "12",
-          mm: "00",
+          mm: "10",
           ss: "00"
         },
       }
@@ -124,6 +133,15 @@ export default {
     methods: {
       showModal() {
         this.$modal.show('addTaskModal');
+      },
+       onCancel() {
+         this.$modal.hide('addTaskModal');
+        this.task.title = '';
+        this.startDate = '',
+        this.formatedStartDate = '',
+        this.formatedEndDate = '',
+        this.endDate = ''
+
       },
 
       addTask() {
