@@ -10,7 +10,7 @@
     </div>
 
     <!-- modal -->
-    <modal name="completeTask" height="auto">
+    <modal name="completeTask" :adaptive="true" height="auto">
       <div class="p-10">
 
         <header class="section py-6 mt-4 mb-6" style="background: url('/images/splash.svg') 100px 4px no-repeat;">

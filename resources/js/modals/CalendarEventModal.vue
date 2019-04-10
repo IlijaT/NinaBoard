@@ -1,31 +1,31 @@
 <template>
-  <modal adaptive name="calendarModal" height="auto" @before-open="beforeOpen">
+  <modal @before-open="beforeOpen" name="calendarModal" :adaptive="true" height="auto" :draggable="true" >
     <div 
-      :class="task.completed ? 'border-l-8 border-green' : 'border-l-8 border-orange'" 
-      class="flex flex-column p-10  h-full justify-center"
+      :class="task.completed ? 'border-l-8 border-blue-dark' : ''" 
+      class="flex flex-column p-10 h-full justify-center"
       >
 
       <div class="mb-2">
-        <!-- <h1 class="text-2xl font-bold m-3 text-center">
-          {{ task.title }}  
-        </h1> -->
-        <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 75px 4px no-repeat;">
-          <h1 class="text-black text-center text-2xl mb-4">{{ task.title }} </h1>
+        <header class="section py-2 mb-2">
+          <h1 class="font-bold text-black text-center text-lg">{{ task.title }} </h1>
         </header>
 
       </div>
       <div class="text-center mb-2">
         <h1 class="text-sm font-normal">
+          Date: 
+          <span  class="italic text-xs">
           {{ task.startDate }} 
           {{ task.startDate != task.endDate ? '-' : '' }}
           {{ task.startDate != task.endDate ? task.endDate : '' }}
+          </span>
         </h1>
         <h1 class="text-sm font-normal mr-2">
-           {{ task.startTime }} - {{ task.endTime }}
+          Time:  <span class="italic text-xs">{{ task.startTime }} - {{ task.endTime }}</span>
         </h1>
 
-        <div v-if="task.completed" class="text-center text-4xl ">
-          <i  class="fas fa-check text-5xl text-green"></i>
+        <div v-if="task.completed" class="text-center">
+          <i class="fas fa-feather-alt text-5xl ml-2 text-blue-dark"></i>
           <div class="text-black text-lg">Completed</div> 
         </div>
 
@@ -38,16 +38,15 @@
 
       </div>
 
-      <div class="flex mt-4">
-        <div class="ml-auto control flex">
-          <button @click="$modal.hide('calendarModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
+      <div v-if="! task.completed" class="flex mt-4">
+       
+          <button @click="$modal.hide('calendarModal')" class="flex-1 btn ml-auto mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
           <button 
-            v-if="! task.completed" 
             :disabled="! task.finished" 
             @click="onSubmit" 
             :class="loading ? 'loader' : ''"
-            class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-1 border-blue">Save</button>
-        </div> 
+            class="flex-1 btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark">Complete</button>
+        
       </div> 
 
     </div>

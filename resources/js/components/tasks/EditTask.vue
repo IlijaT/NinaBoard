@@ -2,7 +2,7 @@
   <div>
     
     <!-- modal -->
-    <modal @before-open="beforeOpen" adaptive name="editTaskModal" :height="590" :width="650">
+    <modal @before-open="beforeOpen" :adaptive="true" :draggable="true" name="editTaskModal" :height="590" :width="650">
         <form class="p-10 flex flex-column h-full" @submit.prevent="editTask">
 
             <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 190px 4px no-repeat;">

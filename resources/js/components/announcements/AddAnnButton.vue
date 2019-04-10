@@ -5,7 +5,7 @@
 
 
     <!-- modal -->
-    <modal adaptive name="addAnnouncementModal" :width="650" height="auto">
+    <modal :scrollable="true" :adaptive="true" :draggable="true" name="addAnnouncementModal" :width="650" height="auto">
         <add-announcement-form></add-announcement-form>
     </modal>
    

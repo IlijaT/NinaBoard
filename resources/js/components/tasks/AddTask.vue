@@ -6,7 +6,7 @@
     </div>
     
     <!-- modal -->
-    <modal adaptive name="addTaskModal"  :height="590" :width="650">
+    <modal :adaptive="true" :draggable="true" name="addTaskModal"  :height="590" :width="650">
         <form class="p-10 flex flex-column h-full" @submit.prevent="addTask">
             <header class="section py-6 mb-2" style="background: url('/images/splash.svg') 161px 4px no-repeat;">
               <h1 class="text-black text-center text-2xl mb-4">Add New Task</h1>

@@ -27,12 +27,12 @@
         </div>
       
         <!-- edit modal -->
-        <modal adaptive name="editProjectModal" :width="650" height="auto">
+        <modal :scrollable="true" :adaptive="true" :draggable="true" name="editProjectModal" :width="650" height="auto">
             <edit-project-form :project="announcement"></edit-project-form>
         </modal>
 
         <!-- delete modal -->
-        <modal adaptive name="deleteProjectModal" height="auto">
+        <modal  name="deleteProjectModal" :adaptive="true" height="auto">
             <div class="p-10">
 
                 <header class="section py-6 mt-4 mb-6" style="background: url('/images/splash.svg') 45px 4px no-repeat;">
