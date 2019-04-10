@@ -24,7 +24,7 @@ class UsersActivityController extends Controller
                 ->where('subject_type', 'App\\Task')
                 ->where('description', '!=', 'incompleted_task')
                 ->whereBetween('created_at', [ $startDate, $endDate])
-                ->with('subject.project:id,title')->paginate(5); //temporary
+                ->with('subject.project:id,title')->paginate(50); //temporary
 
                 return $activity;
             }

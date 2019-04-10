@@ -31,7 +31,7 @@
             <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <th scope="row">{{ $user->id}}</th>
+                        <th scope="row">{{ $loop->iteration }}</th>
                         <td class="flex items-end">
                             <img class="mr-2 rounded-full h-6 w-6 justify-center" 
                                 src="{{ $user->avatar_path }}" 
