@@ -5,7 +5,7 @@
 
 
     <!-- modal -->
-    <modal adaptive name="addUserModal" height="auto">
+    <modal :adaptive="true" name="addUserModal" height="auto">
         <add-user-form></add-user-form>
     </modal>
    

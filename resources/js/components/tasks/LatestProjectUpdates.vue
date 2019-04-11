@@ -1,5 +1,5 @@
 <template>
-  <div  class="flex flex-column mx-0 mt-1 px-3 pt-3 pb-1 bg-white">
+  <div  class="flex flex-column mx-2 mt-1 px-3 pt-3 pb-1 bg-white">
     <h2 class="py-2 text-black text-lg font-bold">Latest Tasks Updates</h2>
       <ul class="text-xs list-reset">
         <li v-for="activity in projectActivities" :key="activity.id">

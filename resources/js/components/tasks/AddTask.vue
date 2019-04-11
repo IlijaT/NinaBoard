@@ -44,7 +44,7 @@
 
                   <div class="mt-2">
                     <label class="label text-sm mb-2 block" for="title">Start time</label>
-                    <vue-timepicker :minute-interval="10" v-model="startTimeValue"></vue-timepicker>
+                    <vue-timepicker :hide-clear-button="true" :minute-interval="10" v-model="startTimeValue"></vue-timepicker>
                   </div>
 
                 </div>
@@ -66,7 +66,7 @@
 
                   <div class="mt-2">
                     <label class="label text-sm mb-2 block" for="title">End time</label>
-                    <vue-timepicker :minute-interval="10" v-model="endTimeValue"></vue-timepicker>
+                    <vue-timepicker :hide-clear-button="true" :minute-interval="10" v-model="endTimeValue"></vue-timepicker>
                   </div>
 
                 </div>

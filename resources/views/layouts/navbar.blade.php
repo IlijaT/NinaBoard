@@ -51,7 +51,7 @@
       </div>
   </div>
 
-    <div class="flex justify-center pb-1">
+    <div class="d-none d-md-block flex justify-center pb-1">
         @auth()
         <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/projects">ANNOUNCEMENTS</a>
         <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/calendar">CALENDAR</a>
