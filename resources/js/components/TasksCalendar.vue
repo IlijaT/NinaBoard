@@ -9,22 +9,15 @@
                 </div>
             </div>
         </div>
-
-        <calendar-event-modal @completed="completed"></calendar-event-modal>
     </div>
-    
-    
-</div>
+  </div>
   
 </template>
 
 <script>
-
-  import CalendarEventModal from '../modals/CalendarEventModal.vue';
+  import Tooltip from 'tooltip.js'
 
   export default {
-    components: { CalendarEventModal },
-
     props: {
       tasks: {
         type: Array,
@@ -33,16 +26,16 @@
     },
     created() {
       this.tasks.forEach(task => {
-        
         this.events.push(
             {
               'id'        : task.id,
-              'title'     : task.project.title + ' : ' + task.title,
+              'title'     : task.project.title + ' - ' + task.title,
               'start'     : task.start, 
               'end'       : task.end, 
               'color'     : task.completed == 1 ? '#38a4cc' : '#de751f',
               'completed' : task.completed,
               'textColor' : 'white',
+              'project'   : task.project,
             }
           );
       }); 
@@ -62,34 +55,51 @@
           scrollTime: '12:00:00',
           slotLabelFormat: 'HH:mm',
           eventClick:  (calEvent) => {
-
-            this.$modal.show('calendarModal', {'task': calEvent} );
-
-          }
+            window.location.href =`/projects/${calEvent.project.id}`;
+          },
+          eventRender: function(eventObj, el) {
+           
+           $(el).popover({
+            trigger: "manual" , 
+            title: eventObj.title,
+            content: eventObj.project.description,
+            html: true,
+            placement: 'top',
+            container: 'body',
+            }).on("mouseenter", function () {
+                  var _this = this;
+                  $(this).popover("show");
+                  $(".popover").on("mouseleave", function () {
+                      $(_this).popover('hide');
+                  });
+              }).on("mouseleave", function () {
+                  var _this = this;
+                  setTimeout(function () {
+                      if (!$(".popover:hover").length) {
+                          $(_this).popover("hide");
+                      }
+                  }, 100);
+            });
+          },
         },
       }
     },
-    methods: {
-      completed(task) {      
-        let newItem = {
-          'id'        : task.id,
-          'title'     : task.project.title + ' : ' + task.title,
-          'start'     : task.start, 
-          'end'       : task.end, 
-          'color'     : '#38a4cc',
-          'completed' : task.completed,
-          'textColor' : 'white',
-        }
-                     
-
-        var index = this.events.findIndex(item => item.id === task.id)
-
-        this.events.splice(index, 1, newItem);
-
-        flash('Task has been completed!', 'green');
-
-      }
-    },
-
   }
 </script>
+
+<style>
+ .fc-event{
+    cursor: pointer;
+}
+.popover-body {
+      height: 200px;
+      overflow-y: auto;
+      white-space:pre-wrap;
+  }
+.popover-header {
+     background:#909a9e;
+     color: white;
+     font-weight: bold;
+  }
+</style>
+

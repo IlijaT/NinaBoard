@@ -27,7 +27,7 @@
         </div>
       
         <!-- edit modal -->
-        <modal :scrollable="true" :adaptive="true" :draggable="true" name="editProjectModal" :width="650" height="auto">
+        <modal :scrollable="true" :adaptive="true" name="editProjectModal" :width="650" height="auto">
             <edit-project-form :project="announcement"></edit-project-form>
         </modal>
 
