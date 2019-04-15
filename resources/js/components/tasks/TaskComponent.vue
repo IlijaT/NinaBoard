@@ -8,24 +8,36 @@
         @click="showEditTaskModal" 
         :class="{
           'border-blue': taskInComponent.completed,
-          'border-orange-dark': !taskInComponent.completed,
+          'border-orange-dark': !taskInComponent.completed && !taskInComponent.cancelled,
+          'border-grey-dark': !taskInComponent.completed && taskInComponent.cancelled,
           'text-grey-dark': taskInComponent.completed }" 
         class="border-l-4  px-3">
-        {{ taskInComponent.title }}
+        {{ taskInComponent.title }} 
+        <span 
+        class="text-xs mx-1 text-grey italic"
+        v-if="taskInComponent.cancelled">
+        - {{ taskInComponent.cancelled }}
+        </span>
       </div>
 
       <div class="px-1 flex text-xs text-grey items-center">{{ diffforhumans(taskInComponent.start) }} 
 
         <div 
-          v-if="!taskInComponent.completed" 
+          v-if="!taskInComponent.completed && !taskInComponent.cancelled" 
           style="cursor:pointer"
           @click="emitEvent">
-          <i class="far fa-square text-grey-darkest ml-2 hover:text-blue-dark"></i>
+          <i class="far fa-square text-grey-dark ml-2 hover:text-blue-dark"></i>
         </div>
 
-        <div v-else>
+        <div v-if="taskInComponent.completed">
           <i class="fas fa-feather-alt text-xl ml-2 text-blue"></i>
         </div>
+
+        <div v-if="!taskInComponent.completed && taskInComponent.cancelled">
+          <i class="far fa-bell-slash text-lg ml-2 text-grey-darkest"></i>
+        </div>
+
+        
 
       </div>
       

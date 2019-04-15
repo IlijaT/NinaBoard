@@ -42,7 +42,7 @@ class ProjectTasksController extends Controller
             ['end' => 'required|date']
         );
         
-        $task->update(request(['title', 'start', 'end']));
+        $task->update(request(['title', 'start', 'end', 'cancelled']));
 
         if (request('completed')) {
             $task->complete();

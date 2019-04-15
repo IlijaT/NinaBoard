@@ -64,6 +64,20 @@
 
             </div>
 
+            <div class="control mb-2">
+              <label class="label text-sm mb-2 block">Cancel the task:</label>
+              <select 
+                class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
+                v-model="taskForEditing.cancelled">
+                <option value=""></option>
+                <option>Najava nije emitovana</option>
+                <option>Najava je odlozena</option>
+                <option>Emisija nije emitovana</option>
+                <option>Medij nije u pracenju</option>
+                <option>Nije snimljeno</option>
+              </select>
+            </div>
+
             <div class="flex mt-auto">
               <div class="ml-auto control flex">
                 <button @click.prevent="$modal.hide('editTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
@@ -145,6 +159,7 @@ export default {
             axios.patch('/projects/' + this.taskForEditing.project_id + '/tasks/' + this.taskForEditing.id, 
                 {
                 'title': this.taskForEditing.title, 
+                'cancelled': this.taskForEditing.cancelled,
                 'start': formatedStartDateAndTime, 
                 'end': formatedEndDateAndTime
                 })
