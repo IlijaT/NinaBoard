@@ -100,6 +100,27 @@ class ProjectTaskTest extends TestCase
     }
 
     /** @test */
+    public function a_task_can_be_cancelled()
+    {
+        $this->withExceptionHandling();
+        
+        $this->signIn();
+        
+        $project = ProjectFactory::withTasks(1)->create();
+
+        $this->patch($project->tasks->first()->path(), [
+            'title' => 'changed title',
+            'cancelled' => 'Emisija nije emitovana'
+        ]);
+
+
+        $this->assertDatabaseHas('tasks', [
+            'title' => 'changed title',
+            'cancelled' => 'Emisija nije emitovana'
+        ]);
+    }
+
+    /** @test */
     public function a_task_requires_a_title()
     {
         $this->signIn();

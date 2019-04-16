@@ -32,7 +32,7 @@
               'title'     : task.project.title + ' - ' + task.title,
               'start'     : task.start, 
               'end'       : task.end, 
-              'color'     : task.completed == 1 ? '#38a4cc' : '#de751f',
+              'color'     : task.completed == 1 ? '#38a4cc' : task.cancelled ? '#8795a1' : '#de751f',
               'completed' : task.completed,
               'textColor' : 'white',
               'project'   : task.project,
@@ -78,7 +78,7 @@
                       if (!$(".popover:hover").length) {
                           $(_this).popover("hide");
                       }
-                  }, 100);
+                  }, 150);
             });
           },
         },
@@ -97,8 +97,8 @@
       white-space:pre-wrap;
   }
 .popover-header {
-     background:#909a9e;
-     color: white;
+     background:#f5f6f9;
+     color: #3d4852;
      font-weight: bold;
   }
 </style>

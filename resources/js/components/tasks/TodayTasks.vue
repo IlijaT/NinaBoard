@@ -8,7 +8,8 @@
             <div v-if="todayTasks.length > 0" v-for="task in todayTasks" :key="task.id">
                 <h3 class="text-xs">
                     <i v-if="task.completed" class="fas fa-feather-alt text-xs text-blue mr-1"></i>
-                    <i v-else class="fas fa-feather-alt text-xs text-orange-dark mr-1"></i>
+                    <i v-if="!task.completed && !task.cancelled" class="fas fa-feather-alt text-xs text-orange-dark mr-1"></i>
+                    <i v-if="task.cancelled" class="fas fa-bell-slash text-xs text-grey-dark mr-1"></i>
                     <span class="font-bold"> {{ task.project.title }} </span> - 
                     <span class="text-xs italic"> "{{ task.title }}" </span> 
                     <span class="text-grey"> 

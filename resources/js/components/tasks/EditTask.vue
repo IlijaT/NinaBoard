@@ -64,6 +64,26 @@
 
             </div>
 
+            <div class="control mb-2">
+              <label class="label text-sm mb-2 block">Cancel Task</label>
+              <div class="input-group mt-2 mb-3">
+                
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                </div>
+                <select 
+                  class="custom-select" id="inputGroupSelect01"
+                  v-model="taskForEditing.cancelled">
+                  <option value="">Aktivno</option>
+                  <option>Najava nije emitovana</option>
+                  <option>Najava je odlozena</option>
+                  <option>Emisija nije emitovana</option>
+                  <option>Medij nije u pracenju</option>
+                  <option>Nije snimljeno</option>
+                </select>
+              </div>
+            </div>
+
             <div class="flex mt-auto">
               <div class="ml-auto control flex">
                 <button @click.prevent="$modal.hide('editTaskModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
@@ -123,9 +143,9 @@ export default {
             this.taskForEditing = event.params.taskForEditing;
             this.formatedStartDate = moment(event.params.taskForEditing.start).format('YYYY-MM-DD');
             this.formatedEndDate = moment(event.params.taskForEditing.end).format('YYYY-MM-DD');
-            this.startTimeValue.HH = moment(event.params.taskForEditing.start).format('hh');
+            this.startTimeValue.HH = moment(event.params.taskForEditing.start).format('HH');
             this.startTimeValue.mm = moment(event.params.taskForEditing.start).format('mm');
-            this.endTimeValue.HH = moment(event.params.taskForEditing.end).format('hh');
+            this.endTimeValue.HH = moment(event.params.taskForEditing.end).format('HH');
             this.endTimeValue.mm = moment(event.params.taskForEditing.end).format('mm');
 
         },
@@ -145,6 +165,7 @@ export default {
             axios.patch('/projects/' + this.taskForEditing.project_id + '/tasks/' + this.taskForEditing.id, 
                 {
                 'title': this.taskForEditing.title, 
+                'cancelled': this.taskForEditing.cancelled,
                 'start': formatedStartDateAndTime, 
                 'end': formatedEndDateAndTime
                 })
