@@ -19,9 +19,13 @@
                 <i class="fas fa-bullhorn text-xs text-grey"></i>
                 {{ this.announcement.tasks ? this.announcement.tasks.length : 0 }}
             </div>
-            <div class="text-grey text-xs font-normal">
+            <div class="text-grey text-xs font-normal  mr-2">
                 <i class="fas fa-feather-alt text-xs text-grey"></i>
                 {{ finishedTasksCount }}
+            </div>
+            <div v-if="cancelledTasksCount" class="text-grey text-xs font-normal">
+                <i class="fas fa-bell-slash text-xs text-grey"></i>
+                {{ cancelledTasksCount }}
             </div>
          
         </div>
@@ -73,9 +77,15 @@ export default {
             if(! this.announcement.tasks) {
                 return 'border-blue-light';
             }
+
+            if(this.cancelledTasksCount){
+                return 'border-grey-dark';
+            }
+
             if(this.announcement.tasks.length == this.finishedTasksCount) {
                 return 'border-blue-light';
             }
+
             return 'border-orange-dark';
         },
         changeLocation(){
@@ -105,7 +115,11 @@ export default {
         finishedTasksCount() {
             let completed = this.announcement.tasks.filter((item) => item.completed );
             return completed.length;
-        }, 
+        },
+        cancelledTasksCount() {
+            let cancelled = this.announcement.tasks.filter((item) => item.cancelled );
+            return cancelled.length;
+        } 
     },
 }
 </script>

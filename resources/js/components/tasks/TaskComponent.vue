@@ -34,7 +34,7 @@
         </div>
 
         <div v-if="!taskInComponent.completed && taskInComponent.cancelled">
-          <i class="far fa-bell-slash text-lg ml-2 text-grey-darkest"></i>
+          <i class="fas fa-bell-slash text-lg ml-2 text-grey-dark"></i>
         </div>
 
         
