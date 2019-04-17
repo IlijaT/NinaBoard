@@ -15,7 +15,6 @@
 </template>
 
 <script>
-  import Tooltip from 'tooltip.js'
 
   export default {
     props: {

@@ -41,7 +41,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{$user->roles[0]->name }}</td>
                                 <td>
-                                    <a href="/users/{{$user->id}}">
+                                    <a href="/users/{{$user->id}}" title="User datails">
                                         <i class="fas fa-eye text-lg text-grey-dark"></i>
                                     </a>
                                 </td>

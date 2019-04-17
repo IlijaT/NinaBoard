@@ -10,7 +10,10 @@
             
             <div class="flex py-2 px-4">
                 <div class="ml-auto py-1 px-1"> 
-                    <button  @click="showModal">
+                    <button
+                        @click="showModal" 
+                        title="Edit announcement's details" 
+                        >
                         <i class="fas fa-edit text-grey-dark text-normal hover:text-grey-darkest"></i>
                     </button>
                 </div>
@@ -18,7 +21,9 @@
                     v-if="logged.roles[0].name == 'manager'"
                     class="py-1 px-1"
                     >
-                    <button @click="showDeleteModal">
+                    <button @click="showDeleteModal" 
+                        title="Archive the announcement" 
+                        >
                         <i class="fas fa-folder-open text-grey-dark text-normal hover:text-grey-darkest"></i>
                     </button>
                 </div>
@@ -70,8 +75,8 @@ export default {
   props: ['project', 'logged'],
 
   created() {
-      this.announcement = this.project;
-      events.$on('updatedproject', (data) => this.announcement = data);
+    this.announcement = this.project;
+    events.$on('updatedproject', (data) => this.announcement = data);
   },
 
   data() {
@@ -103,8 +108,7 @@ export default {
             flash('Ooops! Something went wrong!', 'red');
             this.$modal.hide('deleteProjectModal')
         });
-    }
-
+    },
   }
     
 }

@@ -4,6 +4,7 @@
     <div class="flex justify-between items-center">
 
       <div
+        :title="computedTitle" 
         :style="{cursor: computedCursor }"
         @click="showEditTaskModal" 
         :class="{
@@ -23,7 +24,8 @@
       <div class="px-1 flex text-xs text-grey items-center">{{ diffforhumans(taskInComponent.start) }} 
 
         <div 
-          v-if="!taskInComponent.completed && !taskInComponent.cancelled" 
+          v-if="!taskInComponent.completed && !taskInComponent.cancelled"
+          title="Complete the task" 
           style="cursor:pointer"
           @click="emitEvent">
           <i class="far fa-square text-grey-dark ml-2 hover:text-blue-dark"></i>
@@ -97,6 +99,9 @@ export default {
     computed: {
       computedCursor() {
         return this.taskInComponent.completed ? '' : 'pointer';
+      },
+      computedTitle() {
+        return this.taskInComponent.completed ? '' : 'Edit task\'s details'; 
       }
     }
     
