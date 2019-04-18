@@ -10,12 +10,15 @@
                     <i v-if="task.completed" class="fas fa-feather-alt text-xs text-blue mr-1"></i>
                     <i v-if="!task.completed && !task.cancelled" class="fas fa-feather-alt text-xs text-orange-dark mr-1"></i>
                     <i v-if="task.cancelled" class="fas fa-bell-slash text-xs text-grey-dark mr-1"></i>
-                    <span class="font-bold"> {{ task.project.title }} </span> - 
-                    <span class="text-xs italic"> "{{ task.title }}" </span> 
-                    <span class="text-grey"> 
-                        &nbsp; ({{ time(task.start) }} - 
-                        {{ time(task.end) }})
-                    </span>
+                    <a :href="`/projects/${task.project.id}`" class="text-black hover:no-underline hover:text-black">
+                        <span class="font-bold"> {{ task.project.title }} </span> - 
+                        <span class="text-xs italic"> "{{ task.title }}" </span> 
+                        <span class="text-grey"> 
+                            &nbsp; ({{ time(task.start) }} - 
+                            {{ time(task.end) }})
+                        </span>
+                    </a>
+
                 </h3>
             </div>
              
