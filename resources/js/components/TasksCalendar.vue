@@ -37,12 +37,15 @@
               'project'   : task.project,
             }
           );
-      }); 
+      });
+      events.$on('showpopup', (data) => this.showpopup(data));
+      events.$on('closepopup', (data) => this.closepopup(data));
     },
 
     data() {
       return {
         events: [],
+        timer: null,
         config: {
           defaultView: 'month',
           themeSystem: 'bootstrap4',
@@ -63,31 +66,43 @@
             title: eventObj.title,
             content: eventObj.project.description,
             html: true,
-            placement: 'top',
+            placement: 'right',
             container: 'body',
             }).on("mouseenter", function () {
                 var _this = this;
-                $(_this).popover("show");
-                $(".popover").on("mouseleave", function () {
-                    $(_this).popover('hide');
-                });
+                events.$emit('showpopup', _this);
               }).on("mouseleave", function () {
                 var _this = this;
-                if (!$(".popover:hover").length) {
-                    $(_this).popover("hide");
-                }
-                  
+                events.$emit('closepopup', _this);
             });
           },
         },
       }
     },
+
+    methods: {
+       showpopup(element) {
+         $(element).css("border-color","#3d4852")
+         this.timer = setTimeout(() => {$(element).popover("show");}, 550);
+        $(".popover").on("mouseleave", function () {
+          $(element).popover('hide');
+        });
+       },
+       closepopup(element) {
+          $(element).css("border-color","")
+         clearTimeout(this.timer);
+          if (!$(".popover:hover").length) {
+              $(element).popover("hide");
+          }
+       }
+      
+    },
   }
 </script>
 
 <style>
- .fc-event{
-    cursor: pointer;
+.fc-event{
+  cursor: pointer;
 }
 .popover-body {
       height: 200px;
@@ -95,8 +110,8 @@
       white-space:pre-wrap;
   }
 .popover-header {
-     background:#f5f6f9;
-     color: #3d4852;
+     background:#314d70;
+     color: #ffffff;
      font-weight: bold;
   }
 </style>
