@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/users/{user}/avatar', 'UserAvatarController@store');
 
     Route::get('/calendar', 'CalendarController@index');
+    Route::get('/archive', 'ArchiveController@index');
+    Route::get('/archive/tasks', 'ArchiveController@show');
+    Route::get('/archive/tasks/export', 'ArchiveController@export');
 
     Route::post('/tasks/{task}', 'TasksController@update');
     Route::get('/today-tasks', 'TodayTasksController@index');

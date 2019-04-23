@@ -30,6 +30,7 @@
                                 
                             <a class="dropdown-item" href="/projects">Announcements</a>
                             <a class="dropdown-item" href="/calendar">Calendar</a>
+                            <a class="dropdown-item" href="/archive">Archive</a>
                             @can('delete-project')
                                 <a class="dropdown-item" href="/users">Users</a>
                             @endcan
@@ -55,6 +56,7 @@
         @auth()
         <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/projects">ANNOUNCEMENTS</a>
         <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/calendar">CALENDAR</a>
+        <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/archive">ARCHIVE</a>
         @can('delete-project')
             <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/users">USERS</a>
         @endcan

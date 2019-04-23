@@ -30,6 +30,7 @@ Vue.component('add-new-user', require('./components/users/AddNewUser.vue').defau
 Vue.component('edit-user', require('./components/users/EditUser.vue').default);
 Vue.component('user-stats', require('./components/users/UserStats.vue').default);
 Vue.component('tasks-component', require('./components/tasks/TasksComponent.vue').default);
+Vue.component('archived-tasks', require('./components/tasks/ArchivedTasks.vue').default);
 Vue.component('project-card', require('./components/tasks/ProjectCard.vue').default);
 Vue.component('add-task', require('./components/tasks/AddTask.vue').default);
 Vue.component('general-notes', require('./components/tasks/GeneralNotes.vue').default);
