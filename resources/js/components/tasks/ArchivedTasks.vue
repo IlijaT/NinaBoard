@@ -19,7 +19,7 @@
         <div class="p-10 flex flex-column">
 
           <header class="section mb-2">
-            <h1 class="text-black text-center text-2xl mb-2">Filter Tasks</h1>
+            <div class="text-black text-center text-2xl mb-2">Search Archived Tasks</div>
           </header>
           
           <div class="control mb-2">
@@ -34,10 +34,10 @@
           </div>
           
           <div class="control mb-2">
-            <label class="label text-sm block">Task status</label>
-            <select v-model="selectedFilter"  class="custom-select" id="inputGroupSelect02">
-              <option v-for="option in options" :value="option.value" :key="option.value">
-              {{ option.text }}
+            <label class="label text-sm block">Select tasks status</label>
+            <select v-model="selectedFilter"  class="custom-select text-xs" id="inputGroupSelect02">
+              <option  v-for="option in options" :value="option.value" :key="option.value">
+              <span class="text-sm">{{ option.text }}</span>
               </option>
             </select>
           </div>
@@ -84,22 +84,24 @@
 
     </div>
 
-    <table class="table lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
+    <table  class="table table-sm table-responsive  lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
       <thead class="bg-grey-light text-black">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Client</th>
           <th scope="col">Task</th>
-          <th scope="col">Action</th>
+          <th scope="col">Completed</th>
+          <th scope="col">Cancelled</th>
           <th scope="col">Date</th>
         </tr>
       </thead>
-      <tbody >
+      <tbody class="text-xs">
         <tr v-if="tableData" v-for="item in tableData" :key="item.id">
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.client }}</td>
           <td>{{ item.task }}</td>
-          <td>{{ item.action }}</td>
+          <td>{{ item.completed }}</td>
+          <td>{{ item.cancelled }}</td>
           <td>{{ item.date }}</td>
         </tr>
         <tr v-if="tableData.length < 1 || tableData == undefined">
@@ -153,33 +155,31 @@ import moment from 'moment';
       filter(page) {
         this.tableData = [];
         this.loading = true;
-        console.log('filtermethod');
         axios.get(this.url(page), { params: { name: this.name, start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
-        //   .then((data) => {
-            
-        //     this.dataSet = data.data;
-        //     console.log(data.data);
-        //     data.data.data.forEach(element => {
-        //       this.tableData.push({
-        //           'id': (this.dataSet.current_page == 1 ? 0 : ((this.dataSet.current_page - 1) * this.dataSet.per_page)) + (data.data.data.indexOf(element) + 1),
-        //           'client': element.subject.project.title,
-        //           'task': element.subject.title,
-        //           'action': element.description.replace("_", " "),
-        //           'date': element.created_at,
-        //         });
-        //     });
 
-        //     this.loading = false;
-        //     this.$modal.hide('filterModal');
-        //   })
-        //   .catch(error => {
-        //     this.tableData = [];
-        //     this.loading = false;
-        //     this.name = '';
-        //     this.startDate = '';
-        //     this.endDate = '';
-        //     this.$modal.hide('filterModal');
-        //   });
+          .then((data) => {
+            this.dataSet = data.data;
+            data.data.data.forEach(element => {
+                this.tableData.push({
+                  'id': (this.dataSet.current_page == 1 ? 0 : ((this.dataSet.current_page - 1) * this.dataSet.per_page)) + (data.data.data.indexOf(element) + 1),
+                  'client': element.project.title,
+                  'task': element.title,
+                  'completed': element.completed == 1 ? 'completed' : '/',
+                  'cancelled': element.cancelled == null ? '/' : element.cancelled,
+                  'date': moment(element.created_at).format('DD.MM.YYYY.') 
+                });
+            });
+            this.loading = false;
+            this.$modal.hide('filterModal');
+          })
+          .catch(error => {
+            this.tableData = [];
+            this.loading = false;
+            this.name = '';
+            this.startDate = '';
+            this.endDate = '';
+            this.$modal.hide('filterModal');
+          });
       },
 
       url(page = 1) {
@@ -187,7 +187,7 @@ import moment from 'moment';
       },
       exportExcel() {
 
-        axios.get(`${location.pathname}/tasks/export?`, { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
+        axios.get(`${location.pathname}/tasks/export?`, { params: { name: this.name, start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
           .then(response => 
             window.location =  response.request.responseURL)
           ;

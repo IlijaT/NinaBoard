@@ -73,7 +73,7 @@
 
     </div>
 
-    <table class="table lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
+    <table class="table table-sm table-responsive lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
       <thead class="bg-grey-light text-black">
         <tr>
           <th scope="col">#</th>
@@ -83,7 +83,7 @@
           <th scope="col">Date</th>
         </tr>
       </thead>
-      <tbody >
+      <tbody class="text-xs">
         <tr v-if="tableData" v-for="item in tableData" :key="item.id">
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.client }}</td>
@@ -152,7 +152,7 @@ import moment from 'moment';
                   'client': element.subject.project.title,
                   'task': element.subject.title,
                   'action': element.description.replace("_", " "),
-                  'date': element.created_at,
+                  'date': moment(element.created_at).format('DD.MM.YYYY.'),
                 });
             });
 

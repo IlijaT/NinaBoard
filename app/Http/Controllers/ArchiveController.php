@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Project;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TaskStatsExport;
 
 class ArchiveController extends Controller
 {
@@ -19,42 +21,47 @@ class ArchiveController extends Controller
         $startDate =  Carbon::parse(request('start'))->startOfDay();
         $endDate =  Carbon::parse(request('end'))->endOfDay();
 
-        if (! request()->ajax()) {
-            abort(403);
-        }
-
         if (request('selected') == 'all') {
-            return Project::withTrashed()
-                    ->with(['tasks' => function ($query) {
-                        $query->withTrashed();
-                    }])
-                    ->where('title', 'like', '%' . strtolower(request('name')) . '%')
-                    ->whereBetween('created_at', [ $startDate, $endDate])
-                    ->paginate(50);
+            return Task::withTrashed()->with("project")->whereHas("project", function ($q) {
+                $q->where("title", 'like', '%' . strtolower(request('name')) . '%');
+            })
+            ->whereBetween('created_at', [ $startDate, $endDate])
+            ->oldest()
+            ->paginate(50);
         }
 
         if (request('selected') == 'completed') {
-            return Project::withTrashed()
-                    ->with(['tasks' => function ($query) {
-                        $query->withTrashed()->where('completed', 1);
-                    }])
-                    ->where('title', 'like', '%' . strtolower(request('name')) . '%')
-                    ->whereBetween('created_at', [ $startDate, $endDate])
-                    ->paginate(50);
+            return Task::withTrashed()->with("project")->whereHas("project", function ($q) {
+                $q->where("title", 'like', '%' . strtolower(request('name')) . '%');
+            })
+            ->where('completed', 1)
+            ->whereBetween('created_at', [ $startDate, $endDate])
+            ->oldest()
+            ->paginate(50);
         }
 
         if (request('selected') == 'cancelled') {
-            return Project::withTrashed()
-                    ->with(['tasks' => function ($query) {
-                        $query->withTrashed()->whereNotNull('cancelled');
-                    }])
-                    ->where('title', 'like', '%' . strtolower(request('name')) . '%')
-                    ->whereBetween('created_at', [ $startDate, $endDate])
-                    ->paginate(50);
+            return Task::withTrashed()->with("project")->whereHas("project", function ($q) {
+                $q->where("title", 'like', '%' . strtolower(request('name')) . '%');
+            })
+            ->whereNotNull('cancelled')
+            ->whereBetween('created_at', [ $startDate, $endDate])
+            ->oldest()
+            ->paginate(50);
         }
     }
 
     public function export()
     {
+        $name = request('name');
+        $description = request('selected');
+        $startDate =  Carbon::parse(request('start'))->startOfDay();
+        $endDate =  Carbon::parse(request('end'))->endOfDay();
+
+        $paramsForQuerying = ['name' => $name, 'description' => $description, 'startDate' => $startDate, 'endDate' => $endDate];
+       
+        $now = Carbon::now()->timestamp;
+
+        return Excel::download(new TaskStatsExport($paramsForQuerying), "{$now}_{$name}_announcements_stats.xlsx");
     }
 }
