@@ -11,12 +11,14 @@
         <ul v-if="shouldPaginate" class="pagination justify-content-end">
           <li v-show="prevUrl" class="page-item">
           <a class="page-link text-normal text-grey-darkest" href="#" @click.prevent="page--" rel="prev">
-            <i class="far fa-hand-point-left text-normal text-grey-darkest"></i>
+            <i class="far fa-hand-point-left text-normal text-grey-darkest mr-1"></i>
+            Previous
           </a>
           </li>
           <li v-show="nextUrl" class="page-item">
             <a class="page-link text-normal text-grey-darkest" href="#" @click.prevent="page++" rel="next">
-              <i class="far fa-hand-point-right text-normal text-grey-darkest"></i>
+              Next
+              <i class="far fa-hand-point-right text-normal text-grey-darkest ml-1"></i>
             </a>
           </li>
         </ul>

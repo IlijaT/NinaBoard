@@ -16,50 +16,61 @@
 
       <!-- modal -->
       <modal adaptive name="filterModal" height="auto" :width="740">
-        <div class="p-10 flex flex-column h-full m-2">
+        <div class="p-10 flex flex-column">
 
-          <header class="section py-6 mb-6" style="background: url('/images/splash.svg') 218px 4px no-repeat;">
-            <h1 class="text-black text-center text-2xl mb-4">Filter Data</h1>
+          <header class="section mb-2">
+            <div class="text-black text-center text-2xl mb-2">Search Archived Tasks</div>
           </header>
-
           
-          <div class="flex m-2">
-            <select v-model="selectedFilter"  class="custom-select" id="inputGroupSelect02">
-              <option v-for="option in options" :value="option.value" :key="option.value">
-              {{ option.text }}
+          <div class="control mb-2">
+            <label class="label text-sm block">Client name</label>
+            <input
+                type="text"
+                class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
+                placeholder="Client name..."
+                v-model="name"
+                required
+                >
+          </div>
+          
+          <div class="control mb-2">
+            <label class="label text-sm block">Select tasks status</label>
+            <select v-model="selectedFilter"  class="custom-select text-xs" id="inputGroupSelect02">
+              <option  v-for="option in options" :value="option.value" :key="option.value">
+              <span class="text-sm">{{ option.text }}</span>
               </option>
             </select>
-            <div class="input-group-append">
-              <label class="input-group-text btn bg-grey-light" for="inputGroupSelect02">
-              <i class="fas fa-filter text-normal text-black"></i>
-              </label>
+          </div>
+
+          <div class="control mb-2">
+            <label class="label text-sm block">Choose dates</label>
+            <div class="flex justify-between mb-2">
+              <datepicker
+              :inline="true"
+              :mondayFirst="true"
+              @selected="selectedStartDate"
+              bootstrap-styling
+              v-model="startDate">
+              </datepicker>
+
+              <datepicker
+                :inline="true"
+                :mondayFirst="true"
+                v-model="endDate"
+                :disabled="true"
+                :disabled-dates="disabledEndDates">
+              </datepicker>
             </div>
           </div>
 
-          <div class="flex justify-between mx-2 my-3">
-            <datepicker
-            :inline="true"
-            :mondayFirst="true"
-            @selected="selectedStartDate"
-            bootstrap-styling
-            v-model="startDate">
-            </datepicker>
-
-            <datepicker
-              :inline="true"
-              :mondayFirst="true"
-              v-model="endDate"
-              :disabled="true"
-              :disabled-dates="disabledEndDates">
-            </datepicker>
-          </div>
+          
 
 
-          <div class="flex m-2 mt-4 py-4">
+          <div class="flex py-4">
             <div class="ml-auto control flex">
               <button @click="$modal.hide('filterModal')" class="btn mr-2 text-grey-darker text-lg hover:border-blue hover:text-blue rounded-lg py-1 px-4 border-1 border-grey">Cancel</button>
               <button
-                @click="filter"
+                @click.prevent="filter"
                 :disabled="! startDate || ! endDate"
                 :class="loading ? 'loader' : ''"
                 class="btn py-1 px-4 text-lg button rounded-lg text-white hover:bg-blue-dark hover:border-blue-dark  border-2 border-blue"
@@ -73,13 +84,14 @@
 
     </div>
 
-    <table class="table table-sm table-responsive lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
+    <table  class="table table-sm table-responsive  lg:mx-auto bg-white p-6 md:py-12 md:px-16 rounded shadow">
       <thead class="bg-grey-light text-black">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Client</th>
           <th scope="col">Task</th>
-          <th scope="col">Action</th>
+          <th scope="col">Completed</th>
+          <th scope="col">Cancelled</th>
           <th scope="col">Date</th>
         </tr>
       </thead>
@@ -88,7 +100,8 @@
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.client }}</td>
           <td>{{ item.task }}</td>
-          <td>{{ item.action }}</td>
+          <td>{{ item.completed }}</td>
+          <td>{{ item.cancelled }}</td>
           <td>{{ item.date }}</td>
         </tr>
         <tr v-if="tableData.length < 1 || tableData == undefined">
@@ -112,17 +125,18 @@ import moment from 'moment';
     data() {
       return {
         loading: false,
+        name: '',
         startDate: '',
         endDate: '',
         disabledEndDates: {
           to: new Date(2023, 0, 1),
         },
 
-        selectedFilter: 'completed_task',
+        selectedFilter: 'completed',
 
         options: [
-          { text: 'Completed Tasks', value: 'completed_task' },
-          { text: 'Created Tasks', value: 'created_task' },
+          { text: 'Completed Tasks', value: 'completed' },
+          { text: 'Cancelled Tasks', value: 'cancelled' },
           { text: 'All', value: 'all' },
         ],
 
@@ -141,27 +155,27 @@ import moment from 'moment';
       filter(page) {
         this.tableData = [];
         this.loading = true;
-        axios.get(this.url(page), { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
-          .then((data) => {
-            
-            this.dataSet = data.data;
+        axios.get(this.url(page), { params: { name: this.name, start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
 
+          .then((data) => {
+            this.dataSet = data.data;
             data.data.data.forEach(element => {
-              this.tableData.push({
+                this.tableData.push({
                   'id': (this.dataSet.current_page == 1 ? 0 : ((this.dataSet.current_page - 1) * this.dataSet.per_page)) + (data.data.data.indexOf(element) + 1),
-                  'client': element.subject.project.title,
-                  'task': element.subject.title,
-                  'action': element.description.replace("_", " "),
-                  'date': moment(element.created_at).format('DD.MM.YYYY.'),
+                  'client': element.project.title,
+                  'task': element.title,
+                  'completed': element.completed == 1 ? 'completed' : '/',
+                  'cancelled': element.cancelled == null ? '/' : element.cancelled,
+                  'date': moment(element.created_at).format('DD.MM.YYYY.') 
                 });
             });
-
             this.loading = false;
             this.$modal.hide('filterModal');
           })
           .catch(error => {
             this.tableData = [];
             this.loading = false;
+            this.name = '';
             this.startDate = '';
             this.endDate = '';
             this.$modal.hide('filterModal');
@@ -169,11 +183,11 @@ import moment from 'moment';
       },
 
       url(page = 1) {
-        return `${location.pathname}/activity?page=${page}`;
+        return `${location.pathname}/tasks?page=${page}`;
       },
       exportExcel() {
 
-        axios.get(`${location.pathname}/activity/export?`, { params: { start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
+        axios.get(`${location.pathname}/tasks/export?`, { params: { name: this.name, start: this.startDate, end: this.endDate, selected: this.selectedFilter}})
           .then(response => 
             window.location =  response.request.responseURL)
           ;
