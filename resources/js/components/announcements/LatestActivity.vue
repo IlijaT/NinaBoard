@@ -15,7 +15,7 @@
                     </div>
                     <div v-if="activity.description == 'created_project'">
                         <span class="text-normal font-bold">{{ activity.user.name }}</span>    
-                        <span class="text-xs mr-1"> created new announcement </span>
+                        created new announcement for <span class="italic text-xs mr-1"> "{{ activity.project.title }}"</span>
                         <span class="text-grey text-xs">{{ diffforhumans(activity.created_at)  }}</span>
                     </div>
                     <div v-if="activity.description == 'created_task'">
