@@ -35,7 +35,7 @@
                     </div>
                     <div v-if="activity.description == 'updated_project'">
                         <span class="text-normal font-bold">{{ activity.user.name }}</span> 
-                        updated the announcement 
+                        updated the announcement <span class="italic text-xs mr-1"> "{{ activity.project.title }}"</span>
                         <span class="text-grey text-xs">{{ diffforhumans(activity.created_at)  }}</span>
                     </div>
                 </li>
