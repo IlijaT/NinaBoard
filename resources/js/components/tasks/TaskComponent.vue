@@ -53,12 +53,6 @@
             class="px-3 hover:bg-blue-light hover:text-white text-grey-darkest leading-loose text-sm block">
             Copy Task
           </div>
-           <div
-            @click.prevent="deleteTask"
-            title="Delete task" 
-            class="px-3 hover:bg-blue-light hover:text-white text-grey-darkest leading-loose text-sm block">
-            Delete Task
-          </div>
          </dropdown>
         </div>
 
@@ -76,7 +70,6 @@
 
   </div>
 </template>
-
 
 <script>
 
@@ -126,31 +119,17 @@ export default {
             })
           .catch(error => flash('Oooops! Something went wrong!', 'red'));
       },
-      deleteTask() {
-        events.$emit('closeconextmenu');
-        console.log('deletedtask');
-        // axios.delete('/projects/' + this.taskInComponent.project_id + '/tasks', 
-        //   )
-        //   .then((data) => {
-        //       events.$emit('deletedtask', data.data);
-             
-        //       flash('A task has been deleted!', 'red');
-        //     })
-        //   .catch(error => flash('Oooops! Something went wrong!', 'red'));
-      },
       onEditedTask(data) {
         if( this.taskInComponent.id == data.id) {
           this.taskInComponent = data;
           flash('The task has been updated successfully!', 'green');
         }
-        
       },
       onConpletedTask(data){
         if( this.taskInComponent.id == data.id) {
           this.taskInComponent = data;
         }
       }
-
     },
 
     computed: {

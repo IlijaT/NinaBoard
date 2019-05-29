@@ -128,7 +128,6 @@ class TriggerActivityTest extends TestCase
     /** @test */
     public function deleting_a_task_triggers_activity()
     {
-        $this->withExceptionHandling();
         
         $this->signIn();
         
