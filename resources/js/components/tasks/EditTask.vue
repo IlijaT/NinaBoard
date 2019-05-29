@@ -80,6 +80,7 @@
                   <option>Emisija nije emitovana</option>
                   <option>Medij nije u pracenju</option>
                   <option>Nije snimljeno</option>
+                  <option>Greškom upisano</option>
                 </select>
               </div>
             </div>

@@ -26,6 +26,7 @@
                     <div v-if="activity.description == 'deleted_task'">
                         <span class="text-normal font-bold">{{ activity.user.name }}</span> 
                         deleted a task  
+                         <span class="italic text-xs mr-1">"{{ activity.subject.title }}"</span>
                         <span class="text-grey text-xs">{{ diffforhumans(activity.created_at)  }}</span>
                     </div>
                     <div v-if="activity.description == 'incompleted_task'">

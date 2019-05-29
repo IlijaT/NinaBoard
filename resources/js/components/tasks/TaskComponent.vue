@@ -31,6 +31,31 @@
           <i class="far fa-square text-grey-dark ml-2 hover:text-blue-dark"></i>
         </div>
 
+        <div 
+          class="ml-2"
+          v-if="!taskInComponent.completed && !taskInComponent.cancelled"
+          title="More options" 
+          style="cursor:pointer"
+          >
+         <dropdown>
+           <template v-slot:trigger>
+             <button><i class="fas fa-chevron-down text-grey-dark hover:text-blue-dark"></i></button>
+           </template>
+           <div
+            @click.prevent="showEditTaskModal"
+            title="Edit task" 
+            class="px-3 hover:bg-blue-light hover:text-white text-grey-darkest leading-loose text-sm block">
+            Edit Task
+           </div>
+           <div
+            @click.prevent="copyTask"
+            title="Copy task" 
+            class="px-3 hover:bg-blue-light hover:text-white text-grey-darkest leading-loose text-sm block">
+            Copy Task
+          </div>
+         </dropdown>
+        </div>
+
         <div v-if="taskInComponent.completed">
           <i class="fas fa-feather-alt text-xl ml-2 text-blue"></i>
         </div>
@@ -39,15 +64,12 @@
           <i class="fas fa-bell-slash text-lg ml-2 text-grey-dark"></i>
         </div>
 
-        
-
       </div>
       
     </div>
 
   </div>
 </template>
-
 
 <script>
 
@@ -79,21 +101,35 @@ export default {
         if(this.taskInComponent.completed){
           return;
         }
+        events.$emit('closeconextmenu');
         this.$emit('showEditTaskModal', this.taskInComponent);
+      },
+      copyTask() {
+        events.$emit('closeconextmenu');
+        axios.post('/projects/' + this.taskInComponent.project_id + '/tasks', 
+          {
+          'title': this.taskInComponent.title, 
+          'start': this.taskInComponent.start,
+          'end': this.taskInComponent.end,
+          })
+          .then((data) => {
+              events.$emit('addedtask', data.data);
+             
+              flash('New task has added successfully!', 'green');
+            })
+          .catch(error => flash('Oooops! Something went wrong!', 'red'));
       },
       onEditedTask(data) {
         if( this.taskInComponent.id == data.id) {
           this.taskInComponent = data;
           flash('The task has been updated successfully!', 'green');
         }
-        
       },
       onConpletedTask(data){
         if( this.taskInComponent.id == data.id) {
           this.taskInComponent = data;
         }
       }
-
     },
 
     computed: {

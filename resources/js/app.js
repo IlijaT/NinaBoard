@@ -19,6 +19,7 @@ Vue.use(VueSession);
 Vue.config.ignoredElements = ['trix-editor']
 
 Vue.component('flash-component', require('./components/FlashComponent.vue').default);
+Vue.component('dropdown', require('./components/Dropdown.vue').default);
 Vue.component('tasks-calendar', require('./components/TasksCalendar.vue').default);
 Vue.component('paginator', require('./components/Paginator.vue').default);
 Vue.component('announcements', require('./components/announcements/Announcements.vue').default);
