@@ -138,4 +138,22 @@ class TriggerActivityTest extends TestCase
         $this->assertCount(3, $project->activities);
         $this->assertEquals('deleted_task', $project->fresh()->activities->fresh()->last()->description);
     }
+
+    /** @test */
+    public function soft_deleting_a_project_doesnt_remove_all_activity_for_that_project()
+    {
+        
+        $this->signIn();
+        
+        $project = ProjectFactory::withTasks(1)->create();
+
+        $project->delete();
+
+        $this->assertCount(2, $project->activities);
+        $this->assertEquals('created_task', $project->fresh()->activities->fresh()->last()->description);
+
+        $this->get('/last-activity')
+            ->assertSee($project->title);
+
+    }
 }
