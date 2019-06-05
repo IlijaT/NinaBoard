@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-white flex flex-column">
+<nav id="visible-navbar" class="navbar navbar-expand-md navbar-light navbar-laravel bg-white flex flex-column">
   <div class="container">
       <h1>
           <a class="navbar-brand" href="{{ url('/projects') }}">
@@ -54,11 +54,11 @@
 
     <div class="d-none d-md-block flex justify-center pb-1">
         @auth()
-        <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/projects">ANNOUNCEMENTS</a>
-        <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/calendar">CALENDAR</a>
-        <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/archive">ARCHIVE</a>
+        <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey font-extrabold" href="/projects">ANNOUNCEMENTS</a>
+        <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey font-extrabold" href="/calendar">CALENDAR</a>
+        <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey font-extrabold" href="/archive">ARCHIVE</a>
         @can('delete-project')
-            <a class="px-4 hover:no-underline hover:text-blue text-grey font-extrabold" href="/users">USERS</a>
+            <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey font-extrabold" href="/users">USERS</a>
         @endcan
         @endauth 
     </div>

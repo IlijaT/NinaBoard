@@ -38,7 +38,7 @@
                      <span class="text-xs">10 completed tasks</span>
                     <i class="fas fa-star text-lg text-white"></i>
                 </div>
-                <div class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 100 ? 'bg-yellow' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2 shadow-md">
+                <div class="tooltips {{ $user->activity()->where('description','completed_task')->count() > 100 ? 'bg-yellow-dark' : 'bg-grey-lighter' }} flex items-center justify-center rounded-full h-8 w-8 m-2 shadow-md">
                         <span class="text-xs">100 completed tasks</span>
                     <i class="fas fa-award text-lg text-white"></i>
                 </div>

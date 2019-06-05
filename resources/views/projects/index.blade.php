@@ -16,12 +16,14 @@
                     {{-- button to add new announcement --}}
                     <div class="ml-auto flex content-center items-center">
                         <search-bar class="mr-3"></search-bar>
-                        <add-announcement ></add-announcement>
+                        <add-announcement 
+                            text='Add New' 
+                            prop-style="bg-blue ml-auto btn rounded-lg text-white hover:bg-blue-dark" id="new-announcement-button">
+                        </add-announcement>
                     </div>
                 </div>
                 
-                <announcements :projects="{{ $projects }}">
-                </announcements>
+                <announcements :projects="{{ $projects }}"></announcements>
 
             </div>
 
@@ -37,19 +39,35 @@
             {{-- latest 48h updates --}}
             <latest-activity></latest-activity>
             
-            {{-- <div style="height:400px" class="my-1">
-
-                <div class="flex flex-column m-1 p-3 bg-white flex-1 h-full overflow-auto">
-
-                    <h2 class="py-2 text-black text-lg font-bold">Latest Updates</h2>
-                    
-                    @include('projects.activity.card')
-                
-                </div>
-            </div> --}}
-
         </div>
+      
+        <visible when-hidden="#new-announcement-button">
+            <template slot="default" slot-scope="slotProps">
+                <add-announcement 
+                    style="position: fixed; right: 1em; bottom: 0;"
+                    prop-style="bg-blue hover:bg-blue-dark rounded-full w-16 h-16 text-white text-4xl z-10 mr-8 mb-8
+                    text-center flex items-center justify-center shadow-lg"
+                    text='+' 
+                     ></add-announcement>
+            </template>
+        </visible>
 
+        <visible when-hidden="#visible-navbar">
+            <template slot="default" slot-scope="slotProps">
+                <div 
+                style="position: fixed; top: 0; left:0; background-color:#c6c6c6"
+                class="flex justify-center p-1 w-full">
+                    @auth()
+                    <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/projects">ANNOUNCEMENTS</a>
+                    <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/calendar">CALENDAR</a>
+                    <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/archive">ARCHIVE</a>
+                    @can('delete-project')
+                        <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/users">USERS</a>
+                    @endcan
+                    @endauth 
+                </div>
+            </template>
+        </visible>  
         
     </main>
 
