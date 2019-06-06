@@ -29,7 +29,6 @@
 
         </div>
 
-
         {{-- right side --}}
         <div class="lg:w-1/4 lg:flex flex-column ">
 
@@ -56,21 +55,23 @@
             <template slot="default" slot-scope="slotProps">
                 <div 
                 style="position: fixed; top: 0; left:0; background-color:#c6c6c6"
-                class="flex justify-center p-1 w-full">
+                class="flex p-1 w-full items-center">
+                    <a class="lg:w-2/5" href="{{ url('/projects') }}">
+                        <img src="/images/logo.svg">
+                    </a>
                     @auth()
-                    <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/projects">ANNOUNCEMENTS</a>
-                    <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/calendar">CALENDAR</a>
-                    <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/archive">ARCHIVE</a>
-                    @can('delete-project')
-                        <a class="px-4 hover:no-underline hover:text-grey-darkest text-grey-lightest font-extrabold" href="/users">USERS</a>
-                    @endcan
+                    <div class="lg:w-3/5" class="justify-start">
+                        <a class="lg:px-4 px-1 hover:no-underline hover:text-grey-darkest text-grey-lightest lg:font-extrabold" href="/projects">ANNOUNCEMENTS</a>
+                        <a class="lg:px-4 px-1 hover:no-underline hover:text-grey-darkest text-grey-lightest lg:font-extrabold" href="/calendar">CALENDAR</a>
+                        <a class="lg:px-4 px-1 hover:no-underline hover:text-grey-darkest text-grey-lightest lg:font-extrabold" href="/archive">ARCHIVE</a>
+                        @can('delete-project')
+                            <a class="lg:px-4 px-1 hover:no-underline hover:text-grey-darkest text-grey-lightest lg:font-extrabold" href="/users">USERS</a>
+                        @endcan
+                    </div>
                     @endauth 
                 </div>
             </template>
         </visible>  
-        
     </main>
-
-
  
 @endsection
