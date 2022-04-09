@@ -28,7 +28,7 @@
     "dependencies": {
         "in-viewport": "^3.6.0",
         "laravel-echo": "^1.5.3",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "pusher-js": "^4.4.0",
         "trix": "^1.1.0",
         "vue-full-calendar": "^2.7.0",
